@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import routes from "../routes";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
+import Forgot from "../pages/Forgot";
 
 const useStyles = makeStyles((theme) => ({
   panel: {
@@ -88,6 +89,7 @@ const Dashboard = () => {
       )}
       <Route exact path="/login" component={Login} />
       <Route exact path="/signup" component={Signup} />
+      <Route exact path="/forgot" component={Forgot} />
       <Redirect to="/" />
     </Switch>
   );
