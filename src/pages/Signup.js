@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import * as ROUTES from "../constant/routes";
 
 function Signup() {
   return (
@@ -15,7 +14,7 @@ function Signup() {
             <p className="mt-2 text-center text-sm text-gray-600">
               <p className="text-sm">
                 Already registered?
-                <Link to={ROUTES.LOGIN} className="font-bold">
+                <Link to="/login" className="font-bold">
                   Sign in
                 </Link>
               </p>

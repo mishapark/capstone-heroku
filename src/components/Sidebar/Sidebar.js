@@ -1,105 +1,121 @@
-import React from "react";
-import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
-import Button from "@mui/material/Button";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Collapse from "@mui/material/Collapse";
-import { SidebarData } from "./SidebarData";
+import React, { useState } from "react";
 
-import * as FaIcons from "react-icons/fa";
+import Drawer from "@material-ui/core/Drawer";
+import Hidden from "@material-ui/core/Hidden";
+import List from "@material-ui/core/List";
+import PropTypes from "prop-types";
+import SidebarItem from "./SidebarItem";
+import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
+import { drawerWidth } from "../../styleVariables";
+import { makeStyles } from "@material-ui/core/styles";
+import withWidth from "@material-ui/core/withWidth";
 
-import { Link } from "react-router-dom";
-import { IconContext } from "react-icons/lib";
+const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
-function SideBar() {
-  const [state, setState] = React.useState({
-    left: false,
-  });
-  const [open, setOpen] = React.useState(false);
+const useStyles = makeStyles((theme) => ({
+  drawerPaper: {
+    position: "relative",
+    width: drawerWidth,
+    maxWidth: drawerWidth,
+    height: "100%",
+    zIndex: theme.zIndex.drawer + 99,
+  },
+  modal: {
+    [theme.breakpoints.down("sm")]: {
+      top: "56px!important",
+    },
+    [theme.breakpoints.up("sm")]: {
+      top: "64px!important",
+    },
+    zIndex: "1000!important",
+  },
+  backdrop: {
+    [theme.breakpoints.down("sm")]: {
+      top: "56px",
+    },
+    [theme.breakpoints.up("sm")]: {
+      top: "64px",
+    },
+  },
+}));
 
-  const handleClick = () => {
-    setOpen(!open);
-  };
+const Sidebar = ({ opened, toggleDrawer, routes, location }) => {
+  const classes = useStyles();
+  const [activeRoute, setActiveRoute] = useState(undefined);
+  const toggleMenu = (index) =>
+    setActiveRoute(activeRoute === index ? undefined : index);
 
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-
-    setState({ ...state, [anchor]: open });
-  };
-
-  const list = (anchor) => (
-    <Box
-      sx={{ width: 250 }}
-      role="presentation"
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
-      <List>
-        {SidebarData.map((sidebarMenu, index) =>
-          !sidebarMenu.subNav ? (
-            <Link to={sidebarMenu.path} key={index}>
-              <ListItem button onClick={toggleDrawer(anchor, false)}>
-                <IconContext.Provider value={{ color: "#3F50B5" }}>
-                  <ListItemIcon>{sidebarMenu.icon}</ListItemIcon>
-                </IconContext.Provider>
-                <ListItemText primary={sidebarMenu.title} />
-              </ListItem>
-            </Link>
-          ) : (
-            <>
-              <ListItem button onClick={handleClick}>
-                <IconContext.Provider value={{ color: "#3F50B5" }}>
-                  <ListItemIcon>{sidebarMenu.icon}</ListItemIcon>
-                </IconContext.Provider>
-                <ListItemText primary={sidebarMenu.title} />
-                {open ? sidebarMenu.iconOpened : sidebarMenu.iconClosed}
-              </ListItem>
-              <Collapse in={open} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-                  {sidebarMenu.subNav.map((submenu) => (
-                    <Link to={submenu.path} key={submenu.title}>
-                      <ListItem
-                        button
-                        sx={{ pl: 4 }}
-                        onClick={toggleDrawer(anchor, false)}
-                      >
-                        <ListItemIcon>{submenu.icon}</ListItemIcon>
-                        <ListItemText primary={submenu.title} />
-                      </ListItem>
-                    </Link>
-                  ))}
-                </List>
-              </Collapse>
-            </>
-          )
-        )}
-      </List>
-    </Box>
+  const menu = (
+    <List component="div">
+      {routes.map((route, index) => {
+        return (
+          <SidebarItem
+            key={index}
+            index={index}
+            route={route}
+            activeRoute={activeRoute}
+            toggleMenu={toggleMenu}
+          />
+        );
+      })}
+    </List>
   );
 
   return (
-    <React.Fragment>
-      <Button onClick={toggleDrawer("left", true)}>
-        <IconContext.Provider value={{ color: "#fff", size: "30px" }}>
-          <FaIcons.FaBars />
-        </IconContext.Provider>
-      </Button>
-      <Drawer
-        anchor="left"
-        open={state["left"]}
-        onClose={toggleDrawer("left", false)}
-      >
-        {list("left")}
-      </Drawer>
-    </React.Fragment>
+    <>
+      <Hidden smDown>
+        <Drawer
+          variant="persistent"
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+          open={opened}
+          ModalProps={{
+            keepMounted: false,
+            className: classes.modal,
+            BackdropProps: {
+              className: classes.backdrop,
+            },
+            onBackdropClick: toggleDrawer,
+          }}
+        >
+          {menu}
+        </Drawer>
+      </Hidden>
+      <Hidden mdUp>
+        <SwipeableDrawer
+          variant="temporary"
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+          open={opened}
+          onClose={toggleDrawer}
+          onOpen={toggleDrawer}
+          disableBackdropTransition={!iOS}
+          ModalProps={{
+            keepMounted: false,
+            className: classes.modal,
+            BackdropProps: {
+              className: classes.backdrop,
+            },
+            onBackdropClick: toggleDrawer,
+          }}
+        >
+          {menu}
+        </SwipeableDrawer>
+      </Hidden>
+    </>
   );
-}
+};
 
-export default SideBar;
+Sidebar.prototypes = {
+  opened: PropTypes.func,
+  toggleDrawer: PropTypes.func,
+  closeDrawer: PropTypes.func,
+  openDrawer: PropTypes.func,
+  routes: PropTypes.object,
+};
+
+// const SidebarWithRouter = withRouter(Sidebar);
+
+export default withWidth()(Sidebar);
