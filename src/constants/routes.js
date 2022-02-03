@@ -6,6 +6,7 @@ import Compliance from "../pages/Compliance";
 import FDA from "../pages/FDA";
 import Products from "../pages/Products";
 import Home from "../pages/Home";
+import Forgot from "../pages/Forgot";
 
 // Icons
 import AppsIcon from "@material-ui/icons/Apps";

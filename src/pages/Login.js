@@ -70,9 +70,9 @@ function Login() {
               </div>
 
               <div className="text-sm">
-                <button className="font-medium text-indigo-600 hover:text-indigo-500">
+                <Link to="/forgot" className="font-bold">
                   Forgot your password?
-                </button>
+                </Link>
               </div>
             </div>
 
