@@ -1,11 +1,11 @@
 // Pages
-import Analytics from "./pages/Analytics";
-import BIS from "./pages/BIS";
-import CE from "./pages/CE";
-import Compliance from "./pages/Compliance";
-import FDA from "./pages/FDA";
-import Products from "./pages/Products";
-import Home from "./pages/Home";
+import Analytics from "../pages/Analytics";
+import BIS from "../pages/BIS";
+import CE from "../pages/CE";
+import Compliance from "../pages/Compliance";
+import FDA from "../pages/FDA";
+import Products from "../pages/Products";
+import Home from "../pages/Home";
 
 // Icons
 import AppsIcon from "@material-ui/icons/Apps";

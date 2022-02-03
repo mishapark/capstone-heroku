@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     position: "relative",
     display: "block",
+    padding: "20px",
     [theme.breakpoints.up("sm")]: {
       overflowY: "auto",
       overflowX: "hidden",

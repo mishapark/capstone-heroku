@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import classNames from "classnames";
 import { makeStyles } from "@material-ui/core/styles";
-import routes from "../routes";
+import routes from "../constants/routes";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 

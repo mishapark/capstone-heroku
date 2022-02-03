@@ -15,3 +15,7 @@ button:focus {
   outline: 0;
   cursor: pointer;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
