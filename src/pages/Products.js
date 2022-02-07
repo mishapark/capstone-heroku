@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
-import { Modal } from "@material-ui/core";
-import ModalCustom from "../components/ModalCustom/ModalCustom";
+import Dialog from "@material-ui/core/Dialog";
+import DialogCustom from "../components/Dialog/DialogCustom";
 
 function Products() {
   const [open, setOpen] = React.useState(false);
@@ -18,14 +18,21 @@ function Products() {
         <AddIcon />
         Add Product
       </Button>
-      <Modal
+      <Dialog
         open={open}
         onClose={() => setOpen(false)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        scroll="paper"
+        aria-labelledby="scroll-dialog-title"
+        aria-describedby="scroll-dialog-description"
+        maxWidth="md"
+        fullWidth
       >
-        <ModalCustom title="Add Product" onClose={() => setOpen(false)} />
-      </Modal>
+        <DialogCustom
+          title="Add Product"
+          content="addProduct"
+          onClose={() => setOpen(false)}
+        />
+      </Dialog>
     </div>
   );
 }
