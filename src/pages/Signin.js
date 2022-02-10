@@ -11,8 +11,10 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import {useForm} from 'react-hook-form';
 
 export default function SignIn() {
+    const { register, formState: { errors,}, handleSubmit } = useForm();
   return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -30,7 +32,7 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={handleSubmit((data) => alert(JSON.stringify(data)))} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
@@ -39,6 +41,10 @@ export default function SignIn() {
               label="Email Address"
               name="email"
               autoComplete="email"
+              {...register('email', {
+                required: true,
+                pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+              })}
               autoFocus
             />
             <TextField
@@ -49,6 +55,10 @@ export default function SignIn() {
               label="Password"
               type="password"
               id="password"
+              {...register('password', {
+                required: true,
+                min: 8,
+              })}
               autoComplete="current-password"
             />
             <FormControlLabel

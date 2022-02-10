@@ -12,8 +12,10 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import LockResetIcon from '@mui/icons-material/LockReset';
+import {useForm} from 'react-hook-form';
 
 function Forgot() {
+  const { register, formState: { errors,}, handleSubmit } = useForm();
   return (
     <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -34,7 +36,7 @@ function Forgot() {
           <Typography component="subtitle1" align="center" sx={{mt:2}}>
             Enter your email and we'll send you instructions on how to reset your password
           </Typography>
-          <Box component="form" noValidate sx={{ mt: 1 }}>
+          <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleSubmit((data) => alert(JSON.stringify(data)))}>
             <TextField
               margin="normal"
               required
@@ -43,6 +45,10 @@ function Forgot() {
               label="Email Address"
               name="email"
               autoComplete="email"
+              {...register('email', {
+                required: true,
+                pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+              })}
               autoFocus
             />
             
