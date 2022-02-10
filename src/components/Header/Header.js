@@ -15,6 +15,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
 import LogoutIcon from '@mui/icons-material/Logout';
+import PaymentsIcon from '@mui/icons-material/Payments';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -127,20 +128,13 @@ const Header = ({ logo, logoAltText, toggleDrawer }) => {
           open={Boolean(anchorEl)}
           onClose={handleCloseMenu}
         >
-          <Link to="/signin">
+          {/* My Prefernces Settings Billing Logout*/}
+          <Link to="mypreferences">
             <MenuItem onClick={handleCloseMenu}>
               <ListItemIcon>
                 <AccountBoxIcon />
               </ListItemIcon>
-              <ListItemText primary="Login" />
-            </MenuItem>
-          </Link>
-          <Link to="signup">
-            <MenuItem onClick={handleCloseMenu}>
-              <ListItemIcon>
-                <ExitToAppIcon />
-              </ListItemIcon>
-              <ListItemText primary="Sign Up" />
+              <ListItemText primary="My Preferences" />
             </MenuItem>
           </Link>
           <Link to="settings">
@@ -149,6 +143,14 @@ const Header = ({ logo, logoAltText, toggleDrawer }) => {
                 <SettingsApplicationsIcon />
               </ListItemIcon>
               <ListItemText primary="Settings" />
+            </MenuItem>
+          </Link>
+          <Link to="billing">
+            <MenuItem onClick={handleCloseMenu}>
+              <ListItemIcon>
+                <PaymentsIcon />
+              </ListItemIcon>
+              <ListItemText primary="Billing" />
             </MenuItem>
           </Link>
           <Link to="logout">

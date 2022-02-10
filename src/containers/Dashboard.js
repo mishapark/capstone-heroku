@@ -4,12 +4,12 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import classNames from "classnames";
 import { makeStyles } from "@material-ui/core/styles";
 import routes from "../constants/routes";
-import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import Forgot from "../pages/Forgot";
 import Signin from "../pages/Signin";
 import Settings from "../pages/Settings"
-import LogoDevIcon from '@mui/icons-material/LogoDev';
+import Billing from "../pages/Billing";
+import MyPreferences from "../pages/MyPreferences";
 
 const useStyles = makeStyles((theme) => ({
   panel: {
@@ -96,6 +96,8 @@ const Dashboard = () => {
       <Route exact path="/forgot" component={Forgot} />
       <Route exact path="/settings" component={Settings} />
       <Route exact path="/logout" component={Signin} />
+      <Route exact path="/billing" component={Billing} />
+      <Route exact path="/mypreferences" component={MyPreferences} />
       <Redirect to="/" />
     </Switch>
   );
