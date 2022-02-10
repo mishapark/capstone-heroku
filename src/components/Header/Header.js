@@ -13,6 +13,8 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Toolbar from "@material-ui/core/Toolbar";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
+import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -125,7 +127,7 @@ const Header = ({ logo, logoAltText, toggleDrawer }) => {
           open={Boolean(anchorEl)}
           onClose={handleCloseMenu}
         >
-          <Link to="/login">
+          <Link to="/signin">
             <MenuItem onClick={handleCloseMenu}>
               <ListItemIcon>
                 <AccountBoxIcon />
@@ -139,6 +141,22 @@ const Header = ({ logo, logoAltText, toggleDrawer }) => {
                 <ExitToAppIcon />
               </ListItemIcon>
               <ListItemText primary="Sign Up" />
+            </MenuItem>
+          </Link>
+          <Link to="settings">
+            <MenuItem onClick={handleCloseMenu}>
+              <ListItemIcon>
+                <SettingsApplicationsIcon />
+              </ListItemIcon>
+              <ListItemText primary="Settings" />
+            </MenuItem>
+          </Link>
+          <Link to="logout">
+            <MenuItem onClick={handleCloseMenu}>
+              <ListItemIcon>
+                <LogoutIcon />
+              </ListItemIcon>
+              <ListItemText primary="Logout" />
             </MenuItem>
           </Link>
         </Menu>

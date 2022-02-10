@@ -1,44 +1,62 @@
-import React from "react";
+import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import LockResetIcon from '@mui/icons-material/LockReset';
 
 function Forgot() {
   return (
-    <>
-      <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full space-y-8">
-          <div>
-            <h2 className="mt-6 text-center">CAPSTONE PROJECT</h2>
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-              Forgot your password?
-            </h2>
-            <p className="mt-2 text-center text-sm text-gray-600">
-              <p>
-                Enter your email and we'll send you instructions on how to reset
-                your password.
-              </p>
-            </p>
-          </div>
-          <form method="POST">
-            <input
-              aria-label="Enter your email address"
-              className="text-sm text-gray w-full mr-3 py-5 px-4 h-2 border bg-gray-background rounded mb-2"
-              type="text"
-              placeholder="Email address"
+    <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockResetIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Forgot your password?
+          </Typography>
+          <Typography component="subtitle1" align="center" sx={{mt:2}}>
+            Enter your email and we'll send you instructions on how to reset your password
+          </Typography>
+          <Box component="form" noValidate sx={{ mt: 1 }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
             />
-            <div className="flex items-center justify-between"></div>
-
-            <div>
-              <button
-                type="submit"
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                <span className="absolute left-0 inset-y-0 flex items-center pl-3"></span>
-                Reset
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </>
+            
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2, backgroundColor: '#3F50B5' }}
+            >
+              Reset
+            </Button>
+          </Box>
+        </Box>
+      </Container>
   );
 }
 

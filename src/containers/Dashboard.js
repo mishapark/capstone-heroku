@@ -7,6 +7,9 @@ import routes from "../constants/routes";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import Forgot from "../pages/Forgot";
+import Signin from "../pages/Signin";
+import Settings from "../pages/Settings"
+import LogoDevIcon from '@mui/icons-material/LogoDev';
 
 const useStyles = makeStyles((theme) => ({
   panel: {
@@ -85,11 +88,14 @@ const Dashboard = () => {
             name={item.name}
             key={index}
           />
+          
         )
       )}
-      <Route exact path="/login" component={Login} />
+      <Route exact path="/signin" component={Signin} />
       <Route exact path="/signup" component={Signup} />
       <Route exact path="/forgot" component={Forgot} />
+      <Route exact path="/settings" component={Settings} />
+      <Route exact path="/logout" component={Signin} />
       <Redirect to="/" />
     </Switch>
   );
