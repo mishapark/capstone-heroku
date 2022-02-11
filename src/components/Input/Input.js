@@ -32,6 +32,7 @@ const styles = {
   },
   ipnutReq: { color: "red", marginRight: 5 },
   input: {
+    position: "relative",
     display: "flex",
     justifyContent: "flex-start",
     width: "100%",
@@ -47,11 +48,13 @@ const styles = {
     marginLeft: 10,
   },
   fileName: {
-    marginLeft: 10,
+    position: "absolute",
+
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
     overflow: "hidden",
     width: "30%",
+    right: 20,
   },
   filesName: {
     marginTop: 10,

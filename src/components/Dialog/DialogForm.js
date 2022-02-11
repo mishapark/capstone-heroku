@@ -17,7 +17,7 @@ const styles = {
   inputs: {
     display: "grid",
     columnGap: 20,
-    gridTemplateColumns: "50% 50%",
+    gridTemplateColumns: "auto auto auto auto",
     padding: 20,
     width: "100%",
   },
