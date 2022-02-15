@@ -60,6 +60,28 @@ const Dashboard = () => {
     resizeDispatch();
   };
 
+  const handleFullscreenToggle = () => {
+    const element = document.querySelector("#root");
+    const isFullscreen =
+      document.webkitIsFullScreen || document.mozFullScreen || false;
+
+    element.requestFullScreen =
+      element.requestFullScreen ||
+      element.webkitRequestFullScreen ||
+      element.mozRequestFullScreen ||
+      function() {
+        return false;
+      };
+    document.cancelFullScreen =
+      document.cancelFullScreen ||
+      document.webkitCancelFullScreen ||
+      document.mozCancelFullScreen ||
+      function() {
+        return false;
+      };
+    isFullscreen ? document.cancelFullScreen() : element.requestFullScreen();
+  };
+
   const getRoutes = (
     <Switch>
       {routes.items.map((item, index) =>
@@ -108,6 +130,7 @@ const Dashboard = () => {
         logoAltText="Capstone"
         logo={``}
         toggleDrawer={handleDrawerToggle}
+        toggleFullscreen={handleFullscreenToggle}
       />
       <div className={classNames(classes.panel, "theme-dark")}>
         <Sidebar

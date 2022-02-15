@@ -13,6 +13,7 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import InboxIcon from "@material-ui/icons/Inbox";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import AssessmentIcon from "@material-ui/icons/Assessment";
+import RequestQuoteIcon from '@mui/icons-material/RequestQuote';
 
 export default {
   items: [
@@ -45,29 +46,15 @@ export default {
       component: Analytics,
     },
     {
-      path: "/submissions",
-      name: "Submissions",
+      path: "/rfq",
+      name: "RFQ Manager",
       type: "submenu",
-      icon: AppsIcon,
-      badge: {
-        type: "primary",
-        value: "3",
-      },
+      icon: RequestQuoteIcon,
       children: [
         {
-          path: "/ce",
-          name: "CE",
+          path: "/createrfq",
+          name: "Create",
           component: CE,
-        },
-        {
-          path: "/fda",
-          name: "FDA",
-          component: FDA,
-        },
-        {
-          path: "/bis",
-          name: "BIS",
-          component: BIS,
         },
       ],
     },

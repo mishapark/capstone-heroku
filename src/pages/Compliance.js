@@ -20,6 +20,7 @@ import Switch from "@mui/material/Switch";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
+import axios from 'axios';
 
 function createData(name, type, issueDate) {
   return {
@@ -99,21 +100,22 @@ const EnhancedTableToolbar = (props) => {
 export default function Compliance() {
   const [products, setProducts] = React.useState([]);
 
+  const sendGetRequest = async () => {
+    try {
+      const response = await axios.get(
+        'http://humber-capstone-backend.herokuapp.com/products'
+      );
+      setProducts(response.data);
+      setIsLoading(false);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
   React.useEffect(() => {
-    rows = [];
-    fetch("http://humber-capstone-backend.herokuapp.com/products").then(
-      (response) =>
-        response
-          .json()
-          .then((responseData) =>
-            responseData.map((r) =>
-              rows.push(
-                createData(r["product_details"]["product_name"], " ", "  ")
-              )
-            )
-          )
-    );
+    sendGetRequest();
   }, []);
+
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
@@ -122,12 +124,13 @@ export default function Compliance() {
           <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
             <EnhancedTableHead />
             <TableBody>
-              {rows.map((row) => {
+              {products.map((product) => {
+                console.log(product)
                 return (
                   <TableRow>
-                    <TableCell>{row.name}</TableCell>
-                    <TableCell>{row.type}</TableCell>
-                    <TableCell>{row.issueDate}</TableCell>
+                    <TableCell>{product["product_details"]["product_name"]}</TableCell>
+                    <TableCell>{product["product_details"]["product_name"]}</TableCell>
+                    <TableCell>{product["product_details"]["product_name"]}</TableCell>
                   </TableRow>
                 );
               })}

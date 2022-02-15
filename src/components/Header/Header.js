@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import AppBar from "@material-ui/core/AppBar";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import { Hidden } from "@material-ui/core";
+import SearchIcon from '@mui/icons-material/Search';
 import IconButton from "@material-ui/core/IconButton";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -55,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: theme.shape.borderRadius,
     marginRight: theme.spacing(1) * 2,
     display: "block",
-    maxWidth: "800px",
+    minWidth: "300px",
   },
   searchInput: {
     fontSize: "1rem",
@@ -79,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Header = ({ logo, logoAltText, toggleDrawer }) => {
+const Header = ({ logo, logoAltText,toggleFullscreen, toggleDrawer }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [searchExpanded, setSearchExpanded] = useState(false);
@@ -109,6 +111,39 @@ const Header = ({ logo, logoAltText, toggleDrawer }) => {
         <div className={classes.branding}>
           <img src={logo} alt={logoAltText} className={classes.logo} />
         </div>
+
+        <Hidden xsDown>
+          <div className={classes.searchWrapper}>
+            <form className={classes.searchForm}>
+              <IconButton aria-label="Search" className={classes.searchIcon}>
+                <SearchIcon />
+              </IconButton>
+              <input
+                className={classes.searchInput}
+                type="text"
+                placeholder="Search"
+                autoFocus={true}
+              />
+            </form>
+          </div>
+        </Hidden>
+
+        <Hidden smUp>
+          <span className="flexSpacer" />
+        </Hidden>
+
+        <Hidden smUp>
+          <IconButton
+            color="inherit"
+            onClick={handleSearchExpandToggle}
+            aria-expanded={searchExpanded}
+            aria-label="Show searchbar"
+          >
+            <SearchIcon />
+          </IconButton>
+        </Hidden>
+
+      
 
         <span className="flexSpacer" />
 
