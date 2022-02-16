@@ -45,7 +45,7 @@ export default function Compliance() {
   const sendGetRequest = async () => {
     try {
       const response = await axios.get(
-        'http://humber-capstone-backend.herokuapp.com/products'
+        'https://humber-capstone-backend.herokuapp.com/products'
       );
       setProducts(response.data);
       setIsLoading(false);

@@ -15,7 +15,7 @@ function Products() {
   const sendGetRequest = async () => {
     try {
       const response = await axios.get(
-        'http://humber-capstone-backend.herokuapp.com/products'
+        'https://humber-capstone-backend.herokuapp.com/products'
       );
       setTableData(response.data);
       setIsLoading(false);
