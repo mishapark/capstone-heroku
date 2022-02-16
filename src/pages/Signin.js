@@ -12,9 +12,23 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {useForm} from 'react-hook-form';
+import axios from 'axios';
+import { AuthContext } from '../context/AuthContext';
+import {useContext} from 'react'
 
 export default function SignIn() {
-    const { register, formState: { errors,}, handleSubmit } = useForm();
+    const { register, formState: { errors,}, handleSubmit } = useForm()
+    const authContext = useContext(AuthContext);
+
+    const loginHandler = () => {
+      authContext.login();
+    };
+
+    const logoutHandler = () => {
+      authContext.logout();
+    };
+
+
   return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -32,7 +46,16 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit((data) => alert(JSON.stringify(data)))} noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={handleSubmit((data) => {
+            axios.post('https://humber-capstone-backend.herokuapp.com/users/login', data)
+  .then(function (response) {
+    if (response["status"] === 200) {
+      console.log("logged in")
+    } else {
+      console.log("error")
+    }
+  })
+          })} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
@@ -41,7 +64,7 @@ export default function SignIn() {
               label="Email Address"
               name="email"
               autoComplete="email"
-              {...register('email', {
+              {...register('userEmail', {
                 required: true,
                 pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
               })}

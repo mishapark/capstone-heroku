@@ -13,9 +13,22 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import {useForm} from 'react-hook-form';
+import axios from 'axios';
 
 function Signup() {
   const { register, formState: { errors,}, handleSubmit } = useForm();
+  const onSubmit = async (data) => {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    };
+
+    const response = await fetch(["https://humber-capstone-backend.herokuapp.com/users/register"], requestOptions);
+    const jsonData = await response.json();
+
+    console.log(jsonData);
+}
   return (
     <Container component="main" maxWidth="xs">
     <CssBaseline />
@@ -33,16 +46,21 @@ function Signup() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" onSubmit={handleSubmit((data) => alert(JSON.stringify(data)))} noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={handleSubmit((data) => {
+            axios.post('https://humber-capstone-backend.herokuapp.com/users/register', data)
+  .then(function (response) {
+    console.log(response);
+  })
+          })} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
               fullWidth
-              id="name"
+              id="userName"
               label="Full name"
-              name="name"
+              name="userName"
               autoComplete="name"
-              {...register('name', {
+              {...register('userName', {
                 required: true,
               })}
               autoFocus
@@ -54,10 +72,10 @@ function Signup() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              {...register('email', {
+              id="userEmail"
+              label="Email"
+              name="userEmail"
+              {...register('userEmail', {
                 required: true,
                 pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
               })}
@@ -70,6 +88,7 @@ function Signup() {
               margin="normal"
               required
               fullWidth
+              id="password"
               name="password"
               label="Password"
               type="password"

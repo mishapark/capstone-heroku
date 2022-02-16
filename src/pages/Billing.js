@@ -5,12 +5,141 @@ import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { Container } from '@material-ui/core';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardHeader from '@mui/material/CardHeader';
+import StarIcon from '@mui/icons-material/StarBorder';
+import { Divider } from '@material-ui/core';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+
 
 
 function Billing() {
+  const tiers = [
+    {
+      title: 'Free',
+      price: '0',
+      description: [
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In mollis vulputate neque a lobortis. Integer eu cursus tortor. Cras sit amet enim a lorem tempus faucibus. Vestibulum in diam feugiat, lobortis est id, tincidunt enim. Nullam euismod nisi sit amet orci mattis faucibus. Pellentesque blandit luctus semper. Sed vel feugiat mauris. Duis eget elit a enim porta elementum. Vivamus quis dolor imperdiet, euismod mauris sit amet, euismod tortor. Phasellus mattis turpis ac augue molestie facilisis.        ',
+       
+      ],
+      buttonText: 'Sign up for free',
+      buttonVariant: 'outlined',
+    },
+    {
+      title: 'Pro',
+      subheader: 'Most popular',
+      price: '15',
+      description: [
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In mollis vulputate neque a lobortis. Integer eu cursus tortor. Cras sit amet enim a lorem tempus faucibus. Vestibulum in diam feugiat, lobortis est id, tincidunt enim. Nullam euismod nisi sit amet orci mattis faucibus. Pellentesque blandit luctus semper. Sed vel feugiat mauris. Duis eget elit a enim porta elementum. Vivamus quis dolor imperdiet, euismod mauris sit amet, euismod tortor. Phasellus mattis turpis ac augue molestie facilisis.',
+      ],
+      buttonText: 'Get started',
+      buttonVariant: 'contained',
+    },
+    {
+      title: 'Enterprise',
+      price: '30',
+      description: [
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In mollis vulputate neque a lobortis. Integer eu cursus tortor. Cras sit amet enim a lorem tempus faucibus. Vestibulum in diam feugiat, lobortis est id, tincidunt enim. Nullam euismod nisi sit amet orci mattis faucibus. Pellentesque blandit luctus semper. Sed vel feugiat mauris. Duis eget elit a enim porta elementum. Vivamus quis dolor imperdiet, euismod mauris sit amet, euismod tortor. Phasellus mattis turpis ac augue molestie facilisis.',
+      ],
+      buttonText: 'Contact us',
+      buttonVariant: 'outlined',
+    },
+  ];
+
   return (
     <Container>
-      <Typography variant="h6" gutterBottom>
+         <Container disableGutters maxWidth="sm" component="main" sx={{ pt: 8, pb: 6 }}>
+
+        <Typography
+          component="h1"
+          variant="h2"
+          align="center"
+          color="text.primary"
+          gutterBottom
+        >
+          Pricing
+        </Typography>
+        <Typography variant="subtitle1" align="center" color="text.secondary" component="p">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In mollis vulputate neque a lobortis. Integer eu cursus tortor. Cras sit amet enim a lorem tempus faucibus. Vestibulum in diam feugiat, lobortis est id, tincidunt enim. Nullam euismod nisi sit amet orci mattis faucibus. Pellentesque blandit luctus semper. Sed vel feugiat mauris. Duis eget elit a enim porta elementum. Vivamus quis dolor imperdiet, euismod mauris sit amet, euismod tortor. Phasellus mattis turpis ac augue molestie facilisis.
+
+
+        </Typography>
+      </Container>
+      {/* End hero unit */}
+      <Container maxWidth="md" component="main">
+        <Grid container spacing={5} alignItems="flex-end">
+          {tiers.map((tier) => (
+            // Enterprise card is full width at sm breakpoint
+            <Grid
+              item
+              key={tier.title}
+              xs={12}
+              sm={tier.title === 'Enterprise' ? 12 : 6}
+              md={4}
+            >
+              <Card>
+                <CardHeader
+                  title={tier.title}
+                  subheader={tier.subheader}
+                  titleTypographyProps={{ align: 'center' }}
+                  action={tier.title === 'Pro' ? <StarIcon /> : null}
+                  subheaderTypographyProps={{
+                    align: 'center',
+                  }}
+                  sx={{
+                    backgroundColor: (theme) =>
+                      theme.palette.mode === 'light'
+                        ? theme.palette.grey[200]
+                        : theme.palette.grey[700],
+                  }}
+                />
+                <CardContent>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'baseline',
+                      mb: 2,
+                    }}
+                  >
+                    <Typography component="h2" variant="h3" color="text.primary">
+                      ${tier.price}
+                    </Typography>
+                    <Typography variant="h6" color="text.secondary">
+                      /mo
+                    </Typography>
+                  </Box>
+                  <ul>
+                    {tier.description.map((line) => (
+                      <Typography
+                        component="li"
+                        variant="subtitle1"
+                        align="center"
+                        key={line}
+                      >
+                        {line}
+                      </Typography>
+                    ))}
+                  </ul>
+                </CardContent>
+                <CardActions>
+                  <Button fullWidth variant={tier.buttonVariant}>
+                    {tier.buttonText}
+                  </Button>
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+      <Divider sx={{'mt':5}}/>
+      <Box sx={{padding:5}}>
+      <Typography variant="h6" gutterBottom sx={{'mt':5}}>
         Payment method
       </Typography>
       <Grid container spacing={3}>
@@ -62,6 +191,8 @@ function Billing() {
           />
         </Grid>
       </Grid>
+      </Box>
+      
     </Container>
   );
 }

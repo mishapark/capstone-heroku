@@ -1,9 +1,7 @@
 // Pages
 import Analytics from "../pages/Analytics";
-import BIS from "../pages/BIS";
-import CE from "../pages/CE";
 import Compliance from "../pages/Compliance";
-import FDA from "../pages/FDA";
+import RQC, { RFQ } from "../pages/RFQ"
 import Products from "../pages/Products";
 import Home from "../pages/Home";
 
@@ -54,7 +52,7 @@ export default {
         {
           path: "/createrfq",
           name: "Create",
-          component: CE,
+          component: RFQ,
         },
       ],
     },
