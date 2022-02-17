@@ -1,6 +1,7 @@
 import React from "react";
 import { useFormContext } from "react-hook-form";
-import { InputLabel, TextField } from "@material-ui/core";
+import { InputLabel } from "@material-ui/core";
+import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import styles from "./styles";
 

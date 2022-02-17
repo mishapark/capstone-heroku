@@ -22,12 +22,13 @@ function UploadInput({ required, label, uploadLabel, name }) {
             id={uploadLabel}
             multiple
             type="file"
-            {...register(name)}
-            onChange={(event) => {
-              if (event.target.files) {
-                setUploadedFiles(event.target.files);
-              }
-            }}
+            {...register(name, {
+              onChange: (event) => {
+                if (event.target.files) {
+                  setUploadedFiles(event.target.files);
+                }
+              },
+            })}
           />
           <Button
             variant="outlined"

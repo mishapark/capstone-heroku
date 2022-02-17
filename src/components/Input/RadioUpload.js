@@ -57,17 +57,16 @@ function RadioUpload({ required, label, options, name }) {
                 <Button
                   variant="outlined"
                   color="primary"
-                  style={styles.marginLeft}
                   component="span"
                   startIcon={<UploadIcon />}
                 >
                   Upload
                 </Button>
               </label>
-              <span style={styles.fileName}>{uploadedFile}</span>
             </>
           ) : null}
         </>
+        <div style={styles.fileName}>{uploadedFile}</div>
       </div>
     </div>
   );

@@ -33,8 +33,8 @@ function TextExtraInput({ required, label, placeholder, name }) {
             color="primary"
             aria-label="Add"
             style={{
-              marginLeft: 15,
-              height: "100%",
+              marginLeft: 10,
+              height: "auto",
             }}
           >
             {addClicked ? <RemoveIcon /> : <AddIcon />}
@@ -49,6 +49,7 @@ function TextExtraInput({ required, label, placeholder, name }) {
           fullWidth
           helperText=""
           style={styles.extra}
+          placeholder={placeholder}
         />
       ) : null}
     </div>

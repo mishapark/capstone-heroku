@@ -1,11 +1,13 @@
 import React from "react";
 import { useFormContext } from "react-hook-form";
-import { InputLabel, TextField, Chip } from "@material-ui/core";
+import { InputLabel, Chip } from "@material-ui/core";
 import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
 import styles from "./styles";
 
 function CountriesInput({ required, label, placeholder, options, name }) {
   const { register } = useFormContext();
+
   return (
     <div style={styles.inputContainer}>
       <InputLabel style={styles.inputLabel} htmlFor="component-error">
@@ -13,31 +15,44 @@ function CountriesInput({ required, label, placeholder, options, name }) {
         {label}
       </InputLabel>
       <div style={styles.input}>
-        <>
-          <Autocomplete
-            limitTags={2}
-            multiple
-            id="fixed-tags-demo"
-            options={options}
-            groupBy={(option) => option.firstLetter}
-            // getOptionLabel={(option) => option}
-            renderTags={(tagValue, getTagProps) =>
-              tagValue.map((option, index) => (
-                <Chip label={option} {...getTagProps({ index })} />
-              ))
-            }
-            fullWidth
-            renderInput={(params) => (
-              <TextField
-                variant="outlined"
-                {...params}
-                size="small"
-                placeholder={placeholder}
-                {...register(name)}
-              />
-            )}
-          />
-        </>
+        <Autocomplete
+          limitTags={2}
+          multiple
+          size="small"
+          id="fixed-tags-demo"
+          options={options
+            .sort((a, b) => {
+              const countryA = a.continents[0];
+              const countryB = b.continents[0];
+              if (countryA < countryB) {
+                return -1;
+              }
+              if (countryA > countryB) {
+                return 1;
+              }
+            })
+            .reduce((acc, current) => {
+              const optionRows = [];
+              optionRows.push({
+                country: current.name.common,
+                continent: current.continents[0],
+              });
+              acc = acc.concat(optionRows);
+              return acc;
+            }, [])}
+          groupBy={(option) => option.continent}
+          getOptionLabel={(option) => option.country}
+          fullWidth
+          renderInput={(params) => (
+            <TextField
+              size="small"
+              variant="outlined"
+              {...params}
+              placeholder={placeholder}
+              {...register(name)}
+            />
+          )}
+        />
       </div>
     </div>
   );

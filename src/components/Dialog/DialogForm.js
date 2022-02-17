@@ -11,9 +11,9 @@ import ProductEnvironInfo from "./AddProductSections/ProductEnvironInfo";
 import MarkingDoc from "./AddProductSections/MarkingDoc";
 const styles = {
   inputs: {
-    display: "grid",
-    columnGap: 20,
-    gridTemplateColumns: "auto auto auto auto",
+    display: "flex",
+    flexWrap: "Wrap",
+    margin: "0 -10px -10px 0",
     padding: 20,
     width: "100%",
   },

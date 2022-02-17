@@ -5,26 +5,15 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogForm from "./DialogForm";
-import axios from "axios";
 import { getCountries } from "../../api/countries";
+import { getStandards } from "../../api/standards";
 
 function DialogCustom({ title, onClose }) {
   const [standards, setStandards] = useState([]);
   const [countries, setCountries] = useState([]);
 
-  const sendGetRequest = async () => {
-    try {
-      const response = await axios.get(
-        "https://humber-capstone-backend.herokuapp.com/standards"
-      );
-      const standards = response.data.map((standard) => standard);
-      setStandards(standards);
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
   useEffect(() => {
-    sendGetRequest();
+    getStandards().then((data) => setStandards(data));
     getCountries().then((data) => setCountries(data));
   }, []);
 

@@ -1,15 +1,15 @@
 export default {
   inputContainer: {
-    display: "flex",
+    display: "inline-block",
     flexDirection: "column",
     alignItems: "flex-start",
-    marginBottom: 15,
+    margin: "0 10px 10px 0",
+    width: "calc(100% * (1/4) - 10px - 1px)",
     justifyContent: "flex-start",
   },
   inputLabel: {
     marginBottom: 10,
     textAlign: "left",
-    whiteSpace: "noWrap",
   },
   ipnutReq: { color: "red", marginRight: 5 },
   input: {
@@ -29,12 +29,19 @@ export default {
     marginLeft: 10,
   },
   fileName: {
-    position: "absolute",
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
     overflow: "hidden",
     width: "30%",
-    right: 20,
+    marginLeft: 5,
+  },
+  uploadSection: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+    overflow: "hidden",
+    width: "60%",
   },
   filesName: {
     marginTop: 10,

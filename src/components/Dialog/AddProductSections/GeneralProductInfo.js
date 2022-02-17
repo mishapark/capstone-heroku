@@ -7,15 +7,8 @@ import TextExtraInput from "../../Input/TextExtraInput";
 import RadioUpload from "../../Input/RadioUpload";
 import CountriesInput from "../../Input/CountriesInput";
 
-const countriess = ["Russia", "Canada", "China", "Korea", "India", "Kongo"];
-
 function GeneralProductInfo({ standards, countries }) {
   const [category, setCategory] = useState("");
-  const [country, setCountry] = useState([]);
-
-  // if (countries.length > 0) {
-  //   setCountry(countries.map((c) => c.name.common));
-  // }
 
   return (
     <>
@@ -98,7 +91,7 @@ function GeneralProductInfo({ standards, countries }) {
         required={false}
         label="Market"
         placeholder="Select a country"
-        options={countries.map((c) => c.name.common)}
+        options={countries}
         name="market"
       />
     </>
