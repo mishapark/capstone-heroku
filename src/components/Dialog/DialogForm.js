@@ -1,18 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
 } from "@material-ui/core";
-import Input from "../Input/Input";
-import {
-  generalProdInfo,
-  prodTechInfo,
-  prodEnvInfo,
-  markingDoc,
-} from "../../constants/inputs";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-
+import GeneralProductInfo from "./AddProductSections/GeneralProductInfo";
+import ProductTechnicalInfo from "./AddProductSections/ProductTechnicalInfo";
+import ProductEnvironInfo from "./AddProductSections/ProductEnvironInfo";
+import MarkingDoc from "./AddProductSections/MarkingDoc";
 const styles = {
   inputs: {
     display: "grid",
@@ -26,63 +22,24 @@ const styles = {
   },
 };
 
-function DialogForm({ title }) {
-  const [expanded, setExpanded] = React.useState(true);
+function DialogForm({ title, standards, countries }) {
+  const [expanded, setExpanded] = useState(true);
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
 
-  const renderInputs = () => {
+  const renderForm = () => {
     switch (title) {
       case "General Product Information":
-        return generalProdInfo.map((input) => (
-          <Input
-            key={input.id}
-            label={input.field}
-            type={input.type}
-            required={input.required}
-            options={input.options}
-            optional={input.optional}
-            placeholder={input.placeholder}
-          />
-        ));
+        return (
+          <GeneralProductInfo standards={standards} countries={countries} />
+        );
       case "Product Technical Information":
-        return prodTechInfo.map((input) => (
-          <Input
-            key={input.id}
-            label={input.field}
-            type={input.type}
-            required={input.required}
-            options={input.options}
-            optional={input.optional}
-            placeholder={input.placeholder}
-          />
-        ));
+        return <ProductTechnicalInfo />;
       case "Product Environmental Information":
-        return prodEnvInfo.map((input) => (
-          <Input
-            key={input.id}
-            label={input.field}
-            type={input.type}
-            required={input.required}
-            options={input.options}
-            optional={input.optional}
-            placeholder={input.placeholder}
-          />
-        ));
+        return <ProductEnvironInfo />;
       case "Marking and Documentations":
-        return markingDoc.map((input) => (
-          <Input
-            key={input.id}
-            label={input.field}
-            type={input.type}
-            required={input.required}
-            options={input.options}
-            optional={input.optional}
-            placeholder={input.placeholder}
-            uploadLabel={input.uploadLabel}
-          />
-        ));
+        return <MarkingDoc />;
       default:
         break;
     }
@@ -99,7 +56,7 @@ function DialogForm({ title }) {
         {title}
       </AccordionSummary>
       <AccordionDetails>
-        <div style={styles.inputs}>{renderInputs()}</div>
+        <div style={styles.inputs}>{renderForm()}</div>
       </AccordionDetails>
     </Accordion>
   );

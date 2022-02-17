@@ -1,39 +1,66 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useForm, FormProvider } from "react-hook-form";
 import { Button } from "@material-ui/core";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogForm from "./DialogForm";
+import axios from "axios";
+import { getCountries } from "../../api/countries";
 
-function DialogCustom({ title, content, onClose }) {
-  const renderContent = () => {
-    switch (content) {
-      case "addProduct":
-        return (
-          <>
-            <DialogForm title="General Product Information" />
-            <DialogForm title="Product Technical Information" />
-            <DialogForm title="Product Environmental Information" />
-            <DialogForm title="Marking and Documentations" />
-          </>
-        );
-      default:
-        break;
+function DialogCustom({ title, onClose }) {
+  const [standards, setStandards] = useState([]);
+  const [countries, setCountries] = useState([]);
+
+  const sendGetRequest = async () => {
+    try {
+      const response = await axios.get(
+        "https://humber-capstone-backend.herokuapp.com/standards"
+      );
+      const standards = response.data.map((standard) => standard);
+      setStandards(standards);
+    } catch (err) {
+      console.log(err.message);
     }
   };
+  useEffect(() => {
+    sendGetRequest();
+    getCountries().then((data) => setCountries(data));
+  }, []);
+
+  const methods = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   return (
-    <>
-      <DialogTitle id="scroll-dialog-title">{title}</DialogTitle>
-      <DialogContent dividers="true" style={{ backgroundColor: "#f6f7f8" }}>
-        {renderContent()}
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
-        <Button onClick={onClose} color="primary" variant="contained">
-          Submit
-        </Button>
-      </DialogActions>
-    </>
+    <FormProvider {...methods}>
+      <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <DialogTitle id="scroll-dialog-title">{title}</DialogTitle>
+        <DialogContent dividers={true} style={{ backgroundColor: "#f6f7f8" }}>
+          <DialogForm
+            title="General Product Information"
+            standards={standards}
+            countries={countries}
+          />
+          <DialogForm title="Product Technical Information" />
+          <DialogForm title="Product Environmental Information" />
+          <DialogForm title="Marking and Documentations" />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={onClose}>Cancel</Button>
+          <Button
+            type="submit"
+            onClick={onClose}
+            color="primary"
+            variant="contained"
+          >
+            Submit
+          </Button>
+        </DialogActions>
+      </form>
+    </FormProvider>
   );
 }
 

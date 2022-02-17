@@ -34,7 +34,7 @@ function CustomTable({ tableData }) {
           <CustomHeader columns={DUMMY_COLUMNS} />
           <TableBody>
             {tableData.map((p) => (
-              <TableRow>
+              <TableRow key={p["_id"]}>
                 <TableCell>{p["product_details"]["product_name"]}</TableCell>
                 <TableCell>{p["product_details"]["product_name"]}</TableCell>
                 <TableCell>{p["product_details"]["product_name"]}</TableCell>

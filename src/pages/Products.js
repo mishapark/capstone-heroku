@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { Button, Dialog } from "@material-ui/core";
 import Card from "@mui/material/Card";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -15,7 +15,7 @@ function Products() {
   const sendGetRequest = async () => {
     try {
       const response = await axios.get(
-        'https://humber-capstone-backend.herokuapp.com/products'
+        "https://humber-capstone-backend.herokuapp.com/products"
       );
       setTableData(response.data);
       setIsLoading(false);

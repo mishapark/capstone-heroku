@@ -23,10 +23,8 @@ export const generalProdInfo = [
   {
     id: 4,
     field: "Product Category",
-    placeholder: "Select Product Category",
-    type: "autocomplete",
+    type: "categoryInput",
     required: true,
-    options: ["BATT", "CABL", "CAP", "CONT"],
   },
   {
     id: 5,
@@ -52,16 +50,8 @@ export const generalProdInfo = [
   {
     id: 8,
     field: "Applicable Standards",
-    placeholder: "Enter Applicable Standards",
-    type: "autocomplete/free",
+    type: "applicableStandards",
     required: true,
-    options: [
-      "IEC 60086-1:2015",
-      "IEC 60086-2:2015",
-      "IEC 60086-1:2015",
-      "IEC 60086-2:2015",
-      "IEC 60086-3:2011",
-    ],
   },
   {
     id: 9,
