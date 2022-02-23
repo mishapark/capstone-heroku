@@ -3,7 +3,6 @@ import Analytics from "../pages/Analytics";
 import Compliance from "../pages/Compliance";
 import RQC, { RFQ } from "../pages/RFQ"
 import Products from "../pages/Products";
-import Home from "../pages/Home";
 
 // Icons
 import AppsIcon from "@material-ui/icons/Apps";
@@ -12,6 +11,7 @@ import InboxIcon from "@material-ui/icons/Inbox";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import AssessmentIcon from "@material-ui/icons/Assessment";
 import RequestQuoteIcon from '@mui/icons-material/RequestQuote';
+import { Dash } from "../pages/Dash";
 
 export default {
   items: [
@@ -20,7 +20,7 @@ export default {
       name: "Dashboard",
       type: "link",
       icon: DashboardIcon,
-      component: <Home/>,
+      component: <Dash/>,
     },
     {
       path: "products",
