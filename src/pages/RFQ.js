@@ -3,12 +3,13 @@ import { Typography } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 import { Paper } from "@material-ui/core";
 import { Button } from "@material-ui/core";
-import { Stack } from "@mui/material";
+import { Card, Stack } from "@mui/material";
 import { TextField } from "@material-ui/core";
-import { Box } from "@material-ui/core";
+import { Box} from "@material-ui/core";
 import { Toolbar } from "@material-ui/core";
 import { Tooltip } from "chart.js";
 import { useState } from "react";
+import AddIcon from "@material-ui/icons/Add";
 import { Table } from "@material-ui/core";
 import { TableCell } from "@material-ui/core";
 import { TableRow } from "@material-ui/core";
@@ -19,7 +20,26 @@ export const RFQ = () => {
 
   return (
     <>
-      <Box sx={{ width: "100%" }}>
+      <Card
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+            padding: 2,
+            marginBottom: 2,
+          }}
+        >
+          <Button
+            onClick={() => setOpenForm((prev) => !prev)}
+            variant="contained"
+            color="primary"
+            aria-label="Add"
+          >
+            <AddIcon />
+            Create
+          </Button>
+        </Card>
+        {openForm && (
+      <Box sx={{ width: "100%", mb:5 }}>
         <Paper sx={{ width: "100%", mb: 2 }}>
           <Toolbar>
             <Typography
@@ -34,18 +54,12 @@ export const RFQ = () => {
           <Grid container spacing={1}>
             <Grid item xs={12} md={2}>
               <Box textAlign="center">
-                <Button
-                  variant="contained"
-                  onClick={() => setOpenForm((prev) => !prev)}
-                >
-                  Create
-                </Button>
+                
               </Box>
             </Grid>
             <Grid item xs={12} md={2}>
               
             </Grid>
-            {openForm && (
               <Grid item xs={12} md={8} >
                 <form>
                   <Stack spacing={2} sx={{ padding: 5, maxWidth:'700px' }}>
@@ -136,10 +150,32 @@ export const RFQ = () => {
                   </Stack>
                 </form>
               </Grid>
-            )}
           </Grid>
         </Paper>
       </Box>
+      )}
+      <Box sx={{ width: "100%", mt:2}}>
+      <Paper sx={{ width: "100%", mb: 2 }}>
+        <Table className="mb-0">
+      <TableHead>
+        <TableRow>
+            <TableCell key={1} sx={{'fontWeight':'bold'}}>Product name</TableCell>
+            <TableCell key={2} sx={{'fontWeight':'bold'}}>Compliance status</TableCell>
+            <TableCell key={3} sx={{'fontWeight':'bold'}}>Documents</TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+          <TableRow>
+            <TableCell>Test1</TableCell>
+            <TableCell>
+             Test1
+            </TableCell>
+            <TableCell>Test1</TableCell>
+          </TableRow>
+      </TableBody>
+    </Table>
+      </Paper>
+    </Box>
     </>
   );
 };

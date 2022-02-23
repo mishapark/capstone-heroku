@@ -46,15 +46,9 @@ export default {
     {
       path: "rfq",
       name: "RFQ Manager",
-      type: "submenu",
+      type: "link",
       icon: RequestQuoteIcon,
-      children: [
-        {
-          path: "createrfq",
-          name: "Create",
-          component: <RFQ/>,
-        },
-      ],
+      component: <RFQ/>,
     },
   ],
 };

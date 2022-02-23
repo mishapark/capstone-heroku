@@ -47,8 +47,10 @@ export default function Compliance() {
       const response = await axios.get(
         'https://humber-capstone-backend.herokuapp.com/products'
       );
+      console.log(response.data)
       setProducts(response.data);
       setIsLoading(false);
+      
     } catch (err) {
       console.log(err.message);
     }
