@@ -28,7 +28,6 @@ function RadioUpload({ required, label, options, name }) {
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
             onChange={(event) => setRadioValue(event.target.value)}
-            defaultValue={radioValue}
           >
             {options.map((option) => (
               <FormControlLabel

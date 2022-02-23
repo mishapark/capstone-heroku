@@ -22,7 +22,7 @@ const styles = {
   },
 };
 
-function DialogForm({ title, standards, countries }) {
+function DialogForm({ title, standards, countries, editContent }) {
   const [expanded, setExpanded] = useState(true);
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
@@ -32,14 +32,18 @@ function DialogForm({ title, standards, countries }) {
     switch (title) {
       case "General Product Information":
         return (
-          <GeneralProductInfo standards={standards} countries={countries} />
+          <GeneralProductInfo
+            standards={standards}
+            countries={countries}
+            editContent={editContent && editContent["product_details"]}
+          />
         );
       case "Product Technical Information":
-        return <ProductTechnicalInfo />;
+        return <ProductTechnicalInfo editContent={editContent} />;
       case "Product Environmental Information":
-        return <ProductEnvironInfo />;
+        return <ProductEnvironInfo editContent={editContent} />;
       case "Marking and Documentations":
-        return <MarkingDoc />;
+        return <MarkingDoc editContent={editContent} />;
       default:
         break;
     }

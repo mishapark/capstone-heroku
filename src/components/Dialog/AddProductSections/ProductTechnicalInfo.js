@@ -3,6 +3,8 @@ import AutocompleteInput from "../../Input/AutocompleteInput";
 import RadioTextInput from "../../Input/RadioTextInput";
 import SupplyConnInput from "../../Input/SupplyConnInput";
 import TextInput from "../../Input/TextInput";
+import CheckboxInput from "../../Input/CheckboxInput";
+import TextSizeInput from "../../Input/TextSizeInput";
 
 function ProductTechnicalInfo() {
   const options = [
@@ -27,7 +29,7 @@ function ProductTechnicalInfo() {
       values: ["Non-detachable Supply Cord", "Appliance Coupler"],
     },
     {
-      category: "Other",
+      category: "Other types",
       values: ["Permanent connection", "Mating connector "],
     },
   ];
@@ -44,7 +46,7 @@ function ProductTechnicalInfo() {
 
   return (
     <>
-      <TextInput
+      <TextSizeInput
         required={false}
         label="Overall Size of Equipment (W x D x H)"
         placeholder="Enter Size"
@@ -63,28 +65,28 @@ function ProductTechnicalInfo() {
         options={opmode}
         name="operation_mode"
       />
-      <AutocompleteInput
+      <CheckboxInput
         required={false}
         label="Classification of use by"
         placeholder="Select Classification"
         options={options}
         name="use_classification"
       />
-      <AutocompleteInput
+      <CheckboxInput
         required={false}
         label="Supply Connection"
         placeholder="Select Supply Connection"
         options={supply}
-        name="regulatory_model_name"
+        name="supply_connection"
       />
       <SupplyConnInput
         required={false}
         label="Supply Connection – Type"
         placeholder="Select Type"
         options={supplCon}
-        name="supply_connection"
+        name="supply_connection_type"
       />
-      <AutocompleteInput
+      <CheckboxInput
         required={false}
         label="Equipment Mobility"
         placeholder="Select Equipment Mobility"

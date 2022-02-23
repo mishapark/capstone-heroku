@@ -7,7 +7,7 @@ import TextExtraInput from "../../Input/TextExtraInput";
 import RadioUpload from "../../Input/RadioUpload";
 import CountriesInput from "../../Input/CountriesInput";
 
-function GeneralProductInfo({ standards, countries }) {
+function GeneralProductInfo({ standards, countries, editContent }) {
   const [category, setCategory] = useState("");
 
   return (
@@ -17,18 +17,21 @@ function GeneralProductInfo({ standards, countries }) {
         label="Regulatory Model Name"
         placeholder="Enter Model Name"
         name="regulatory_model_name"
+        editContent={editContent}
       />
       <TextInput
         required={true}
         label="Product Name"
         placeholder="Enter Product Name"
         name="product_name"
+        editContent={editContent}
       />
       <TextInput
         required={true}
         label="Regulatory Family"
         placeholder="Enter Product Family"
         name="product_family"
+        editContent={editContent}
       />
       <CategoryInput
         required={true}
@@ -43,12 +46,14 @@ function GeneralProductInfo({ standards, countries }) {
         label="Product Description / Intended Use"
         placeholder="Enter Product Description / Intended Use"
         name="product_description"
+        editContent={editContent}
       />
       <TextInput
         required={false}
         label="Model Difference (if applicable)"
         placeholder="Enter Model Difference"
         name="model_difference"
+        editContent={editContent}
       />
       <CheckboxInput
         required={true}
@@ -68,6 +73,7 @@ function GeneralProductInfo({ standards, countries }) {
         label="Applicant Name and Address"
         placeholder="Enter Applicant Name and Address"
         name="applicant"
+        editContent={editContent}
       />
       <TextExtraInput
         required={false}

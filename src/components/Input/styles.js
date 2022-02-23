@@ -52,4 +52,8 @@ export default {
     whiteSpace: "nowrap",
     overflow: "hidden",
   },
+  supplySub: {
+    display: "flex",
+    flexDirection: "column",
+  },
 };

@@ -8,11 +8,13 @@ import {
   Paper,
   TableRow,
   IconButton,
+  Dialog,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import PageviewIcon from "@mui/icons-material/Pageview";
 import CustomTableToolbar from "./CustomTableToolbar";
+import DialogCustom from "../../components/Dialog/DialogCustom";
 
 const DUMMY_COLUMNS = [
   "Product Name",
@@ -26,6 +28,9 @@ const DUMMY_COLUMNS = [
 ];
 
 function CustomTable({ tableData }) {
+  const [open, setOpen] = useState(false);
+  const [editContent, setEditContent] = useState();
+
   return (
     <>
       <CustomTableToolbar title="Products" />
@@ -46,7 +51,13 @@ function CustomTable({ tableData }) {
                   </IconButton>
                 </TableCell>
                 <TableCell>
-                  <IconButton color="primary">
+                  <IconButton
+                    color="primary"
+                    onClick={(e) => {
+                      setOpen(true);
+                      setEditContent(p);
+                    }}
+                  >
                     <EditIcon />
                   </IconButton>
                 </TableCell>
@@ -60,6 +71,22 @@ function CustomTable({ tableData }) {
           </TableBody>
         </Table>
       </TableContainer>
+
+      <Dialog
+        open={open}
+        onClose={() => setOpen(false)}
+        scroll="paper"
+        aria-labelledby="scroll-dialog-title"
+        aria-describedby="scroll-dialog-description"
+        maxWidth="xl"
+        fullWidth
+      >
+        <DialogCustom
+          title="Edit Product"
+          onClose={() => setOpen(false)}
+          editContent={editContent}
+        />
+      </Dialog>
     </>
   );
 }

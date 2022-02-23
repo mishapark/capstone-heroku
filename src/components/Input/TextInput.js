@@ -3,9 +3,9 @@ import { useFormContext } from "react-hook-form";
 import { InputLabel, TextField } from "@material-ui/core";
 import styles from "./styles";
 
-function TextInput({ required, label, placeholder, name }) {
+function TextInput({ required, label, placeholder, name, editContent }) {
   const { register } = useFormContext();
-
+  // console.log(editContent, name);
   return (
     <div style={styles.inputContainer}>
       <InputLabel style={styles.inputLabel} htmlFor="component-error">
@@ -19,6 +19,7 @@ function TextInput({ required, label, placeholder, name }) {
           variant="outlined"
           fullWidth
           helperText=""
+          // value={editContent ? editContent[name] : ""}
           placeholder={placeholder}
           {...register(name)}
         />

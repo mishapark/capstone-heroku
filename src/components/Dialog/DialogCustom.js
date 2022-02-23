@@ -7,8 +7,10 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogForm from "./DialogForm";
 import { getCountries } from "../../api/countries";
 import { getStandards } from "../../api/standards";
+import useProduct from "../hooks/useProduct";
+import axios from "axios";
 
-function DialogCustom({ title, onClose }) {
+function DialogCustom({ title, onClose, editContent }) {
   const [standards, setStandards] = useState([]);
   const [countries, setCountries] = useState([]);
 
@@ -21,6 +23,40 @@ function DialogCustom({ title, onClose }) {
 
   const onSubmit = (data) => {
     console.log(data);
+    const formData = new FormData();
+    formData.append("file", data.marking_plate[0]);
+
+    const product = useProduct(data);
+    console.log(product);
+
+    axios
+      .post(
+        `https://humber-capstone-backend.herokuapp.com/files/upload`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        product.marking_and_doc.marking_plate.push({
+          // name: res.data.file.originalname,
+          // file_location: "files/" + res.data.file.filename,
+        });
+        // product.marking_and_doc.warning_mark.push({
+        //   name: res.data.file.originalname,
+        //   file_location: "files/" + res.data.file.filename,
+        // });
+
+        console.log(product);
+        // axios
+        //   .post(`http://localhost:5000/products/add`, product)
+        //   .then((result) => {
+        //     console.log(result);
+        //   });
+      });
   };
 
   return (
@@ -32,10 +68,20 @@ function DialogCustom({ title, onClose }) {
             title="General Product Information"
             standards={standards}
             countries={countries}
+            editContent={editContent}
           />
-          <DialogForm title="Product Technical Information" />
-          <DialogForm title="Product Environmental Information" />
-          <DialogForm title="Marking and Documentations" />
+          <DialogForm
+            title="Product Technical Information"
+            editContent={editContent}
+          />
+          <DialogForm
+            title="Product Environmental Information"
+            editContent={editContent}
+          />
+          <DialogForm
+            title="Marking and Documentations"
+            editContent={editContent}
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={onClose}>Cancel</Button>
