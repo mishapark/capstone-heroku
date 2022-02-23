@@ -16,43 +16,43 @@ import RequestQuoteIcon from '@mui/icons-material/RequestQuote';
 export default {
   items: [
     {
-      path: "/",
+      path: "",
       name: "Dashboard",
       type: "link",
       icon: DashboardIcon,
-      component: Home,
+      component: <Home/>,
     },
     {
-      path: "/products",
+      path: "products",
       name: "Products",
       type: "link",
       icon: InboxIcon,
-      component: Products,
+      component: <Products/>,
     },
     {
-      path: "/compliance",
+      path: "compliance",
       name: "Compliance Central",
       type: "link",
       icon: CheckBoxIcon,
-      component: Compliance,
+      component: <Compliance/> ,
     },
     {
-      path: "/analytics",
+      path: "analytics",
       name: "Analytics",
       type: "link",
       icon: AssessmentIcon,
       component: Analytics,
     },
     {
-      path: "/rfq",
+      path: "rfq",
       name: "RFQ Manager",
       type: "submenu",
       icon: RequestQuoteIcon,
       children: [
         {
-          path: "/createrfq",
+          path: "createrfq",
           name: "Create",
-          component: RFQ,
+          component: <RFQ/>,
         },
       ],
     },

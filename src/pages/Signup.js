@@ -14,6 +14,7 @@ import Container from '@mui/material/Container';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import {useForm} from 'react-hook-form';
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom'
 
 function Signup() {
   const { register, formState: { errors,}, handleSubmit } = useForm();
@@ -29,6 +30,7 @@ function Signup() {
 
     console.log(jsonData);
 }
+const navigate = useNavigate()
   return (
     <Container component="main" maxWidth="xs">
     <CssBaseline />
@@ -49,7 +51,7 @@ function Signup() {
           <Box component="form" onSubmit={handleSubmit((data) => {
             axios.post('https://humber-capstone-backend.herokuapp.com/users/register', data)
   .then(function (response) {
-    console.log(response);
+    navigate('/app', { replace: true })
   })
           })} noValidate sx={{ mt: 1 }}>
             <TextField
@@ -111,7 +113,7 @@ function Signup() {
             >
               Sign Up
             </Button>
-            <Link href="/signin" variant="body2">
+            <Link to="/signin" variant="body2">
                   Already have an account? Sign in
             </Link>
           </Box>

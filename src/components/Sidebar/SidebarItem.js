@@ -174,7 +174,6 @@ const SidebarItem = ({ route, index, activeRoute, toggleMenu }) => {
   return (
     <NavLink
       to={route.path}
-      exact
       className={classes.menuLink}
       activeClassName={classes.menuActive}
       key={index}

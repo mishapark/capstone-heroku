@@ -1,6 +1,6 @@
 import { Header, Sidebar, Workspace } from "../components";
 import React, { useState } from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import classNames from "classnames";
 import { makeStyles } from "@material-ui/core/styles";
 import routes from "../constants/routes";
@@ -9,6 +9,7 @@ import Forgot from "../pages/Forgot";
 import Signin from "../pages/Signin";
 import Settings from "../pages/Settings"
 import Billing from "../pages/Billing";
+import { Logout } from "../pages/Logout";
 import MyPreferences from "../pages/MyPreferences";
 
 const useStyles = makeStyles((theme) => ({
@@ -83,45 +84,34 @@ const Dashboard = () => {
   };
 
   const getRoutes = (
-    <Switch>
+    <Routes>
       {routes.items.map((item, index) =>
+
         item.type === "external" ? (
           <Route
-            exact
             path={item.path}
-            component={item.component}
-            name={item.name}
-            key={index}
+            element={item.component}
           />
         ) : item.type === "submenu" ? (
           item.children.map((subItem) => (
             <Route
-              exact
               path={`${item.path}${subItem.path}`}
-              component={subItem.component}
-              name={subItem.name}
+              element={subItem.component}
             />
           ))
         ) : (
           <Route
-            exact
             path={item.path}
-            component={item.component}
-            name={item.name}
-            key={index}
+            element={item.component}
           />
           
         )
       )}
-      <Route exact path="/signin" component={Signin} />
-      <Route exact path="/signup" component={Signup} />
-      <Route exact path="/forgot" component={Forgot} />
-      <Route exact path="/settings" component={Settings} />
-      <Route exact path="/logout" component={Signin} />
-      <Route exact path="/billing" component={Billing} />
-      <Route exact path="/mypreferences" component={MyPreferences} />
-      <Redirect to="/" />
-    </Switch>
+      <Route path="/settings" element={<Settings/>} />
+      <Route path="/logout" element={<Logout/>} />
+      <Route path="/billing" element={<Billing/>} />
+      <Route path="/mypreferences" element={<MyPreferences/>} />
+    </Routes>
   );
 
   return (
