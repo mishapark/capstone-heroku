@@ -7,7 +7,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogForm from "./DialogForm";
 import { getCountries } from "../../api/countries";
 import { getStandards } from "../../api/standards";
-import useProduct from "../hooks/useProduct";
+import useProduct from "../../hooks/useProduct";
 import axios from "axios";
 
 function DialogCustom({ title, onClose, editContent }) {

@@ -1,4 +1,4 @@
-import React, {useMemo} from "react";
+import React, { useMemo } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Dashboard from "./containers/Dashboard";
 import "./index.css";
@@ -7,17 +7,16 @@ import { AuthContext } from "./context/AuthProvider";
 import Home from "./pages/Home";
 import { Missing } from "./pages/Missing";
 import Layout from "./containers/Layout";
-import {useState, useContext} from "react"
+import { useState, useContext } from "react";
 import Signup from "./pages/Signup";
 import RequireAuth from "./components/RequiredAuth";
 import Forgot from "./pages/Forgot";
 
 const ROLES = {
-  'User': 'Viewer',
-  'Editor': 1984,
-  'Admin': 5150
-}
-
+  User: "Viewer",
+  Editor: 1984,
+  Admin: 5150,
+};
 
 function App() {
   const [user, setUser] = useState(null);
@@ -27,15 +26,14 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-
         {/* public routes */}
         <Route path="/" element={<Home />} />
         <Route path="signin" element={<SignIn />} />
         <Route path="signup" element={<Signup />} />
         <Route path="forgot" element={<Forgot />} />
-
-         {/* we want to protect these routes */}
-         <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
+        <Route path="app/*" element={<Dashboard />} />
+        {/* we want to protect these routes */}
+        <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
           <Route path="app/*" element={<Dashboard />} />
         </Route>
 

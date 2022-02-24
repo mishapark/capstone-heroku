@@ -28,7 +28,7 @@ function DialogForm({ title, standards, countries, editContent }) {
     setExpanded(newExpanded ? panel : false);
   };
 
-  const renderForm = () => {
+  const renderForm = (title) => {
     switch (title) {
       case "General Product Information":
         return (
@@ -60,7 +60,7 @@ function DialogForm({ title, standards, countries, editContent }) {
         {title}
       </AccordionSummary>
       <AccordionDetails>
-        <div style={styles.inputs}>{renderForm()}</div>
+        <div style={styles.inputs}>{renderForm(title)}</div>
       </AccordionDetails>
     </Accordion>
   );

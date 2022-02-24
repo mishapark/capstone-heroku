@@ -15,6 +15,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import PageviewIcon from "@mui/icons-material/Pageview";
 import CustomTableToolbar from "./CustomTableToolbar";
 import DialogCustom from "../../components/Dialog/DialogCustom";
+import { Link } from "react-router-dom";
 
 const DUMMY_COLUMNS = [
   "Product Name",
@@ -47,7 +48,9 @@ function CustomTable({ tableData }) {
                 <TableCell>{p["product_details"]["product_name"]}</TableCell>
                 <TableCell>
                   <IconButton color="primary">
-                    <PageviewIcon />
+                    <Link to={`${p._id}`}>
+                      <PageviewIcon />
+                    </Link>
                   </IconButton>
                 </TableCell>
                 <TableCell>

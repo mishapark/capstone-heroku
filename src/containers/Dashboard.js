@@ -7,10 +7,11 @@ import routes from "../constants/routes";
 import Signup from "../pages/Signup";
 import Forgot from "../pages/Forgot";
 import Signin from "../pages/Signin";
-import Settings from "../pages/Settings"
+import Settings from "../pages/Settings";
 import Billing from "../pages/Billing";
 import { Logout } from "../pages/Logout";
 import MyPreferences from "../pages/MyPreferences";
+import ProductInfo from "../pages/ProductInfo";
 
 const useStyles = makeStyles((theme) => ({
   panel: {
@@ -70,14 +71,14 @@ const Dashboard = () => {
       element.requestFullScreen ||
       element.webkitRequestFullScreen ||
       element.mozRequestFullScreen ||
-      function() {
+      function () {
         return false;
       };
     document.cancelFullScreen =
       document.cancelFullScreen ||
       document.webkitCancelFullScreen ||
       document.mozCancelFullScreen ||
-      function() {
+      function () {
         return false;
       };
     isFullscreen ? document.cancelFullScreen() : element.requestFullScreen();
@@ -86,12 +87,8 @@ const Dashboard = () => {
   const getRoutes = (
     <Routes>
       {routes.items.map((item, index) =>
-
         item.type === "external" ? (
-          <Route
-            path={item.path}
-            element={item.component}
-          />
+          <Route path={item.path} element={item.component} />
         ) : item.type === "submenu" ? (
           item.children.map((subItem) => (
             <Route
@@ -100,17 +97,14 @@ const Dashboard = () => {
             />
           ))
         ) : (
-          <Route
-            path={item.path}
-            element={item.component}
-          />
-          
+          <Route path={item.path} element={item.component} />
         )
       )}
-      <Route path="/settings" element={<Settings/>} />
-      <Route path="/logout" element={<Logout/>} />
-      <Route path="/billing" element={<Billing/>} />
-      <Route path="/mypreferences" element={<MyPreferences/>} />
+      <Route path="/settings" element={<Settings />} />
+      <Route path="/logout" element={<Logout />} />
+      <Route path="/billing" element={<Billing />} />
+      <Route path="/mypreferences" element={<MyPreferences />} />
+      <Route path="/products/:id" element={<ProductInfo />} />
     </Routes>
   );
 
