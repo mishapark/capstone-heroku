@@ -12,7 +12,7 @@ function MyPreferences() {
     setLanguage(event.target.value);
   };
   return (
-    <Box sx={{maxWidth:"800px"}}>
+    <Box sx={{maxWidth:"500px"}}>
       <Stack spacing={2}>
       <Typography variant="h5">My Preferences</Typography>
       <Stack spacing={2}>
