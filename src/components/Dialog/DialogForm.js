@@ -12,8 +12,7 @@ import MarkingDoc from "./AddProductSections/MarkingDoc";
 const styles = {
   inputs: {
     display: "flex",
-    flexWrap: "Wrap",
-    margin: "0 -10px -10px 0",
+    flexWrap: "wrap",
     padding: 20,
     width: "100%",
   },

@@ -22,14 +22,15 @@ function CountriesInput({ required, label, placeholder, options, name }) {
           id="fixed-tags-demo"
           options={options
             .sort((a, b) => {
-              const countryA = a.continents[0];
-              const countryB = b.continents[0];
-              if (countryA < countryB) {
-                return -1;
-              }
-              if (countryA > countryB) {
-                return 1;
-              }
+              const continentA = a.continents[0];
+              const continentB = b.continents[0];
+              const countryA = a.name.common;
+              const countryB = b.name.common;
+
+              return (
+                continentA.localeCompare(continentB) ||
+                countryA.localeCompare(countryB)
+              );
             })
             .reduce((acc, current) => {
               const optionRows = [];

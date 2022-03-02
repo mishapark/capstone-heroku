@@ -1,11 +1,8 @@
 export default {
   inputContainer: {
-    display: "inline-block",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    margin: "0 10px 10px 0",
-    width: "calc(100% * (1/4) - 10px - 1px)",
-    justifyContent: "flex-start",
+    flex: "0 0 23.5%",
+    marginBottom: 10,
+    marginRight: 10,
   },
   inputLabel: {
     marginBottom: 10,
