@@ -1,11 +1,6 @@
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
-import Collapse from "@material-ui/core/Collapse";
-import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import { NavLink } from "react-router-dom";
-import PropTypes from "prop-types";
 import React from "react";
 import Typography from "@material-ui/core/Typography";
 import classNames from "classnames";
@@ -73,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SidebarItem = ({ route, index, activeRoute, toggleMenu }) => {
+const SidebarItem = ({ route, index, toggleMenu }) => {
   const classes = useStyles();
 
   const badge = (badge) => {
@@ -91,93 +86,8 @@ const SidebarItem = ({ route, index, activeRoute, toggleMenu }) => {
     );
   };
 
-  if (route.type === "external") {
-    return (
-      <a
-        href={route.path}
-        target="_blank"
-        rel="noopener noreferrer"
-        key={index}
-        className={classes.menuLink}
-      >
-        <ListItem className={classes.menuItem} button>
-          <ListItemIcon>
-            <route.icon className={classes.menuIcon} />
-          </ListItemIcon>
-          <Typography variant="body1" className="flexSpacer">
-            {route.name}
-          </Typography>
-          {badge(route.badge)}
-        </ListItem>
-      </a>
-    );
-  }
-
-  if (route.type === "submenu") {
-    return (
-      <div
-        className={
-          activeRoute === index ? classes.menuCollapsed : classes.menuClosed
-        }
-      >
-        <ListItem
-          className={classes.menuItem}
-          button
-          key={index}
-          onClick={() => toggleMenu(index)}
-        >
-          <ListItemIcon>
-            <route.icon className={classes.menuIcon} />
-          </ListItemIcon>
-          <Typography variant="body1" className="flexSpacer">
-            {route.name}
-          </Typography>
-          {badge(route.badge)}
-          <ListItemIcon className={classes.caret}>
-            {activeRoute === index ? (
-              <ArrowDropUpIcon />
-            ) : (
-              <ArrowDropDownIcon />
-            )}
-          </ListItemIcon>
-        </ListItem>
-        <Collapse
-          in={activeRoute === index ? true : false}
-          timeout="auto"
-          unmountOnExit
-        >
-          <List disablePadding>
-            {route.children.map((subitem, index) => (
-              <NavLink
-                to={`${route.path ? route.path : ""}${
-                  subitem.path ? subitem.path : ""
-                }`}
-                exact
-                className={classes.menuLink}
-                activeClassName={classes.menuActive}
-                key={index}
-              >
-                <ListItem className={classes.menuSubItem} button>
-                  <Typography variant="body1" className="flexSpacer">
-                    {subitem.name}
-                  </Typography>
-                  {badge(subitem.badge)}
-                </ListItem>
-              </NavLink>
-            ))}
-          </List>
-        </Collapse>
-      </div>
-    );
-  }
-
   return (
-    <NavLink
-      to={route.path}
-      className={classes.menuLink}
-      activeClassName={classes.menuActive}
-      key={index}
-    >
+    <NavLink to={route.path} className={classes.menuLink} key={index}>
       <ListItem
         className={classes.menuItem}
         button
@@ -193,13 +103,6 @@ const SidebarItem = ({ route, index, activeRoute, toggleMenu }) => {
       </ListItem>
     </NavLink>
   );
-};
-
-SidebarItem.prototypes = {
-  route: PropTypes.object,
-  index: PropTypes.number,
-  activeRoute: PropTypes.number,
-  toggleMenu: PropTypes.func,
 };
 
 export default SidebarItem;

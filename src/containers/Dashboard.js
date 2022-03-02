@@ -1,12 +1,9 @@
 import { Header, Sidebar, Workspace } from "../components";
 import React, { useState } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import classNames from "classnames";
 import { makeStyles } from "@material-ui/core/styles";
 import routes from "../constants/routes";
-import Signup from "../pages/Signup";
-import Forgot from "../pages/Forgot";
-import Signin from "../pages/Signin";
 import Settings from "../pages/Settings";
 import Billing from "../pages/Billing";
 import { Logout } from "../pages/Logout";
@@ -86,20 +83,9 @@ const Dashboard = () => {
 
   const getRoutes = (
     <Routes>
-      {routes.items.map((item, index) =>
-        item.type === "external" ? (
-          <Route path={item.path} element={item.component} />
-        ) : item.type === "submenu" ? (
-          item.children.map((subItem) => (
-            <Route
-              path={`${item.path}${subItem.path}`}
-              element={subItem.component}
-            />
-          ))
-        ) : (
-          <Route path={item.path} element={item.component} />
-        )
-      )}
+      {routes.items.map((item, index) => (
+        <Route key={index} path={item.path} element={item.component} />
+      ))}
       <Route path="/settings" element={<Settings />} />
       <Route path="/logout" element={<Logout />} />
       <Route path="/billing" element={<Billing />} />
