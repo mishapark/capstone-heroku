@@ -78,7 +78,9 @@ export default function Compliance() {
           <TableRow key={product["product_id"]}>
             <TableCell>{product["product_details"]["product_name"]}</TableCell>
             <TableCell>
-               <Chip label="Compliant" sx={{'bgcolor':'#2F7C31'}}/>
+              { product.is_compliant ? (
+                <Chip label="Compliant" sx={{'bgcolor':'#2F7C31'}}/>
+              ) : (<Chip label="Not compliant" sx={{'bgcolor':'blue'}}/>) }
             </TableCell>
             <TableCell>{product["product_details"]["product_name"]}</TableCell>
           </TableRow>

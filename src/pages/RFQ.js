@@ -23,6 +23,9 @@ import { TableCell } from "@material-ui/core";
 import { TableRow } from "@material-ui/core";
 import { TableHead } from "@material-ui/core";
 import { TableBody } from "@material-ui/core";
+import "react-widgets/styles.css";
+import DatePicker from "react-widgets/DatePicker";
+import DropdownList from "react-widgets/DropdownList";
 
 export const RFQ = () => {
   const [state, setState] = React.useState('');
@@ -140,20 +143,11 @@ export const RFQ = () => {
                       size="small"
                       required
                     />
-                    <TextField
-                      id="quote-req"
-                      label="Quote Required By"
-                      variant="outlined"
-                      size="small"
-                      required
-                    />
+                    <DatePicker placeholder="Date Required By" />
                      
-                    <TextField
-                      id="authorized-person"
-                      label="Authorized Person"
-                      variant="outlined"
-                      size="small"
-                      required
+                    <DropdownList
+                      placeholder="Approver"
+                      data={["Andrew", "Timothy", "Christine", "Mikhail"]}
                     />
                     <TextField
                       id="description"
@@ -179,17 +173,10 @@ export const RFQ = () => {
                       size="small"
                       required
                     />
-                    <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      value={state}
-                      label="Status"
-                      onChange={handleChange}
-                      variant="outlined"
-                    >
-                      <MenuItem value={10}>Draft</MenuItem>
-                      <MenuItem value={20}>Published</MenuItem>
-                  </Select>
+                    <DropdownList
+                      placeholder="Status"
+                      data={["Draft", "Published"]}
+                    />
                   </Stack>
         </DialogContent>
         <DialogActions>

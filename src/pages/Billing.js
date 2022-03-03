@@ -19,6 +19,26 @@ import Tab from '@mui/material/Tab';
 
 
 function Billing() {
+      // TODO this is a placeholder and needs to access actual product and user details
+      const product = {
+        price: 100,
+        name: "Test Product",
+        image: "https://m.media-amazon.com/images/I/71Td9FZnnFL._AC_SL1010_.jpg",
+        pickup: "March 1, 2022 13:00:00",
+        dropoff: "March 5, 2022 14:00:00",
+        location: "123 Street Toronto, ON, A1A A1A",
+        notes: "Go to side of building"
+    }
+
+    const user = {
+        fname: "Christine",
+        lname: "Ebeo",
+        email: "ce@mail.ca",
+        address: "1 ABC Street, Toronto, ON, B1B B1B",
+        phone: "647 123 4567"
+
+    }
+
   const tiers = [
     {
       title: 'Free',
