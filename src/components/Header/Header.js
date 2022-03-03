@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import AppBar from "@material-ui/core/AppBar";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import { Hidden } from "@material-ui/core";
+import { Box, Hidden, Paper } from "@material-ui/core";
 import SearchIcon from '@mui/icons-material/Search';
 import IconButton from "@material-ui/core/IconButton";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -18,6 +18,11 @@ import { Link } from "react-router-dom";
 import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
 import LogoutIcon from '@mui/icons-material/Logout';
 import PaymentsIcon from '@mui/icons-material/Payments';
+import axios from "axios";
+import useProducts from "../../hooks/useProducts";
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Divider from '@mui/material/Divider';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -70,6 +75,7 @@ const useStyles = makeStyles((theme) => ({
     border: "none",
     background: "transparent",
     width: "100%",
+    color: "black",
     outline: "0",
   },
   searchIcon: {
@@ -85,6 +91,9 @@ const Header = ({ logo, logoAltText,toggleFullscreen, toggleDrawer }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [searchExpanded, setSearchExpanded] = useState(false);
+  const [filteredData, setFilteredData] = useState([]);
+  const [wordEntered, setWordEntered] = useState("");
+  const [product, setProduct] = useState([])
 
   const handleSettingdToggle = (event) => setAnchorEl(event.currentTarget);
 
@@ -96,6 +105,35 @@ const Header = ({ logo, logoAltText,toggleFullscreen, toggleDrawer }) => {
     toggleDrawer();
     if (searchExpanded) handleSearchExpandToggle();
   };
+
+  const { products } = useProducts(
+    "https://humber-capstone-backend.herokuapp.com/products"
+  );
+
+  useEffect(() => {
+    setProduct(products)
+  }, [products]);
+  
+
+  const handleFilter = (event) => {
+    const searchWord = event.target.value;
+    setWordEntered(searchWord);
+    const newFilter = product.filter((value) => {
+      return value["product_details"]["product_name"].toLowerCase().includes(searchWord.toLowerCase());
+    });
+
+    if (searchWord === "") {
+      setFilteredData([]);
+    } else {
+      setFilteredData(newFilter);
+    }
+  };
+
+  const clearInput = () => {
+    setFilteredData([]);
+    setWordEntered("");
+  };
+
 
   return (
     <AppBar position="static" className={classes.appBar}>
@@ -123,10 +161,15 @@ const Header = ({ logo, logoAltText,toggleFullscreen, toggleDrawer }) => {
                 type="text"
                 placeholder="Search"
                 autoFocus={true}
+                value={wordEntered}
+                onChange={handleFilter}
               />
+              
             </form>
           </div>
         </Hidden>
+
+        
 
         <Hidden smUp>
           <span className="flexSpacer" />
@@ -163,6 +206,7 @@ const Header = ({ logo, logoAltText,toggleFullscreen, toggleDrawer }) => {
           open={Boolean(anchorEl)}
           onClose={handleCloseMenu}
         >
+        
           {/* My Prefernces Settings Billing Logout*/}
           <Link to="mypreferences">
             <MenuItem onClick={handleCloseMenu}>
@@ -198,6 +242,24 @@ const Header = ({ logo, logoAltText,toggleFullscreen, toggleDrawer }) => {
           </Link>
         </Menu>
       </Toolbar>
+      {filteredData.length != 0 && (
+        <Box>
+          <List component="nav" aria-label="Products search results">
+            
+            {filteredData.slice(0, 15).map((value, key) => {
+            return (
+              
+                <Link to={`/app/products/${value["_id"]}`} target="_blank">
+                <ListItem button divider>
+                  <p>{value["product_details"]["product_name"]}</p>
+                  </ListItem>
+                </Link>
+              
+            );
+          })}
+          </List>
+        </Box>
+      )}
     </AppBar>
   );
 };

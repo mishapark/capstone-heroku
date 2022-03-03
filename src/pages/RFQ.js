@@ -10,26 +10,90 @@ import { Toolbar } from "@material-ui/core";
 import { Tooltip } from "chart.js";
 import { useState } from "react";
 import AddIcon from "@material-ui/icons/Add";
+import { Select, MenuItem } from "@material-ui/core";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import { width } from "@mui/system";
+import { GeneralTable } from "../components/CustomTable/GeneralTable";
 import { Table } from "@material-ui/core";
 import { TableCell } from "@material-ui/core";
 import { TableRow } from "@material-ui/core";
 import { TableHead } from "@material-ui/core";
 import { TableBody } from "@material-ui/core";
+
 export const RFQ = () => {
-  const [openForm, setOpenForm] = useState("false");
+  const [state, setState] = React.useState('');
+  const [value, setValue] = React.useState(new Date('2014-08-18T21:11:54'));
+
+  const handleChangee = (newValue) => {
+    setValue(newValue);
+  };
+
+  const [headers, setHeaders] = React.useState([
+    {
+      "name": "RFQ Number", 
+      "id":1
+    },
+    {
+      "name": "Status", 
+      "id":2
+    },
+    {
+      "name": "Stage", 
+      "id":3
+    }
+  ])
+  const [data, setData] = React.useState([
+    {
+      "name": 1232,
+      "id": 1,
+    }, 
+    {
+      "name": "Draft",
+      "id": 2,
+    }, 
+    {
+      "name": "In progress",
+      "id": 3,
+    }, 
+  ])
+  const [open, setOpen] = React.useState(false);
+  const [date, setDate] = React.useState(
+    new Date().toISOString().slice(0, 10)
+  )
+
+
+  const handleChange = (event) => {
+    setState(event.target.value);
+  };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
 
   return (
-    <>
+    <> 
+    <Stack spacing={2}>
+      {}
       <Card
           sx={{
             display: "flex",
-            justifyContent: "flex-end",
+            justifyContent: "space-between",
             padding: 2,
             marginBottom: 2,
           }}
         >
+          <Typography variant="h5">RFQ Manager</Typography>
           <Button
-            onClick={() => setOpenForm((prev) => !prev)}
+            onClick={handleClickOpen}
             variant="contained"
             color="primary"
             aria-label="Add"
@@ -38,31 +102,13 @@ export const RFQ = () => {
             Create
           </Button>
         </Card>
-        {openForm && (
-      <Box sx={{ width: "100%", mb:5 }}>
-        <Paper sx={{ width: "100%", mb: 2 }}>
-          <Toolbar>
-            <Typography
-              sx={{ flex: "1 1 100%" }}
-              variant="h6"
-              id="tableTitle"
-              component="div"
-            >
-              RFQ Manager
-            </Typography>
-          </Toolbar>
-          <Grid container spacing={1}>
-            <Grid item xs={12} md={2}>
-              <Box textAlign="center">
-                
-              </Box>
-            </Grid>
-            <Grid item xs={12} md={2}>
-              
-            </Grid>
-              <Grid item xs={12} md={8} >
-                <form>
-                  <Stack spacing={2} sx={{ padding: 5, maxWidth:'700px' }}>
+      <Dialog open={open} onClose={handleClose} maxWidth="md">
+        <DialogTitle>Create new RFQ</DialogTitle>
+        <DialogContent sx={{width:"900px"}}>
+          <DialogContentText>
+            Please, fill in the information
+          </DialogContentText>
+          <Stack spacing={2} sx={{mt:2}}>
                     <TextField
                       id="to"
                       label="To"
@@ -80,20 +126,13 @@ export const RFQ = () => {
                     />
                     <TextField
                       id="rfq-date"
-                      label="RFQ Date"
+                      label={date}
                       variant="outlined"
                       required
                       disabled
                       size="small"
                     />
-                    <TextField
-                      id="rfq-number"
-                      label="RFQ Number"
-                      variant="outlined"
-                      disabled
-                      size="small"
-                      required
-                    />
+                    
                     <TextField
                       id="vendor-details"
                       label="Vendor Details"
@@ -108,6 +147,7 @@ export const RFQ = () => {
                       size="small"
                       required
                     />
+                     
                     <TextField
                       id="authorized-person"
                       label="Authorized Person"
@@ -139,43 +179,47 @@ export const RFQ = () => {
                       size="small"
                       required
                     />
-                    <Grid container>
-                      <Grid xs={11}></Grid>
-                      <Grid xs={1}>
-                        <Button variant="contained" type="submit">
-                          Send
-                        </Button>
-                      </Grid>
-                    </Grid>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={state}
+                      label="Status"
+                      onChange={handleChange}
+                      variant="outlined"
+                    >
+                      <MenuItem value={10}>Draft</MenuItem>
+                      <MenuItem value={20}>Published</MenuItem>
+                  </Select>
                   </Stack>
-                </form>
-              </Grid>
-          </Grid>
-        </Paper>
-      </Box>
-      )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleClose}>Save</Button>
+        </DialogActions>
+      </Dialog>
+
       <Box sx={{ width: "100%", mt:2}}>
-      <Paper sx={{ width: "100%", mb: 2 }}>
-        <Table className="mb-0">
-      <TableHead>
-        <TableRow>
-            <TableCell key={1} sx={{'fontWeight':'bold'}}>Product name</TableCell>
-            <TableCell key={2} sx={{'fontWeight':'bold'}}>Compliance status</TableCell>
-            <TableCell key={3} sx={{'fontWeight':'bold'}}>Documents</TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-          <TableRow>
-            <TableCell>Test1</TableCell>
-            <TableCell>
-             Test1
-            </TableCell>
-            <TableCell>Test1</TableCell>
-          </TableRow>
-      </TableBody>
-    </Table>
+      <Paper sx={{ width: "100%", mt: 2 }}>
+        <Table>
+              <TableHead>
+                  <TableRow key={1}>
+                
+                    <TableCell key={11}>RFQ Number</TableCell>
+                    <TableCell key={12}>Status</TableCell>
+                    <TableCell key={13}>Stage</TableCell>
+                  </TableRow>
+              </TableHead>
+              <TableBody>
+                      <TableRow key={2}>
+                          <TableCell key={21}>Test</TableCell>
+                          <TableCell key={21}>Draft</TableCell>
+                          <TableCell key={21}>In Progress</TableCell>
+                      </TableRow>
+              </TableBody>
+          </Table>
       </Paper>
     </Box>
+    </Stack>
     </>
   );
 };

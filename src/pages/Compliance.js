@@ -12,6 +12,7 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { Button } from "@material-ui/core";
+import { Chip } from "@material-ui/core";
 import axios from 'axios';
 
 
@@ -77,17 +78,7 @@ export default function Compliance() {
           <TableRow key={product["product_id"]}>
             <TableCell>{product["product_details"]["product_name"]}</TableCell>
             <TableCell>
-              <Button
-                size="small"
-                color="primary"
-                variant="contained"
-                disabled
-                sx={{
-                  borderRadius:'12px'
-                }}
-              >
-                Yes
-              </Button>
+               <Chip label="Compliant" sx={{'bgcolor':'#2F7C31'}}/>
             </TableCell>
             <TableCell>{product["product_details"]["product_name"]}</TableCell>
           </TableRow>

@@ -4,21 +4,22 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { TimezonePicker } from "@blueprintjs/timezone";
 
 function MyPreferences() {
   const [language, setLanguage] = React.useState('English');
+  const [timezone, setTimezone] = React.useState();
 
   const handleChange = (event) => {
     setLanguage(event.target.value);
   };
   return (
-    <Box sx={{maxWidth:"500px"}}>
+    <Box sx={{maxWidth:"900px"}}>
       <Stack spacing={2}>
       <Typography variant="h5">My Preferences</Typography>
       <Stack spacing={2}>
-        <Typography variant="subtitl1">Timezone</Typography>
-        <TextField></TextField>
-      </Stack>
+        <TimezonePicker value={timezone} onChange={setTimezone}  />
+      </Stack> 
       <Stack spacing={2}>
         <Typography variant="subtitl1">Language</Typography>
         <Box sx={{ minWidth: 120 }}>
