@@ -7,6 +7,7 @@ import LockResetIcon from "@mui/icons-material/LockReset";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import EditIcon from "@mui/icons-material/Edit";
 import ViewSidebarIcon from "@mui/icons-material/ViewSidebar";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 import SettingsList from "../components/SettingsList/SettingsList";
 
@@ -84,7 +85,7 @@ const ROLES = [
       {
         title: "Company Settings",
         color: "#ffd229",
-        icon: <ViewSidebarIcon />,
+        icon: <SettingsIcon />,
         menuOptions: [
           { name: "Add", icon: <GroupAddIcon /> },
           { name: "Remove", icon: <GroupRemoveIcon /> },

@@ -82,6 +82,10 @@ function DialogCustom({ title, onClose, editContent }) {
             title="Marking and Documentations"
             editContent={editContent}
           />
+          <DialogForm
+            title="Compliance Reports"
+            editContent={editContent}
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={onClose}>Cancel</Button>

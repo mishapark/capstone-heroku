@@ -9,6 +9,7 @@ import GeneralProductInfo from "./AddProductSections/GeneralProductInfo";
 import ProductTechnicalInfo from "./AddProductSections/ProductTechnicalInfo";
 import ProductEnvironInfo from "./AddProductSections/ProductEnvironInfo";
 import MarkingDoc from "./AddProductSections/MarkingDoc";
+import ComplianceReports from "./AddProductSections/ComplianceReports";
 const styles = {
   inputs: {
     display: "flex",
@@ -43,6 +44,8 @@ function DialogForm({ title, standards, countries, editContent }) {
         return <ProductEnvironInfo editContent={editContent} />;
       case "Marking and Documentations":
         return <MarkingDoc editContent={editContent} />;
+      case "Compliance Reports":
+        return <ComplianceReports editContent={editContent} />;
       default:
         break;
     }
