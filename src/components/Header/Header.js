@@ -136,6 +136,7 @@ const Header = ({ logo, logoAltText,toggleFullscreen, toggleDrawer }) => {
 
 
   return (
+    <>
     <AppBar position="static" className={classes.appBar}>
       <Toolbar className={classes.toolBar}>
         <IconButton
@@ -242,9 +243,12 @@ const Header = ({ logo, logoAltText,toggleFullscreen, toggleDrawer }) => {
           </Link>
         </Menu>
       </Toolbar>
-      {filteredData.length != 0 && (
-        <Box>
-          <List component="nav" aria-label="Products search results">
+      
+    </AppBar>
+    {filteredData.length != 0 && (
+        <Paper sx={{width:"200px"}}>
+          <List component="nav" aria-label="Products search results" sx={{width:"1400px",  marginLeft: "auto",
+    marginRight: "auto", position:"fixed",  top:"7%", left:"15%", "z-index": 50, backgroundColor: "white" }}>
             
             {filteredData.slice(0, 15).map((value, key) => {
             return (
@@ -258,9 +262,9 @@ const Header = ({ logo, logoAltText,toggleFullscreen, toggleDrawer }) => {
             );
           })}
           </List>
-        </Box>
+        </Paper>
       )}
-    </AppBar>
+    </>
   );
 };
 

@@ -40,7 +40,7 @@ export default {
       name: "Analytics",
       type: "link",
       icon: AssessmentIcon,
-      component: Analytics,
+      component: <Analytics/>,
     },
     {
       path: "rfq",

@@ -19,26 +19,7 @@ import Tab from '@mui/material/Tab';
 
 
 function Billing() {
-      // TODO this is a placeholder and needs to access actual product and user details
-      const product = {
-        price: 100,
-        name: "Test Product",
-        image: "https://m.media-amazon.com/images/I/71Td9FZnnFL._AC_SL1010_.jpg",
-        pickup: "March 1, 2022 13:00:00",
-        dropoff: "March 5, 2022 14:00:00",
-        location: "123 Street Toronto, ON, A1A A1A",
-        notes: "Go to side of building"
-    }
-
-    const user = {
-        fname: "Christine",
-        lname: "Ebeo",
-        email: "ce@mail.ca",
-        address: "1 ABC Street, Toronto, ON, B1B B1B",
-        phone: "647 123 4567"
-
-    }
-
+  
   const tiers = [
     {
       title: 'Free',
@@ -73,91 +54,7 @@ function Billing() {
 
   return (
     <Container>
-         <Container disableGutters maxWidth="sm" component="main" sx={{ pt: 8, pb: 6 }}>
-
-        <Typography
-          component="h1"
-          variant="h2"
-          align="center"
-          color="text.primary"
-          gutterBottom
-        >
-          Pricing
-        </Typography>
-        <Typography variant="subtitle1" align="center" color="text.secondary" component="p">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In mollis vulputate neque a lobortis. Integer eu cursus tortor. Cras sit amet enim a lorem tempus faucibus. Vestibulum in diam feugiat, lobortis est id, tincidunt enim. Nullam euismod nisi sit amet orci mattis faucibus. Pellentesque blandit luctus semper. Sed vel feugiat mauris. Duis eget elit a enim porta elementum. Vivamus quis dolor imperdiet, euismod mauris sit amet, euismod tortor. Phasellus mattis turpis ac augue molestie facilisis.
-
-
-        </Typography>
-      </Container>
-      {/* End hero unit */}
-      <Container maxWidth="md" component="main">
-        <Grid container spacing={5} alignItems="flex-end">
-          {tiers.map((tier) => (
-            // Enterprise card is full width at sm breakpoint
-            <Grid
-              item
-              key={tier.title}
-              xs={12}
-              sm={tier.title === 'Enterprise' ? 12 : 6}
-              md={4}
-            >
-              <Card>
-                <CardHeader
-                  title={tier.title}
-                  subheader={tier.subheader}
-                  titleTypographyProps={{ align: 'center' }}
-                  action={tier.title === 'Pro' ? <StarIcon /> : null}
-                  subheaderTypographyProps={{
-                    align: 'center',
-                  }}
-                  sx={{
-                    backgroundColor: (theme) =>
-                      theme.palette.mode === 'light'
-                        ? theme.palette.grey[200]
-                        : theme.palette.grey[700],
-                  }}
-                />
-                <CardContent>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'baseline',
-                      mb: 2,
-                    }}
-                  >
-                    <Typography component="h2" variant="h3" color="text.primary">
-                      ${tier.price}
-                    </Typography>
-                    <Typography variant="h6" color="text.secondary">
-                      /mo
-                    </Typography>
-                  </Box>
-                  <ul>
-                    {tier.description.map((line) => (
-                      <Typography
-                        component="li"
-                        variant="subtitle1"
-                        align="center"
-                        key={line}
-                      >
-                        {line}
-                      </Typography>
-                    ))}
-                  </ul>
-                </CardContent>
-                <CardActions>
-                  <Button fullWidth variant={tier.buttonVariant}>
-                    {tier.buttonText}
-                  </Button>
-                </CardActions>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
-      <Divider sx={{'mt':5}}/>
+         
       <Box sx={{padding:5}}>
       <Typography variant="h6" gutterBottom sx={{'mt':5}}>
         Payment method

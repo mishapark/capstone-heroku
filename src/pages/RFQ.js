@@ -8,7 +8,7 @@ import { TextField } from "@material-ui/core";
 import { Box} from "@material-ui/core";
 import { Toolbar } from "@material-ui/core";
 import { Tooltip } from "chart.js";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AddIcon from "@material-ui/icons/Add";
 import { Select, MenuItem } from "@material-ui/core";
 import Dialog from '@mui/material/Dialog';
@@ -26,6 +26,7 @@ import { TableBody } from "@material-ui/core";
 import "react-widgets/styles.css";
 import DatePicker from "react-widgets/DatePicker";
 import DropdownList from "react-widgets/DropdownList";
+import axios from "axios";
 
 export const RFQ = () => {
   const [state, setState] = React.useState('');
@@ -34,6 +35,25 @@ export const RFQ = () => {
   const handleChangee = (newValue) => {
     setValue(newValue);
   };
+
+  const [rfqs, setRfqs] = React.useState([]);
+
+  const sendGetRequest = async () => {
+    try {
+      const response = await axios.get(
+        'https://humber-capstone-backend.herokuapp.com/rfqs'
+      );
+      console.log(response.data)
+      setRfqs(response.data);
+      
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  React.useEffect(() => {
+    sendGetRequest();
+  }, []);
 
   const [headers, setHeaders] = React.useState([
     {
@@ -85,7 +105,6 @@ export const RFQ = () => {
   return (
     <> 
     <Stack spacing={2}>
-      {}
       <Card
           sx={{
             display: "flex",
@@ -190,19 +209,20 @@ export const RFQ = () => {
         <Table>
               <TableHead>
                   <TableRow key={1}>
-                
-                    <TableCell key={11}>RFQ Number</TableCell>
-                    <TableCell key={12}>Status</TableCell>
-                    <TableCell key={13}>Stage</TableCell>
+                    <TableCell key={11} sx={{'fontWeight':'bold'}}>RFQ Number</TableCell>
+                    <TableCell key={12} sx={{'fontWeight':'bold'}}>Status</TableCell>
+                    <TableCell key={13} sx={{'fontWeight':'bold'}}>Stage</TableCell>
                   </TableRow>
               </TableHead>
               <TableBody>
-                      <TableRow key={2}>
-                          <TableCell key={21}>Test</TableCell>
-                          <TableCell key={21}>Draft</TableCell>
-                          <TableCell key={21}>In Progress</TableCell>
-                      </TableRow>
-              </TableBody>
+              {rfqs.map((rfq) => (
+                <TableRow key={rfq["_id"]}>
+                  <TableCell>{rfq["rfqNumber"]}</TableCell>
+                  <TableCell>Draft</TableCell>
+                  <TableCell>{rfq["RFQstages"]}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
           </Table>
       </Paper>
     </Box>
