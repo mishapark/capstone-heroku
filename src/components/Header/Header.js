@@ -4,7 +4,7 @@ import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import AppBar from "@material-ui/core/AppBar";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { Box, Hidden, Paper } from "@material-ui/core";
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search";
 import IconButton from "@material-ui/core/IconButton";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -15,14 +15,16 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Toolbar from "@material-ui/core/Toolbar";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
-import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
-import LogoutIcon from '@mui/icons-material/Logout';
-import PaymentsIcon from '@mui/icons-material/Payments';
+import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
+import LogoutIcon from "@mui/icons-material/Logout";
+import PaymentsIcon from "@mui/icons-material/Payments";
 import axios from "axios";
 import useProducts from "../../hooks/useProducts";
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import Divider from '@mui/material/Divider';
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import Divider from "@mui/material/Divider";
+import useLogout from "../../hooks/useLogout";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -87,13 +89,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Header = ({ logo, logoAltText,toggleFullscreen, toggleDrawer }) => {
+const Header = ({ logo, logoAltText, toggleFullscreen, toggleDrawer }) => {
+  const logout = useLogout();
+  const signOut = async () => {
+    await logout();
+  };
+
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [searchExpanded, setSearchExpanded] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
-  const [product, setProduct] = useState([])
+  const [product, setProduct] = useState([]);
 
   const handleSettingdToggle = (event) => setAnchorEl(event.currentTarget);
 
@@ -111,15 +118,16 @@ const Header = ({ logo, logoAltText,toggleFullscreen, toggleDrawer }) => {
   );
 
   useEffect(() => {
-    setProduct(products)
+    setProduct(products);
   }, [products]);
-  
 
   const handleFilter = (event) => {
     const searchWord = event.target.value;
     setWordEntered(searchWord);
     const newFilter = product.filter((value) => {
-      return value["product_details"]["product_name"].toLowerCase().includes(searchWord.toLowerCase());
+      return value["product_details"]["product_name"]
+        .toLowerCase()
+        .includes(searchWord.toLowerCase());
     });
 
     if (searchWord === "") {
@@ -134,133 +142,140 @@ const Header = ({ logo, logoAltText,toggleFullscreen, toggleDrawer }) => {
     setWordEntered("");
   };
 
-
   return (
     <>
-    <AppBar position="static" className={classes.appBar}>
-      <Toolbar className={classes.toolBar}>
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          onClick={handleDrawerToggle}
-        >
-          <MenuIcon />
-        </IconButton>
-
-        <div className={classes.branding}>
-          <img src={logo} alt={logoAltText} className={classes.logo} />
-        </div>
-
-        <Hidden xsDown>
-          <div className={classes.searchWrapper}>
-            <form className={classes.searchForm}>
-              <IconButton aria-label="Search" className={classes.searchIcon}>
-                <SearchIcon />
-              </IconButton>
-              <input
-                className={classes.searchInput}
-                type="text"
-                placeholder="Search"
-                autoFocus={true}
-                value={wordEntered}
-                onChange={handleFilter}
-              />
-              
-            </form>
-          </div>
-        </Hidden>
-
-        
-
-        <Hidden smUp>
-          <span className="flexSpacer" />
-        </Hidden>
-
-        <Hidden smUp>
+      <AppBar position="static" className={classes.appBar}>
+        <Toolbar className={classes.toolBar}>
           <IconButton
             color="inherit"
-            onClick={handleSearchExpandToggle}
-            aria-expanded={searchExpanded}
-            aria-label="Show searchbar"
+            aria-label="open drawer"
+            onClick={handleDrawerToggle}
           >
-            <SearchIcon />
+            <MenuIcon />
           </IconButton>
-        </Hidden>
 
-      
+          <div className={classes.branding}>
+            <img src={logo} alt={logoAltText} className={classes.logo} />
+          </div>
 
-        <span className="flexSpacer" />
+          <Hidden xsDown>
+            <div className={classes.searchWrapper}>
+              <form className={classes.searchForm}>
+                <IconButton aria-label="Search" className={classes.searchIcon}>
+                  <SearchIcon />
+                </IconButton>
+                <input
+                  className={classes.searchInput}
+                  type="text"
+                  placeholder="Search"
+                  autoFocus={true}
+                  value={wordEntered}
+                  onChange={handleFilter}
+                />
+              </form>
+            </div>
+          </Hidden>
 
-        <IconButton
-          aria-label="User Settings"
-          aria-owns={anchorEl ? "user-menu" : null}
-          aria-haspopup="true"
-          color="inherit"
-          onClick={handleSettingdToggle}
-        >
-          <MoreVertIcon />
-        </IconButton>
+          <Hidden smUp>
+            <span className="flexSpacer" />
+          </Hidden>
 
-        <Menu
-          id="user-menu"
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={handleCloseMenu}
-        >
-        
-          {/* My Prefernces Settings Billing Logout*/}
-          <Link to="mypreferences">
-            <MenuItem onClick={handleCloseMenu}>
-              <ListItemIcon>
-                <AccountBoxIcon />
-              </ListItemIcon>
-              <ListItemText primary="My Preferences" />
-            </MenuItem>
-          </Link>
-          <Link to="settings">
-            <MenuItem onClick={handleCloseMenu}>
-              <ListItemIcon>
-                <SettingsApplicationsIcon />
-              </ListItemIcon>
-              <ListItemText primary="Settings" />
-            </MenuItem>
-          </Link>
-          <Link to="billing">
-            <MenuItem onClick={handleCloseMenu}>
-              <ListItemIcon>
-                <PaymentsIcon />
-              </ListItemIcon>
-              <ListItemText primary="Billing" />
-            </MenuItem>
-          </Link>
-          <Link to="logout">
-            <MenuItem onClick={handleCloseMenu}>
-              <ListItemIcon>
-                <LogoutIcon />
-              </ListItemIcon>
-              <ListItemText primary="Logout" />
-            </MenuItem>
-          </Link>
-        </Menu>
-      </Toolbar>
-      
-    </AppBar>
-    {filteredData.length != 0 && (
-        <Paper sx={{width:"200px"}}>
-          <List component="nav" aria-label="Products search results" sx={{width:"1400px",  marginLeft: "auto",
-    marginRight: "auto", position:"fixed",  top:"7%", left:"15%", "z-index": 50, backgroundColor: "white" }}>
-            
+          <Hidden smUp>
+            <IconButton
+              color="inherit"
+              onClick={handleSearchExpandToggle}
+              aria-expanded={searchExpanded}
+              aria-label="Show searchbar"
+            >
+              <SearchIcon />
+            </IconButton>
+          </Hidden>
+
+          <span className="flexSpacer" />
+
+          <IconButton
+            aria-label="User Settings"
+            aria-owns={anchorEl ? "user-menu" : null}
+            aria-haspopup="true"
+            color="inherit"
+            onClick={handleSettingdToggle}
+          >
+            <MoreVertIcon />
+          </IconButton>
+
+          <Menu
+            id="user-menu"
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={handleCloseMenu}
+          >
+            {/* My Prefernces Settings Billing Logout*/}
+            <Link to="mypreferences">
+              <MenuItem onClick={handleCloseMenu}>
+                <ListItemIcon>
+                  <AccountBoxIcon />
+                </ListItemIcon>
+                <ListItemText primary="My Preferences" />
+              </MenuItem>
+            </Link>
+            <Link to="settings">
+              <MenuItem onClick={handleCloseMenu}>
+                <ListItemIcon>
+                  <SettingsApplicationsIcon />
+                </ListItemIcon>
+                <ListItemText primary="Settings" />
+              </MenuItem>
+            </Link>
+            <Link to="billing">
+              <MenuItem onClick={handleCloseMenu}>
+                <ListItemIcon>
+                  <PaymentsIcon />
+                </ListItemIcon>
+                <ListItemText primary="Billing" />
+              </MenuItem>
+            </Link>
+            <Link to="logout">
+              <MenuItem onClick={handleCloseMenu}>
+                <ListItemIcon>
+                  <LogoutIcon />
+                </ListItemIcon>
+                <ListItemText primary="Logout" onClick={signOut} />
+              </MenuItem>
+            </Link>
+          </Menu>
+        </Toolbar>
+      </AppBar>
+      {filteredData.length != 0 && (
+        <Paper sx={{ width: "200px" }}>
+          <List
+            component="nav"
+            aria-label="Products search results"
+            sx={{
+              width: "1420px",
+              marginLeft: "auto",
+              marginRight: "auto",
+              position: "absolute",
+              top: "7%",
+              left: "14%",
+              "z-index": 100,
+              backgroundColor: "white",
+              backgroundColor: "white",
+              borderBottom: "1px solid gray",
+              borderLeft: "1px solid gray",
+              borderRight: "1px solid gray",
+              borderRadius: "5px",
+              boxShadow: "5px 10px 8px #888888",
+            }}
+          >
             {filteredData.slice(0, 15).map((value, key) => {
-            return (
-              
+              return (
                 <Link to={`/app/products/${value["_id"]}`} target="_blank">
-                <ListItem button divider>
-                  <p>{value["product_details"]["product_name"]}</p>
+                  <ListItem button divider>
+                    <p>{value["product_details"]["product_name"]}</p>
                   </ListItem>
                 </Link>
-              
-            );
-          })}
+              );
+            })}
           </List>
         </Paper>
       )}

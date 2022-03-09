@@ -9,6 +9,7 @@ import { Missing } from "./pages/Missing";
 import Layout from "./containers/Layout";
 import { useState, useContext } from "react";
 import Signup from "./pages/Signup";
+import PersistLogin from "./components/PersistLogin";
 import RequireAuth from "./components/RequiredAuth";
 import Forgot from "./pages/Forgot";
 
@@ -31,10 +32,11 @@ function App() {
         <Route path="signin" element={<SignIn />} />
         <Route path="signup" element={<Signup />} />
         <Route path="forgot" element={<Forgot />} />
-        <Route path="app/*" element={<Dashboard />} />
         {/* we want to protect these routes */}
-        <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
-          <Route path="app/*" element={<Dashboard />} />
+        <Route element={<PersistLogin />}>
+          <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
+            <Route path="/*" element={<Dashboard />} />
+          </Route>
         </Route>
 
         {/* catch all */}

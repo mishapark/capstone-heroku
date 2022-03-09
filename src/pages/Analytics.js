@@ -81,7 +81,7 @@ function Analytics() {
           <Typography variant="h5" sx={{padding:2}}>Analytics</Typography>
          
         </Card>
-        <Grid container spacing={2}>
+        <Grid container>
           <Grid item xs={12} md={6}>
           <Card
         >
@@ -103,6 +103,7 @@ function Analytics() {
                     <br></br>
         </Card>
           </Grid>
+          <br></br>
           <Grid item xs={12} md={6}>
           <Card
         >

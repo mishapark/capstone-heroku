@@ -1,5 +1,12 @@
-import axios from 'axios';
+import axios from "axios";
+const BASE_URL = "https://humber-capstone-backend.herokuapp.com/";
 
 export default axios.create({
-    baseURL: 'https://humber-capstone-backend.herokuapp.com/'
-})
+  baseURL: BASE_URL,
+});
+
+export const axiosPrivate = axios.create({
+  baseURL: BASE_URL,
+  headers: { "Content-Type": "application/json" },
+  withCredentials: true,
+});

@@ -12,9 +12,9 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useContext, useState } from "react";
-import useAuth from '../hooks/useAuth';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useContext, useState, useEffect } from "react";
+import useAuth from "../hooks/useAuth";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 export default function SignIn() {
   const {
@@ -23,15 +23,20 @@ export default function SignIn() {
     handleSubmit,
   } = useForm();
 
-  const { setAuth } = useAuth();
+  const { setAuth, persist, setPersist } = useAuth();
 
-  const [pwd, setPwd] = useState('');
+  const [pwd, setPwd] = useState("");
 
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+  const togglePersist = () => {
+    setPersist((prev) => !prev);
+  };
 
-
+  useEffect(() => {
+    localStorage.setItem("persist", persist);
+  }, [persist]);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -53,15 +58,19 @@ export default function SignIn() {
         <Box
           component="form"
           onSubmit={handleSubmit((data) => {
-            const user = data["userEmail"]
+            const user = data["userEmail"];
             axios
               .post(
                 "https://humber-capstone-backend.herokuapp.com/users/login",
-                data
+                data,
+                {
+                  headers: { "Content-Type": "application/json" },
+                  withCredentials: true,
+                }
               )
               .then(function (response) {
                 if (response["status"] === 200) {
-                  console.log(response)
+                  console.log(response);
                   const accessToken = response["data"]["accessToken"];
                   const roles = response["data"]["role"];
                   setAuth({ user, roles, accessToken });
@@ -126,6 +135,15 @@ export default function SignIn() {
               <Link to="/signup" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
+              <div className="persistCheck">
+                <input
+                  type="checkbox"
+                  id="persist"
+                  onChange={togglePersist}
+                  checked={persist}
+                />
+                <label htmlFor="persist">Trust This Device</label>
+              </div>
             </Grid>
           </Grid>
         </Box>
