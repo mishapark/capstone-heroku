@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
 import { Box } from "@mui/system";
 import { Paper, Typography, Grid } from "@mui/material";
 import axios from "axios";
-
-
+import useRefreshToken from "../hooks/useRefreshToken";
 
 export const Dash = () => {
   const [products, setProducts] = useState([]);
@@ -34,14 +33,15 @@ export const Dash = () => {
     labels: ["Comliant", "Non Compliant"],
     datasets: [
       {
-        data: [products.filter((product) => product.is_compliant === true).length, products.filter((product) => product.is_compliant === false).length],
+        data: [
+          products.filter((product) => product.is_compliant === true).length,
+          products.filter((product) => product.is_compliant === false).length,
+        ],
         backgroundColor: ["green", "red"],
       },
     ],
   };
 
-
-  
   const option = {
     title: {
       text: "Compliance",
@@ -52,23 +52,26 @@ export const Dash = () => {
     labels: ["Initiated", "In progress", "Completed"],
     datasets: [
       {
-        data: [rfqs.filter((rfq) => rfq.RFQstages === "Initiated").length, 
-        rfqs.filter((rfq) => rfq.RFQstages === "Processing").length,
-        rfqs.filter((rfq) => rfq.RFQstages === "Completed").length],
+        data: [
+          rfqs.filter((rfq) => rfq.RFQstages === "Initiated").length,
+          rfqs.filter((rfq) => rfq.RFQstages === "Processing").length,
+          rfqs.filter((rfq) => rfq.RFQstages === "Completed").length,
+        ],
         backgroundColor: ["blue", "green", "yellow"],
       },
     ],
   };
 
-  
   const o2 = {
     title: {
       text: "RFQs",
     },
   };
+  const refresh = useRefreshToken();
 
   return (
     <div>
+      <button onClick={() => refresh()}>Refresh</button>
       <Grid container spacing={2}>
         <Grid item xs={12} md={4}>
           <Paper sx={{ padding: 2 }}>

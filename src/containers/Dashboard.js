@@ -9,6 +9,8 @@ import Billing from "../pages/Billing";
 import { Logout } from "../pages/Logout";
 import MyPreferences from "../pages/MyPreferences";
 import ProductInfo from "../pages/ProductInfo";
+import { RFQInfo } from "../pages/RFQInfo";
+import { TaskInfo } from "../pages/TaskInfo";
 
 const useStyles = makeStyles((theme) => ({
   panel: {
@@ -91,6 +93,8 @@ const Dashboard = () => {
       <Route path="/billing" element={<Billing />} />
       <Route path="/mypreferences" element={<MyPreferences />} />
       <Route path="/products/:id" element={<ProductInfo />} />
+      <Route path="/rfq/:id" element={<RFQInfo />} />
+      <Route path="/tasks/:id" element={<TaskInfo />} />
     </Routes>
   );
 

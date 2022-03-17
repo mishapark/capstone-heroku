@@ -13,10 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { Button } from "@material-ui/core";
 import { Chip } from "@material-ui/core";
-import axios from 'axios';
-
-
-
+import axios from "axios";
 
 const EnhancedTableToolbar = (props) => {
   const { numSelected } = props;
@@ -46,12 +43,10 @@ export default function Compliance() {
   const sendGetRequest = async () => {
     try {
       const response = await axios.get(
-        'https://humber-capstone-backend.herokuapp.com/products'
+        "https://humber-capstone-backend.herokuapp.com/products"
       );
-      console.log(response.data)
+      console.log(response.data);
       setProducts(response.data);
-      setIsLoading(false);
-      
     } catch (err) {
       console.log(err.message);
     }
@@ -66,27 +61,39 @@ export default function Compliance() {
       <Paper sx={{ width: "100%", mb: 2 }}>
         <EnhancedTableToolbar />
         <Table className="mb-0">
-      <TableHead>
-        <TableRow>
-            <TableCell key={1} sx={{'fontWeight':'bold'}}>Product name</TableCell>
-            <TableCell key={2} sx={{'fontWeight':'bold'}}>Compliance status</TableCell>
-            <TableCell key={3} sx={{'fontWeight':'bold'}}>Documents</TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {products.map((product) => (
-          <TableRow key={product["product_id"]}>
-            <TableCell>{product["product_details"]["product_name"]}</TableCell>
-            <TableCell>
-              { product.is_compliant ? (
-                <Chip label="Compliant" sx={{'bgcolor':'#2F7C31'}}/>
-              ) : (<Chip label="Not compliant" sx={{'bgcolor':'blue'}}/>) }
-            </TableCell>
-            <TableCell>{product["product_details"]["product_name"]}</TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+          <TableHead>
+            <TableRow>
+              <TableCell key={1} sx={{ fontWeight: "bold" }}>
+                Product name
+              </TableCell>
+              <TableCell key={2} sx={{ fontWeight: "bold" }}>
+                Compliance status
+              </TableCell>
+              <TableCell key={3} sx={{ fontWeight: "bold" }}>
+                Documents
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {products.map((product) => (
+              <TableRow key={product["product_id"]}>
+                <TableCell>
+                  {product["product_details"]["product_name"]}
+                </TableCell>
+                <TableCell>
+                  {product.is_compliant ? (
+                    <Chip label="Compliant" sx={{ bgcolor: "#2F7C31" }} />
+                  ) : (
+                    <Chip label="Not compliant" sx={{ bgcolor: "blue" }} />
+                  )}
+                </TableCell>
+                <TableCell>
+                  {product["product_details"]["product_name"]}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </Paper>
     </Box>
   );
