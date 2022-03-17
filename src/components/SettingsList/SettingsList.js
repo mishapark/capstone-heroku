@@ -6,7 +6,6 @@ function SettingsList({ title, cards }) {
     if (title !== "Anyone") {
       return (
         <>
-          <h1>{title}</h1>
           <div
             style={{ display: "flex", flexWrap: "wrap", marginLeft: "-10px" }}
           >
@@ -27,7 +26,6 @@ function SettingsList({ title, cards }) {
     if (title === "Anyone") {
       return (
         <>
-          <h1>{title}</h1>
           <div
             style={{ display: "flex", flexWrap: "wrap", marginLeft: "-10px" }}
           >

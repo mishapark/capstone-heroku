@@ -116,7 +116,6 @@ function Signup() {
               required: true,
               min: 8,
             })}
-            id="password"
             autoComplete="current-password"
           />
           <Typography component="h3" variant="overline">
