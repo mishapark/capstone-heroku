@@ -6,13 +6,15 @@ import {
   Stack,
   TextField,
   Typography,
+  Autocomplete,
 } from "@mui/material";
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import React from "react";
-import DatePicker from "react-widgets/esm/DatePicker";
-import DropdownList from "react-widgets/DropdownList";
+import { DesktopDatePicker } from "@mui/lab";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
 
 export const RFQInfo = () => {
   //use navigate
@@ -36,81 +38,97 @@ export const RFQInfo = () => {
     sendGetRequest();
   }, []);
 
+  const [value, setValue] = React.useState(new Date("2014-08-18T21:11:54"));
+
+  const handleChange = (newValue) => {
+    setValue(newValue);
+  };
   return (
     <Paper>
       <Typography variant="h4" sx={{ padding: 3 }}>
         {rfq.rfqNumber}
       </Typography>
       <Container sx={{ paddingBottom: 5 }} maxWidth="sm">
-        <Stack spacing={2} sx={{ mt: 5 }}>
-          <TextField
-            id="to"
-            label="To"
-            variant="outlined"
-            autoFocus
-            required
-            size="small"
-          />
-          <TextField
-            id="from"
-            label="From"
-            variant="outlined"
-            required
-            size="small"
-          />
-          <TextField
-            id="rfq-date"
-            defaultValue={rfq.rfqDate}
-            variant="outlined"
-            required
-            disabled
-            size="small"
-          />
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <Stack spacing={2} sx={{ mt: 5 }}>
+            <TextField
+              id="to"
+              label="To"
+              variant="outlined"
+              autoFocus
+              required
+              size="small"
+            />
+            <TextField
+              id="from"
+              label="From"
+              variant="outlined"
+              required
+              size="small"
+            />
+            <TextField
+              id="rfq-date"
+              defaultValue={rfq.rfqDate}
+              variant="outlined"
+              required
+              disabled
+              size="small"
+            />
 
-          <TextField
-            id="vendor-details"
-            defaultValue={rfq.vendorDetail}
-            variant="outlined"
-            size="small"
-            required
-          />
-          <DatePicker placeholder="Date Required By" value={rfq.date} />
-
-          <TextField
-            id="description"
-            defaultValue={rfq.description}
-            variant="outlined"
-            multiline
-            rows={5}
-            size="small"
-          >
-            {rfq.description}
-          </TextField>
-          <TextField
-            id="other-instruction"
-            defaultValue={rfq.instruction}
-            variant="outlined"
-            multiline
-            rows={3}
-            size="small"
-          />
-          <TextField
-            id="statement"
-            label="Statement For Qualification"
-            variant="outlined"
-            size="small"
-            required
-          />
-          <DropdownList placeholder="Status" data={["Draft", "Published"]} />
-          <Grid container spacing={2}>
-            <Grid item xs={8} md={6}>
-              <Button>Save</Button>
+            <TextField
+              id="vendor-details"
+              defaultValue={rfq.vendorDetail}
+              variant="outlined"
+              size="small"
+              required
+            />
+            <DesktopDatePicker
+              label="Date&Time picker"
+              value={value}
+              onChange={handleChange}
+              renderInput={(params) => <TextField {...params} />}
+            />
+            <TextField
+              id="description"
+              defaultValue={rfq.description}
+              variant="outlined"
+              multiline
+              rows={5}
+              size="small"
+            >
+              {rfq.description}
+            </TextField>
+            <TextField
+              id="other-instruction"
+              defaultValue={rfq.instruction}
+              variant="outlined"
+              multiline
+              rows={3}
+              size="small"
+            />
+            <TextField
+              id="statement"
+              label="Statement For Qualification"
+              variant="outlined"
+              size="small"
+              required
+            />
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              options={["Draft", "Published"]}
+              renderInput={(params) => <TextField {...params} label="Status" />}
+            />
+            <Grid container spacing={2}>
+              <Grid item xs={8} md={6}>
+                <Button>Save</Button>
+              </Grid>
+              <Grid item xs={8} md={6}>
+                <Button>Cancel</Button>
+              </Grid>
             </Grid>
-            <Grid item xs={8} md={6}>
-              <Button>Cancel</Button>
-            </Grid>
-          </Grid>
-        </Stack>
+          </Stack>
+        </LocalizationProvider>
       </Container>
     </Paper>
   );
