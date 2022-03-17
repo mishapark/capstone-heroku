@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import classNames from "classnames";
 import { makeStyles } from "@material-ui/core/styles";
 import routes from "../constants/routes";
+import settingsRoutes from "../constants/settingsRoutes";
 import Settings from "../pages/Settings";
 import Billing from "../pages/Billing";
 import { Logout } from "../pages/Logout";
@@ -85,6 +86,13 @@ const Dashboard = () => {
     <Routes>
       {routes.items.map((item, index) => (
         <Route key={index} path={item.path} element={item.component} />
+      ))}
+      {settingsRoutes.map((item, index) => (
+        <Route
+          key={index}
+          path={`/settings/${item.path}`}
+          element={item.component}
+        />
       ))}
       <Route path="/settings" element={<Settings />} />
       <Route path="/logout" element={<Logout />} />

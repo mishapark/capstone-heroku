@@ -4,11 +4,12 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Chip from "@mui/material/Chip";
+import { NavLink } from "react-router-dom";
 
 function SettingsCard({ title, color, icon, menuOptions, optionsColor, info }) {
   return (
     <Card
-      sx={{
+      style={{
         padding: 1,
         background: color,
         flex: "1 0 160px",
@@ -38,27 +39,34 @@ function SettingsCard({ title, color, icon, menuOptions, optionsColor, info }) {
               {info}: <Chip label="Open" style={{ color: "white" }} />
             </span>
           ) : null}
+          {menuOptions &&
+            menuOptions.map((o) => (
+              <NavLink
+                key={o.name}
+                to={o.name.toLowerCase().split(" ").join("")}
+              >
+                <Button
+                  variant="contained"
+                  color="primary"
+                  aria-label="Add"
+                  style={{
+                    minWidth: "fit-content",
+                    background: optionsColor,
+                    marginRight: 15,
+                    padding: 8,
+                    borderRadius: 5,
+                    "&:hover": {
+                      backgroundColor: "#fff",
+                      color: color,
+                    },
+                  }}
+                >
+                  <div style={{ marginRight: 10 }}>{o.icon}</div>
+                  <div style={{ paddingTop: 5 }}>{o.name}</div>
+                </Button>
+              </NavLink>
+            ))}
         </div>
-        {menuOptions &&
-          menuOptions.map((o) => (
-            <Button
-              key={o.name}
-              variant="contained"
-              color="primary"
-              aria-label="Add"
-              sx={{
-                minWidth: "fit-content",
-                background: optionsColor,
-                "&:hover": {
-                  backgroundColor: "#fff",
-                  color: color,
-                },
-              }}
-            >
-              <div style={{ marginRight: 10 }}>{o.icon}</div>
-              {o.name}
-            </Button>
-          ))}
       </CardActions>
     </Card>
   );

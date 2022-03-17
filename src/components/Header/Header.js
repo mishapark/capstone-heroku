@@ -246,7 +246,7 @@ const Header = ({ logo, logoAltText, toggleFullscreen, toggleDrawer }) => {
         </Toolbar>
       </AppBar>
       {filteredData.length != 0 && (
-        <Paper sx={{ width: "200px" }}>
+        <Paper style={{ position: "absolute" }}>
           <List
             component="nav"
             aria-label="Products search results"
@@ -254,10 +254,9 @@ const Header = ({ logo, logoAltText, toggleFullscreen, toggleDrawer }) => {
               width: "1420px",
               marginLeft: "auto",
               marginRight: "auto",
-              position: "absolute",
               top: "7%",
               left: "14%",
-              "z-index": 100,
+              zIndex: 2000,
               backgroundColor: "white",
               backgroundColor: "white",
               borderBottom: "1px solid gray",
