@@ -61,7 +61,8 @@ function Signup() {
             axios
               .post(
                 "https://humber-capstone-backend.herokuapp.com/users/register",
-                data
+                data,
+                { withCredentials: true }
               )
               .then(function (response) {
                 navigate("/app", { replace: true });
@@ -115,7 +116,6 @@ function Signup() {
               required: true,
               min: 8,
             })}
-            id="password"
             autoComplete="current-password"
           />
           <Typography component="h3" variant="overline">
