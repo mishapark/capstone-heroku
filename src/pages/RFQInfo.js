@@ -60,7 +60,7 @@ export const RFQInfo = () => {
           />
           <TextField
             id="rfq-date"
-            label={rfq.rfqDate}
+            defaultValue={rfq.rfqDate}
             variant="outlined"
             required
             disabled
@@ -69,7 +69,7 @@ export const RFQInfo = () => {
 
           <TextField
             id="vendor-details"
-            value={rfq.vendorDetail}
+            defaultValue={rfq.vendorDetail}
             variant="outlined"
             size="small"
             required
@@ -78,7 +78,7 @@ export const RFQInfo = () => {
 
           <TextField
             id="description"
-            value={rfq.description}
+            defaultValue={rfq.description}
             variant="outlined"
             multiline
             rows={5}
@@ -88,7 +88,7 @@ export const RFQInfo = () => {
           </TextField>
           <TextField
             id="other-instruction"
-            value={rfq.instruction}
+            defaultValue={rfq.instruction}
             variant="outlined"
             multiline
             rows={3}

@@ -67,11 +67,9 @@ export const Dash = () => {
       text: "RFQs",
     },
   };
-  const refresh = useRefreshToken();
 
   return (
     <div>
-      <button onClick={() => refresh()}>Refresh</button>
       <Grid container spacing={2}>
         <Grid item xs={12} md={4}>
           <Paper sx={{ padding: 2 }}>
