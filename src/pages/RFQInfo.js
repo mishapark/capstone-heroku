@@ -24,6 +24,8 @@ export const RFQInfo = () => {
   const { id } = useParams();
   const [rfq, setRfq] = useState({
     rfqNumber: id,
+    status: "Draft",
+    approver: "Timothy",
   });
   const sendGetRequest = async () => {
     try {
@@ -44,7 +46,7 @@ export const RFQInfo = () => {
   const handleSubmit = async (e) => {
     // store the states in the form data
     e.preventDefault();
-
+    console.log(rfq);
     try {
       // make axios post request
       const response = await axios({
@@ -67,6 +69,23 @@ export const RFQInfo = () => {
       [event.target.name]: event.target.value,
     });
     console.log(rfq);
+  };
+
+  const handleSelect = (e, value) => {
+    setRfq({
+      ...rfq,
+      ["status"]: value,
+    });
+    console.log(rfq);
+  };
+
+  const handleApprover = (e, value) => {
+    setRfq({
+      ...rfq,
+      ["approver"]: value,
+    });
+    console.log(rfq);
+    console.log(value);
   };
 
   React.useEffect(() => {
@@ -132,6 +151,17 @@ export const RFQInfo = () => {
                 onChange={handleChange}
                 renderInput={(params) => <TextField {...params} />}
               />
+              <Autocomplete
+                disablePortal
+                id="approver"
+                value={rfq.approver}
+                name="approver"
+                onInputChange={(event, value) => handleApprover(event, value)}
+                options={["Andrew", "Timothy", "Christine", "Mikhail"]}
+                renderInput={(params) => (
+                  <TextField {...params} label="Approver" />
+                )}
+              />
               <TextField
                 id="description"
                 variant="outlined"
@@ -167,8 +197,11 @@ export const RFQInfo = () => {
                 disablePortal
                 id="combo-box-demo"
                 options={["Draft", "Published"]}
+                name="status"
+                value={rfq.status}
+                onInputChange={(e, value) => handleSelect(e, value)}
                 renderInput={(params) => (
-                  <TextField {...params} label="Status" />
+                  <TextField {...params} name="status" label="Status" />
                 )}
               />
               <Grid container spacing={2}>

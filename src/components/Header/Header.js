@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import AppBar from "@material-ui/core/AppBar";
@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: theme.shape.borderRadius,
     marginRight: theme.spacing(1) * 2,
     display: "block",
-    maxWidth: "300px",
+    maxWidth: "500px",
   },
   searchInput: {
     fontSize: "1rem",
@@ -123,11 +123,29 @@ const Header = ({ logo, logoAltText, toggleFullscreen, toggleDrawer }) => {
     setProduct(products);
   }, [products]);
 
+  let [isShown, setIsShown] = useState(true);
+  let searchRef = useRef();
+
+  useEffect(() => {
+    let maybeHandler = (event) => {
+      if (!searchRef.current?.contains(event.target)) {
+        setIsShown(false);
+      }
+    };
+
+    document.addEventListener("mousedown", maybeHandler);
+
+    console.log(isShown);
+    return () => {
+      document.removeEventListener("mousedown", maybeHandler);
+    };
+  });
+
   const handleFilter = (event) => {
     const searchWord = event.target.value;
     setWordEntered(searchWord);
     const newFilter = product.filter((value) => {
-      if(value["product_details"]["product_name"]) {
+      if (value["product_details"]["product_name"]) {
         return value["product_details"]["product_name"]
           .toLowerCase()
           .includes(searchWord.toLowerCase());
@@ -146,6 +164,8 @@ const Header = ({ logo, logoAltText, toggleFullscreen, toggleDrawer }) => {
     setWordEntered("");
   };
 
+  const searchInput = useRef();
+
   return (
     <>
       <AppBar position="static" className={classes.appBar}>
@@ -163,13 +183,18 @@ const Header = ({ logo, logoAltText, toggleFullscreen, toggleDrawer }) => {
           </div>
 
           <Hidden xsDown>
-            <div className={classes.searchWrapper}>
+            <div
+              className={classes.searchWrapper}
+              ref={searchRef}
+              onClick={() => setIsShown((isShown) => !isShown)}
+            >
               <form className={classes.searchForm}>
                 <IconButton aria-label="Search" className={classes.searchIcon}>
                   <SearchIcon />
                 </IconButton>
                 <input
                   className={classes.searchInput}
+                  ref={searchInput}
                   type="text"
                   placeholder="Search"
                   autoFocus={true}
@@ -177,6 +202,42 @@ const Header = ({ logo, logoAltText, toggleFullscreen, toggleDrawer }) => {
                   onChange={handleFilter}
                 />
               </form>
+              {filteredData.length != 0 &&
+                (isShown ? (
+                  <Paper style={{ position: "absolute" }}>
+                    <List
+                      component="nav"
+                      aria-label="Products search results"
+                      sx={{
+                        width: "500px",
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                        top: "7%",
+                        zIndex: 2000,
+                        backgroundColor: "white",
+                        backgroundColor: "white",
+                        borderBottom: "1px solid gray",
+                        borderLeft: "1px solid gray",
+                        borderRight: "1px solid gray",
+                        borderRadius: "5px",
+                        boxShadow: "5px 10px 8px #888888",
+                      }}
+                    >
+                      {filteredData.slice(0, 15).map((value, key) => {
+                        return (
+                          <Link
+                            to={`/app/products/${value["_id"]}`}
+                            target="_blank"
+                          >
+                            <ListItem button divider>
+                              <p>{value["product_details"]["product_name"]}</p>
+                            </ListItem>
+                          </Link>
+                        );
+                      })}
+                    </List>
+                  </Paper>
+                ) : null)}
             </div>
           </Hidden>
 
@@ -249,39 +310,6 @@ const Header = ({ logo, logoAltText, toggleFullscreen, toggleDrawer }) => {
           </Menu>
         </Toolbar>
       </AppBar>
-      {filteredData.length != 0 && (
-        <Paper style={{ position: "absolute" }}>
-          <List
-            component="nav"
-            aria-label="Products search results"
-            sx={{
-              width: "1420px",
-              marginLeft: "auto",
-              marginRight: "auto",
-              top: "7%",
-              left: "14%",
-              zIndex: 2000,
-              backgroundColor: "white",
-              backgroundColor: "white",
-              borderBottom: "1px solid gray",
-              borderLeft: "1px solid gray",
-              borderRight: "1px solid gray",
-              borderRadius: "5px",
-              boxShadow: "5px 10px 8px #888888",
-            }}
-          >
-            {filteredData.slice(0, 15).map((value, key) => {
-              return (
-                <Link to={`/app/products/${value["_id"]}`} target="_blank">
-                  <ListItem button divider>
-                    <p>{value["product_details"]["product_name"]}</p>
-                  </ListItem>
-                </Link>
-              );
-            })}
-          </List>
-        </Paper>
-      )}
     </>
   );
 };
