@@ -29,17 +29,16 @@ const DUMMY_COLUMNS = [
   "Delete",
 ];
 
-function CustomTable({ tableData }) {
+function CustomTable({ tableData, setRequestData }) {
   const [open, setOpen] = useState(false);
   const [editContent, setEditContent] = useState();
 
   const handleDelete = async (id) => {
-    console.log(id);
     await axios
       .delete(
-        `https://humber-capstone-backend.herokuapp.com/products/delete?id=${id}`
+        `https://humber-capstone-backend.herokuapp.com/products/delete?product_id=${id}`
       )
-      .then((res) => console.log(res));
+      .then(() => setRequestData(new Date()));
   };
 
   return (

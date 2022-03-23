@@ -9,11 +9,12 @@ import CustomTable from "../components/CustomTable/CustomTable";
 
 function Products() {
   const [open, setOpen] = React.useState(false);
+  const [requestData, setRequestData] = useState(new Date());
   const [isLoading, setIsLoading] = useState(true);
   const [tableData, setTableData] = useState([]);
 
-  const sendGetRequest = async () => {
-    await axios
+  const sendGetRequest = () => {
+    axios
       .get("https://humber-capstone-backend.herokuapp.com/products")
       .then((response) => {
         setTableData(response.data);
@@ -24,7 +25,7 @@ function Products() {
 
   useEffect(() => {
     sendGetRequest();
-  }, []);
+  }, [requestData]);
 
   return (
     <div>
@@ -49,7 +50,7 @@ function Products() {
 
       {!isLoading ? (
         <Card>
-          <CustomTable tableData={tableData} />
+          <CustomTable tableData={tableData} setRequestData={setRequestData}/>
         </Card>
       ) : (
         <CircularProgress />
@@ -68,6 +69,7 @@ function Products() {
           title="Add Product"
           content="addProduct"
           onClose={() => setOpen(false)}
+          setRequestData={setRequestData}
         />
       </Dialog>
     </div>

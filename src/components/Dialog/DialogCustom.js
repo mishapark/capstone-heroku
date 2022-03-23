@@ -10,7 +10,7 @@ import { getStandards } from "../../api/standards";
 import useProduct from "../../hooks/useProduct";
 import axios from "axios";
 
-function DialogCustom({ title, onClose, editContent }) {
+function DialogCustom({ title, onClose, editContent, setRequestData }) {
   const [standards, setStandards] = useState([]);
   const [countries, setCountries] = useState([]);
 
@@ -37,8 +37,8 @@ function DialogCustom({ title, onClose, editContent }) {
           },
         }
       )
-      .then((res) => {
-        console.log(res);
+      .then(() => {
+        setRequestData(new Date())
       });
   };
 
