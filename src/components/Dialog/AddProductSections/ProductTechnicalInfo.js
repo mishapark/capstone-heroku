@@ -64,6 +64,7 @@ function ProductTechnicalInfo() {
         label="Operation Mode"
         options={opmode}
         name="operation_mode"
+        textName="operation_ratio"
       />
       <CheckboxInput
         required={false}

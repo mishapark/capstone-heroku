@@ -13,15 +13,13 @@ function Products() {
   const [tableData, setTableData] = useState([]);
 
   const sendGetRequest = async () => {
-    try {
-      const response = await axios.get(
-        "https://humber-capstone-backend.herokuapp.com/products"
-      );
-      setTableData(response.data);
-      setIsLoading(false);
-    } catch (err) {
-      console.log(err.message);
-    }
+    await axios
+      .get("https://humber-capstone-backend.herokuapp.com/products")
+      .then((response) => {
+        setTableData(response.data);
+        setIsLoading(false);
+      })
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {

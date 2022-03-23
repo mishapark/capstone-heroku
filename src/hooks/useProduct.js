@@ -14,24 +14,24 @@ const useProduct = (data) => {
         address: data.applicant.split(",")[1],
       },
       manufacturer: [
-        // {
-        //   name: str,
-        //   address: str,
-        //   phone_number: str,
-        // },
+        {
+          name: "",
+          address: "",
+          phone_number: "",
+        },
       ],
       trade_mark: {
         status: data.trade_mark,
-        data: [],
+        data: "",
       },
       family_series_model: [data.family_series_model],
       market: [
-        // {
-        //   continent_code: data.,
-        //   continent_name: data.,
-        //   country_code: data.,
-        //   country_name: data.,
-        // },
+        {
+          continent_code: "",
+          continent_name: "",
+          country_code: "",
+          country_name: "",
+        },
       ],
     },
     product_tech_details: {
@@ -41,7 +41,7 @@ const useProduct = (data) => {
         height: data.equipment_size.split(/X|x/)[2],
         unit: data.equipment_size_unit,
       },
-      equipment_weight: 0,
+      equipment_weight: data.equipment_mass,
       power_rating: {
         voltage: 0,
         phase: 0,
@@ -50,8 +50,8 @@ const useProduct = (data) => {
         current: 0,
       },
       operation_mode: {
-        selected_mode: data.operation_mode, // “Continuous”/”Duty Cycle”
-        ratio: 0, // this is for when Duty Cycle is selected
+        selected_mode: data.operation_mode,
+        ratio: data.operation_mode,
       },
       use_classification: [data.use_classification],
       supply_connection: [],
@@ -60,6 +60,13 @@ const useProduct = (data) => {
     marking_and_doc: {
       marking_plate: [],
       warning_mark: [],
+      fusy_type: "",
+    },
+    compliance_report_number: [""],
+    last_updated_status: {
+      last_updated_by: "",
+      last_updated_date: new Date(),
+      active_standard: "",
     },
   };
 

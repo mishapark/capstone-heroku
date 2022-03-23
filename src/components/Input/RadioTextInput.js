@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import styles from "./styles";
 
-function RadioTextInput({ required, label, options, name }) {
+function RadioTextInput({ required, label, options, name, textName }) {
   const { register } = useFormContext();
   const [radioOperationValue, setRadioOperationValue] = useState("");
 
@@ -45,6 +45,7 @@ function RadioTextInput({ required, label, options, name }) {
           helperText=""
           placeholder="Enter Duty Cycle"
           style={styles.extra}
+          {...register(textName)}
         />
       ) : null}
     </div>

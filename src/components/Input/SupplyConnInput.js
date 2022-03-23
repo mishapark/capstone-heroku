@@ -38,8 +38,8 @@ function SupplyConnInput({ required, label, placeholder, options, name }) {
           marginTop: 20,
         }}
       >
-        {options.map((o) => (
-          <div style={styles.supplySub}>
+        {options.map((o, index) => (
+          <div key={index} style={styles.supplySub}>
             <FormLabel
               style={{
                 marginBottom: 10,

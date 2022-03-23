@@ -22,40 +22,23 @@ function DialogCustom({ title, onClose, editContent }) {
   const methods = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
-    const formData = new FormData();
-    formData.append("file", data.marking_plate[0]);
+    // console.log(data);
 
     const product = useProduct(data);
     console.log(product);
 
     axios
       .post(
-        `https://humber-capstone-backend.herokuapp.com/files/upload`,
-        formData,
+        `https://humber-capstone-backend.herokuapp.com/products/add`,
+        product,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "application/json",
           },
         }
       )
       .then((res) => {
         console.log(res);
-        product.marking_and_doc.marking_plate.push({
-          // name: res.data.file.originalname,
-          // file_location: "files/" + res.data.file.filename,
-        });
-        // product.marking_and_doc.warning_mark.push({
-        //   name: res.data.file.originalname,
-        //   file_location: "files/" + res.data.file.filename,
-        // });
-
-        console.log(product);
-        // axios
-        //   .post(`http://localhost:5000/products/add`, product)
-        //   .then((result) => {
-        //     console.log(result);
-        //   });
       });
   };
 
@@ -82,10 +65,7 @@ function DialogCustom({ title, onClose, editContent }) {
             title="Marking and Documentations"
             editContent={editContent}
           />
-          <DialogForm
-            title="Compliance Reports"
-            editContent={editContent}
-          />
+          <DialogForm title="Compliance Reports" editContent={editContent} />
         </DialogContent>
         <DialogActions>
           <Button onClick={onClose}>Cancel</Button>

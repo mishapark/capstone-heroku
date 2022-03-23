@@ -16,6 +16,7 @@ import PageviewIcon from "@mui/icons-material/Pageview";
 import CustomTableToolbar from "./CustomTableToolbar";
 import DialogCustom from "../../components/Dialog/DialogCustom";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const DUMMY_COLUMNS = [
   "Product Name",
@@ -32,6 +33,15 @@ function CustomTable({ tableData }) {
   const [open, setOpen] = useState(false);
   const [editContent, setEditContent] = useState();
 
+  const handleDelete = async (id) => {
+    console.log(id);
+    await axios
+      .delete(
+        `https://humber-capstone-backend.herokuapp.com/products/delete?id=${id}`
+      )
+      .then((res) => console.log(res));
+  };
+
   return (
     <>
       <CustomTableToolbar title="Products" />
@@ -42,9 +52,13 @@ function CustomTable({ tableData }) {
             {tableData.map((p) => (
               <TableRow key={p["_id"]}>
                 <TableCell>{p["product_details"]["product_name"]}</TableCell>
-                <TableCell>{p["product_details"]["product_name"]}</TableCell>
-                <TableCell>{p["product_details"]["product_name"]}</TableCell>
-                <TableCell>{p["product_details"]["product_name"]}</TableCell>
+                <TableCell>{p["product_details"]["product_family"]}</TableCell>
+                <TableCell>
+                  {p["product_details"]["product_category"]}
+                </TableCell>
+                <TableCell>
+                  {p["product_details"]["applicable_standards"]}
+                </TableCell>
                 <TableCell>{p["product_details"]["product_name"]}</TableCell>
                 <TableCell>
                   <IconButton color="primary">
@@ -65,7 +79,10 @@ function CustomTable({ tableData }) {
                   </IconButton>
                 </TableCell>
                 <TableCell>
-                  <IconButton color="primary">
+                  <IconButton
+                    color="primary"
+                    onClick={() => handleDelete(p.product_id)}
+                  >
                     <DeleteIcon />
                   </IconButton>
                 </TableCell>

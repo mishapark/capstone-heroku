@@ -14,7 +14,6 @@ function TextInput({
   value,
 }) {
   const { register } = useFormContext();
-  // console.log(editContent, name);
   return (
     <div style={styles.inputContainer}>
       <InputLabel style={styles.inputLabel} htmlFor="component-error">
@@ -27,14 +26,13 @@ function TextInput({
           size="small"
           variant="outlined"
           fullWidth
-          helperText="cvz"
-          error={false}
+          helperText=""
           type={type && type}
-          onChange={handleChange}
-          value={value && value}
           // value={editContent ? editContent[name] : ""}
           placeholder={placeholder}
           {...register(name)}
+          value={value && value}
+          onChange={handleChange}
         />
       </div>
     </div>
