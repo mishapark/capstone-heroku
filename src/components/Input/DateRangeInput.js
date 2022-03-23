@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import TextField from "@mui/material/TextField";
 import DateRangePicker from "@mui/lab/DateRangePicker";
 import Box from "@mui/material/Box";
@@ -7,8 +7,6 @@ import { InputLabel } from "@material-ui/core";
 import styles from "./styles";
 
 function DateRangeInput({
-  value,
-  onChange,
   required,
   label,
   placeholder,
@@ -16,6 +14,8 @@ function DateRangeInput({
   type,
   editContent,
 }) {
+  const [value, setValue] = useState([null, null]);
+
   return (
     <div style={styles.inputContainer}>
       <InputLabel style={styles.inputLabel} htmlFor="component-error">
@@ -27,14 +27,16 @@ function DateRangeInput({
           startText="Issued Date"
           endText="Expiry Date"
           value={value}
-          onChange={onChange}
+          onChange={(newValue) => {
+            console.log(newValue);
+            setValue(newValue);
+          }}
           renderInput={(startProps, endProps) => (
             <React.Fragment>
               <TextField
                 size="small"
                 {...startProps}
                 id="outlined-basic"
-                size="small"
                 variant="outlined"
                 fullWidth
                 helperText=""
@@ -45,7 +47,6 @@ function DateRangeInput({
                 size="small"
                 {...endProps}
                 id="outlined-basic"
-                size="small"
                 variant="outlined"
                 fullWidth
                 helperText=""

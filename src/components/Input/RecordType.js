@@ -69,15 +69,21 @@ const records = [
   },
   {
     title: "Audit Report",
+    options: ["Audit Report"],
+  },
+  {
+    title: "Test Report",
+    options: ["Test Report"],
   },
   {
     title: "Issued Certificate",
+    options: ["Issued Certificate"],
   },
   {
     title: "Supporting Documents",
     options: [
       "Caliberation Cert",
-      "Client INformation Sheet",
+      "Client Information Sheet",
       "Component Information Sheet",
       "Draft Report Sheet",
       "Marking Labels",
@@ -90,6 +96,18 @@ const records = [
     ],
   },
 ];
+
+const newarr = records.map(e => {
+  return e.options.reduce((acc, current) => {
+    const optionRows = [];
+    optionRows.push({
+      title: e.title,
+      options: current,
+    });
+    acc = acc.concat(optionRows);
+    return acc;
+  }, [])
+})
 
 function RecordType({ required, label, placeholder, name }) {
   const { register } = useFormContext();
@@ -104,19 +122,10 @@ function RecordType({ required, label, placeholder, name }) {
         <Autocomplete
           size="small"
           options={
-            records
-            //     .reduce((acc, current) => {
-            //     const optionRows = [];
-            //     optionRows.push({
-            //       title: current.name.common,
-            //       name: current.continents[0],
-            //     });
-            //     acc = acc.concat(optionRows);
-            //     return acc;
-            //   }, [])
+            [].concat(...newarr)
           }
           groupBy={(option) => option.title}
-          //   getOptionLabel={(option) => option.country}
+          getOptionLabel={(option) => option.options}
           fullWidth
           renderInput={(params) => (
             <TextField

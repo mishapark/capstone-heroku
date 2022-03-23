@@ -7,7 +7,6 @@ import DateRangeInput from "../../Input/DateRangeInput";
 import RecordType from "../../Input/RecordType";
 
 function ComplianceReports() {
-  const [value, setValue] = useState([null, null]);
 
   return (
     <>
@@ -20,8 +19,8 @@ function ComplianceReports() {
       <DownloadInput
         required={false}
         label="Download"
-        uploadLabel="copy-or-marking-plate"
-        name="marking_plate"
+        uploadLabel="report_number_download"
+        name="report_number_download"
       />
       <RecordType
         required={false}
@@ -35,11 +34,6 @@ function ComplianceReports() {
           label="Date"
           placeholder="Enter Report Number"
           name="date_range"
-          value={value}
-          onChange={(newValue) => {
-            console.log(newValue);
-            setValue(newValue);
-          }}
         />
       </LocalizationProvider>
     </>

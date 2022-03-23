@@ -127,9 +127,11 @@ const Header = ({ logo, logoAltText, toggleFullscreen, toggleDrawer }) => {
     const searchWord = event.target.value;
     setWordEntered(searchWord);
     const newFilter = product.filter((value) => {
-      return value["product_details"]["product_name"]
-        .toLowerCase()
-        .includes(searchWord.toLowerCase());
+      if(value["product_details"]["product_name"]) {
+        return value["product_details"]["product_name"]
+          .toLowerCase()
+          .includes(searchWord.toLowerCase());
+      }
     });
 
     if (searchWord === "") {

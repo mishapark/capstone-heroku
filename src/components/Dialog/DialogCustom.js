@@ -27,19 +27,19 @@ function DialogCustom({ title, onClose, editContent, setRequestData }) {
     const product = useProduct(data);
     console.log(product);
 
-    axios
-      .post(
-        `https://humber-capstone-backend.herokuapp.com/products/add`,
-        product,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      .then(() => {
-        setRequestData(new Date())
-      });
+    // axios
+    //   .post(
+    //     `https://humber-capstone-backend.herokuapp.com/products/add`,
+    //     product,
+    //     {
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //     }
+    //   )
+    //   .then(() => {
+    //     setRequestData(new Date())
+    //   });
   };
 
   return (
