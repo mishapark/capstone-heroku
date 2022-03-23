@@ -138,7 +138,7 @@ function ProductsByCompliance() {
                                             } else {
                                                 return (< TableRow >
                                                     <TableCell>{r}</TableCell>
-                                                    <TableCell>{complianceReport[0].expiry_date}</TableCell>
+                                                    <TableCell>{complianceReport[0].expiry_date.match(/^\d{4}\-\d{1,2}\-\d{1,2}/)}</TableCell>
                                                 </TableRow>)
                                             }
 

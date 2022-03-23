@@ -26,6 +26,7 @@ function ProductsByStandard({ title, data }) {
     const getStandards = data
         .map((s) => s["standard_body"])
         .reduce((prev, curr) => prev.concat(curr), []);
+        
     const getStandardsByCat = data.filter(
         (s) => s["standard_category"] === category
     );

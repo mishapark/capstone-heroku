@@ -19,6 +19,7 @@ import { getStandards } from "../api/standards";
 
 import ProductsByStandard from '../components/AnalyticsData/ProductsByStandard';
 import ProductsByCompliance from '../components/AnalyticsData/ProductsByCompliance';
+import RfqOverviewByStatus from '../components/AnalyticsData/RfqOverviewByStatus';
 
 function Analytics() {
     const [products, setProducts] = useState([]);
@@ -47,23 +48,7 @@ function Analytics() {
         getStandards().then((data) => setStandards(data));
     }, []);
 
-    const d2 = {
-        labels: ["Initiated", "In progress", "Completed"],
-        datasets: [
-            {
-                data: [rfqs.filter((rfq) => rfq.RFQstages === "Initiated").length,
-                rfqs.filter((rfq) => rfq.RFQstages === "Processing").length,
-                rfqs.filter((rfq) => rfq.RFQstages === "Completed").length],
-                backgroundColor: ["orange", "green", "blue"],
-            },
-        ],
-    };
-
-    const o2 = {
-        title: {
-            text: "RFQs",
-        },
-    };
+    
 
     const handleAnalyticsTabChange = (event, value) => {
         setAnalyticsTabValue(value)
@@ -108,8 +93,7 @@ function Analytics() {
                     >
                         <Tab value="1" label="Products by Standard" />
                         <Tab value="2" label="Products by Compliance" />
-                        <Tab value="3" label="RFQ by Product" />
-                        <Tab value="4" label="RFQ Overview by Status" />
+                        <Tab value="3" label="RFQ Overview by Status" />
                     </Tabs>
 
                     <TabPanel value="1">
@@ -123,15 +107,8 @@ function Analytics() {
                     </TabPanel>
                     
                     <TabPanel value="3">
-                        <Typography variant="h6" sx={{ padding: 2 }}>RFQ by Product</Typography>
-                        <Typography variant="subtitle1" sx={{ padding: 2 }}>N/A</Typography>
-                    </TabPanel>
-
-                    <TabPanel value="4">
-                        <Typography variant="h6" sx={{ padding: 2 }}>RFQ Overview by Status</Typography>
-                        <Doughnut data={d2} option={o2} height="200px"
-                            width="200px"
-                            options={{ maintainAspectRatio: false }} />
+                        {/*<Typography variant="h6" sx={{ padding: 2 }}>RFQ Overview by Status</Typography>*/}
+                        <RfqOverviewByStatus/>
                     </TabPanel>
 
                 </TabContext>
