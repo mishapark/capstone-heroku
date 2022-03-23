@@ -18,24 +18,7 @@ import TabPanel from '@material-ui/lab/TabPanel';
 import { getStandards } from "../api/standards";
 
 import ProductsByStandard from '../components/AnalyticsData/ProductsByStandard';
-
-const data = {
-    labels: ["Comliant", "Non Compliant"],
-    datasets: [
-        {
-            data: [10, 12],
-            backgroundColor: ["green", "red"],
-        },
-    ],
-};
-
-const option = {
-    title: {
-        text: "Compliance",
-    },
-};
-
-
+import ProductsByCompliance from '../components/AnalyticsData/ProductsByCompliance';
 
 function Analytics() {
     const [products, setProducts] = useState([]);
@@ -130,16 +113,13 @@ function Analytics() {
                     </Tabs>
 
                     <TabPanel value="1">
-                        <Typography variant="h6" sx={{ padding: 2 }}>Products by Standard</Typography>
-                        
+                        {/*<Typography variant="h6" sx={{ padding: 2 }}>Products by Standard</Typography>*/}
                         <ProductsByStandard data={standards} />                        
                     </TabPanel>
 
                     <TabPanel value="2">
-                        <Typography variant="h6" sx={{ padding: 2 }}>Products by Compliance</Typography>
-                        <Pie data={data} option={option} height="200px"
-                            width="200px"
-                            options={{ maintainAspectRatio: false }} />
+                        {/*<Typography variant="h6" sx={{ padding: 2 }}>Products by Compliance</Typography>*/}
+                        <ProductsByCompliance />  
                     </TabPanel>
                     
                     <TabPanel value="3">
