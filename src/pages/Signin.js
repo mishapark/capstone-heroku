@@ -74,7 +74,7 @@ export default function SignIn() {
                   const accessToken = response["data"]["accessToken"];
                   const roles = response["data"]["role"];
                   setAuth({ user, roles, accessToken });
-                  navigate("../app", { replace: true });
+                  navigate("../dash", { replace: true });
                 } else {
                   console.log("error");
                 }

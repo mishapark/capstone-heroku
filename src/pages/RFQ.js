@@ -74,13 +74,9 @@ export const RFQ = () => {
 
   const [value, setValue] = React.useState(new Date("2014-08-18T21:11:54"));
 
-  const handleChange = (newValue) => {
-    setValue(newValue);
-  };
-
   const handleInput = (e) => {
     const newData = { ...newRfq };
-    newData[e.target.id] = e.target.value;
+    newData["approver"] = e.target.value;
     setNewRfq(newData);
     console.log(newRfq);
   };
@@ -128,6 +124,19 @@ export const RFQ = () => {
       .then(function (response) {
         window.location.reload();
       });
+  };
+
+  const onTagsChange = (event, values) => {
+    setNewRfq(
+      {
+        approver: values,
+      },
+      () => {
+        // This will output an array of objects
+        // given by Autocompelte options property.
+        console.log(newRfq);
+      }
+    );
   };
 
   return (
@@ -206,7 +215,8 @@ export const RFQ = () => {
                   <Autocomplete
                     disablePortal
                     id="approver"
-                    onChange={(event, value) => handleSelect(event, value)}
+                    name="approver"
+                    onInputChange={(event, value) => handleInput(event, value)}
                     options={["Andrew", "Timothy", "Christine", "Mikhail"]}
                     renderInput={(params) => (
                       <TextField {...params} label="Approver" />

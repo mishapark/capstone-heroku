@@ -12,6 +12,7 @@ import Signup from "./pages/Signup";
 import PersistLogin from "./components/PersistLogin";
 import RequireAuth from "./components/RequiredAuth";
 import Forgot from "./pages/Forgot";
+import Unauthorized from "./components/Unauthorized";
 
 const ROLES = {
   User: "Viewer",
@@ -29,6 +30,7 @@ function App() {
       <Route path="/" element={<Layout />}>
         {/* public routes */}
         <Route path="/" element={<Home />} />
+        <Route path="unathorized" element={<Unauthorized />} />
         <Route path="signin" element={<SignIn />} />
         <Route path="signup" element={<Signup />} />
         <Route path="forgot" element={<Forgot />} />
