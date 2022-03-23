@@ -57,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
   searchWrapper: {
     flex: "1 1 0%",
     boxSizing: " border-box",
+    maxWidth: "500px",
   },
   searchForm: {
     background: "white",
@@ -64,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: theme.shape.borderRadius,
     marginRight: theme.spacing(1) * 2,
     display: "block",
-    minWidth: "300px",
+    maxWidth: "300px",
   },
   searchInput: {
     fontSize: "1rem",
@@ -78,6 +79,7 @@ const useStyles = makeStyles((theme) => ({
     background: "transparent",
     width: "100%",
     color: "black",
+    maxWidth: "300px",
     outline: "0",
   },
   searchIcon: {
