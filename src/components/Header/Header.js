@@ -225,10 +225,7 @@ const Header = ({ logo, logoAltText, toggleFullscreen, toggleDrawer }) => {
                     >
                       {filteredData.slice(0, 15).map((value, key) => {
                         return (
-                          <Link
-                            to={`/app/products/${value["_id"]}`}
-                            target="_blank"
-                          >
+                          <Link to={`/products/${value["_id"]}`}>
                             <ListItem button divider>
                               <p>{value["product_details"]["product_name"]}</p>
                             </ListItem>
