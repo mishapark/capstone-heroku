@@ -20,9 +20,11 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 export const RFQInfo = () => {
   //use navigate
   const navigate = useNavigate();
-  const [rfq, setRfq] = useState("");
-  const { id } = useParams();
 
+  const { id } = useParams();
+  const [rfq, setRfq] = useState({
+    rfqNumber: id,
+  });
   const sendGetRequest = async () => {
     try {
       const response = await axios.get(
@@ -36,33 +38,21 @@ export const RFQInfo = () => {
   };
 
   const [formValue, setformValue] = React.useState({
-    to: "",
-    from: "",
-    vendorDetails: "",
-    description: "",
-    instruction: "",
-    statement: "",
+    rfqNumber: id,
   });
 
   const handleSubmit = async (e) => {
     // store the states in the form data
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("to", formValue.to);
-    formData.append("from", formValue.from);
-    formData.append("vendorDetails", formValue.vendorDetails);
-    formData.append("description", formValue.description);
-    formData.append("instruction", formValue.instruction);
-    formData.append("statement", formValue.statement);
 
     try {
       // make axios post request
       const response = await axios({
         method: "put",
-        url: `https://humber-capstone-backend.herokuapp.com/rfqs/update?rfqNumber=${rfq.rfqNumber}`,
-        data: formData,
+        url: `https://humber-capstone-backend.herokuapp.com/RFQs/update?rfqNumber=${id}`,
+        data: rfq,
         headers: {
-          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json",
           withCredentials: true,
         },
       });
@@ -72,11 +62,11 @@ export const RFQInfo = () => {
   };
 
   const handleChangeValue = (event) => {
-    setformValue({
-      ...formValue,
+    setRfq({
+      ...rfq,
       [event.target.name]: event.target.value,
     });
-    console.log(formValue);
+    console.log(rfq);
   };
 
   React.useEffect(() => {
@@ -99,44 +89,43 @@ export const RFQInfo = () => {
             <Stack spacing={2} sx={{ mt: 5 }}>
               <TextField
                 id="to"
-                label="To"
                 variant="outlined"
                 autoFocus
                 required
                 name="to"
                 size="small"
-                value={formValue.to}
+                value={rfq.to}
                 onChange={handleChangeValue}
               />
               <TextField
                 id="from"
-                label="From"
                 variant="outlined"
                 required
                 size="small"
                 name="from"
-                value={formValue.from}
+                value={rfq.from}
                 onChange={handleChangeValue}
               />
               <TextField
                 id="rfq-date"
-                defaultValue={rfq.rfqDate}
+                value={rfq.rfqDate}
                 variant="outlined"
                 required
                 disabled
                 size="small"
               />
+              {console.log(rfq.rfqDate)}
 
               <TextField
                 id="vendor-details"
-                defaultValue={rfq.vendorDetail}
                 variant="outlined"
                 size="small"
                 required
-                name="vendorDetails"
-                value={formValue.vendorDetails}
+                name="vendorDetail"
+                value={rfq.vendorDetail}
                 onChange={handleChangeValue}
               />
+
               <DesktopDatePicker
                 label="Date&Time picker"
                 value={value}
@@ -145,35 +134,32 @@ export const RFQInfo = () => {
               />
               <TextField
                 id="description"
-                defaultValue={rfq.description}
                 variant="outlined"
                 multiline
                 rows={5}
                 size="small"
                 name="description"
-                value={formValue.description}
+                value={rfq.description}
                 onChange={handleChangeValue}
               >
                 {rfq.description}
               </TextField>
               <TextField
                 id="other-instruction"
-                defaultValue={rfq.instruction}
                 variant="outlined"
                 multiline
                 rows={3}
                 size="small"
                 name="instruction"
-                value={formValue.instruction}
+                value={rfq.instruction}
                 onChange={handleChangeValue}
               />
               <TextField
                 id="statement"
-                label="Statement For Qualification"
                 variant="outlined"
                 size="small"
                 name="statement"
-                value={formValue.statement}
+                value={rfq.statement}
                 onChange={handleChangeValue}
                 required
               />

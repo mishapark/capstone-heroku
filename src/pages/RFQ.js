@@ -126,9 +126,7 @@ export const RFQ = () => {
         }
       )
       .then(function (response) {
-        if (response.data.message === "Sucessfully Submitted") {
-          navigate("/tasks");
-        }
+        window.location.reload();
       });
   };
 
@@ -272,12 +270,18 @@ export const RFQ = () => {
                     RFQ Number
                   </TableCell>
                   <TableCell key={12} sx={{ fontWeight: "bold" }}>
-                    Status
+                    Date
                   </TableCell>
                   <TableCell key={13} sx={{ fontWeight: "bold" }}>
-                    Stage
+                    Description
                   </TableCell>
                   <TableCell key={14} sx={{ fontWeight: "bold" }}>
+                    Status
+                  </TableCell>
+                  <TableCell key={15} sx={{ fontWeight: "bold" }}>
+                    Stage
+                  </TableCell>
+                  <TableCell key={16} sx={{ fontWeight: "bold" }}>
                     Delete
                   </TableCell>
                 </TableRow>
@@ -290,6 +294,10 @@ export const RFQ = () => {
                         {rfq["rfqNumber"]}
                       </Link>
                     </TableCell>
+                    <TableCell>
+                      {rfq.rfqDate.match(/^\d{4}\-\d{1,2}\-\d{1,2}/)}
+                    </TableCell>
+                    <TableCell>{rfq.description}</TableCell>
                     <TableCell>Draft</TableCell>
                     <TableCell>{rfq["RFQstages"]}</TableCell>
                     <TableCell>

@@ -2,9 +2,20 @@ import React, { useEffect, useRef, useState } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
 import { Box } from "@mui/system";
-import { Paper, Typography, Grid } from "@mui/material";
+import {
+  Paper,
+  Typography,
+  Grid,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+} from "@mui/material";
 import axios from "axios";
 import useRefreshToken from "../hooks/useRefreshToken";
+import ProductsDash from "../components/Dashboards/ProductsDash";
+import { Link } from "react-router-dom";
 
 export const Dash = () => {
   const [products, setProducts] = useState([]);
@@ -90,6 +101,42 @@ export const Dash = () => {
               <Typography variant="h6">Compliance chart</Typography>
               <Pie data={data} option={option} style={{ maxWidth: "500px" }} />
             </div>
+          </Paper>
+        </Grid>
+        <Grid item xs={12}>
+          <Paper sx={{ padding: 2 }}>
+            <Typography variant="h6">Products</Typography>
+            <br />
+            <Table size="small">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Product</TableCell>
+                  <TableCell>Category</TableCell>
+                  <TableCell>Product family</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {products.slice(0, 5).map((product) => (
+                  <TableRow key={product.product_id}>
+                    <TableCell>
+                      <Link to={`/products/${product._id}`}>
+                        {product.product_details.product_name}
+                      </Link>
+                    </TableCell>
+                    <TableCell>
+                      {product.product_details.product_category}
+                    </TableCell>
+                    <TableCell>
+                      {product.product_details.product_family}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+            {console.log(products)}
+            <Link color="primary" to="/products" sx={{ mt: 3 }}>
+              See all products
+            </Link>
           </Paper>
         </Grid>
       </Grid>
