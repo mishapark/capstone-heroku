@@ -34,6 +34,8 @@ import { Autocomplete } from "@mui/material";
 import { DesktopDatePicker } from "@mui/lab";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import DeleteIcon from "@mui/icons-material/Delete";
+import IconButton from "@mui/material/IconButton";
 
 export const RFQ = () => {
   const [state, setState] = React.useState("");
@@ -107,6 +109,22 @@ export const RFQ = () => {
       .post(`https://humber-capstone-backend.herokuapp.com/rfqs/add`, newRfq, {
         headers: { "Content-Type": "application/json" },
       })
+      .then(function (response) {
+        if (response.data.message === "Sucessfully Submitted") {
+          navigate("/tasks");
+        }
+      });
+  };
+
+  const handleDelete = (rfq) => {
+    axios
+      .delete(
+        `https://humber-capstone-backend.herokuapp.com/rfqs/delete?rfqNumber=${rfq}`,
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      )
       .then(function (response) {
         if (response.data.message === "Sucessfully Submitted") {
           navigate("/tasks");
@@ -239,9 +257,7 @@ export const RFQ = () => {
               </DialogContent>
               <DialogActions>
                 <Button onClick={handleClose}>Cancel</Button>
-                <Button>
-                  <input type="submit" value="Submit" />
-                </Button>
+                <Button type="submit">Submit</Button>
               </DialogActions>
             </form>
           </LocalizationProvider>
@@ -261,6 +277,9 @@ export const RFQ = () => {
                   <TableCell key={13} sx={{ fontWeight: "bold" }}>
                     Stage
                   </TableCell>
+                  <TableCell key={14} sx={{ fontWeight: "bold" }}>
+                    Delete
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -273,6 +292,15 @@ export const RFQ = () => {
                     </TableCell>
                     <TableCell>Draft</TableCell>
                     <TableCell>{rfq["RFQstages"]}</TableCell>
+                    <TableCell>
+                      <Button
+                        aria-label="delete"
+                        name="delete"
+                        onClick={() => handleDelete(rfq.rfqNumber)}
+                      >
+                        <DeleteIcon />
+                      </Button>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
