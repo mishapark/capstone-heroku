@@ -29,21 +29,21 @@ function DialogCustom({ title, onClose, editContent, setRequestData }) {
     uploadFile(data.marking_plate).then((files) => {
       product = useProduct(data, files);
       console.log(product);
-    });
 
-    axios
-      .post(
-        `https://humber-capstone-backend.herokuapp.com/products/add`,
-        product,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      .then(() => {
-        setRequestData(new Date());
-      });
+      axios
+        .post(
+          `https://humber-capstone-backend.herokuapp.com/products/add`,
+          product,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then(() => {
+          setRequestData(new Date());
+        });
+    });
   };
 
   const uploadFile = async (files) => {
