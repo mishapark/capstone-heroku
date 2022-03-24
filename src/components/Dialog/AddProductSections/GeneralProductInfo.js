@@ -6,6 +6,7 @@ import CheckboxInput from "../../Input/CheckboxInput";
 import TextExtraInput from "../../Input/TextExtraInput";
 import RadioUpload from "../../Input/RadioUpload";
 import CountriesInput from "../../Input/CountriesInput";
+import { Controller } from "react-hook-form";
 
 function GeneralProductInfo({ standards, countries, editContent }) {
   const [category, setCategory] = useState("");
@@ -75,11 +76,16 @@ function GeneralProductInfo({ standards, countries, editContent }) {
         name="applicant"
         editContent={editContent}
       />
-      <TextExtraInput
-        required={false}
-        label="Manufacturer Name and Address"
-        placeholder="Enter Name and Address"
+      <Controller
         name="manufacturer"
+        render={({ field }) => (
+          <TextExtraInput
+            required={false}
+            label="Manufacturer Name and Address"
+            placeholder="Enter Name and Address"
+            field={field}
+          />
+        )}
       />
       <RadioUpload
         required={false}
@@ -87,18 +93,29 @@ function GeneralProductInfo({ standards, countries, editContent }) {
         options={["Yes", "No"]}
         name="trade_mark"
       />
-      <TextExtraInput
-        required={false}
-        label="Family/Series Model"
-        placeholder="Enter Family/Series Model"
+      <Controller
         name="family_series_model"
+        render={({ field }) => (
+          <TextExtraInput
+            required={false}
+            label="Family/Series Model"
+            placeholder="Enter Family/Series Model"
+            field={field}
+          />
+        )}
       />
-      <CountriesInput
-        required={false}
-        label="Market"
-        placeholder="Select a country"
-        options={countries}
+      <Controller
         name="market"
+        render={({ field: { onChange } }) => (
+          <CountriesInput
+            required={false}
+            label="Market"
+            placeholder="Select a country"
+            options={countries}
+            name="market"
+            onChange={onChange}
+          />
+        )}
       />
     </>
   );

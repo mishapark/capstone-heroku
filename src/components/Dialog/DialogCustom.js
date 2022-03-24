@@ -22,24 +22,50 @@ function DialogCustom({ title, onClose, editContent, setRequestData }) {
   const methods = useForm();
 
   const onSubmit = (data) => {
-    // console.log(data);
+    console.log(data);
 
-    const product = useProduct(data);
-    console.log(product);
+    let product;
 
-    // axios
-    //   .post(
-    //     `https://humber-capstone-backend.herokuapp.com/products/add`,
-    //     product,
-    //     {
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //     }
-    //   )
-    //   .then(() => {
-    //     setRequestData(new Date())
-    //   });
+    uploadFile(data.marking_plate).then((files) => {
+      product = useProduct(data, files);
+      console.log(product);
+    });
+
+    axios
+      .post(
+        `https://humber-capstone-backend.herokuapp.com/products/add`,
+        product,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then(() => {
+        setRequestData(new Date());
+      });
+  };
+
+  const uploadFile = async (files) => {
+    const filesArr = [];
+    for (let i = 0; i < files.length; i++) {
+      const formData = new FormData();
+      formData.append("file", files[i]);
+      const res = await axios.post(
+        `https://humber-capstone-backend.herokuapp.com/files/upload`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      filesArr.push({
+        name: res.data.file.originalname,
+        file_location: res.data.file.filename,
+      });
+    }
+    return filesArr;
   };
 
   return (

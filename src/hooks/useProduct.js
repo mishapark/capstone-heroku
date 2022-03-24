@@ -1,4 +1,4 @@
-const useProduct = (data) => {
+const useProduct = (data, files) => {
   let product = {
     product_details: {
       regulatory_model_name: data.regulatory_model_name,
@@ -24,15 +24,8 @@ const useProduct = (data) => {
         status: data.trade_mark,
         data: "",
       },
-      family_series_model: [data.family_series_model],
-      market: [
-        {
-          continent_code: "",
-          continent_name: "",
-          country_code: "",
-          country_name: "",
-        },
-      ],
+      family_series_model: ["data.family_series_model"],
+      market: data.market,
     },
     product_tech_details: {
       equipment_size: {
@@ -51,16 +44,16 @@ const useProduct = (data) => {
       },
       operation_mode: {
         selected_mode: data.operation_mode,
-        ratio: data.operation_mode,
+        ratio: data.ratio,
       },
-      use_classification: [data.use_classification],
-      supply_connection: [],
-      mobility: [],
+      use_classification: data.use_classification,
+      supply_connection: data.supply_connection,
+      mobility: data.mobility,
     },
     marking_and_doc: {
-      marking_plate: [],
-      warning_mark: [],
-      fusy_type: "",
+      marking_plate: files,
+      warning_mark: data.warning_mark,
+      fuse_type: data.fuse_type,
     },
     compliance_report_number: [""],
     last_updated_status: {

@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { useFormContext } from "react-hook-form";
 import { InputLabel, TextField, Button } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import styles from "./styles";
 
-function TextExtraInput({ required, label, placeholder, name }) {
-  const { register } = useFormContext();
+function TextExtraInput({ required, label, placeholder, field }) {
   const [addClicked, setAddClicked] = useState(false);
 
   return (
@@ -24,7 +22,9 @@ function TextExtraInput({ required, label, placeholder, name }) {
             fullWidth
             helperText=""
             placeholder={placeholder}
-            {...register(name)}
+            onChange={(e) => {
+              field.onChange({ ...field.value, text: e.target.value });
+            }}
           />
           <Button
             onClick={() => setAddClicked(!addClicked)}
@@ -50,6 +50,9 @@ function TextExtraInput({ required, label, placeholder, name }) {
           helperText=""
           style={styles.extra}
           placeholder={placeholder}
+          onChange={(e) => {
+            field.onChange({ ...field.value, extra_text: e.target.value });
+          }}
         />
       ) : null}
     </div>

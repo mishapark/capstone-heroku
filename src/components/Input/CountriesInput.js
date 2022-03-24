@@ -5,7 +5,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import styles from "./styles";
 
-function CountriesInput({ required, label, placeholder, options, name }) {
+function CountriesInput({ required, label, placeholder, options, onChange }) {
   const { register } = useFormContext();
 
   return (
@@ -35,22 +35,41 @@ function CountriesInput({ required, label, placeholder, options, name }) {
             .reduce((acc, current) => {
               const optionRows = [];
               optionRows.push({
-                country: current.name.common,
-                continent: current.continents[0],
+                country_name: current.name.common,
+                continent_name: current.continents[0],
+                country_code: current.idd.suffixes
+                  ? current.idd.root + current.idd.suffixes[0]
+                  : current.idd.root,
+                continent_code:
+                  current.continents[0] === "Africa"
+                    ? "AF"
+                    : current.continents[0] === "Antarctica"
+                    ? "AN"
+                    : current.continents[0] === "Asia"
+                    ? "AS"
+                    : current.continents[0] === "Europe"
+                    ? "EU"
+                    : current.continents[0] === "North America"
+                    ? "NA"
+                    : current.continents[0] === "Oceania"
+                    ? "OC"
+                    : current.continents[0] === "South America"
+                    ? "SA"
+                    : "",
               });
               acc = acc.concat(optionRows);
               return acc;
             }, [])}
-          groupBy={(option) => option.continent}
-          getOptionLabel={(option) => option.country}
+          groupBy={(option) => option.continent_name}
+          getOptionLabel={(option) => option.country_name}
           fullWidth
+          onChange={(event, value) => onChange(value)}
           renderInput={(params) => (
             <TextField
               size="small"
               variant="outlined"
               {...params}
               placeholder={placeholder}
-              {...register(name)}
             />
           )}
         />
