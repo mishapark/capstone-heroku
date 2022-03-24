@@ -132,6 +132,7 @@ const Header = ({ logo, logoAltText, toggleFullscreen, toggleDrawer }) => {
     let maybeHandler = (event) => {
       if (!searchRef.current?.contains(event.target)) {
         setIsShown(false);
+        setWordEntered("");
       }
     };
 
