@@ -1,68 +1,169 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import LockResetIcon from '@mui/icons-material/LockReset';
-import {useForm} from 'react-hook-form';
-
+import * as React from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import LockResetIcon from "@mui/icons-material/LockReset";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 function Forgot() {
-  const { register, formState: { errors,}, handleSubmit } = useForm();
+  const [email, setEmail] = React.useState({
+    userEmail: "",
+  });
+
+  const handleSubmit = async (e) => {
+    // store the states in the form data
+    e.preventDefault();
+    localStorage.setItem("userEmail", email.userEmail);
+    try {
+      // make axios post request
+      const response = await axios({
+        method: "put",
+        url: `https://humber-capstone-backend.herokuapp.com/users/forgetPassword`,
+        data: email,
+        headers: {
+          "Content-Type": "application/json",
+          withCredentials: true,
+        },
+      }).then((response) => {
+        if (
+          (response.data.message =
+            "update the user successfully, please redirect to the reset router")
+        ) {
+          setIsReady(true);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleChangeValue = (event) => {
+    setEmail({ ...email, [event.target.name]: event.target.value });
+    console.log(email);
+  };
+
+  const [isReady, setIsReady] = React.useState(false);
+
+  const navigate = useNavigate();
+  const handleReset = async (e) => {
+    // store the states in the form data
+    e.preventDefault();
+    if (handleSame) {
+      try {
+        // make axios post request
+        const response = await axios({
+          method: "put",
+          url: `https://humber-capstone-backend.herokuapp.com/users/resetPassword`,
+          data: email,
+          headers: {
+            "Content-Type": "application/json",
+            withCredentials: true,
+          },
+        }).then((response) => {
+          if ((response.data.message = "Your password has been changed!")) {
+            navigate("/signin");
+          }
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      console.log("error, not the same");
+    }
+  };
+
+  const [same, setSame] = React.useState(false);
+
+  const handleSame = (e) => {
+    if (e.target.value === email.newPass) {
+      setSame(true);
+    }
+  };
+
   return (
     <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockResetIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Forgot your password?
-          </Typography>
-          <Typography component="subtitle1" align="center" sx={{mt:2}}>
-            Enter your email and we'll send you instructions on how to reset your password
-          </Typography>
-          <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleSubmit((data) => alert(JSON.stringify(data)))}>
+      <CssBaseline />
+      <Box
+        sx={{
+          marginTop: 8,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <LockResetIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Forgot your password?
+        </Typography>
+        <Typography component="subtitle1" align="center" sx={{ mt: 2 }}>
+          Enter your email and we'll send you instructions on how to reset your
+          password
+        </Typography>
+        {!isReady ? (
+          <Box component="form" sx={{ mt: 1 }} onSubmit={handleSubmit}>
             <TextField
               margin="normal"
               required
               fullWidth
               id="email"
               label="Email Address"
-              name="email"
+              onChange={handleChangeValue}
+              name="userEmail"
               autoComplete="email"
-              {...register('email', {
-                required: true,
-                pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-              })}
               autoFocus
             />
-            
+
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2, backgroundColor: '#3F50B5' }}
+              sx={{ mt: 3, mb: 2, backgroundColor: "#3F50B5" }}
             >
               Reset
             </Button>
           </Box>
-        </Box>
-      </Container>
+        ) : (
+          <Box component="form" sx={{ mt: 1 }} onSubmit={handleReset}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              label="New Password"
+              onChange={handleChangeValue}
+              name="newPass"
+            />
+
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              label="Repeat password"
+              onChange={handleSame}
+              name="newPass2"
+            />
+
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2, backgroundColor: "#3F50B5" }}
+            >
+              Reset
+            </Button>
+          </Box>
+        )}
+      </Box>
+    </Container>
   );
 }
 

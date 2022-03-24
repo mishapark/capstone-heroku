@@ -115,10 +115,15 @@ export default function SignIn() {
             })}
             autoComplete="current-password"
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
+          <div className="persistCheck">
+            <input
+              type="checkbox"
+              id="persist"
+              onChange={togglePersist}
+              checked={persist}
+            />
+            <label htmlFor="persist"> Trust This Device</label>
+          </div>
           <Button
             type="submit"
             fullWidth
@@ -137,15 +142,6 @@ export default function SignIn() {
               <Link to="/signup" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
-              <div className="persistCheck">
-                <input
-                  type="checkbox"
-                  id="persist"
-                  onChange={togglePersist}
-                  checked={persist}
-                />
-                <label htmlFor="persist">Trust This Device</label>
-              </div>
             </Grid>
           </Grid>
         </Box>
