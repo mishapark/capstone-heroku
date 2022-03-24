@@ -12,12 +12,14 @@ import axios from "axios";
 import React from "react";
 import DatePicker from "react-widgets/esm/DatePicker";
 import DropdownList from "react-widgets/DropdownList";
+import useAuth from "../hooks/useAuth";
 
 export const TaskInfo = () => {
   //use navigate
   const navigate = useNavigate();
   const [rfq, setRfq] = useState("");
   const { id } = useParams();
+  const { auth } = useAuth();
 
   const sendGetRequest = async () => {
     try {
@@ -74,7 +76,7 @@ export const TaskInfo = () => {
             required
           />
           <DatePicker placeholder="Date Required By" value={rfq.date} />
-
+          {console.log(auth)}
           <TextField
             id="description"
             value={rfq.description}

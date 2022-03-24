@@ -98,124 +98,126 @@ export const RFQInfo = () => {
     setValue(newValue);
   };
   return (
-    <Paper>
-      <Typography variant="h4" sx={{ padding: 3 }}>
-        {rfq.rfqNumber}
-      </Typography>
-      <Container sx={{ paddingBottom: 5 }} maxWidth="sm">
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <form onSubmit={handleSubmit}>
-            <Stack spacing={2} sx={{ mt: 5 }}>
-              <TextField
-                id="to"
-                variant="outlined"
-                autoFocus
-                required
-                name="to"
-                size="small"
-                value={rfq.to}
-                onChange={handleChangeValue}
-              />
-              <TextField
-                id="from"
-                variant="outlined"
-                required
-                size="small"
-                name="from"
-                value={rfq.from}
-                onChange={handleChangeValue}
-              />
-              <TextField
-                id="rfq-date"
-                value={rfq.rfqDate}
-                variant="outlined"
-                required
-                disabled
-                size="small"
-              />
-              {console.log(rfq.rfqDate)}
+    <Container>
+      <Paper>
+        <Typography variant="h4" sx={{ padding: 3 }}>
+          {rfq.rfqNumber}
+        </Typography>
+        <Container sx={{ paddingBottom: 5 }} maxWidth="sm">
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <form onSubmit={handleSubmit}>
+              <Stack spacing={2} sx={{ mt: 5 }}>
+                <TextField
+                  id="to"
+                  variant="outlined"
+                  autoFocus
+                  required
+                  name="to"
+                  size="small"
+                  value={rfq.to}
+                  onChange={handleChangeValue}
+                />
+                <TextField
+                  id="from"
+                  variant="outlined"
+                  required
+                  size="small"
+                  name="from"
+                  value={rfq.from}
+                  onChange={handleChangeValue}
+                />
+                <TextField
+                  id="rfq-date"
+                  value={rfq.rfqDate}
+                  variant="outlined"
+                  required
+                  disabled
+                  size="small"
+                />
+                {console.log(rfq.rfqDate)}
 
-              <TextField
-                id="vendor-details"
-                variant="outlined"
-                size="small"
-                required
-                name="vendorDetail"
-                value={rfq.vendorDetail}
-                onChange={handleChangeValue}
-              />
+                <TextField
+                  id="vendor-details"
+                  variant="outlined"
+                  size="small"
+                  required
+                  name="vendorDetail"
+                  value={rfq.vendorDetail}
+                  onChange={handleChangeValue}
+                />
 
-              <DesktopDatePicker
-                label="Date&Time picker"
-                value={value}
-                onChange={handleChange}
-                renderInput={(params) => <TextField {...params} />}
-              />
-              <Autocomplete
-                disablePortal
-                id="approver"
-                value={rfq.approver}
-                name="approver"
-                onInputChange={(event, value) => handleApprover(event, value)}
-                options={["Andrew", "Timothy", "Christine", "Mikhail"]}
-                renderInput={(params) => (
-                  <TextField {...params} label="Approver" />
-                )}
-              />
-              <TextField
-                id="description"
-                variant="outlined"
-                multiline
-                rows={5}
-                size="small"
-                name="description"
-                value={rfq.description}
-                onChange={handleChangeValue}
-              >
-                {rfq.description}
-              </TextField>
-              <TextField
-                id="other-instruction"
-                variant="outlined"
-                multiline
-                rows={3}
-                size="small"
-                name="instruction"
-                value={rfq.instruction}
-                onChange={handleChangeValue}
-              />
-              <TextField
-                id="statement"
-                variant="outlined"
-                size="small"
-                name="statement"
-                value={rfq.statement}
-                onChange={handleChangeValue}
-                required
-              />
-              <Autocomplete
-                disablePortal
-                id="combo-box-demo"
-                options={["Draft", "Published"]}
-                name="status"
-                value={rfq.status}
-                onInputChange={(e, value) => handleSelect(e, value)}
-                renderInput={(params) => (
-                  <TextField {...params} name="status" label="Status" />
-                )}
-              />
-              <Grid container spacing={2}>
-                <Grid item xs={8} md={6}>
-                  <Button type="submit">Save</Button>
+                <DesktopDatePicker
+                  label="Date&Time picker"
+                  value={value}
+                  onChange={handleChange}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+                <Autocomplete
+                  disablePortal
+                  id="approver"
+                  value={rfq.approver}
+                  name="approver"
+                  onInputChange={(event, value) => handleApprover(event, value)}
+                  options={["Andrew", "Timothy", "Christine", "Mikhail"]}
+                  renderInput={(params) => (
+                    <TextField {...params} label="Approver" />
+                  )}
+                />
+                <TextField
+                  id="description"
+                  variant="outlined"
+                  multiline
+                  rows={5}
+                  size="small"
+                  name="description"
+                  value={rfq.description}
+                  onChange={handleChangeValue}
+                >
+                  {rfq.description}
+                </TextField>
+                <TextField
+                  id="other-instruction"
+                  variant="outlined"
+                  multiline
+                  rows={3}
+                  size="small"
+                  name="instruction"
+                  value={rfq.instruction}
+                  onChange={handleChangeValue}
+                />
+                <TextField
+                  id="statement"
+                  variant="outlined"
+                  size="small"
+                  name="statement"
+                  value={rfq.statement}
+                  onChange={handleChangeValue}
+                  required
+                />
+                <Autocomplete
+                  disablePortal
+                  id="combo-box-demo"
+                  options={["Draft", "Published"]}
+                  name="status"
+                  value={rfq.status}
+                  onInputChange={(e, value) => handleSelect(e, value)}
+                  renderInput={(params) => (
+                    <TextField {...params} name="status" label="Status" />
+                  )}
+                />
+                <Grid container spacing={2}>
+                  <Grid item xs={8} md={6}>
+                    <Button type="submit">Save</Button>
+                  </Grid>
+                  <Grid item xs={8} md={6}>
+                    <Button>Cancel</Button>
+                  </Grid>
                 </Grid>
-                <Grid item xs={8} md={6}>
-                  <Button>Cancel</Button>
-                </Grid>
-              </Grid>
-            </Stack>
-          </form>
-        </LocalizationProvider>
-      </Container>
-    </Paper>
+              </Stack>
+            </form>
+          </LocalizationProvider>
+        </Container>
+      </Paper>
+    </Container>
   );
 };
