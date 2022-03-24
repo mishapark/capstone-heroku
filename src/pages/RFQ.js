@@ -76,17 +76,25 @@ export const RFQ = () => {
 
   const handleInput = (e) => {
     const newData = { ...newRfq };
-    newData["approver"] = e.target.value;
+    newData[e.target.name] = e.target.value;
     setNewRfq(newData);
     console.log(newRfq);
   };
 
   const handleSelect = (e, value) => {
     const newData = { ...newRfq };
-    newData[e.target.id] = value;
+    newData["approver"] = value;
+    setNewRfq(newData);
+    console.log(newData);
+  };
+
+  const handleStatus = (e, value) => {
+    const newData = { ...newRfq };
+    newData["status"] = value;
     setNewRfq(newData);
     console.log(newRfq);
   };
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -100,6 +108,8 @@ export const RFQ = () => {
   };
 
   const handleSubmitData = (e) => {
+    console.log(newRfq);
+
     e.preventDefault();
     axios
       .post(`https://humber-capstone-backend.herokuapp.com/rfqs/add`, newRfq, {
@@ -124,19 +134,6 @@ export const RFQ = () => {
       .then(function (response) {
         window.location.reload();
       });
-  };
-
-  const onTagsChange = (event, values) => {
-    setNewRfq(
-      {
-        approver: values,
-      },
-      () => {
-        // This will output an array of objects
-        // given by Autocompelte options property.
-        console.log(newRfq);
-      }
-    );
   };
 
   return (
@@ -177,6 +174,7 @@ export const RFQ = () => {
                     autoFocus
                     required
                     size="small"
+                    name="to"
                     onChange={(e) => handleInput(e)}
                   />
                   <TextField
@@ -185,6 +183,7 @@ export const RFQ = () => {
                     variant="outlined"
                     required
                     size="small"
+                    name="from"
                     onChange={(e) => handleInput(e)}
                   />
                   <TextField
@@ -194,6 +193,7 @@ export const RFQ = () => {
                     required
                     disabled
                     size="small"
+                    name="rfqDate"
                     onChange={(e) => handleInput(e)}
                   />
 
@@ -201,6 +201,7 @@ export const RFQ = () => {
                     id="vendor-details"
                     label="Vendor Details"
                     variant="outlined"
+                    name="vendorDetail"
                     size="small"
                     onChange={(e) => handleInput(e)}
                     required
@@ -216,7 +217,7 @@ export const RFQ = () => {
                     disablePortal
                     id="approver"
                     name="approver"
-                    onInputChange={(event, value) => handleInput(event, value)}
+                    onInputChange={(event, value) => handleSelect(event, value)}
                     options={["Andrew", "Timothy", "Christine", "Mikhail"]}
                     renderInput={(params) => (
                       <TextField {...params} label="Approver" />
@@ -226,6 +227,7 @@ export const RFQ = () => {
                     id="description"
                     label="Description"
                     variant="outlined"
+                    name="description"
                     multiline
                     rows={5}
                     size="small"
@@ -236,6 +238,7 @@ export const RFQ = () => {
                     id="other-instruction"
                     label="Any Other Instructions For Quoting"
                     variant="outlined"
+                    name="instruction"
                     multiline
                     rows={3}
                     size="small"
@@ -246,19 +249,18 @@ export const RFQ = () => {
                     label="Statement For Qualification"
                     variant="outlined"
                     size="small"
+                    name="statement"
                     onChange={(e) => handleInput(e)}
                     required
                   />
                   <Autocomplete
                     disablePortal
                     id="status"
+                    name="status"
                     options={["Draft", "Published"]}
+                    onInputChange={(event, value) => handleStatus(event, value)}
                     renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        onChange={(event, value) => handleSelect(event, value)}
-                        label="Status"
-                      />
+                      <TextField {...params} label="Status" />
                     )}
                   />
                 </Stack>
@@ -308,7 +310,7 @@ export const RFQ = () => {
                       {rfq.rfqDate.match(/^\d{4}\-\d{1,2}\-\d{1,2}/)}
                     </TableCell>
                     <TableCell>{rfq.description}</TableCell>
-                    <TableCell>Draft</TableCell>
+                    <TableCell>{rfq.status}</TableCell>
                     <TableCell>{rfq["RFQstages"]}</TableCell>
                     <TableCell>
                       <Button

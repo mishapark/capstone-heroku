@@ -8,11 +8,13 @@ import {
   TableRow,
   TableBody,
   TableCell,
+  Badge,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "../api/axios";
+import TaskAltIcon from "@mui/icons-material/TaskAlt";
 
 export const Tasks = () => {
   const [state, setState] = React.useState("");
@@ -45,6 +47,9 @@ export const Tasks = () => {
         }}
       >
         <Typography variant="h5">Tasks</Typography>
+        <Badge badgeContent={rfqs.length} color="primary">
+          <TaskAltIcon />
+        </Badge>
       </Card>
       <Box sx={{ width: "100%", mt: 2 }}>
         <Paper sx={{ width: "100%", mt: 2 }}>
