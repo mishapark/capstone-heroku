@@ -16,7 +16,8 @@ const useRefreshToken = () => {
       console.log(response.data);
       return {
         ...prev,
-        roles: response.data.roles,
+        user: localStorage.getItem("user"),
+        roles: response.data.role,
         accessToken: response.data.accessToken,
       };
     });

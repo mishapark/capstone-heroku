@@ -73,6 +73,8 @@ export default function SignIn() {
                   console.log(response);
                   const accessToken = response["data"]["accessToken"];
                   const roles = response["data"]["role"];
+                  localStorage.setItem("role", roles);
+                  localStorage.setItem("user", user);
                   setAuth({ user, roles, accessToken });
                   navigate("../dash", { replace: true });
                 } else {
