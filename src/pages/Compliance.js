@@ -15,6 +15,7 @@ import { Button } from "@material-ui/core";
 import { Chip } from "@material-ui/core";
 import axios from "axios";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
+import { Link } from "react-router-dom";
 
 const EnhancedTableToolbar = (props) => {
   const { numSelected } = props;
@@ -79,7 +80,9 @@ export default function Compliance() {
             {products.map((product) => (
               <TableRow key={product["product_id"]}>
                 <TableCell>
-                  {product["product_details"]["product_name"]}
+                  <Link to={`../products/${product["_id"]}`}>
+                    {product["product_details"]["product_name"]}
+                  </Link>
                 </TableCell>
                 <TableCell>
                   {product.is_compliant ? (
@@ -93,7 +96,8 @@ export default function Compliance() {
                     <Typography>
                       <AttachFileIcon />
                       <a
-                        href={`https://humber-capstone-backend.herokuapp.com/${file.file_location}`}
+                        href={`https://humber-capstone-backend.herokuapp.com/files/${file.file_location}`}
+                        target="_blank"
                       >
                         {file.name}
                       </a>

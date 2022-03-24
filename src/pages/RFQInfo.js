@@ -57,7 +57,7 @@ export const RFQInfo = () => {
           "Content-Type": "application/json",
           withCredentials: true,
         },
-      });
+      }).then(navigate("/rfq"));
     } catch (error) {
       console.log(error);
     }
@@ -210,7 +210,7 @@ export const RFQInfo = () => {
                     <Button type="submit">Save</Button>
                   </Grid>
                   <Grid item xs={8} md={6}>
-                    <Button>Cancel</Button>
+                    <Button onClick={() => navigate("/rfq")}>Cancel</Button>
                   </Grid>
                 </Grid>
               </Stack>

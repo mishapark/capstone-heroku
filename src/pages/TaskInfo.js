@@ -5,6 +5,8 @@ import {
   Stack,
   TextField,
   Typography,
+  Autocomplete,
+  Grid,
 } from "@mui/material";
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -13,12 +15,19 @@ import React from "react";
 import DatePicker from "react-widgets/esm/DatePicker";
 import DropdownList from "react-widgets/DropdownList";
 import useAuth from "../hooks/useAuth";
+import { DesktopDatePicker } from "@mui/lab";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
 
 export const TaskInfo = () => {
   //use navigate
   const navigate = useNavigate();
-  const [rfq, setRfq] = useState("");
   const { id } = useParams();
+  const [rfq, setRfq] = useState({
+    rfqNumber: id,
+    status: "Draft",
+    approver: "Timothy",
+  });
   const { auth } = useAuth();
 
   const sendGetRequest = async () => {
@@ -37,75 +46,179 @@ export const TaskInfo = () => {
     sendGetRequest();
   }, []);
 
+  const handleSubmit = async (e) => {
+    // store the states in the form data
+    e.preventDefault();
+    console.log(rfq);
+    try {
+      // make axios post request
+      const response = await axios({
+        method: "put",
+        url: `https://humber-capstone-backend.herokuapp.com/RFQs/update?rfqNumber=${id}`,
+        data: rfq,
+        headers: {
+          "Content-Type": "application/json",
+          withCredentials: true,
+        },
+      }).then(navigate("/rfq"));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleChangeValue = (event) => {
+    setRfq({
+      ...rfq,
+      [event.target.name]: event.target.value,
+    });
+    console.log(rfq);
+  };
+
+  const handleSelect = (e, value) => {
+    setRfq({
+      ...rfq,
+      ["status"]: value,
+    });
+    console.log(rfq);
+  };
+
+  const handleApprover = (e, value) => {
+    setRfq({
+      ...rfq,
+      ["approver"]: value,
+    });
+    console.log(rfq);
+    console.log(value);
+  };
+
+  React.useEffect(() => {
+    sendGetRequest();
+  }, []);
+
+  const [value, setValue] = React.useState(new Date("2014-08-18T21:11:54"));
+
+  const handleChange = (newValue) => {
+    setValue(newValue);
+  };
+
   return (
     <Paper>
       <Typography variant="h4" sx={{ padding: 3 }}>
         {rfq.rfqNumber}
       </Typography>
       <Container sx={{ paddingBottom: 5 }} maxWidth="sm">
-        <Stack spacing={2} sx={{ mt: 5 }}>
-          <TextField
-            id="to"
-            label="To"
-            variant="outlined"
-            autoFocus
-            required
-            size="small"
-          />
-          <TextField
-            id="from"
-            label="From"
-            variant="outlined"
-            required
-            size="small"
-          />
-          <TextField
-            id="rfq-date"
-            label={rfq.rfqDate}
-            variant="outlined"
-            required
-            disabled
-            size="small"
-          />
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <form onSubmit={handleSubmit}>
+            <Stack spacing={2} sx={{ mt: 5 }}>
+              <TextField
+                id="to"
+                variant="outlined"
+                autoFocus
+                required
+                name="to"
+                size="small"
+                value={rfq.to}
+                onChange={handleChangeValue}
+              />
+              <TextField
+                id="from"
+                variant="outlined"
+                required
+                size="small"
+                name="from"
+                value={rfq.from}
+                onChange={handleChangeValue}
+              />
+              <TextField
+                id="rfq-date"
+                value={rfq.rfqDate}
+                variant="outlined"
+                required
+                disabled
+                size="small"
+              />
+              {console.log(rfq.rfqDate)}
 
-          <TextField
-            id="vendor-details"
-            value={rfq.vendorDetail}
-            variant="outlined"
-            size="small"
-            required
-          />
-          <DatePicker placeholder="Date Required By" value={rfq.date} />
-          {console.log(auth)}
-          <TextField
-            id="description"
-            value={rfq.description}
-            variant="outlined"
-            multiline
-            rows={5}
-            size="small"
-          >
-            {" "}
-            {rfq.description}{" "}
-          </TextField>
-          <TextField
-            id="other-instruction"
-            value={rfq.instruction}
-            variant="outlined"
-            multiline
-            rows={3}
-            size="small"
-          />
-          <TextField
-            id="statement"
-            label="Statement For Qualification"
-            variant="outlined"
-            size="small"
-            required
-          />
-          <DropdownList placeholder="Status" data={["Draft", "Published"]} />
-          <Button variant="outlined">Sign RFQ</Button>
-        </Stack>
+              <TextField
+                id="vendor-details"
+                variant="outlined"
+                size="small"
+                required
+                name="vendorDetail"
+                value={rfq.vendorDetail}
+                onChange={handleChangeValue}
+              />
+
+              <DesktopDatePicker
+                label="Date&Time picker"
+                value={value}
+                onChange={handleChange}
+                renderInput={(params) => <TextField {...params} />}
+              />
+              <Autocomplete
+                disablePortal
+                id="approver"
+                value={rfq.approver}
+                name="approver"
+                onInputChange={(event, value) => handleApprover(event, value)}
+                options={["Andrew", "Timothy", "Christine", "Mikhail"]}
+                renderInput={(params) => (
+                  <TextField {...params} label="Approver" />
+                )}
+              />
+              <TextField
+                id="description"
+                variant="outlined"
+                multiline
+                rows={5}
+                size="small"
+                name="description"
+                value={rfq.description}
+                onChange={handleChangeValue}
+              >
+                {rfq.description}
+              </TextField>
+              <TextField
+                id="other-instruction"
+                variant="outlined"
+                multiline
+                rows={3}
+                size="small"
+                name="instruction"
+                value={rfq.instruction}
+                onChange={handleChangeValue}
+              />
+              <TextField
+                id="statement"
+                variant="outlined"
+                size="small"
+                name="statement"
+                value={rfq.statement}
+                onChange={handleChangeValue}
+                required
+              />
+              <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                options={["Draft", "Published"]}
+                name="status"
+                value={rfq.status}
+                onInputChange={(e, value) => handleSelect(e, value)}
+                renderInput={(params) => (
+                  <TextField {...params} name="status" label="Status" />
+                )}
+              />
+              <Grid container spacing={2}>
+                <Grid item xs={8} md={6}>
+                  <Button>Sign RFQ</Button>
+                </Grid>
+                <Grid item xs={8} md={6}>
+                  <Button onClick={() => navigate("/rfq")}>Cancel</Button>
+                </Grid>
+              </Grid>
+            </Stack>
+          </form>
+        </LocalizationProvider>
       </Container>
     </Paper>
   );

@@ -133,6 +133,7 @@ const Header = ({ logo, logoAltText, toggleFullscreen, toggleDrawer }) => {
       if (!searchRef.current?.contains(event.target)) {
         setIsShown(false);
         setWordEntered("");
+        setFilteredData([]);
       }
     };
 
@@ -228,7 +229,13 @@ const Header = ({ logo, logoAltText, toggleFullscreen, toggleDrawer }) => {
                     >
                       {filteredData.slice(0, 15).map((value, key) => {
                         return (
-                          <Link to={`/products/${value["_id"]}`}>
+                          <Link
+                            to={`/products/${value["_id"]}`}
+                            onClick={() => {
+                              setWordEntered("");
+                              setFilteredData([]);
+                            }}
+                          >
                             <ListItem button divider>
                               <p>{value["product_details"]["product_name"]}</p>
                             </ListItem>

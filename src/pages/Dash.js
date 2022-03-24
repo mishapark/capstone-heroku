@@ -11,6 +11,7 @@ import {
   TableRow,
   TableCell,
   TableBody,
+  Divider,
 } from "@mui/material";
 import axios from "axios";
 import useRefreshToken from "../hooks/useRefreshToken";
@@ -105,7 +106,7 @@ export const Dash = () => {
         </Grid>
         <Grid item xs={12}>
           <Paper sx={{ padding: 2 }}>
-            <Typography variant="h6">Products</Typography>
+            <Typography variant="h6">Products to Expire Soon</Typography>
             <br />
             <Table size="small">
               <TableHead>
@@ -134,7 +135,8 @@ export const Dash = () => {
               </TableBody>
             </Table>
             {console.log(products)}
-            <Link color="primary" to="/products" sx={{ mt: 3 }}>
+            <br></br>
+            <Link color="primary" to="/products" sx={{ mt: 3, color: "blue" }}>
               See all products
             </Link>
           </Paper>
