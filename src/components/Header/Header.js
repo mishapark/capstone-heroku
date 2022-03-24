@@ -92,9 +92,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Header = ({ logo, logoAltText, toggleFullscreen, toggleDrawer }) => {
+  const navigate = useNavigate();
   const logout = useLogout();
   const signOut = async () => {
     await logout();
+    navigate("../", { replace: true });
   };
 
   const classes = useStyles();

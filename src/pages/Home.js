@@ -6,6 +6,7 @@ import {
   Grid,
   Typography,
   Paper,
+  Stack,
 } from "@mui/material";
 import React from "react";
 import useAuth from "../hooks/useAuth";
@@ -34,7 +35,20 @@ function Home() {
             backgroundPosition: "center",
           }}
         />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid
+          item
+          xs={12}
+          sm={8}
+          md={5}
+          component={Paper}
+          elevation={6}
+          square
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
           <Box
             sx={{
               my: 8,
@@ -47,15 +61,15 @@ function Home() {
             <Typography component="h1" variant="h5">
               Welcome
             </Typography>
-            <Box component="form" noValidate sx={{ mt: 1 }}>
-              <Button>
+            <br></br>
+            <Stack component="form" noValidate sx={{ mt: 1 }} spacing={3}>
+              <Button variant="contained">
                 <Link to="/signin">Login</Link>
               </Button>
-              <br></br>
-              <Button>
+              <Button variant="contained">
                 <Link to="/signup">Sign Up</Link>
               </Button>
-            </Box>
+            </Stack>
           </Box>
         </Grid>
       </Grid>

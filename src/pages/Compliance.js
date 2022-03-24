@@ -14,6 +14,7 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import { Button } from "@material-ui/core";
 import { Chip } from "@material-ui/core";
 import axios from "axios";
+import AttachFileIcon from "@mui/icons-material/AttachFile";
 
 const EnhancedTableToolbar = (props) => {
   const { numSelected } = props;
@@ -60,7 +61,7 @@ export default function Compliance() {
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
         <EnhancedTableToolbar />
-        <Table className="mb-0">
+        <Table>
           <TableHead>
             <TableRow>
               <TableCell key={1} sx={{ fontWeight: "bold" }}>
@@ -82,13 +83,22 @@ export default function Compliance() {
                 </TableCell>
                 <TableCell>
                   {product.is_compliant ? (
-                    <Chip label="Compliant" sx={{ bgcolor: "#2F7C31" }} />
+                    <Chip label="Compliant" sx={{ color: "#2F7C31" }} />
                   ) : (
-                    <Chip label="Not compliant" sx={{ bgcolor: "blue" }} />
+                    <Chip label="Not compliant" />
                   )}
                 </TableCell>
                 <TableCell>
-                  {product["product_details"]["product_name"]}
+                  {product.marking_and_doc.marking_plate.map((file) => (
+                    <Typography>
+                      <AttachFileIcon />
+                      <a
+                        href={`https://humber-capstone-backend.herokuapp.com/${file.file_location}`}
+                      >
+                        {file.name}
+                      </a>
+                    </Typography>
+                  ))}
                 </TableCell>
               </TableRow>
             ))}
