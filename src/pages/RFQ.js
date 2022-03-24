@@ -117,7 +117,8 @@ export const RFQ = () => {
       })
       .then(function (response) {
         if (response.data.message === "Sucessfully Submitted") {
-          navigate("/tasks");
+          setOpen(false);
+          window.location.reload(true);
         }
       });
   };
