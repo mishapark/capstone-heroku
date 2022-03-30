@@ -91,14 +91,37 @@ export const TaskInfo = () => {
     console.log(value);
   };
 
-  React.useEffect(() => {
-    sendGetRequest();
-  }, []);
-
-  const [value, setValue] = React.useState(new Date("2014-08-18T21:11:54"));
+  const [value, setValue] = React.useState(null);
 
   const handleChange = (newValue) => {
     setValue(newValue);
+  };
+
+  const [approvers, setApprovers] = React.useState([]);
+
+  const getApprovers = async () => {
+    try {
+      const response = await axios.get(
+        "https://humber-capstone-backend.herokuapp.com/rfqs/findApprovers"
+      );
+      console.log(response.data);
+      setApprovers(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  React.useEffect(() => {
+    sendGetRequest();
+    getApprovers();
+  }, []);
+
+  const handleDate = (e) => {
+    const newData = { ...rfq };
+    newData["quoteRequiredBy"] = e;
+    setValue(e);
+    setRfq(newData);
+    console.log(rfq);
   };
 
   return (
@@ -148,11 +171,10 @@ export const TaskInfo = () => {
                 value={rfq.vendorDetail}
                 onChange={handleChangeValue}
               />
-
               <DesktopDatePicker
                 label="Date&Time picker"
                 value={value}
-                onChange={handleChange}
+                onChange={(e) => handleDate(e)}
                 renderInput={(params) => <TextField {...params} />}
               />
               <Autocomplete
@@ -161,7 +183,7 @@ export const TaskInfo = () => {
                 value={rfq.approver}
                 name="approver"
                 onInputChange={(event, value) => handleApprover(event, value)}
-                options={["Andrew", "Timothy", "Christine", "Mikhail"]}
+                options={approvers.map((element) => element.userName)}
                 renderInput={(params) => (
                   <TextField {...params} label="Approver" />
                 )}
