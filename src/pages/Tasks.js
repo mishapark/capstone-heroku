@@ -68,17 +68,19 @@ export const Tasks = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rfqs.map((rfq) => (
-                <TableRow key={rfq["_id"]}>
-                  <TableCell>
-                    <Link to={`/tasks/${rfq.rfqNumber}`}>
-                      {rfq["rfqNumber"]}
-                    </Link>
-                  </TableCell>
-                  <TableCell>Draft</TableCell>
-                  <TableCell>{rfq["RFQstages"]}</TableCell>
-                </TableRow>
-              ))}
+              {rfqs
+                .filter((rfq) => rfq.status == "Published")
+                .map((rfq) => (
+                  <TableRow key={rfq["_id"]}>
+                    <TableCell>
+                      <Link to={`/tasks/${rfq.rfqNumber}`}>
+                        {rfq["rfqNumber"]}
+                      </Link>
+                    </TableCell>
+                    <TableCell>Published</TableCell>
+                    <TableCell>{rfq["RFQstages"]}</TableCell>
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
         </Paper>

@@ -48,6 +48,7 @@ export const RFQ = () => {
   const user_id = "620c6a949115e6ac657a4607";
 
   const [rfqs, setRfqs] = React.useState([]);
+  const [approvers, setApprovers] = React.useState([]);
 
   const sendGetRequest = async () => {
     try {
@@ -61,8 +62,20 @@ export const RFQ = () => {
     }
   };
 
+  const getApprovers = async () => {
+    try {
+      const response = await axios.get(
+        "https://humber-capstone-backend.herokuapp.com/rfqs/findApprovers"
+      );
+      console.log(response.data);
+      setApprovers(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   React.useEffect(() => {
     sendGetRequest();
+    getApprovers();
   }, []);
 
   const [open, setOpen] = React.useState(false);
@@ -72,7 +85,7 @@ export const RFQ = () => {
     user_id: "620c6a949115e6ac657a4607",
   });
 
-  const [value, setValue] = React.useState(new Date("2014-08-18T21:11:54"));
+  const [value, setValue] = React.useState(null);
 
   const handleInput = (e) => {
     const newData = { ...newRfq };
@@ -137,6 +150,13 @@ export const RFQ = () => {
       });
   };
 
+  const handleDate = (e) => {
+    const newData = { ...newRfq };
+    setValue(e);
+    newData["quoteRequiredBy"] = e;
+    setNewRfq(newData);
+    console.log(newRfq);
+  };
   return (
     <>
       <Stack spacing={2}>
@@ -210,7 +230,7 @@ export const RFQ = () => {
                   <DesktopDatePicker
                     label="Date&Time picker"
                     value={value}
-                    onChange={(e) => handleInput(e)}
+                    onChange={(e) => handleDate(e)}
                     renderInput={(params) => <TextField {...params} />}
                   />
 
@@ -219,7 +239,7 @@ export const RFQ = () => {
                     id="approver"
                     name="approver"
                     onInputChange={(event, value) => handleSelect(event, value)}
-                    options={["Andrew", "Timothy", "Christine", "Mikhail"]}
+                    options={approvers.map((e) => e.userName)}
                     renderInput={(params) => (
                       <TextField {...params} label="Approver" />
                     )}
