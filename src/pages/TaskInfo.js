@@ -137,7 +137,7 @@ export const TaskInfo = () => {
     // docusign
     const [docusignUrl, setDocusignUrl] = useState("")
     const handleSignRfq = (event) => {
-        setSignButtonIsDisabled(true)
+        //setSignButtonIsDisabled(true)
         // TODO change to actual url and actual client ID
         axios
             .post(
