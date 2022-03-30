@@ -155,6 +155,10 @@ export const TaskInfo = () => {
             });
     }
 
+    const handlePreviewSignDocument = (event) => {
+        window.open(`https://humber-capstone-backend.herokuapp.com/docusigns/` + rfq.docusignEnvelopeId )
+    }
+
     return (
         <Paper>
             <Typography variant="h4" sx={{ padding: 3 }}>
@@ -262,9 +266,17 @@ export const TaskInfo = () => {
                                 )}
                             />
                             <Grid container spacing={2}>
-                                <Grid item xs={8} md={6}>
-                                    <Button onClick={handleSignRfq} disabled={signButtonIsDisabled} >Sign RFQ</Button>
-                                </Grid>
+                                {!signButtonIsDisabled &&
+                                    <Grid item xs={8} md={6}>
+                                        <Button onClick={handleSignRfq} >Sign RFQ</Button>
+                                    </Grid>
+                                }
+
+                                {signButtonIsDisabled &&
+                                    <Grid item xs={8} md={6}>
+                                        <Button onClick={handlePreviewSignDocument} >Preview Signed Document</Button>
+                                    </Grid>
+                                }
                                 <Grid item xs={8} md={6}>
                                     <Button onClick={() => navigate("/tasks")}>Cancel</Button>
                                 </Grid>
