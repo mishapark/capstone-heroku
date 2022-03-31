@@ -109,7 +109,7 @@ const Dashboard = () => {
   return (
     <>
       <Header
-        logoAltText="Capstone"
+        logoAltText="The Daily Compliance"
         logo={``}
         toggleDrawer={handleDrawerToggle}
         toggleFullscreen={handleFullscreenToggle}

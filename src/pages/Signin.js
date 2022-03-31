@@ -15,6 +15,7 @@ import axios from "axios";
 import { useContext, useState, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Alert } from "@material-ui/lab";
 
 export default function SignIn() {
   const {
@@ -38,6 +39,8 @@ export default function SignIn() {
     localStorage.setItem("persist", persist);
   }, [persist]);
 
+  const [error, setError] = useState(false);
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -55,6 +58,11 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
+        {error ? (
+          <Alert severity="error">Incorrect email or password</Alert>
+        ) : (
+          <></>
+        )}
         <Box
           component="form"
           onSubmit={handleSubmit((data) => {
@@ -78,9 +86,10 @@ export default function SignIn() {
                   setAuth({ user, roles, accessToken });
                   navigate("../dash", { replace: true });
                 } else {
-                  console.log("error");
+                  console.log(response.error);
                 }
-              });
+              })
+              .catch(() => setError(true));
           })}
           noValidate
           sx={{ mt: 1 }}

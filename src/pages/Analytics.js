@@ -82,7 +82,7 @@ function Analytics() {
           <Tabs
             value={analyticsTabValue}
             onChange={handleAnalyticsTabChange}
-            textColor="secondprimaryary"
+            textColor="primary"
             indicatorColor="primary"
             aria-label="secondary tabs example"
             centered

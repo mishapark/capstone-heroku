@@ -59,7 +59,7 @@ function Home() {
             }}
           >
             <Typography component="h1" variant="h5">
-              Welcome
+              Welcome to The Daily Compliance
             </Typography>
             <br></br>
             <Stack component="form" noValidate sx={{ mt: 1 }} spacing={3}>
