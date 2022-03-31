@@ -137,7 +137,7 @@ export const TaskInfo = () => {
     // docusign
     const [docusignUrl, setDocusignUrl] = useState("")
     const handleSignRfq = (event) => {
-        setSignButtonIsDisabled(true)
+        //setSignButtonIsDisabled(true)
         // TODO change to actual url and actual client ID
         axios
             .post(
@@ -153,6 +153,10 @@ export const TaskInfo = () => {
                 //window.location.assign(res.data);
                 window.open(res.data, "_blank")
             });
+    }
+
+    const handlePreviewSignDocument = (event) => {
+        window.open(`https://humber-capstone-backend.herokuapp.com/docusigns/` + rfq.docusignEnvelopeId )
     }
 
     return (
@@ -262,9 +266,17 @@ export const TaskInfo = () => {
                                 )}
                             />
                             <Grid container spacing={2}>
-                                <Grid item xs={8} md={6}>
-                                    <Button onClick={handleSignRfq} disabled={signButtonIsDisabled} >Sign RFQ</Button>
-                                </Grid>
+                                {!signButtonIsDisabled &&
+                                    <Grid item xs={8} md={6}>
+                                        <Button onClick={handleSignRfq} >Sign RFQ</Button>
+                                    </Grid>
+                                }
+
+                                {signButtonIsDisabled &&
+                                    <Grid item xs={8} md={6}>
+                                        <Button onClick={handlePreviewSignDocument} >Preview Signed Document</Button>
+                                    </Grid>
+                                }
                                 <Grid item xs={8} md={6}>
                                     <Button onClick={() => navigate("/tasks")}>Cancel</Button>
                                 </Grid>
