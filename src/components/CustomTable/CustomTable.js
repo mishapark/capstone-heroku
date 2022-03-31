@@ -56,9 +56,13 @@ function CustomTable({ tableData, setRequestData }) {
                   {p["product_details"]["product_category"]}
                 </TableCell>
                 <TableCell>
-                  {p["product_details"]["applicable_standards"]}
+                  {p["product_details"]["applicable_standard"]}
                 </TableCell>
-                <TableCell>{p["product_details"]["product_name"]}</TableCell>
+                <TableCell>
+                  {p.last_updated_status.last_updated_date
+                    .toString()
+                    .slice(0, 10)}
+                </TableCell>
                 <TableCell>
                   <IconButton color="primary">
                     <Link to={`${p._id}`}>

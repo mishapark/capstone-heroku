@@ -1,17 +1,25 @@
 const useProduct = (data, files) => {
   let product = {
     product_details: {
-      regulatory_model_name: data.regulatory_model_name,
-      product_name: data.product_name,
-      product_family: data.product_family,
-      product_category: data.product_category,
-      product_description: data.product_description,
-      model_difference: data.model_difference,
-      intended_environment: data.intended_environment,
-      applicable_standards: data.applicable_standards,
+      regulatory_model_name: data.regulatory_model_name
+        ? data.regulatory_model_name
+        : " - ",
+      product_name: data.product_name ? data.product_name : " - ",
+      product_family: data.product_family ? data.product_family : " - ",
+      product_category: data.product_category ? data.product_category : " - ",
+      product_description: data.product_description
+        ? data.product_description
+        : " - ",
+      model_difference: data.model_difference ? data.model_difference : " - ",
+      intended_environment: data.intended_environment
+        ? data.intended_environment.join(", ")
+        : " - ",
+      applicable_standard: data.applicable_standard
+        ? data.applicable_standard
+        : " - ",
       applicant: {
-        name: data.applicant.split(",")[0],
-        address: data.applicant.split(",")[1],
+        name: data.applicant ? data.applicant.split(",")[0] : " - ",
+        address: data.applicant ? data.applicant.split(",")[1] : " - ",
       },
       manufacturer: [
         {
@@ -21,11 +29,22 @@ const useProduct = (data, files) => {
         },
       ],
       trade_mark: {
-        status: data.trade_mark,
+        status: data.trade_mark === "Yes" ? true : false,
         data: "",
       },
-      family_series_model: ["data.family_series_model"],
-      market: data.market,
+      family_series_model: data.family_series_model
+        ? data.family_series_model
+        : [" - "],
+      market: data.market
+        ? data.market
+        : [
+            {
+              continent_code: " - ",
+              continent_name: " - ",
+              country_code: " - ",
+              country_name: " - ",
+            },
+          ],
     },
     product_tech_details: {
       equipment_size: {
@@ -49,6 +68,16 @@ const useProduct = (data, files) => {
       use_classification: data.use_classification,
       supply_connection: data.supply_connection,
       mobility: data.mobility,
+    },
+    product_env_details: {
+      pollution_degree: data.pollution_degree,
+      max_operating_ambient: parseFloat(data.max_operating_ambient),
+      ingree_protection_classification: data.ingree_protection_classification,
+      operation_altitude: parseFloat(data.operation_altitude),
+      equipment_mass: parseFloat(data.equipment_mass),
+      relative_humidity: parseFloat(data.relative_humidity),
+      atmospheric_pressure: parseFloat(data.atmospheric_pressure),
+      indoor_outdoor: "Indoor",
     },
     marking_and_doc: {
       marking_plate: files,

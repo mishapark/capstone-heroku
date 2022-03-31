@@ -67,7 +67,7 @@ function GeneralProductInfo({ standards, countries, editContent }) {
         label="Applicable Standards"
         options={standards}
         category={category}
-        name="applicable_standards"
+        name="applicable_standard"
       />
       <TextInput
         required={false}

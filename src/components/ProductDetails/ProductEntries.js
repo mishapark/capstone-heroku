@@ -27,49 +27,52 @@ function ProductEntries({ title, data }) {
             </div>
             <div style={styles.element}>
               <InputLabel style={styles.mb10}>Product Category</InputLabel>
-              <div>{}</div>
+              <div>{data.product_category}</div>
             </div>
             <div style={styles.element}>
               <InputLabel style={styles.mb10}>
                 Product Description / Intended Use
               </InputLabel>
-              <div>{}</div>
+              <div>{data.product_description}</div>
             </div>
             <div style={styles.element}>
               <InputLabel style={styles.mb10}>Model Difference</InputLabel>
-              <div>{}</div>
+              <div>{data.model_difference}</div>
             </div>
             <div style={styles.element}>
               <InputLabel style={styles.mb10}>Intended Environment</InputLabel>
-              <div>{}</div>
+              <div>{data.intended_environment[0]}</div>
             </div>
             <div style={styles.element}>
               <InputLabel style={styles.mb10}>Applicable Standards</InputLabel>
-              <div>{}</div>
+              <div>{data.applicable_standard}</div>
             </div>
             <div style={styles.element}>
               <InputLabel style={styles.mb10}>
                 Applicant Name and Address
               </InputLabel>
-              <div>{}</div>
+              <div>{data.applicant.name}</div>
             </div>
             <div style={styles.element}>
               <InputLabel style={styles.mb10}>
                 Manufacturer Name and Address
               </InputLabel>
-              <div>{}</div>
+              <div>{data.manufacturer[0].name}</div>
             </div>
             <div style={styles.element}>
               <InputLabel style={styles.mb10}>TradeMark</InputLabel>
-              <div>{}</div>
+              <div>{data.trade_mark.status === true ? "Yes" : "No"}</div>
             </div>
             <div style={styles.element}>
               <InputLabel style={styles.mb10}>Family/Series Model</InputLabel>
-              <div>{}</div>
+              <div>
+                {data.family_series_model[0] &&
+                  data.family_series_model[0].text}
+              </div>
             </div>
             <div style={styles.element}>
               <InputLabel style={styles.mb10}>Market</InputLabel>
-              <div>{}</div>
+              <div>{data.market.map((c) => c.country_name).join(", ")}</div>
             </div>
           </>
         );
@@ -118,7 +121,7 @@ function ProductEntries({ title, data }) {
         return (
           <>
             <div style={styles.element}>
-              <InputLabel style={styles.mb10}>Polution Degree</InputLabel>
+              <InputLabel style={styles.mb10}>Pollution Degree</InputLabel>
               <div>{}</div>
             </div>
             <div style={styles.element}>
@@ -175,7 +178,7 @@ function ProductEntries({ title, data }) {
               <div>{}</div>
             </div>
             <div style={styles.element}>
-              <InputLabel style={styles.mb10}>Polution Degree</InputLabel>
+              <InputLabel style={styles.mb10}>Fuse Type</InputLabel>
               <div>{}</div>
             </div>
             <div style={styles.element}>

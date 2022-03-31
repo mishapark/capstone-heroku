@@ -13,8 +13,8 @@ function ProductEnvironInfo() {
     <>
       <RadioInput
         required={false}
-        label="Polution Degree"
-        placeholder="Enter Polution Degree"
+        label="Pollution Degree"
+        placeholder="Enter Pollution Degree"
         options={options}
         name="pollution_degree"
       />

@@ -20,16 +20,16 @@ function MarkingDoc() {
       />
       <RadioInput
         required={false}
-        label="Polution Degree"
-        placeholder="Enter Polution Degree"
+        label="Fuse Type"
+        placeholder="Enter Fuse Type"
         options={["Replaceable", "Non-Replaceable", "None"]}
-        name="polution_degree"
+        name="fuse_type"
       />
       <TextInput
         required={false}
         label="Fuse Marking"
         placeholder="Enter Fuse Marking"
-        name="fuse_type"
+        name="fuse_marking"
       />
     </>
   );

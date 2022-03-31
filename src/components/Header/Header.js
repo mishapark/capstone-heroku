@@ -139,7 +139,7 @@ const Header = ({ logo, logoAltText, toggleFullscreen, toggleDrawer }) => {
 
     document.addEventListener("mousedown", maybeHandler);
 
-    console.log(isShown);
+    // console.log(isShown);
     return () => {
       document.removeEventListener("mousedown", maybeHandler);
     };

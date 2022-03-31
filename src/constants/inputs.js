@@ -180,8 +180,8 @@ export const prodTechInfo = [
 export const prodEnvInfo = [
   {
     id: 1,
-    field: "Polution Degree",
-    placeholder: "Enter Polution Degree",
+    field: "Pollution Degree",
+    placeholder: "Enter Pollution Degree",
     type: "radio",
     required: false,
     options: ["PD1", "PD2", "PD3"],
@@ -255,7 +255,7 @@ export const markingDoc = [
   },
   {
     id: 3,
-    field: "Polution Degree",
+    field: "Fuse Type",
     placeholder: "Fuse Type",
     type: "radio",
     required: false,
