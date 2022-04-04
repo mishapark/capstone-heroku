@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import {
   FormGroup,
@@ -8,11 +8,28 @@ import {
   Checkbox,
 } from "@material-ui/core";
 import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
 import styles from "./styles";
 
 function SupplyConnInput({ required, label, placeholder, options, name }) {
+  const [state, setState] = useState(options);
   const { register } = useFormContext();
+
+  const handleChange = (event) => {
+    console.log(event.target);
+    setState(
+      state.map((object) => {
+        return {
+          ...object,
+          values: object.values.map((insideObj) => {
+            if (insideObj.name === event.target.value) {
+              return { ...insideObj, isChecked: event.target.checked };
+            }
+            return insideObj;
+          }),
+        };
+      })
+    );
+  };
 
   return (
     <div
@@ -38,7 +55,7 @@ function SupplyConnInput({ required, label, placeholder, options, name }) {
           marginTop: 20,
         }}
       >
-        {options.map((o, index) => (
+        {state.map((o, index) => (
           <div key={index} style={styles.supplySub}>
             <FormLabel
               style={{
@@ -54,16 +71,23 @@ function SupplyConnInput({ required, label, placeholder, options, name }) {
             >
               {o.values.map((option) => (
                 <FormControlLabel
-                  control={<Checkbox color="primary" {...register(name)} />}
-                  key={option}
-                  value={option}
-                  label={option}
+                  control={
+                    <Checkbox
+                      color="primary"
+                      {...register(name)}
+                      checked={option.isChecked}
+                      onChange={handleChange}
+                    />
+                  }
+                  key={option.name}
+                  value={option.name}
+                  label={option.name}
                 />
               ))}
             </FormGroup>
           </div>
         ))}
-        <div style={styles.supplySub}>
+        {/* <div style={styles.supplySub}>
           <FormLabel
             style={{
               marginBottom: 10,
@@ -77,7 +101,7 @@ function SupplyConnInput({ required, label, placeholder, options, name }) {
             placeholder={"Enter type"}
             {...register(name)}
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );

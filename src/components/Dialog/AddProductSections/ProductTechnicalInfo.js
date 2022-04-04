@@ -6,42 +6,211 @@ import TextInput from "../../Input/TextInput";
 import CheckboxInput from "../../Input/CheckboxInput";
 import TextSizeInput from "../../Input/TextSizeInput";
 
-function ProductTechnicalInfo() {
+function ProductTechnicalInfo({ editContent }) {
   const options = [
-    "Ordinary person",
-    "Children likely present",
-    "Instructed person",
-    "Skilled person",
+    {
+      name: "Ordinary person",
+      isChecked: editContent
+        ? editContent["use_classification"].includes("Ordinary person")
+          ? true
+          : false
+        : false,
+    },
+    {
+      name: "Children likely present",
+      isChecked: editContent
+        ? editContent["use_classification"].includes("Children likely present")
+          ? true
+          : false
+        : false,
+    },
+    {
+      name: "Instructed person",
+      isChecked: editContent
+        ? editContent["use_classification"].includes("Instructed person")
+          ? true
+          : false
+        : false,
+    },
+    {
+      name: "Skilled person",
+      isChecked: editContent
+        ? editContent["use_classification"].includes("Skilled person")
+          ? true
+          : false
+        : false,
+    },
   ];
   const rating = ["Voltage", "Phase", "Frequency", "Power", "Current"];
-  const supply = ["AC mains", "DC mains", "Battery Powered"];
+  const supply = [
+    {
+      name: "AC mains",
+      isChecked: editContent
+        ? editContent["supply_connection"].includes("AC mains")
+          ? true
+          : false
+        : false,
+    },
+    {
+      name: "DC mains",
+      isChecked: editContent
+        ? editContent["supply_connection"].includes("DC mains")
+          ? true
+          : false
+        : false,
+    },
+    {
+      name: "Battery Powered",
+      isChecked: editContent
+        ? editContent["supply_connection"].includes("Battery Powered")
+          ? true
+          : false
+        : false,
+    },
+  ];
   const supplCon = [
     {
       category: "Pluggable equipment type A",
       values: [
-        "Non-detachable Supply Cord",
-        "Appliance Coupler",
-        "Direct plug-in",
+        {
+          name: "Non-detachable Supply Cord",
+          isChecked: editContent
+            ? editContent["supply_connection_type"].includes(
+                "Non-detachable Supply Cord"
+              )
+              ? true
+              : false
+            : false,
+        },
+        {
+          name: "Appliance Coupler",
+          isChecked: editContent
+            ? editContent["supply_connection_type"].includes(
+                "Appliance Coupler"
+              )
+              ? true
+              : false
+            : false,
+        },
+        {
+          name: "Direct plug-in",
+          isChecked: editContent
+            ? editContent["supply_connection_type"].includes("Direct plug-in")
+              ? true
+              : false
+            : false,
+        },
       ],
     },
     {
       category: "Pluggable equipment type B",
-      values: ["Non-detachable Supply Cord", "Appliance Coupler"],
+      values: [
+        {
+          name: "Non-detachable Supply Cord B",
+          isChecked: editContent
+            ? editContent["supply_connection_type"].includes(
+                "Non-detachable Supply Cord B"
+              )
+              ? true
+              : false
+            : false,
+        },
+        {
+          name: "Appliance Coupler B",
+          isChecked: editContent
+            ? editContent["supply_connection_type"].includes(
+                "Appliance Coupler B"
+              )
+              ? true
+              : false
+            : false,
+        },
+      ],
     },
     {
       category: "Other types",
-      values: ["Permanent connection", "Mating connector "],
+      values: [
+        {
+          name: "Permanent connection",
+          isChecked: editContent
+            ? editContent["supply_connection_type"].includes(
+                "Permanent connection"
+              )
+              ? true
+              : false
+            : false,
+        },
+        {
+          name: "Mating connector",
+          isChecked: editContent
+            ? editContent["supply_connection_type"].includes("Mating connector")
+              ? true
+              : false
+            : false,
+        },
+      ],
     },
   ];
-  const opmode = ["Continuons", "Duty Cycle"];
+  const opmode = ["Continuos", "Duty Cycle"];
   const eqmob = [
-    "Movable",
-    "Hand-held",
-    "Transportable",
-    "Direct plug-in",
-    "Stationary for building-in",
-    "Wall/ceiling-mounted SRME/rack-mounted",
-    "Other",
+    {
+      name: "Movable",
+      isChecked: editContent
+        ? editContent["mobility"].includes("Movable")
+          ? true
+          : false
+        : false,
+    },
+    {
+      name: "Hand-held",
+      isChecked: editContent
+        ? editContent["mobility"].includes("Hand-held")
+          ? true
+          : false
+        : false,
+    },
+    {
+      name: "Transportable",
+      isChecked: editContent
+        ? editContent["mobility"].includes("Transportable")
+          ? true
+          : false
+        : false,
+    },
+    {
+      name: "Direct plug-in",
+      isChecked: editContent
+        ? editContent["mobility"].includes("Direct plug-in")
+          ? true
+          : false
+        : false,
+    },
+    {
+      name: "Stationary for building-in",
+      isChecked: editContent
+        ? editContent["mobility"].includes("Stationary for building-in")
+          ? true
+          : false
+        : false,
+    },
+    {
+      name: "Wall/ceiling-mounted SRME/rack-mounted",
+      isChecked: editContent
+        ? editContent["mobility"].includes(
+            "Wall/ceiling-mounted SRME/rack-mounted"
+          )
+          ? true
+          : false
+        : false,
+    },
+    {
+      name: "Other",
+      isChecked: editContent
+        ? editContent["mobility"].includes("Other")
+          ? true
+          : false
+        : false,
+    },
   ];
 
   return (

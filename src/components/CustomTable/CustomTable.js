@@ -50,13 +50,25 @@ function CustomTable({ tableData, setRequestData }) {
           <TableBody>
             {tableData.map((p) => (
               <TableRow key={p["_id"]}>
-                <TableCell>{p["product_details"]["product_name"]}</TableCell>
-                <TableCell>{p["product_details"]["product_family"]}</TableCell>
                 <TableCell>
-                  {p["product_details"]["product_category"]}
+                  {p["product_details"]["product_name"]
+                    ? p["product_details"]["product_name"]
+                    : "-"}
                 </TableCell>
                 <TableCell>
-                  {p["product_details"]["applicable_standard"]}
+                  {p["product_details"]["product_family"]
+                    ? p["product_details"]["product_family"]
+                    : "-"}
+                </TableCell>
+                <TableCell>
+                  {p["product_details"]["product_category"]
+                    ? p["product_details"]["product_category"]
+                    : "-"}
+                </TableCell>
+                <TableCell>
+                  {p["product_details"]["applicable_standard"]
+                    ? p["product_details"]["applicable_standard"]
+                    : "-"}
                 </TableCell>
                 <TableCell>
                   {p.last_updated_status.last_updated_date
@@ -74,8 +86,8 @@ function CustomTable({ tableData, setRequestData }) {
                   <IconButton
                     color="primary"
                     onClick={(e) => {
-                      setOpen(true);
                       setEditContent(p);
+                      setOpen(true);
                     }}
                   >
                     <EditIcon />
@@ -108,6 +120,7 @@ function CustomTable({ tableData, setRequestData }) {
           title="Edit Product"
           onClose={() => setOpen(false)}
           editContent={editContent}
+          setRequestData={setRequestData}
         />
       </Dialog>
     </>

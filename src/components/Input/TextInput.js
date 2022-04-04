@@ -1,19 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { InputLabel, TextField } from "@material-ui/core";
 import styles from "./styles";
 
-function TextInput({
-  required,
-  label,
-  placeholder,
-  name,
-  type,
-  editContent,
-  handleChange,
-  value,
-}) {
+function TextInput({ required, label, placeholder, name, type, editContent }) {
+  const [content, setContent] = useState(
+    editContent
+      ? editContent[name].name
+        ? editContent[name].name
+        : editContent[name]
+      : ""
+  );
   const { register } = useFormContext();
+  console.log(editContent);
   return (
     <div style={styles.inputContainer}>
       <InputLabel style={styles.inputLabel} htmlFor="component-error">
@@ -28,11 +27,10 @@ function TextInput({
           fullWidth
           helperText=""
           type={type && type}
-          // value={editContent ? editContent[name] : ""}
           placeholder={placeholder}
           {...register(name)}
-          value={value && value}
-          onChange={handleChange}
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
         />
       </div>
     </div>

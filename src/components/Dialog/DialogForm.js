@@ -39,7 +39,11 @@ function DialogForm({ title, standards, countries, editContent }) {
           />
         );
       case "Product Technical Information":
-        return <ProductTechnicalInfo editContent={editContent} />;
+        return (
+          <ProductTechnicalInfo
+            editContent={editContent && editContent["product_tech_details"]}
+          />
+        );
       case "Product Environmental Information":
         return <ProductEnvironInfo editContent={editContent} />;
       case "Marking and Documentations":

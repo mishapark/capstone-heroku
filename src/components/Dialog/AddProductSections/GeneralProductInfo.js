@@ -9,7 +9,9 @@ import CountriesInput from "../../Input/CountriesInput";
 import { Controller } from "react-hook-form";
 
 function GeneralProductInfo({ standards, countries, editContent }) {
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState(
+    editContent ? editContent.product_category : "BATT"
+  );
 
   return (
     <>
@@ -41,6 +43,7 @@ function GeneralProductInfo({ standards, countries, editContent }) {
         standards={standards}
         onCategoryChange={(value) => setCategory(value)}
         name="product_category"
+        editContent={editContent}
       />
       <TextInput
         required={false}
@@ -59,8 +62,34 @@ function GeneralProductInfo({ standards, countries, editContent }) {
       <CheckboxInput
         required={true}
         label="Intended Environment"
-        options={["Household", "Commercial", "Clinical"]}
+        options={[
+          {
+            name: "Household",
+            isChecked: editContent
+              ? editContent["intended_environment"].includes("Household")
+                ? true
+                : false
+              : false,
+          },
+          {
+            name: "Commercial",
+            isChecked: editContent
+              ? editContent["intended_environment"].includes("Commercial")
+                ? true
+                : false
+              : false,
+          },
+          {
+            name: "Clinical",
+            isChecked: editContent
+              ? editContent["intended_environment"].includes("Clinical")
+                ? true
+                : false
+              : false,
+          },
+        ]}
         name="intended_environment"
+        editContent={editContent}
       />
       <ApplicableStandardsInput
         required={true}
@@ -68,6 +97,7 @@ function GeneralProductInfo({ standards, countries, editContent }) {
         options={standards}
         category={category}
         name="applicable_standard"
+        editContent={editContent}
       />
       <TextInput
         required={false}
@@ -92,6 +122,7 @@ function GeneralProductInfo({ standards, countries, editContent }) {
         label="TradeMark"
         options={["Yes", "No"]}
         name="trade_mark"
+        editContent={editContent}
       />
       <Controller
         name="family_series_model"
@@ -114,6 +145,7 @@ function GeneralProductInfo({ standards, countries, editContent }) {
             options={countries}
             name="market"
             onChange={onChange}
+            editContent={editContent}
           />
         )}
       />

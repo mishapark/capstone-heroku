@@ -19,7 +19,7 @@ function ProductInfo() {
       setProduct(products.find((p) => p._id === params.id));
     }
   }, [products]);
-  console.log(product);
+  
   return isLoading ? (
     <CircularProgress />
   ) : (
@@ -54,15 +54,15 @@ function ProductInfo() {
           />
           <ProductDetails
             title="Product Environmental Information"
-            data={product.product_tech_details}
+            data={product.product_env_details}
           />
           <ProductDetails
             title="Marking and Documentations"
-            data={product.product_tech_details}
+            data={product.marking_and_doc}
           />
           <ProductDetails
             title="Compliance Reports"
-            data={product.product_tech_details}
+            data={product.compliance_report_number}
           />
         </div>
       </div>

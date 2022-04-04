@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
@@ -12,11 +12,16 @@ function CategoryInput({
   standards,
   onCategoryChange,
   name,
+  editContent,
 }) {
+  const [content, setContent] = useState(
+    editContent ? editContent[name] : "BATT"
+  );
   const { register } = useFormContext();
   const options = Array.from(
     new Set(standards.map((standard) => standard["standard_category"]))
   );
+
   return (
     <div style={styles.inputContainer}>
       <InputLabel style={styles.inputLabel} htmlFor="component-error">
@@ -26,6 +31,7 @@ function CategoryInput({
       <div style={styles.input}>
         <>
           <Autocomplete
+            disableClearable
             disablePortal
             id="combo-box-demo"
             options={options}
@@ -42,7 +48,13 @@ function CategoryInput({
                 {...register(name)}
               />
             )}
-            onChange={(event, value) => onCategoryChange(value)}
+            inputValue={content}
+            value={content}
+            isOptionEqualToValue={(option, value) => option.id === value.id}
+            onChange={(event, value) => {
+              onCategoryChange(value);
+              setContent(value);
+            }}
           />
         </>
       </div>

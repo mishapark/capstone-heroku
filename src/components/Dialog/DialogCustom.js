@@ -26,7 +26,7 @@ function DialogCustom({ title, onClose, editContent, setRequestData }) {
 
     let product;
 
-    uploadFile(data.marking_plate).then((files) => {
+    uploadFile(data.marking_plate, data.warning_mark).then((files) => {
       product = useProduct(data, files);
       console.log(product);
 
@@ -46,11 +46,30 @@ function DialogCustom({ title, onClose, editContent, setRequestData }) {
     });
   };
 
-  const uploadFile = async (files) => {
-    const filesArr = [];
-    for (let i = 0; i < files.length; i++) {
+  const onEdit = (data) => {
+    let product;
+
+    uploadFile(data.marking_plate, data.warning_mark).then((files) => {
+      product = useProduct(data, files);
+      console.log(product);
+
+      axios
+        .put(
+          `https://humber-capstone-backend.herokuapp.com/products/update?product_id=${editContent.product_id}`,
+          product
+        )
+        .then(() => {
+          setRequestData(new Date());
+        });
+    });
+  };
+
+  const uploadFile = async (markingFiles, warningFiles) => {
+    const filesArr = [{ marking_plate: [] }, { warning_mark: [] }];
+
+    for (let i = 0; i < markingFiles.length; i++) {
       const formData = new FormData();
-      formData.append("file", files[i]);
+      formData.append("file", markingFiles[i]);
       const res = await axios.post(
         `https://humber-capstone-backend.herokuapp.com/files/upload`,
         formData,
@@ -60,17 +79,42 @@ function DialogCustom({ title, onClose, editContent, setRequestData }) {
           },
         }
       );
-      filesArr.push({
+      filesArr[0].marking_plate.push({
         name: res.data.file.originalname,
         file_location: res.data.file.filename,
       });
     }
+
+    for (let i = 0; i < warningFiles.length; i++) {
+      const formData = new FormData();
+      formData.append("file", warningFiles[i]);
+      const res = await axios.post(
+        `https://humber-capstone-backend.herokuapp.com/files/upload`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      filesArr[1].warning_mark.push({
+        name: res.data.file.originalname,
+        file_location: res.data.file.filename,
+      });
+    }
+
     return filesArr;
   };
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <form
+        onSubmit={
+          title === "Add Product"
+            ? methods.handleSubmit(onSubmit)
+            : methods.handleSubmit(onEdit)
+        }
+      >
         <DialogTitle id="scroll-dialog-title">{title}</DialogTitle>
         <DialogContent dividers={true} style={{ backgroundColor: "#f6f7f8" }}>
           <DialogForm

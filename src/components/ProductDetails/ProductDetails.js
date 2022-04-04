@@ -24,7 +24,6 @@ function ProductDetails({ title, data }) {
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
-  console.log(data);
   return (
     <Accordion expanded={expanded} onChange={handleChange(!expanded)}>
       <AccordionSummary

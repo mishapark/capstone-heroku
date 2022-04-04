@@ -11,24 +11,27 @@ function ApplicableStandardsInput({
   options,
   category,
   name,
+  editContent,
 }) {
+  const [content, setContent] = useState(
+    editContent ? editContent[name] : "IEC 60086-1:2015"
+  );
   const { register } = useFormContext();
   const [standards, setStandards] = useState([]);
-  const getStandards = options
-    .map((s) => s["standard_body"])
-    .reduce((prev, curr) => prev.concat(curr), []);
+
   const getStandardsByCat = options.filter(
     (s) => s["standard_category"] === category
   );
 
   useEffect(() => {
-    if (category !== "") {
-      if (getStandardsByCat[0]) {
-        setStandards(getStandardsByCat[0]["standard_body"]);
-      }
+    if (getStandardsByCat[0]) {
+      setStandards(getStandardsByCat[0]["standard_body"]);
     }
-    if (category === null) {
-      setStandards(getStandards);
+  });
+
+  useEffect(() => {
+    if (getStandardsByCat[0]) {
+      setContent(getStandardsByCat[0]["standard_body"][0]);
     }
   }, [category]);
 
@@ -40,6 +43,7 @@ function ApplicableStandardsInput({
       </InputLabel>
       <div style={styles.input}>
         <Autocomplete
+          disableClearable
           disablePortal
           id="combo-box-demo"
           options={standards}
@@ -58,6 +62,12 @@ function ApplicableStandardsInput({
               {...register(name)}
             />
           )}
+          inputValue={content}
+          value={content}
+          isOptionEqualToValue={(option, value) => option.id === value.id}
+          onChange={(event, value) => {
+            setContent(value);
+          }}
         />
       </div>
     </div>
