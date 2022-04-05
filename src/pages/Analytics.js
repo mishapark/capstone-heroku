@@ -64,102 +64,45 @@ function Analytics() {
 
   return (
     <Stack spacing={2}>
-      <Card
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          padding: 2,
-          marginBottom: 2,
-        }}
-      >
-        <Typography variant="h5" sx={{ padding: 2 }}>
-          Analytics
-        </Typography>
-      </Card>
+      <Paper>
+        <Toolbar>
+          <Typography sx={{ flex: "1 1 100%" }} variant="h6" component="div">
+            Analytics
+          </Typography>
+        </Toolbar>
 
-      <Card sx={{ overflow: "visible" }}>
-        <TabContext value={analyticsTabValue}>
-          <Tabs
-            value={analyticsTabValue}
-            onChange={handleAnalyticsTabChange}
-            textColor="primary"
-            indicatorColor="primary"
-            aria-label="secondary tabs example"
-            centered
-          >
-            <Tab value="1" label="Products by Standard" />
-            <Tab value="2" label="Products by Compliance" />
-            <Tab value="3" label="RFQ Overview by Status" />
-          </Tabs>
+        <Card sx={{ overflow: "visible" }}>
+          <TabContext value={analyticsTabValue}>
+            <Tabs
+              value={analyticsTabValue}
+              onChange={handleAnalyticsTabChange}
+              textColor="primary"
+              indicatorColor="primary"
+              aria-label="secondary tabs example"
+              centered
+            >
+              <Tab value="1" label="Products by Standard" />
+              <Tab value="2" label="Products by Compliance" />
+              <Tab value="3" label="RFQ Overview by Status" />
+            </Tabs>
 
-          <TabPanel value="1">
-            {/*<Typography variant="h6" sx={{ padding: 2 }}>Products by Standard</Typography>*/}
-            <ProductsByStandard data={standards} />
-          </TabPanel>
+            <TabPanel value="1">
+              {/*<Typography variant="h6" sx={{ padding: 2 }}>Products by Standard</Typography>*/}
+              <ProductsByStandard data={standards} />
+            </TabPanel>
 
-          <TabPanel value="2">
-            {/*<Typography variant="h6" sx={{ padding: 2 }}>Products by Compliance</Typography>*/}
-            <ProductsByCompliance />
-          </TabPanel>
+            <TabPanel value="2">
+              {/*<Typography variant="h6" sx={{ padding: 2 }}>Products by Compliance</Typography>*/}
+              <ProductsByCompliance />
+            </TabPanel>
 
-          <TabPanel value="3">
-            {/*<Typography variant="h6" sx={{ padding: 2 }}>RFQ Overview by Status</Typography>*/}
-            <RfqOverviewByStatus />
-          </TabPanel>
-        </TabContext>
-      </Card>
-      {/*
-            <Grid container>
-                <Grid item xs={12} md={6}>
-                    <Card
-                    >
-                        <Typography variant="h6" sx={{ padding: 2 }}>Products by Standard</Typography>
-                        <Box sx={{ width: "350px", padding: 2 }}>
-                            <DropdownList
-                                placeholder="Select category"
-                                data={[]}
-                            /> <br />
-                            <DropdownList
-                                placeholder="Select standard"
-                                data={[]}
-                            />
-                        </Box>
-
-                        <br></br>
-                        <br></br>
-                        <br></br>
-                        <br></br>
-                    </Card>
-                </Grid>
-                <br></br>
-                <Grid item xs={12} md={6}>
-                    <Card
-                    >
-                        <Typography variant="h6" sx={{ padding: 2 }}>Products by Compliance</Typography>
-                        <Pie data={data} option={option} height="200px"
-                            width="200px"
-                            options={{ maintainAspectRatio: false }} />
-                    </Card>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                    <Card
-                    >
-                        <Typography variant="h6" sx={{ padding: 2 }}>RFQ by Product</Typography>
-                        <Typography variant="subtitle1" sx={{ padding: 2 }}>N/A</Typography>
-                    </Card>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                    <Card
-                    >
-                        <Typography variant="h6" sx={{ padding: 2 }}>RFQ Overview by Status</Typography>
-                        <Doughnut data={d2} option={o2} height="200px"
-                            width="200px"
-                            options={{ maintainAspectRatio: false }} />
-                    </Card>
-                </Grid>
-            </Grid>
-
-            */}
+            <TabPanel value="3">
+              {/*<Typography variant="h6" sx={{ padding: 2 }}>RFQ Overview by Status</Typography>*/}
+              <RfqOverviewByStatus />
+            </TabPanel>
+          </TabContext>
+        </Card>
+      </Paper>
     </Stack>
   );
 }

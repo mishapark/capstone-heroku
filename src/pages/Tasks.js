@@ -15,6 +15,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "../api/axios";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
+import { IconButton, Toolbar, Tooltip } from "@material-ui/core";
 
 export const Tasks = () => {
   const [state, setState] = React.useState("");
@@ -38,21 +39,21 @@ export const Tasks = () => {
 
   return (
     <div>
-      <Card
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          padding: 2,
-          marginBottom: 2,
-        }}
-      >
-        <Typography variant="h5">Tasks</Typography>
-        <Badge badgeContent={rfqs.length} color="primary">
-          <TaskAltIcon />
-        </Badge>
-      </Card>
-      <Box sx={{ width: "100%", mt: 2 }}>
-        <Paper sx={{ width: "100%", mt: 2 }}>
+      <Box sx={{ width: "100%" }}>
+        <Paper sx={{ width: "100%" }}>
+          <Toolbar>
+            <Typography sx={{ flex: "1 1 100%" }} variant="h6" component="div">
+              Tasks
+            </Typography>
+
+            <Tooltip title="Create RFQ">
+              <IconButton>
+                <Badge badgeContent={rfqs.length} color="primary">
+                  <TaskAltIcon />
+                </Badge>
+              </IconButton>
+            </Tooltip>
+          </Toolbar>
           <Table>
             <TableHead>
               <TableRow key={1}>

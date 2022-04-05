@@ -7,8 +7,7 @@ import { Card, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 import { TextField } from "@mui/material";
 import { Box } from "@material-ui/core";
-import { Toolbar } from "@material-ui/core";
-import { Tooltip } from "chart.js";
+import { Toolbar, Tooltip } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import AddIcon from "@material-ui/icons/Add";
 import { Select, MenuItem } from "@material-ui/core";
@@ -36,6 +35,7 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 export const RFQ = () => {
   const [state, setState] = React.useState("");
@@ -160,30 +160,11 @@ export const RFQ = () => {
   return (
     <>
       <Stack spacing={2}>
-        <Card
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            padding: 2,
-            marginBottom: 2,
-          }}
-        >
-          <Typography variant="h5">RFQ Manager</Typography>
-          <Button
-            onClick={handleClickOpen}
-            variant="contained"
-            color="primary"
-            aria-label="Add"
-          >
-            <AddIcon />
-            Create
-          </Button>
-        </Card>
         <Dialog open={open} onClose={handleClose} maxWidth="md">
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <form onSubmit={handleSubmitData}>
               <DialogTitle>Create new RFQ</DialogTitle>
-              <DialogContent sx={{ width: "900px" }}>
+              <DialogContent sx={{ minWidth: "700px" }}>
                 <DialogContentText>
                   Please, fill in the information
                 </DialogContentText>
@@ -293,9 +274,30 @@ export const RFQ = () => {
             </form>
           </LocalizationProvider>
         </Dialog>
-
         <Box sx={{ width: "100%", mt: 2 }}>
           <Paper sx={{ width: "100%", mt: 2 }}>
+            <Toolbar
+              style={{ display: "flex", justifyContent: "space-between" }}
+            >
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{ flex: "1 1 100%" }}
+              >
+                RFQ Manager
+              </Typography>
+              <Tooltip title="Create RFQ">
+                <Button
+                  onClick={handleClickOpen}
+                  variant="contained"
+                  color="primary"
+                  aria-label="Add"
+                >
+                  <AddIcon />
+                  Create
+                </Button>
+              </Tooltip>
+            </Toolbar>
             <Table>
               <TableHead>
                 <TableRow key={1}>

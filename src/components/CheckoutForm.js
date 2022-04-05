@@ -7,7 +7,7 @@ import {
 } from "@stripe/react-stripe-js";
 import axios from "axios";
 
-function CheckoutForm() {
+function CheckoutForm({ success }) {
   const [isPaymentLoading, setPaymentLoading] = useState(false);
   const stripe = useStripe();
   const elements = useElements();

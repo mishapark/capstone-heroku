@@ -183,7 +183,13 @@ const Header = ({ logo, logoAltText, toggleFullscreen, toggleDrawer }) => {
           </IconButton>
 
           <div className={classes.branding}>
-            <img src={logo} alt={logoAltText} className={classes.logo} />
+            <img
+              src={logo}
+              alt={logoAltText}
+              className={classes.logo}
+              style={{ maxWidth: "30px" }}
+            />
+            The Daily Compliance
           </div>
 
           <Hidden xsDown>

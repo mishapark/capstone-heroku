@@ -1,4 +1,15 @@
-import { Box, Grid, Paper, Typography } from "@material-ui/core";
+import {
+  Box,
+  Divider,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Grid,
+  Paper,
+  Radio,
+  RadioGroup,
+  Typography,
+} from "@material-ui/core";
 import { Container } from "@mui/material";
 import {
   CardElement,
@@ -10,6 +21,8 @@ import {
 import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from "../components/CheckoutForm";
 import React, { useEffect, useState } from "react";
+import PaymentsIcon from "@mui/icons-material/Payments";
+import { PageHeader } from "../components/Header/PageHeader";
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -21,43 +34,101 @@ const Billing = () => {
   const [status, setStatus] = React.useState("ready");
 
   if (status === "success") {
-    return <div>Congrats on your empanadas!</div>;
+    return (
+      <Container maxWidth="lg">
+        <Paper>
+          <Box style={{ margin: "2em", minHeight: "200px" }}>
+            <Grid container>
+              <Grid
+                item
+                xs={12}
+                style={{ display: "flex", justifyContent: "center" }}
+              >
+                <Typography variant="h6" style={{ paddingTop: "16px" }}>
+                  Thank you for the payment!
+                </Typography>
+              </Grid>
+            </Grid>
+          </Box>
+        </Paper>
+      </Container>
+    );
   }
 
+  const icon = <PaymentsIcon />;
   return (
-    <Container maxWidth="lg">
-      <Paper>
-        <Box sx={{ m: 2 }}>
-          <Grid container>
-            <Grid
-              item
-              xs={12}
-              style={{ display: "flex", justifyContent: "center" }}
-            >
-              <Typography variant="h6" style={{ paddingTop: "16px" }}>
-                Enter payment infromation
-              </Typography>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              style={{ display: "flex", justifyContent: "center" }}
-            >
-              <Typography variant="subtitle1" sx={{ m: 2 }}>
-                Subcription price: $20
-              </Typography>
+    <Container maxWidth="xl">
+      <Paper square={false}>
+        <Grid container style={{ padding: "16px" }}>
+          <Grid item container>
+            <Grid item xs={12}>
+              <PageHeader
+                icon={icon}
+                title="Billing"
+                description="Please, select the plan and the payment card"
+              />
             </Grid>
             <Grid item xs={12}>
-              <Elements stripe={stripePromise}>
-                <CheckoutForm
-                  success={() => {
-                    setStatus("success");
+              <Divider />
+            </Grid>
+            <Grid
+              container
+              item
+              style={{
+                paddingLeft: "16px",
+                paddingTop: "16px",
+              }}
+            >
+              <Grid item xs={6}>
+                <Typography variant="h6">Select plan</Typography>
+                <FormControl
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    paddingLeft: "16px",
+                    paddingTop: "16px",
                   }}
-                />
-              </Elements>
+                >
+                  <FormLabel id="demo-radio-buttons-group-label">
+                    Subcription
+                  </FormLabel>
+                  <RadioGroup
+                    aria-labelledby="demo-radio-buttons-group-label"
+                    defaultValue="female"
+                    name="radio-buttons-group"
+                  >
+                    <FormControlLabel
+                      value="10"
+                      control={<Radio />}
+                      label="$10"
+                    />
+                    <FormControlLabel
+                      value="20"
+                      control={<Radio />}
+                      label="$20"
+                    />
+                    <FormControlLabel
+                      value="30"
+                      control={<Radio />}
+                      label="$30"
+                    />
+                  </RadioGroup>
+                </FormControl>
+              </Grid>
+              <Grid item xs={6} sx={{ m: 2 }}>
+                <Typography variant="h6">Payment Card</Typography>
+                <Typography variant="body2">Enter the card number</Typography>
+                <Elements stripe={stripePromise}>
+                  <CheckoutForm
+                    success={() => {
+                      setStatus("success");
+                    }}
+                  />
+                </Elements>
+              </Grid>
             </Grid>
           </Grid>
-        </Box>
+        </Grid>
       </Paper>
     </Container>
   );

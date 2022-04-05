@@ -106,7 +106,7 @@ export const Dash = () => {
         </Grid>
         <Grid item xs={12}>
           <Paper sx={{ padding: 2 }}>
-            <Typography variant="h6">Products to Expire Soon</Typography>
+            <Typography variant="h6">Upcoming Renewals</Typography>
             <br />
             <Table size="small">
               <TableHead>

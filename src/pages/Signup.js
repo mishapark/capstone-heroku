@@ -78,7 +78,6 @@ function Signup() {
             id="userName"
             label="Full name"
             name="userName"
-            autoComplete="name"
             {...register("userName", {
               required: true,
             })}
@@ -99,7 +98,6 @@ function Signup() {
               pattern:
                 /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
             })}
-            autoComplete="email"
           />
           <Typography component="h3" variant="overline">
             {errors?.name && <span>Put the valide email address</span>}
@@ -116,7 +114,7 @@ function Signup() {
               required: true,
               min: 8,
             })}
-            autoComplete="current-password"
+            autoComplete="new-password"
           />
           <Typography component="h3" variant="overline">
             {errors?.name && (
@@ -133,7 +131,7 @@ function Signup() {
             Sign Up
           </Button>
           <Link to="/signin" variant="body2">
-            Already have an account? Sign in
+            {"Already have an account? Sign in"}
           </Link>
         </Box>
       </Box>

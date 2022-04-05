@@ -16,6 +16,10 @@ import React from "react";
 import { DesktopDatePicker } from "@mui/lab";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import ReceiptIcon from "@mui/icons-material/Receipt";
+import { Divider } from "@material-ui/core";
+import { PageHeader } from "../components/Header/PageHeader";
+import { RFQForm } from "../components/RFQ/RFQForm";
 
 export const RFQInfo = () => {
   //use navigate
@@ -121,125 +125,54 @@ export const RFQInfo = () => {
   }, []);
 
   return (
-    <Container>
-      <Paper>
-        <Typography variant="h4" sx={{ padding: 3 }}>
-          {rfq.rfqNumber}
-        </Typography>
-        <Container sx={{ paddingBottom: 5 }} maxWidth="sm">
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <form onSubmit={handleSubmit}>
-              <Stack spacing={2} sx={{ mt: 5 }}>
-                <TextField
-                  id="to"
-                  variant="outlined"
-                  autoFocus
-                  required
-                  name="to"
-                  size="small"
-                  value={rfq.to}
-                  onChange={handleChangeValue}
-                />
-                <TextField
-                  id="from"
-                  variant="outlined"
-                  required
-                  size="small"
-                  name="from"
-                  value={rfq.from}
-                  onChange={handleChangeValue}
-                />
-                <TextField
-                  id="rfq-date"
-                  value={rfq.rfqDate}
-                  variant="outlined"
-                  required
-                  disabled
-                  size="small"
-                />
-                {console.log(rfq.rfqDate)}
-
-                <TextField
-                  id="vendor-details"
-                  variant="outlined"
-                  size="small"
-                  required
-                  name="vendorDetail"
-                  value={rfq.vendorDetail}
-                  onChange={handleChangeValue}
-                />
-
-                <DesktopDatePicker
-                  label="Date&Time picker"
-                  value={value}
-                  onChange={(e) => handleDate(e)}
-                  renderInput={(params) => <TextField {...params} />}
-                />
-                <Autocomplete
-                  disablePortal
-                  id="approver"
-                  value={rfq.approver}
-                  name="approver"
-                  onInputChange={(event, value) => handleApprover(event, value)}
-                  options={approvers.map((element) => element.userName)}
-                  renderInput={(params) => (
-                    <TextField {...params} label="Approver" />
-                  )}
-                />
-                <TextField
-                  id="description"
-                  variant="outlined"
-                  multiline
-                  rows={5}
-                  size="small"
-                  name="description"
-                  value={rfq.description}
-                  onChange={handleChangeValue}
-                >
-                  {rfq.description}
-                </TextField>
-                <TextField
-                  id="other-instruction"
-                  variant="outlined"
-                  multiline
-                  rows={3}
-                  size="small"
-                  name="instruction"
-                  value={rfq.instruction}
-                  onChange={handleChangeValue}
-                />
-                <TextField
-                  id="statement"
-                  variant="outlined"
-                  size="small"
-                  name="statement"
-                  value={rfq.statement}
-                  onChange={handleChangeValue}
-                  required
-                />
-                <Autocomplete
-                  disablePortal
-                  id="combo-box-demo"
-                  options={["Draft", "Published"]}
-                  name="status"
-                  value={rfq.status}
-                  onInputChange={(e, value) => handleSelect(e, value)}
-                  renderInput={(params) => (
-                    <TextField {...params} name="status" label="Status" />
-                  )}
-                />
-                <Grid container spacing={2}>
-                  <Grid item xs={8} md={6}>
-                    <Button type="submit">Save</Button>
-                  </Grid>
-                  <Grid item xs={8} md={6}>
-                    <Button onClick={() => navigate("/rfq")}>Cancel</Button>
-                  </Grid>
-                </Grid>
-              </Stack>
-            </form>
-          </LocalizationProvider>
-        </Container>
+    <Container maxWidth="xl">
+      <Paper square={false}>
+        <Grid container style={{ padding: "16px" }}>
+          <Grid item container>
+            <Grid item xs={12}>
+              <PageHeader
+                icon={<ReceiptIcon />}
+                title={rfq.rfqNumber}
+                description="Detailed Information"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Divider />
+            </Grid>
+            <Grid
+              container
+              item
+              style={{
+                paddingLeft: "16px",
+                paddingTop: "16px",
+              }}
+            >
+              <Grid item xs={12} spacing={2}>
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <form onSubmit={handleSubmit}>
+                    <RFQForm
+                      rfq={rfq}
+                      handleChangeValue={handleChangeValue}
+                      handleDate={handleDate}
+                      value={value}
+                      approvers={approvers}
+                      handleSelect={handleSelect}
+                      handleApprover={handleApprover}
+                    ></RFQForm>
+                    <Grid container spacing={2}>
+                      <Grid item xs={8} md={6}>
+                        <Button type="submit">Save</Button>
+                      </Grid>
+                      <Grid item xs={8} md={6}>
+                        <Button onClick={() => navigate("/rfq")}>Cancel</Button>
+                      </Grid>
+                    </Grid>
+                  </form>
+                </LocalizationProvider>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
       </Paper>
     </Container>
   );
