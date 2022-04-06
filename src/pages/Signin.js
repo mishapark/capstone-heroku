@@ -81,9 +81,13 @@ export default function SignIn() {
                   console.log(response);
                   const accessToken = response["data"]["accessToken"];
                   const roles = response["data"]["role"];
+                  const companyId = response["data"]["companyId"];
+                  const userId = response["data"]["userId"];
                   localStorage.setItem("role", roles);
                   localStorage.setItem("user", user);
-                  setAuth({ user, roles, accessToken });
+                  localStorage.setItem("userId", userId);
+                  localStorage.setItem("companyId", companyId);
+                  setAuth({ user, roles, companyId, userId, accessToken });
                   navigate("../dash", { replace: true });
                 } else {
                   console.log(response.error);
