@@ -301,7 +301,7 @@ const Header = ({ logo, logoAltText, toggleFullscreen, toggleDrawer }) => {
                 <ListItemIcon>
                   <AccountBoxIcon />
                 </ListItemIcon>
-                <FormattedMessage id="settings">
+                <FormattedMessage id="myPreferences">
                   {(placeholder) => <ListItemText primary={placeholder} />}
                 </FormattedMessage>
               </MenuItem>
@@ -311,7 +311,7 @@ const Header = ({ logo, logoAltText, toggleFullscreen, toggleDrawer }) => {
                 <ListItemIcon>
                   <SettingsApplicationsIcon />
                 </ListItemIcon>
-                <FormattedMessage id="myPreferences">
+                <FormattedMessage id="settings">
                   {(placeholder) => <ListItemText primary={placeholder} />}
                 </FormattedMessage>
               </MenuItem>
