@@ -1,12 +1,7 @@
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import React, { useState } from "react";
-import reorder, {
-  reorderQuoteMap,
-} from "../../components/UserGroups/Edit/reorder";
-
-import Column from "../../components/UserGroups/Edit/Column";
+import React from "react";
+import Typography from "@material-ui/core/Typography";
+import classNames from "classnames";
 import { makeStyles } from "@material-ui/core/styles";
-import userboard from "../../components/UserGroups/Edit/userboard";
 
 const lightBlue = require("@material-ui/core/colors/lightBlue");
 const yellow = require("@material-ui/core/colors/yellow");
@@ -121,66 +116,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function EditUserGroups() {
+const TaskItem = ({ task, isDragging, provided }) => {
   const classes = useStyles();
-  const [columns, setColumns] = useState(userboard);
-  const [ordered, setOrdered] = useState(Object.keys(userboard));
-
-  const onDragEnd = (result) => {
-    // dropped nowhere
-    if (!result.destination) {
-      return;
-    }
-
-    const source = result.source;
-    const destination = result.destination;
-
-    // did not move anywhere - can bail early
-    if (
-      source.droppableId === destination.droppableId &&
-      source.index === destination.index
-    ) {
-      return;
-    }
-
-    // reordering column
-    if (result.type === "COLUMN") {
-      const orderedList = reorder(ordered, source.index, destination.index);
-      setOrdered(orderedList);
-      return;
-    }
-
-    const data = reorderQuoteMap({
-      quoteMap: columns,
-      source,
-      destination,
-    });
-
-    setColumns(data.quoteMap);
-  };
-
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <Droppable droppableId="taskboard" type="COLUMN">
-        {(provided) => (
-          <div
-            ref={provided.innerRef}
-            {...provided.droppableProps}
-            className={classes.taskboard}
-          >
-            {ordered.map((key, index) => (
-              <Column
-                key={key}
-                index={index}
-                title={key}
-                tasks={columns[key]}
-              />
-            ))}
-          </div>
-        )}
-      </Droppable>
-    </DragDropContext>
+    <div
+      className={classNames(
+        classes.task,
+        task.color ? classes[task.color] : ""
+      )}
+      ref={provided.innerRef}
+      {...provided.draggableProps}
+      {...provided.dragHandleProps}
+    >
+      <Typography variant="body1" gutterBottom>
+        {task.title}
+      </Typography>
+      <Typography variant="caption">{task.description}</Typography>
+    </div>
   );
-}
+};
 
-export default EditUserGroups;
+export default TaskItem;

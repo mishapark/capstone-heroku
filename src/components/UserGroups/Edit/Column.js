@@ -1,12 +1,8 @@
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import React, { useState } from "react";
-import reorder, {
-  reorderQuoteMap,
-} from "../../components/UserGroups/Edit/reorder";
-
-import Column from "../../components/UserGroups/Edit/Column";
+import { Draggable } from "react-beautiful-dnd";
+import React from "react";
+import UserGroupList from "./UserGroupList";
+import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import userboard from "../../components/UserGroups/Edit/userboard";
 
 const lightBlue = require("@material-ui/core/colors/lightBlue");
 const yellow = require("@material-ui/core/colors/yellow");
@@ -121,66 +117,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function EditUserGroups() {
+const Column = ({ title, tasks, index }) => {
   const classes = useStyles();
-  const [columns, setColumns] = useState(userboard);
-  const [ordered, setOrdered] = useState(Object.keys(userboard));
-
-  const onDragEnd = (result) => {
-    // dropped nowhere
-    if (!result.destination) {
-      return;
-    }
-
-    const source = result.source;
-    const destination = result.destination;
-
-    // did not move anywhere - can bail early
-    if (
-      source.droppableId === destination.droppableId &&
-      source.index === destination.index
-    ) {
-      return;
-    }
-
-    // reordering column
-    if (result.type === "COLUMN") {
-      const orderedList = reorder(ordered, source.index, destination.index);
-      setOrdered(orderedList);
-      return;
-    }
-
-    const data = reorderQuoteMap({
-      quoteMap: columns,
-      source,
-      destination,
-    });
-
-    setColumns(data.quoteMap);
-  };
-
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <Droppable droppableId="taskboard" type="COLUMN">
-        {(provided) => (
-          <div
-            ref={provided.innerRef}
-            {...provided.droppableProps}
-            className={classes.taskboard}
-          >
-            {ordered.map((key, index) => (
-              <Column
-                key={key}
-                index={index}
-                title={key}
-                tasks={columns[key]}
-              />
-            ))}
+    <Draggable draggableId={title} index={index}>
+      {(provided, snapshot) => (
+        <div className={classes.wrapper} key={index}>
+          <div className={classes.list}>
+            <Typography className={classes.header}>{title}</Typography>
+            <div
+              ref={provided.innerRef}
+              {...provided.draggableProps}
+              className={classes.cards}
+            >
+              <UserGroupList listId={title} tasks={tasks} />
+            </div>
           </div>
-        )}
-      </Droppable>
-    </DragDropContext>
+        </div>
+      )}
+    </Draggable>
   );
-}
+};
 
-export default EditUserGroups;
+export default Column;
