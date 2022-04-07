@@ -18,6 +18,8 @@ const useRefreshToken = () => {
         ...prev,
         user: localStorage.getItem("user"),
         roles: response.data.role,
+        companyId: localStorage.getItem("companyId"),
+        userId: localStorage.getItem("userId"),
         accessToken: response.data.accessToken,
       };
     });
