@@ -43,7 +43,7 @@ function SettingsForm({ settingName }) {
     }
 
     const handleNameChange = (e, field) => {
-        console.log(e.target.value)
+        
         if (field === "name") {
             setName(e.target.value)
         } else if (field === "email") {
