@@ -18,15 +18,7 @@ function Compliance() {
           ></PageHeader>
           <Divider />
           <br />
-          <SettingsForm></SettingsForm>
-          <Grid container spacing={2}>
-            <Grid item xs={8} md={6}>
-              <Button type="submit">Save</Button>
-            </Grid>
-            <Grid item xs={8} md={6}>
-              <Button>Cancel</Button>
-            </Grid>
-          </Grid>
+          <SettingsForm settingName={"compliance"} />
         </Paper>
       </Box>
     </div>

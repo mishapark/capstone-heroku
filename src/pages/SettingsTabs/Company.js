@@ -25,7 +25,6 @@ function Company() {
 
     useEffect(() => {
         // get company from user
-        console.log(auth.companyId)
         getCompany(auth.companyId)
             .then((data) => {
                 setCompany(data)
@@ -102,6 +101,7 @@ function Company() {
                                 rows={4}
                                 fullWidth
                                 value={address}
+                                onChange={(e) => handleNameChange(e, "address")}
                             ></TextField>
                         </Grid>
                         <Grid item xs={11}>
@@ -116,6 +116,7 @@ function Company() {
                                 variant="outlined"
                                 fullWidth
                                 value={email}
+                                onChange={(e) => handleNameChange(e, "email")}
                                 ></TextField>
                         </Grid>
                         <Grid item xs={11}>
@@ -130,6 +131,7 @@ function Company() {
                                 variant="outlined"
                                 fullWidth
                                 value={telephone}
+                                onChange={(e) => handleNameChange(e, "telephone")}
                             ></TextField>
                         </Grid>
                         <Grid container spacing={2}>
