@@ -20,6 +20,7 @@ import { getStandards } from "../api/standards";
 import ProductsByStandard from "../components/AnalyticsData/ProductsByStandard";
 import ProductsByCompliance from "../components/AnalyticsData/ProductsByCompliance";
 import RfqOverviewByStatus from "../components/AnalyticsData/RfqOverviewByStatus";
+import { FormattedMessage } from "react-intl";
 
 function Analytics() {
   const [products, setProducts] = useState([]);
@@ -67,7 +68,7 @@ function Analytics() {
       <Paper>
         <Toolbar>
           <Typography sx={{ flex: "1 1 100%" }} variant="h6" component="div">
-            Analytics
+            <FormattedMessage id="Analytics"></FormattedMessage>
           </Typography>
         </Toolbar>
 

@@ -16,6 +16,7 @@ import { Link } from "react-router-dom";
 import axios from "../api/axios";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import { IconButton, Toolbar, Tooltip } from "@material-ui/core";
+import { FormattedMessage } from "react-intl";
 
 export const Tasks = () => {
   const [state, setState] = React.useState("");
@@ -43,7 +44,7 @@ export const Tasks = () => {
         <Paper sx={{ width: "100%" }}>
           <Toolbar>
             <Typography sx={{ flex: "1 1 100%" }} variant="h6" component="div">
-              Tasks
+              <FormattedMessage id="Tasks"></FormattedMessage>
             </Typography>
 
             <Tooltip title="Create RFQ">
@@ -58,13 +59,13 @@ export const Tasks = () => {
             <TableHead>
               <TableRow key={1}>
                 <TableCell key={11} sx={{ fontWeight: "bold" }}>
-                  RFQ Number
+                  <FormattedMessage id="rfq.rfqNumber"></FormattedMessage>
                 </TableCell>
                 <TableCell key={12} sx={{ fontWeight: "bold" }}>
-                  Status
+                  <FormattedMessage id="rfq.Status"></FormattedMessage>
                 </TableCell>
                 <TableCell key={13} sx={{ fontWeight: "bold" }}>
-                  Stage
+                  <FormattedMessage id="rfq.Stage"></FormattedMessage>
                 </TableCell>
               </TableRow>
             </TableHead>

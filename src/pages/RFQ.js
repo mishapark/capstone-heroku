@@ -36,6 +36,7 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { FormattedMessage } from "react-intl";
 
 export const RFQ = () => {
   const [state, setState] = React.useState("");
@@ -284,7 +285,7 @@ export const RFQ = () => {
                 component="div"
                 sx={{ flex: "1 1 100%" }}
               >
-                RFQ Manager
+                <FormattedMessage id="RFQ Manager"></FormattedMessage>
               </Typography>
               <Tooltip title="Create RFQ">
                 <Button
@@ -294,7 +295,7 @@ export const RFQ = () => {
                   aria-label="Add"
                 >
                   <AddIcon />
-                  Create
+                  <FormattedMessage id="rfq.createBtn"></FormattedMessage>
                 </Button>
               </Tooltip>
             </Toolbar>
@@ -302,22 +303,22 @@ export const RFQ = () => {
               <TableHead>
                 <TableRow key={1}>
                   <TableCell key={11} sx={{ fontWeight: "bold" }}>
-                    RFQ Number
+                    <FormattedMessage id="rfq.rfqNumber"></FormattedMessage>
                   </TableCell>
                   <TableCell key={12} sx={{ fontWeight: "bold" }}>
-                    Date
+                    <FormattedMessage id="rfq.date"></FormattedMessage>
                   </TableCell>
                   <TableCell key={13} sx={{ fontWeight: "bold" }}>
-                    Description
+                    <FormattedMessage id="rfq.description"></FormattedMessage>
                   </TableCell>
                   <TableCell key={14} sx={{ fontWeight: "bold" }}>
-                    Status
+                    <FormattedMessage id="rfq.Status"></FormattedMessage>
                   </TableCell>
                   <TableCell key={15} sx={{ fontWeight: "bold" }}>
-                    Stage
+                    <FormattedMessage id="rfq.Stage"></FormattedMessage>
                   </TableCell>
                   <TableCell key={16} sx={{ fontWeight: "bold" }}>
-                    Delete
+                    <FormattedMessage id="rfq.Delete"></FormattedMessage>
                   </TableCell>
                 </TableRow>
               </TableHead>

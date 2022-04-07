@@ -7,6 +7,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import AddIcon from "@material-ui/icons/Add";
 import DialogCustom from "../components/Dialog/DialogCustom";
 import CustomTable from "../components/CustomTable/CustomTable";
+import { FormattedMessage } from "react-intl";
 
 function Products() {
   const [open, setOpen] = React.useState(false);

@@ -22,6 +22,7 @@ import { PageHeader } from "../components/Header/PageHeader";
 import TaskIcon from "@mui/icons-material/Task";
 import { RFQForm } from "../components/RFQ/RFQForm";
 import { Divider } from "@material-ui/core";
+import { FormattedMessage } from "react-intl";
 
 export const TaskInfo = () => {
   //use navigate
@@ -209,12 +210,14 @@ export const TaskInfo = () => {
                     {signButtonIsDisabled && (
                       <Grid item xs={8} md={6}>
                         <Button onClick={handlePreviewSignDocument}>
-                          Preview Signed Document
+                          <FormattedMessage id="tasks.previewDocument"></FormattedMessage>
                         </Button>
                       </Grid>
                     )}
                     <Grid item xs={8} md={6}>
-                      <Button onClick={() => navigate("/tasks")}>Cancel</Button>
+                      <Button onClick={() => navigate("/tasks")}>
+                        <FormattedMessage id="cancelBtn"></FormattedMessage>
+                      </Button>
                     </Grid>
                   </Grid>
                 </form>
