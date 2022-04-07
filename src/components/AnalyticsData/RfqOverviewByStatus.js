@@ -62,16 +62,20 @@ function RfqOverviewByStatus() {
 
     function handleDoughnutChartOnclick(event, element) {
 
-        setResultsIsVisible(true)
-        if (element[0]._index === 0) {
-            setReportResults(initiatedData)
+        if (element[0]) {
+            setResultsIsVisible(true)
+            if (element[0]._index === 0) {
+                setReportResults(initiatedData)
 
-        } else if (element[0]._index === 1) {
-            setReportResults(inProgressData)
+            } else if (element[0]._index === 1) {
+                setReportResults(inProgressData)
 
-        } else if (element[0]._index === 2) {
-            setReportResults(completedData)
+            } else if (element[0]._index === 2) {
+                setReportResults(completedData)
+            }
         }
+
+
 
     }
 

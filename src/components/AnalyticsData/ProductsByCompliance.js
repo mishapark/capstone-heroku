@@ -59,13 +59,15 @@ function ProductsByCompliance() {
 
     function handlePieChartOnclick(event, element) {
         //console.log(element[0])
-        setResultsIsVisible(true)
-        if (element[0]._index === 0) {
-            setReportResults(compliantData)
-            console.log(compliantData)
+        if (element[0]) {
+            setResultsIsVisible(true)
+            if (element[0]._index === 0) {
+                setReportResults(compliantData)
+                console.log(compliantData)
 
-        } else if (element[0]._index === 1) {
-            setReportResults(nonCompliantData)
+            } else if (element[0]._index === 1) {
+                setReportResults(nonCompliantData)
+            }
         }
 
     }
@@ -99,54 +101,54 @@ function ProductsByCompliance() {
                                     // if there are no mappings, return empty table cells
                                     if (row.compliance_report_number.length == 0) {
                                         return (
-                                            
-                                        <TableRow
-                                            key={row._id}
-                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                        >
-                                            <TableCell component="th" scope="row">
-                                                <a href={"/products/" + row._id} target="_blank">{row.product_details.product_name}</a>
-                                            </TableCell>
-                                            <TableCell component="th" scope="row"></TableCell>
-                                            <TableCell component="th" scope="row"></TableCell>
-                                        </TableRow>
+
+                                            <TableRow
+                                                key={row._id}
+                                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                            >
+                                                <TableCell component="th" scope="row">
+                                                    <a href={"/products/" + row._id} target="_blank">{row.product_details.product_name}</a>
+                                                </TableCell>
+                                                <TableCell component="th" scope="row"></TableCell>
+                                                <TableCell component="th" scope="row"></TableCell>
+                                            </TableRow>
                                         )
                                     }
-                                    
+
                                     // otherwise, get the compliance numbers and expiry dates
                                     return (
-                                    <Fragment>
-                                        <TableRow
-                                            key={row._id}
-                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                        >
-                                            <TableCell component="th" scope="row" rowSpan={row.compliance_report_number.length + 1}>
-                                                <a href={"/products/" + row._id} target="_blank">{row.product_details.product_name}</a>
+                                        <Fragment>
+                                            <TableRow
+                                                key={row._id}
+                                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                            >
+                                                <TableCell component="th" scope="row" rowSpan={row.compliance_report_number.length + 1}>
+                                                    <a href={"/products/" + row._id} target="_blank">{row.product_details.product_name}</a>
 
-                                            </TableCell>
-                                        </TableRow>
+                                                </TableCell>
+                                            </TableRow>
 
-                                        {row.compliance_report_number.map((r) => {
+                                            {row.compliance_report_number.map((r) => {
 
-                                            const complianceReport = compliances.filter((c) => c["report_number"] === r)
+                                                const complianceReport = compliances.filter((c) => c["report_number"] === r)
 
-                                            if (complianceReport.length === 0) {
-                                                return (< TableRow >
-                                                    <TableCell>{r}</TableCell>
-                                                    <TableCell>{ }</TableCell>
-                                                </TableRow>)
-                                            } else {
-                                                return (< TableRow >
-                                                    <TableCell>{r}</TableCell>
-                                                    <TableCell>{complianceReport[0].expiry_date.match(/^\d{4}\-\d{1,2}\-\d{1,2}/)}</TableCell>
-                                                </TableRow>)
-                                            }
+                                                if (complianceReport.length === 0) {
+                                                    return (< TableRow >
+                                                        <TableCell>{r}</TableCell>
+                                                        <TableCell>{ }</TableCell>
+                                                    </TableRow>)
+                                                } else {
+                                                    return (< TableRow >
+                                                        <TableCell>{r}</TableCell>
+                                                        <TableCell>{complianceReport[0].expiry_date.match(/^\d{4}\-\d{1,2}\-\d{1,2}/)}</TableCell>
+                                                    </TableRow>)
+                                                }
 
-                                        })}
-                                    </Fragment>
+                                            })}
+                                        </Fragment>
                                     )
 
-                                    })}
+                                })}
                             </TableBody>
                         </Table>
                     </TableContainer>
