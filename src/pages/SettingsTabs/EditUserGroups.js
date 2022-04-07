@@ -161,7 +161,7 @@ function EditUserGroups() {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <Droppable droppableId="taskboard" type="COLUMN">
+      <Droppable droppableId="userboard" type="COLUMN">
         {(provided) => (
           <div
             ref={provided.innerRef}
