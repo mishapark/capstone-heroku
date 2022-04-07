@@ -114,6 +114,7 @@ function GeneralProductInfo({ standards, countries, editContent }) {
             label="Manufacturer Name and Address"
             placeholder="Enter Name and Address"
             field={field}
+            editContent={editContent}
           />
         )}
       />
@@ -132,6 +133,7 @@ function GeneralProductInfo({ standards, countries, editContent }) {
             label="Family/Series Model"
             placeholder="Enter Family/Series Model"
             field={field}
+            editContent={editContent}
           />
         )}
       />

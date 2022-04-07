@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Toolbar, Typography, Tooltip } from "@mui/material";
 import { Button, Dialog } from "@material-ui/core";
 import Card from "@mui/material/Card";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -30,27 +31,24 @@ function Products() {
 
   return (
     <div>
-      <Card
-        sx={{
-          display: "flex",
-          justifyContent: "flex-end",
-          padding: 2,
-          marginBottom: 2,
-        }}
-      >
-        <Button
-          onClick={() => setOpen(true)}
-          variant="contained"
-          color="primary"
-          aria-label="Add"
-        >
-          <AddIcon />
-          <FormattedMessage id="products.add"></FormattedMessage>
-        </Button>
-      </Card>
-
       {!isLoading ? (
         <Card>
+          <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography variant="h6" component="div" sx={{ flex: "1 1 100%" }}>
+              Products
+            </Typography>
+            <Tooltip title="Add Product">
+              <Button
+                onClick={() => setOpen(true)}
+                variant="contained"
+                color="primary"
+                aria-label="Add"
+              >
+                <AddIcon />
+                Create
+              </Button>
+            </Tooltip>
+          </Toolbar>
           <CustomTable tableData={tableData} setRequestData={setRequestData} />
         </Card>
       ) : (

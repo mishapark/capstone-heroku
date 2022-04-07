@@ -10,10 +10,12 @@ import {
 import UploadIcon from "@mui/icons-material/Upload";
 import styles from "./styles";
 
-function RadioUpload({ required, label, options, name }) {
+function RadioUpload({ required, label, options, name, editContent }) {
   const { register } = useFormContext();
-  const [radioValue, setRadioValue] = useState("No");
   const [uploadedFile, setUploadedFile] = useState("");
+  const [radioOperationValue, setRadioOperationValue] = useState(
+    editContent ? (editContent[name].status ? "Yes" : "No") : ""
+  );
 
   return (
     <div style={styles.inputContainer}>
@@ -27,7 +29,10 @@ function RadioUpload({ required, label, options, name }) {
             row
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
-            onChange={(event) => setRadioValue(event.target.value)}
+            value={radioOperationValue}
+            onChange={(event) => {
+              setRadioOperationValue(event.target.value);
+            }}
           >
             {options.map((option) => (
               <FormControlLabel
@@ -38,7 +43,7 @@ function RadioUpload({ required, label, options, name }) {
               />
             ))}
           </RadioGroup>
-          {radioValue === "Yes" ? (
+          {radioOperationValue === "Yes" ? (
             <>
               <label htmlFor="contained-button-file">
                 <input

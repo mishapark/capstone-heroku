@@ -91,7 +91,7 @@ function ProductEntries({ title, data }) {
             <div style={styles.element}>
               <InputLabel style={styles.mb10}>Market</InputLabel>
               <div>
-                {data.market[0].country_name !== ""
+                {data.market && data.market[0].country_name !== ""
                   ? data.market.map((c) => c.country_name).join(", ")
                   : " - "}
               </div>

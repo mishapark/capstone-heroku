@@ -22,8 +22,6 @@ function DialogCustom({ title, onClose, editContent, setRequestData }) {
   const methods = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
-
     let product;
 
     uploadFile(data.marking_plate, data.warning_mark).then((files) => {
@@ -51,7 +49,6 @@ function DialogCustom({ title, onClose, editContent, setRequestData }) {
 
     uploadFile(data.marking_plate, data.warning_mark).then((files) => {
       product = useProduct(data, files);
-      console.log(product);
 
       axios
         .put(

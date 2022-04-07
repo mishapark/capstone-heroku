@@ -151,7 +151,24 @@ function ProductTechnicalInfo({ editContent }) {
       ],
     },
   ];
-  const opmode = ["Continuos", "Duty Cycle"];
+  const opmode = [
+    {
+      name: "Continuos",
+      isChecked: editContent
+        ? editContent.operation_mode.selected_mode
+          ? true
+          : false
+        : false,
+    },
+    {
+      name: "Duty Cycle",
+      isChecked: editContent
+        ? editContent.operation_mode.selected_mode
+          ? true
+          : false
+        : false,
+    },
+  ];
   const eqmob = [
     {
       name: "Movable",
@@ -220,6 +237,7 @@ function ProductTechnicalInfo({ editContent }) {
         label="Overall Size of Equipment (W x D x H)"
         placeholder="Enter Size"
         name="equipment_size"
+        editContent={editContent}
       />
       <AutocompleteInput
         required={false}
@@ -234,6 +252,7 @@ function ProductTechnicalInfo({ editContent }) {
         options={opmode}
         name="operation_mode"
         textName="ratio"
+        editContent={editContent}
       />
       <CheckboxInput
         required={false}

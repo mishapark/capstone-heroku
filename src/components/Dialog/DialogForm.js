@@ -45,11 +45,15 @@ function DialogForm({ title, standards, countries, editContent }) {
           />
         );
       case "Product Environmental Information":
-        return <ProductEnvironInfo editContent={editContent} />;
+        return (
+          <ProductEnvironInfo
+            editContent={editContent && editContent["product_env_details"]}
+          />
+        );
       case "Marking and Documentations":
-        return <MarkingDoc editContent={editContent} />;
+        return <MarkingDoc />;
       case "Compliance Reports":
-        return <ComplianceReports editContent={editContent} />;
+        return <ComplianceReports />;
       default:
         break;
     }

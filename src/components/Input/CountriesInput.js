@@ -1,12 +1,25 @@
-import React from "react";
-import { useFormContext } from "react-hook-form";
-import { InputLabel, Chip } from "@material-ui/core";
-import Autocomplete from "@mui/material/Autocomplete";
-import TextField from "@mui/material/TextField";
+import React, { useEffect } from "react";
+import { InputLabel } from "@material-ui/core";
+import { Autocomplete } from "@mui/material";
+import { TextField } from "@mui/material";
 import styles from "./styles";
 
-function CountriesInput({ required, label, placeholder, options, onChange }) {
-  const { register } = useFormContext();
+function CountriesInput({
+  required,
+  label,
+  placeholder,
+  options,
+  onChange,
+  editContent,
+}) {
+  useEffect(() => {
+    const value = editContent
+      ? editContent.market
+        ? editContent.market
+        : null
+      : null;
+    onChange(value);
+  }, []);
 
   return (
     <div style={styles.inputContainer}>
@@ -20,6 +33,9 @@ function CountriesInput({ required, label, placeholder, options, onChange }) {
           multiple
           size="small"
           id="fixed-tags-demo"
+          defaultValue={
+            editContent ? (editContent.market ? editContent.market : []) : []
+          }
           options={options
             .sort((a, b) => {
               const continentA = a.continents[0];
@@ -64,6 +80,9 @@ function CountriesInput({ required, label, placeholder, options, onChange }) {
           getOptionLabel={(option) => option.country_name}
           fullWidth
           onChange={(event, value) => onChange(value)}
+          isOptionEqualToValue={(option, value) =>
+            option.country_name === value.country_name
+          }
           renderInput={(params) => (
             <TextField
               size="small"

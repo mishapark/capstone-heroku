@@ -9,9 +9,25 @@ import {
 } from "@material-ui/core";
 import styles from "./styles";
 
-function RadioTextInput({ required, label, options, name, textName }) {
+function RadioTextInput({
+  required,
+  label,
+  options,
+  name,
+  textName,
+  editContent,
+}) {
   const { register } = useFormContext();
-  const [radioOperationValue, setRadioOperationValue] = useState("");
+  const [radioOperationValue, setRadioOperationValue] = useState(
+    editContent
+      ? editContent[name].selected_mode
+        ? editContent[name].selected_mode
+        : ""
+      : ""
+  );
+  const [content, setContent] = useState(
+    editContent ? (editContent[name].ratio ? editContent[name].ratio : "") : ""
+  );
 
   return (
     <div style={styles.inputContainer}>
@@ -24,14 +40,17 @@ function RadioTextInput({ required, label, options, name, textName }) {
           row
           aria-labelledby="demo-row-radio-buttons-group-label"
           name="row-radio-buttons-group"
-          onChange={(event) => setRadioOperationValue(event.target.value)}
+          value={radioOperationValue}
+          onChange={(event) => {
+            setRadioOperationValue(event.target.value);
+          }}
         >
           {options.map((option) => (
             <FormControlLabel
-              key={option}
-              value={option}
+              key={option.name}
+              value={option.name}
               control={<Radio color="primary" {...register(name)} />}
-              label={option}
+              label={option.name}
             />
           ))}
         </RadioGroup>
@@ -46,6 +65,8 @@ function RadioTextInput({ required, label, options, name, textName }) {
           placeholder="Enter Duty Cycle"
           style={styles.extra}
           {...register(textName)}
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
         />
       ) : null}
     </div>

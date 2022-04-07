@@ -6,7 +6,8 @@ import TextInput from "../../Input/TextInput";
 import TextNumDecInput from "../../Input/TextNumDecInput";
 import TextNumX from "../../Input/TextNumX";
 
-function ProductEnvironInfo() {
+function ProductEnvironInfo({ editContent }) {
+  console.log(editContent);
   const options = ["PD1", "PD2", "PD3"];
 
   return (
@@ -17,6 +18,7 @@ function ProductEnvironInfo() {
         placeholder="Enter Pollution Degree"
         options={options}
         name="pollution_degree"
+        editContent={editContent}
       />
       <TextCelciusInput
         required={false}
@@ -29,36 +31,42 @@ function ProductEnvironInfo() {
         label="Ingree Protection Classification"
         placeholder="Enter Classification"
         name="ingree_protection_classification"
+        editContent={editContent}
       />
       <TextInput
         required={false}
         label="Altitude During Operation"
         placeholder="Enter Altitude"
         name="operation_altitude"
+        // editContent={editContent}
       />
       <TextNumDecInput
         required={false}
         label="Mass Of Equipment (in kg)"
         placeholder="Enter Mass"
         name="equipment_mass"
+        editContent={editContent}
       />
       <TextInput
         required={false}
         label="Relative Humidity (%)"
         placeholder="Enter Humidity"
         name="relative_humidity"
+        // editContent={editContent}
       />
       <TextInput
         required={false}
         label="Atmospheric Pressure [kPa]"
         placeholder="Enter Pressure"
         name="atmospheric_pressure"
+        // editContent={editContent}
       />
       <CheckboxInput
         required={false}
         label="Indoor or Outdoor"
         options={["Indoor", "Outdoor"]}
         name="indoor_outdoor"
+        editContent={editContent}
       />
     </>
   );
