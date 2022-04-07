@@ -16,6 +16,7 @@ import { Chip } from "@material-ui/core";
 import axios from "axios";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import { Link } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
 
 const EnhancedTableToolbar = (props) => {
   const { numSelected } = props;
@@ -27,7 +28,7 @@ const EnhancedTableToolbar = (props) => {
         id="tableTitle"
         component="div"
       >
-        Compliance Center
+        <FormattedMessage id="Compliance Central"></FormattedMessage>
       </Typography>
 
       <Tooltip title="Filter list">
@@ -66,13 +67,13 @@ export default function Compliance() {
           <TableHead>
             <TableRow>
               <TableCell key={1} sx={{ fontWeight: "bold" }}>
-                Product name
+                <FormattedMessage id="compliance.productName"></FormattedMessage>
               </TableCell>
               <TableCell key={2} sx={{ fontWeight: "bold" }}>
-                Compliance status
+                <FormattedMessage id="compliance.status"></FormattedMessage>
               </TableCell>
               <TableCell key={3} sx={{ fontWeight: "bold" }}>
-                Documents
+                <FormattedMessage id="compliance.documents"></FormattedMessage>
               </TableCell>
             </TableRow>
           </TableHead>
@@ -86,9 +87,17 @@ export default function Compliance() {
                 </TableCell>
                 <TableCell>
                   {product.is_compliant ? (
-                    <Chip label="Compliant" sx={{ color: "#2F7C31" }} />
+                    <FormattedMessage id="compliance.status.isCompliant">
+                      {(placeholder) => (
+                        <Chip label={placeholder} sx={{ color: "#2F7C31" }} />
+                      )}
+                    </FormattedMessage>
                   ) : (
-                    <Chip label="Not compliant" />
+                    <FormattedMessage id="compliance.status.isNotCompliant">
+                      {(placeholder) => (
+                        <Chip label={placeholder} sx={{ color: "#2F7C31" }} />
+                      )}
+                    </FormattedMessage>
                   )}
                 </TableCell>
                 <TableCell>

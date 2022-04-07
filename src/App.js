@@ -13,6 +13,16 @@ import PersistLogin from "./components/PersistLogin";
 import RequireAuth from "./components/RequiredAuth";
 import Forgot from "./pages/Forgot";
 import Unauthorized from "./components/Unauthorized";
+import { addLocaleData } from "react-intl";
+import { IntlProvider } from "react-intl";
+import French from "./languages/fr-CA.json";
+import English from "./languages/en-US.json";
+import LanguageProvider from "./context/LanguageProvider";
+
+const messages = {
+  en: English,
+  fr: French,
+};
 
 const ROLES = {
   User: "Viewer",
@@ -24,27 +34,34 @@ function App() {
   const [user, setUser] = useState(null);
 
   const value = useMemo(() => ({ user, setUser }), [user, setUser]);
+  const [language, setLanguage] = React.useState("en");
 
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        {/* public routes */}
-        <Route path="/" element={<Home />} />
-        <Route path="unathorized" element={<Unauthorized />} />
-        <Route path="signin" element={<SignIn />} />
-        <Route path="signup" element={<Signup />} />
-        <Route path="forgot" element={<Forgot />} />
-        {/* we want to protect these routes */}
-        <Route element={<PersistLogin />}>
-          <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
-            <Route path="/*" element={<Dashboard />} />
-          </Route>
-        </Route>
+    <LanguageProvider.Provider
+      value={{ language: "en", setLanguage: setLanguage }}
+    >
+      <IntlProvider locale={language} messages={messages[language]}>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            {/* public routes */}
+            <Route path="/" element={<Home />} />
+            <Route path="unathorized" element={<Unauthorized />} />
+            <Route path="signin" element={<SignIn />} />
+            <Route path="signup" element={<Signup />} />
+            <Route path="forgot" element={<Forgot />} />
+            {/* we want to protect these routes */}
+            <Route element={<PersistLogin />}>
+              <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
+                <Route path="/*" element={<Dashboard />} />
+              </Route>
+            </Route>
 
-        {/* catch all */}
-        <Route path="*" element={<Missing />} />
-      </Route>
-    </Routes>
+            {/* catch all */}
+            <Route path="*" element={<Missing />} />
+          </Route>
+        </Routes>
+      </IntlProvider>
+    </LanguageProvider.Provider>
   );
 }
 

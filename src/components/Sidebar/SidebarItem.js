@@ -5,6 +5,7 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 import classNames from "classnames";
 import { makeStyles } from "@material-ui/core/styles";
+import { FormattedMessage } from "react-intl";
 
 const useStyles = makeStyles((theme) => ({
   badge: {
@@ -97,7 +98,8 @@ const SidebarItem = ({ route, index, toggleMenu }) => {
           <route.icon className={classes.menuIcon} />
         </ListItemIcon>
         <Typography variant="body1" className="flexSpacer">
-          {route.name}
+          <FormattedMessage id={route.name}></FormattedMessage>
+          {console.log(route.name)}
         </Typography>
         {badge(route.badge)}
       </ListItem>

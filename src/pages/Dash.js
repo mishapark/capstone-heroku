@@ -17,6 +17,7 @@ import axios from "axios";
 import useRefreshToken from "../hooks/useRefreshToken";
 import ProductsDash from "../components/Dashboards/ProductsDash";
 import { Link } from "react-router-dom";
+import { FormattedMessage, FormattedHTMLMessage } from "react-intl";
 
 export const Dash = () => {
   const [products, setProducts] = useState([]);
@@ -85,13 +86,17 @@ export const Dash = () => {
       <Grid container spacing={2}>
         <Grid item xs={12} md={4}>
           <Paper sx={{ padding: 2 }}>
-            <Typography variant="h6">Total Products</Typography>
+            <Typography variant="h6">
+              <FormattedMessage id="dash.total"></FormattedMessage>
+            </Typography>
             <Typography variant="h4">{products.length}</Typography>
           </Paper>
           <br></br>
           <Paper sx={{ padding: 2 }}>
             <div style={{ maxWidth: "700px" }}>
-              <Typography variant="h6">RFQs Overview</Typography>
+              <Typography variant="h6">
+                <FormattedMessage id="dash.rfqOverview"></FormattedMessage>
+              </Typography>
               <Pie data={d2} option={o2} style={{ maxWidth: "500px" }} />
             </div>
           </Paper>
@@ -99,21 +104,31 @@ export const Dash = () => {
         <Grid item xs={12} md={8}>
           <Paper sx={{ padding: 2 }}>
             <div style={{ maxWidth: "700px" }}>
-              <Typography variant="h6">Compliance chart</Typography>
+              <Typography variant="h6">
+                <FormattedMessage id="dash.complaince"></FormattedMessage>
+              </Typography>
               <Pie data={data} option={option} style={{ maxWidth: "500px" }} />
             </div>
           </Paper>
         </Grid>
         <Grid item xs={12}>
           <Paper sx={{ padding: 2 }}>
-            <Typography variant="h6">Upcoming Renewals</Typography>
+            <Typography variant="h6">
+              <FormattedMessage id="dash.renewals"></FormattedMessage>
+            </Typography>
             <br />
             <Table size="small">
               <TableHead>
                 <TableRow>
-                  <TableCell>Product</TableCell>
-                  <TableCell>Category</TableCell>
-                  <TableCell>Product family</TableCell>
+                  <TableCell>
+                    <FormattedMessage id="dash.products.Product"></FormattedMessage>
+                  </TableCell>
+                  <TableCell>
+                    <FormattedMessage id="dash.products.Category"></FormattedMessage>
+                  </TableCell>
+                  <TableCell>
+                    <FormattedMessage id="dash.products.ProductFamily"></FormattedMessage>
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -134,10 +149,9 @@ export const Dash = () => {
                 ))}
               </TableBody>
             </Table>
-            {console.log(products)}
             <br></br>
             <Link color="primary" to="/products" sx={{ mt: 3, color: "blue" }}>
-              See all products
+              <FormattedMessage id="dash.seeAllProducts"></FormattedMessage>
             </Link>
           </Paper>
         </Grid>

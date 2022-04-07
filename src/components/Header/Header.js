@@ -25,6 +25,7 @@ import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
 import useLogout from "../../hooks/useLogout";
 import { useNavigate } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -202,15 +203,22 @@ const Header = ({ logo, logoAltText, toggleFullscreen, toggleDrawer }) => {
                 <IconButton aria-label="Search" className={classes.searchIcon}>
                   <SearchIcon />
                 </IconButton>
-                <input
-                  className={classes.searchInput}
-                  ref={searchInput}
-                  type="text"
-                  placeholder="Search"
-                  autoFocus={true}
-                  value={wordEntered}
-                  onChange={handleFilter}
-                />
+                <FormattedMessage
+                  id="header.searchLabel"
+                  defaultMessage="search"
+                >
+                  {(placeholder) => (
+                    <input
+                      className={classes.searchInput}
+                      ref={searchInput}
+                      type="text"
+                      placeholder={placeholder}
+                      autoFocus={true}
+                      value={wordEntered}
+                      onChange={handleFilter}
+                    />
+                  )}
+                </FormattedMessage>
               </form>
               {filteredData.length != 0 &&
                 (isShown ? (
@@ -293,7 +301,9 @@ const Header = ({ logo, logoAltText, toggleFullscreen, toggleDrawer }) => {
                 <ListItemIcon>
                   <AccountBoxIcon />
                 </ListItemIcon>
-                <ListItemText primary="My Preferences" />
+                <FormattedMessage id="settings">
+                  {(placeholder) => <ListItemText primary={placeholder} />}
+                </FormattedMessage>
               </MenuItem>
             </Link>
             <Link to="settings">
@@ -301,7 +311,9 @@ const Header = ({ logo, logoAltText, toggleFullscreen, toggleDrawer }) => {
                 <ListItemIcon>
                   <SettingsApplicationsIcon />
                 </ListItemIcon>
-                <ListItemText primary="Settings" />
+                <FormattedMessage id="myPreferences">
+                  {(placeholder) => <ListItemText primary={placeholder} />}
+                </FormattedMessage>
               </MenuItem>
             </Link>
             <Link to="billing">
@@ -309,7 +321,9 @@ const Header = ({ logo, logoAltText, toggleFullscreen, toggleDrawer }) => {
                 <ListItemIcon>
                   <PaymentsIcon />
                 </ListItemIcon>
-                <ListItemText primary="Billing" />
+                <FormattedMessage id="billing">
+                  {(placeholder) => <ListItemText primary={placeholder} />}
+                </FormattedMessage>
               </MenuItem>
             </Link>
             <Link to="logout">
@@ -317,7 +331,11 @@ const Header = ({ logo, logoAltText, toggleFullscreen, toggleDrawer }) => {
                 <ListItemIcon>
                   <LogoutIcon />
                 </ListItemIcon>
-                <ListItemText primary="Logout" onClick={signOut} />
+                <FormattedMessage id="logout">
+                  {(placeholder) => (
+                    <ListItemText primary={placeholder} onClick={signOut} />
+                  )}
+                </FormattedMessage>
               </MenuItem>
             </Link>
           </Menu>

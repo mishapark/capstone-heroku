@@ -6,6 +6,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import AddIcon from "@material-ui/icons/Add";
 import DialogCustom from "../components/Dialog/DialogCustom";
 import CustomTable from "../components/CustomTable/CustomTable";
+import { FormattedMessage } from "react-intl";
 
 function Products() {
   const [open, setOpen] = React.useState(false);
@@ -44,13 +45,13 @@ function Products() {
           aria-label="Add"
         >
           <AddIcon />
-          Add Product
+          <FormattedMessage id="products.add"></FormattedMessage>
         </Button>
       </Card>
 
       {!isLoading ? (
         <Card>
-          <CustomTable tableData={tableData} setRequestData={setRequestData}/>
+          <CustomTable tableData={tableData} setRequestData={setRequestData} />
         </Card>
       ) : (
         <CircularProgress />
