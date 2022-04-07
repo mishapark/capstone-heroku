@@ -35,16 +35,7 @@ const useProduct = (data, files) => {
       family_series_model: data.family_series_model
         ? data.family_series_model
         : [""],
-      market: data.market
-        ? data.market
-        : [
-            {
-              continent_code: "",
-              continent_name: "",
-              country_code: "",
-              country_name: "",
-            },
-          ],
+      market: data.market ? data.market : null,
     },
     product_tech_details: {
       equipment_size: {

@@ -1,11 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { InputLabel, TextField, Button } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import styles from "./styles";
 
-function TextExtraInput({ required, label, placeholder, field }) {
+function TextExtraInput({ required, label, placeholder, field, editContent }) {
+  // console.log(editContent, field);
+  const [content, setContent] = useState(
+    field.name === "family_series_model"
+      ? editContent
+        ? editContent["family_series_model"]
+          ? editContent["family_series_model"][0].text
+          : ""
+        : ""
+      : editContent
+      ? editContent["manufacturer"]
+        ? editContent["manufacturer"][0].name
+        : ""
+      : ""
+  );
   const [addClicked, setAddClicked] = useState(false);
+
+  useEffect(() => {
+    field.onChange({ ...field.value, text: content });
+  }, []);
 
   return (
     <div style={styles.inputContainer}>
@@ -22,8 +40,10 @@ function TextExtraInput({ required, label, placeholder, field }) {
             fullWidth
             helperText=""
             placeholder={placeholder}
+            value={content}
             onChange={(e) => {
               field.onChange({ ...field.value, text: e.target.value });
+              setContent(e.target.value);
             }}
           />
           <Button

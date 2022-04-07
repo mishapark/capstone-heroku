@@ -43,7 +43,6 @@ function CustomTable({ tableData, setRequestData }) {
 
   return (
     <>
-      <CustomTableToolbar title="Products" />
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <CustomHeader columns={DUMMY_COLUMNS} />

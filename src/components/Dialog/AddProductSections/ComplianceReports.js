@@ -7,7 +7,6 @@ import DateRangeInput from "../../Input/DateRangeInput";
 import RecordType from "../../Input/RecordType";
 
 function ComplianceReports() {
-
   return (
     <>
       <TextInput
