@@ -7,13 +7,13 @@ import {
 } from "@stripe/react-stripe-js";
 import axios from "axios";
 
-function CheckoutForm({ success }) {
+function CheckoutForm({ success, payment, companyId }) {
   const [isPaymentLoading, setPaymentLoading] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    console.log(payment);
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card: elements.getElement(CardElement),
@@ -25,7 +25,12 @@ function CheckoutForm({ success }) {
       try {
         const { data } = await axios.post(
           "https://humber-capstone-backend.herokuapp.com/payments/charge",
-          { id, amount: 1099 },
+          {
+            id,
+            amount: payment.amount,
+            plan: payment.plan,
+            companyId: companyId,
+          },
           {
             headers: { "Content-Type": "application/json" },
             withCredentials: true,

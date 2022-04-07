@@ -37,6 +37,7 @@
     "react-fetch-hook": "^1.8.5",
     "react-google-maps": "9.4.5",
     "react-hook-form": "^7.26.1",
+    "react-intl": "^5.24.8",
     "react-jss": "10.5.0",
     "react-leaflet": "3.0.2",
     "react-number-format": "4.4.1",

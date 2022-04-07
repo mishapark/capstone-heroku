@@ -32,6 +32,21 @@ const stripePromise = loadStripe(
 
 const Billing = () => {
   const [status, setStatus] = React.useState("ready");
+  const [companyId, setCompanyId] = React.useState(
+    localStorage.getItem("companyId")
+  );
+  const [paymenet, setPayment] = React.useState({
+    amount: "",
+    plan: "",
+  });
+
+  const handleChange = (event) => {
+    setPayment({
+      amount: event.target.value,
+      plan: event.target.name,
+    });
+    console.log(paymenet);
+  };
 
   if (status === "success") {
     return (
@@ -94,23 +109,27 @@ const Billing = () => {
                   </FormLabel>
                   <RadioGroup
                     aria-labelledby="demo-radio-buttons-group-label"
-                    defaultValue="female"
                     name="radio-buttons-group"
+                    value={paymenet.amount}
+                    onChange={handleChange}
                   >
                     <FormControlLabel
-                      value="10"
+                      value="1000"
+                      name="Standard"
                       control={<Radio />}
-                      label="$10"
+                      label="Standard - $10"
                     />
                     <FormControlLabel
-                      value="20"
+                      value="2000"
+                      name="Professional"
                       control={<Radio />}
-                      label="$20"
+                      label="Professional - $20"
                     />
                     <FormControlLabel
-                      value="30"
+                      value="3000"
+                      name="Enterprise"
                       control={<Radio />}
-                      label="$30"
+                      label="Enterprise - $30"
                     />
                   </RadioGroup>
                 </FormControl>
@@ -120,6 +139,8 @@ const Billing = () => {
                 <Typography variant="body2">Enter the card number</Typography>
                 <Elements stripe={stripePromise}>
                   <CheckoutForm
+                    companyId={companyId}
+                    payment={paymenet}
                     success={() => {
                       setStatus("success");
                     }}
