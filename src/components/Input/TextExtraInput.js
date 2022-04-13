@@ -5,7 +5,6 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import styles from "./styles";
 
 function TextExtraInput({ required, label, placeholder, field, editContent }) {
-  // console.log(editContent, field);
   const [content, setContent] = useState(
     field.name === "family_series_model"
       ? editContent

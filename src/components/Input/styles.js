@@ -16,6 +16,15 @@ export default {
     width: "100%",
     alignItems: "center",
   },
+  powerInput: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  powerFields: {
+    display: "flex",
+    alignItems: "center",
+    marginBottom: 10,
+  },
   upload: {
     display: "none",
   },

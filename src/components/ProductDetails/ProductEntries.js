@@ -119,7 +119,28 @@ function ProductEntries({ title, data }) {
               <InputLabel style={styles.mb10}>
                 Power Rating/Electrical Rating
               </InputLabel>
-              <div>{}</div>
+              <div>
+                Voltage:{" "}
+                {data.power_rating.voltage ? data.power_rating.voltage : " - "}
+              </div>
+              <div>
+                Phase:{" "}
+                {data.power_rating.phase ? data.power_rating.phase : " - "}
+              </div>
+              <div>
+                Frequency:{" "}
+                {data.power_rating.frequency
+                  ? data.power_rating.frequency
+                  : " - "}
+              </div>
+              <div>
+                Power:{" "}
+                {data.power_rating.power ? data.power_rating.power : " - "}
+              </div>
+              <div>
+                Current:{" "}
+                {data.power_rating.current ? data.power_rating.current : " - "}
+              </div>
             </div>
             <div style={styles.element}>
               <InputLabel style={styles.mb10}>Operation Mode</InputLabel>

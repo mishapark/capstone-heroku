@@ -46,11 +46,11 @@ const useProduct = (data, files) => {
       },
       equipment_weight: data.equipment_mass,
       power_rating: {
-        voltage: 0,
-        phase: 0,
-        frequency: 0,
-        power: 0,
-        current: 0,
+        voltage: data.power_rating?.voltage,
+        phase: data.power_rating?.phase,
+        frequency: data.power_rating?.frequency,
+        power: data.power_rating?.power,
+        current: data.power_rating?.current,
       },
       operation_mode: {
         selected_mode: data.operation_mode,

@@ -1,10 +1,10 @@
 import React from "react";
-import AutocompleteInput from "../../Input/AutocompleteInput";
 import RadioTextInput from "../../Input/RadioTextInput";
 import SupplyConnInput from "../../Input/SupplyConnInput";
-import TextInput from "../../Input/TextInput";
 import CheckboxInput from "../../Input/CheckboxInput";
 import TextSizeInput from "../../Input/TextSizeInput";
+import PowerRatingInput from "../../Input/PowerRatingInput";
+import { Controller } from "react-hook-form";
 
 function ProductTechnicalInfo({ editContent }) {
   const options = [
@@ -239,12 +239,18 @@ function ProductTechnicalInfo({ editContent }) {
         name="equipment_size"
         editContent={editContent}
       />
-      <AutocompleteInput
-        required={false}
-        label="Power Rating/Electrical Rating"
-        placeholder="Select Rating"
-        options={rating}
+      <Controller
         name="power_rating"
+        render={({ field }) => (
+          <PowerRatingInput
+            required={false}
+            label="Power Rating/Electrical Rating"
+            placeholder="Select Rating"
+            field={field}
+            options={rating}
+            editContent={editContent}
+          />
+        )}
       />
       <RadioTextInput
         required={false}

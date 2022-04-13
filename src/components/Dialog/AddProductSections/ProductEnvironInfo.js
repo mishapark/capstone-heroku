@@ -7,7 +7,6 @@ import TextNumDecInput from "../../Input/TextNumDecInput";
 import TextNumX from "../../Input/TextNumX";
 
 function ProductEnvironInfo({ editContent }) {
-  console.log(editContent);
   const options = ["PD1", "PD2", "PD3"];
 
   return (
