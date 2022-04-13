@@ -53,14 +53,14 @@ function EditUsers() {
     const handleDelete = (event, userId) => {
         event.preventDefault()
         deleteCompanyUser(company._id, userId).then((data) => {
-            refreshUsers()
+            refreshUsers(company.company_domain)
         })
     }
 
     const handleAdd = (event, userId) => {
         event.preventDefault()
         addCompanyUser(company._id, userId).then((data) => {
-            refreshUsers()
+            refreshUsers(company.company_domain)
         })
     }
 
