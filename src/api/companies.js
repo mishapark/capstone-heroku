@@ -28,3 +28,20 @@ export const updateCompany = (id, company) => {
         console.log(err.message);
     }
 }
+
+export const createCompany = (company) => {
+    try {
+
+        const promise = axios.post(
+            "https://humber-capstone-backend.herokuapp.com/companies/add/",
+            company
+
+        );
+        const data = promise.then((response) => response.data);
+        return data;
+
+    } catch (err) {
+        console.log(err.message);
+    }
+}
+
