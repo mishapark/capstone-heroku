@@ -12,7 +12,11 @@ import {
     IconButton,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ApartmentIcon from "@mui/icons-material/Apartment";
+
+//components
 import CustomTableToolbar from "../../components/CustomTable/CustomTableToolbar";
+import { PageHeader } from "../../components/Header/PageHeader";
 
 // api
 import { getCompanies, deleteCompany} from "../../api/companies";
@@ -39,7 +43,11 @@ function ViewSubscribers() {
 
     return (
         <Card>
-            <CustomTableToolbar title="Subscribers List" />
+            <PageHeader
+                        icon={<ApartmentIcon />}
+                        title="Subscriber List"
+                        description="View the list of subscribers"
+                    ></PageHeader>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <CustomHeader columns={Headers} />
