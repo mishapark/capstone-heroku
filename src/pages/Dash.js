@@ -18,6 +18,9 @@ import useRefreshToken from "../hooks/useRefreshToken";
 import ProductsDash from "../components/Dashboards/ProductsDash";
 import { Link } from "react-router-dom";
 import { FormattedMessage, FormattedHTMLMessage } from "react-intl";
+import useAuth from "../hooks/useAuth";
+import { UserDash } from "../components/Dashboards/UserDash";
+import { AdminDash } from "../components/Dashboards/AdminDash";
 
 export const Dash = () => {
   const [products, setProducts] = useState([]);
@@ -81,81 +84,21 @@ export const Dash = () => {
     },
   };
 
+  const { auth } = useAuth();
+
   return (
     <div>
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={4}>
-          <Paper sx={{ padding: 2 }}>
-            <Typography variant="h6">
-              <FormattedMessage id="dash.total"></FormattedMessage>
-            </Typography>
-            <Typography variant="h4">{products.length}</Typography>
-          </Paper>
-          <br></br>
-          <Paper sx={{ padding: 2 }}>
-            <div style={{ maxWidth: "700px" }}>
-              <Typography variant="h6">
-                <FormattedMessage id="dash.rfqOverview"></FormattedMessage>
-              </Typography>
-              <Pie data={d2} option={o2} style={{ maxWidth: "500px" }} />
-            </div>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} md={8}>
-          <Paper sx={{ padding: 2 }}>
-            <div style={{ maxWidth: "700px" }}>
-              <Typography variant="h6">
-                <FormattedMessage id="dash.complaince"></FormattedMessage>
-              </Typography>
-              <Pie data={data} option={option} style={{ maxWidth: "500px" }} />
-            </div>
-          </Paper>
-        </Grid>
-        <Grid item xs={12}>
-          <Paper sx={{ padding: 2 }}>
-            <Typography variant="h6">
-              <FormattedMessage id="dash.renewals"></FormattedMessage>
-            </Typography>
-            <br />
-            <Table size="small">
-              <TableHead>
-                <TableRow>
-                  <TableCell>
-                    <FormattedMessage id="dash.products.Product"></FormattedMessage>
-                  </TableCell>
-                  <TableCell>
-                    <FormattedMessage id="dash.products.Category"></FormattedMessage>
-                  </TableCell>
-                  <TableCell>
-                    <FormattedMessage id="dash.products.ProductFamily"></FormattedMessage>
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {products.slice(0, 5).map((product) => (
-                  <TableRow key={product.product_id}>
-                    <TableCell>
-                      <Link to={`/products/${product._id}`}>
-                        {product.product_details.product_name}
-                      </Link>
-                    </TableCell>
-                    <TableCell>
-                      {product.product_details.product_category}
-                    </TableCell>
-                    <TableCell>
-                      {product.product_details.product_family}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-            <br></br>
-            <Link color="primary" to="/products" sx={{ mt: 3, color: "blue" }}>
-              <FormattedMessage id="dash.seeAllProducts"></FormattedMessage>
-            </Link>
-          </Paper>
-        </Grid>
-      </Grid>
+      {auth.roles.includes("Super_Admin") ? (
+        <AdminDash />
+      ) : (
+        <UserDash
+          products={products}
+          data={data}
+          option={option}
+          d2={d2}
+          o2={o2}
+        />
+      )}
     </div>
   );
 };

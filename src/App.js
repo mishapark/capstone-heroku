@@ -26,7 +26,7 @@ const messages = {
 
 const ROLES = {
   User: "Viewer",
-  Editor: 1984,
+  Super_Admin: "Super_Admin",
   Admin: 5150,
 };
 
@@ -51,7 +51,11 @@ function App() {
             <Route path="forgot" element={<Forgot />} />
             {/* we want to protect these routes */}
             <Route element={<PersistLogin />}>
-              <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
+              <Route
+                element={
+                  <RequireAuth allowedRoles={[ROLES.User, ROLES.Super_Admin]} />
+                }
+              >
                 <Route path="/*" element={<Dashboard />} />
               </Route>
             </Route>
