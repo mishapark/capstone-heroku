@@ -8,6 +8,7 @@ import EditUserGroups from "../pages/SettingsTabs/EditUserGroups";
 import AddUsers from "../pages/SettingsTabs/AddUsers";
 import RemoveUsers from "../pages/SettingsTabs/RemoveUsers";
 import ViewUsers from "../pages/SettingsTabs/ViewUsers";
+import EditUsers from "../pages/SettingsTabs/EditUsers";
 import Author from "../pages/SettingsTabs/Author";
 import AddSidebarAccess from "../pages/SettingsTabs/AddSidebarAccess";
 import RemoveSidebarAccess from "../pages/SettingsTabs/RemoveSidebarAccess";
@@ -54,6 +55,10 @@ export default [
   {
     path: "viewusers",
     component: <ViewUsers />,
+  },
+  {
+    path: "editusers",
+    component: <EditUsers />,
   },
   {
     path: "author",

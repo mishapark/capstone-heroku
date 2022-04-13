@@ -21,6 +21,7 @@ function AddSubscribers() {
     const goBack = () => navigate(-1);
 
     const [companyName, setCompanyName] = useState("");
+    const [companyDomain, setCompanyDomain] = useState("");
     const [companyAddress, setCompanyAddress] = useState("");
     const [companyCountry, setCompanyCountry] = useState("");
     const [companyEmail, setCompanyEmail] = useState("");
@@ -40,6 +41,8 @@ function AddSubscribers() {
     const handleTextChange = (e, field) => {
         if (field === "companyName") {
             setCompanyName(e.target.value)
+        } else if (field === "companyDomain") {
+            setCompanyDomain(e.target.value)
         } else if (field === "companyAddress") {
             setCompanyAddress(e.target.value)
         } else if (field === "companyEmail") {
@@ -73,6 +76,7 @@ function AddSubscribers() {
 
         let company = {
             "company_name": companyName,
+            "company_domain": companyDomain,
             "company_address": companyAddress,
             "company_country": companyCountry,
             "company_phone": companyPhone,
@@ -126,6 +130,18 @@ function AddSubscribers() {
                                 fullWidth
                                 value={companyName}
                                 onChange={(e) => handleTextChange(e, "companyName")}
+                            ></TextField>
+                        </Grid>
+
+                        <Grid item xs={3}>
+                            <Typography>Company Domain</Typography>
+                        </Grid>
+                        <Grid item xs={7}>
+                            <TextField
+                                variant="outlined"
+                                fullWidth
+                                value={companyDomain}
+                                onChange={(e) => handleTextChange(e, "companyDomain")}
                             ></TextField>
                         </Grid>
 
