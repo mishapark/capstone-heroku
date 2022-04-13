@@ -3,7 +3,7 @@ import axios from "axios";
 export const getCompanyUsers = (id) => {
     try {
         const promise = axios.get(
-            "https://humber-capstone-backend.herokuapp.com/companyusers/" + id
+            "https://humber-capstone-backend.herokuapp.com/companyusers/company/" + id
         );
         const data = promise.then((response) => response.data);
         return data;
@@ -38,7 +38,7 @@ export const deleteCompanyUser = (companyId, userId) => {
 
 export const addCompanyUser = (companyId, userId) => {
     try {
-        const promise = axios.patch(
+        const promise = axios.post(
             "https://humber-capstone-backend.herokuapp.com/companyusers/update/" + companyId + "/" + userId
         );
         const data = promise.then((response) => response.data);

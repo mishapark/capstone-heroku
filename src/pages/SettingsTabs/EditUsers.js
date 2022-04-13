@@ -6,6 +6,7 @@ import {
     Table, TableBody, TableContainer, TableCell, TableRow, Card, IconButton
 } from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from '@mui/icons-material/Add';
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import { Divider, Grid, TextField } from "@material-ui/core";
 import Tab from "@material-ui/core/Tab";
@@ -38,7 +39,7 @@ function EditUsers() {
         getCompany(auth.companyId).then((data) => {
             setCompany(data)
             
-            refreshUsers()
+            refreshUsers(data.company_domain)
         })
        
 
@@ -63,8 +64,8 @@ function EditUsers() {
         })
     }
 
-    const refreshUsers = () => {
-        getUsersByEmail(company.company_domain)
+    const refreshUsers = (domain) => {
+        getUsersByEmail(domain)
             .then((data) => {
                 let noCompanyUsers = data.filter((d) => !d.company_id)
                 setUsersByEmail(noCompanyUsers)
@@ -136,7 +137,7 @@ function EditUsers() {
                                                     <TableCell>{c.userEmail}</TableCell>
                                                     <TableCell>
                                                         <IconButton color="primary" onClick={(e) => handleAdd(e, c._id)}>
-                                                            <DeleteIcon />
+                                                            <AddIcon />
                                                         </IconButton>
                                                     </TableCell>
                                                 </TableRow>
