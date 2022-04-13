@@ -29,7 +29,7 @@ const ROLES = [
         icon: <PeopleAltIcon />,
         menuOptions: [
           { name: "Add subscribers", icon: <GroupAddIcon /> },
-          { name: "Remove subscribers", icon: <GroupRemoveIcon /> },
+          //{ name: "Remove subscribers", icon: <GroupRemoveIcon /> },
           { name: "View subscribers", icon: <PeopleAltIcon /> },
         ],
         optionsColor: "#303f9f",

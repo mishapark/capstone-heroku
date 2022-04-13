@@ -1,5 +1,17 @@
 import axios from "axios";
 
+export const getCompanies = () => {
+    try {
+        const promise = axios.get(
+            "https://humber-capstone-backend.herokuapp.com/companies/"
+        );
+        const data = promise.then((response) => response.data);
+        return data;
+    } catch (err) {
+        console.log(err.message);
+    }
+};
+
 export const getCompany = (id) => {
     try {
         const promise = axios.get(
@@ -44,4 +56,19 @@ export const createCompany = (company) => {
         console.log(err.message);
     }
 }
+
+
+export const deleteCompany = (id) => {
+    try {
+        const promise = axios.delete(
+            "https://humber-capstone-backend.herokuapp.com/companies/delete/" + id
+        );
+        const data = promise.then((response) => response.data);
+        return data;
+    } catch (err) {
+        console.log(err.message);
+    }
+};
+
+
 

@@ -16,6 +16,10 @@ import { createCompany } from "../../api/companies";
 import { getCountries } from "../../api/countries";
 
 function AddSubscribers() {
+
+    const navigate = useNavigate();
+    const goBack = () => navigate(-1);
+
     const [companyName, setCompanyName] = useState("");
     const [companyAddress, setCompanyAddress] = useState("");
     const [companyCountry, setCompanyCountry] = useState("");
@@ -86,7 +90,7 @@ function AddSubscribers() {
 
         createCompany(company)
             .then((data) => {
-                console.log(data)
+                navigate("/settings/viewsubscribers")
             })
 
     }
@@ -95,8 +99,7 @@ function AddSubscribers() {
         setCompanyCountry(val.country_name)
     }
 
-    const navigate = useNavigate();
-    const goBack = () => navigate(-1);
+    
 
     useEffect(() => {
         getCountries().then((data) => setCountries(data));

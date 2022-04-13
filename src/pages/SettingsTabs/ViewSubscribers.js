@@ -1,39 +1,68 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+
 import CustomHeader from "../../components/CustomTable/CustomHeader";
 import {
-  Table,
-  TableBody,
-  TableContainer,
-  TableCell,
-  Paper,
-  TableRow,
-  Card,
+    Table,
+    TableBody,
+    TableContainer,
+    TableCell,
+    Paper,
+    TableRow,
+    Card,
+    IconButton,
 } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 import CustomTableToolbar from "../../components/CustomTable/CustomTableToolbar";
 
-function ViewSubscribers({ tableData }) {
-  const DUMMY_COLUMNS = ["Subscriber Name"];
+// api
+import { getCompanies, deleteCompany} from "../../api/companies";
 
-  return (
-    <Card>
-      <CustomTableToolbar title="Subscribers" />
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <CustomHeader columns={DUMMY_COLUMNS} />
-          <TableBody>
-            {/* {tableData.map((p) => (
-              <TableRow key={1}>
-                <TableCell>{"Mikhail"}</TableCell>
-              </TableRow>
-            ))} */}
-            <TableRow key={1}>
-              <TableCell>{"Mikhail"}</TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Card>
-  );
+function ViewSubscribers() {
+    const Headers = ["Subscriber Name", ""];
+
+    const [companies, setCompanies] = useState([])
+
+
+    useEffect(() => {
+
+        getCompanies().then((data) => setCompanies(data))
+    }, [])
+
+    const handleDelete = (e, id) => {
+        e.preventDefault()
+
+        deleteCompany(id).then((data)=>{
+            //reload the companies
+            getCompanies().then((data) => setCompanies(data))
+        })
+    }
+
+    return (
+        <Card>
+            <CustomTableToolbar title="Subscribers List" />
+            <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <CustomHeader columns={Headers} />
+                    <TableBody>
+
+                        {companies.map((c) => {
+                            return (
+                                <TableRow>
+                                    <TableCell>{c.company_name}</TableCell>
+                                    <TableCell>
+                                        <IconButton color="primary" onClick={(e) => handleDelete(e, c._id)}>
+                                            <DeleteIcon />
+                                        </IconButton>
+                                    </TableCell>
+                                </TableRow>
+                            )
+                        })}
+
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </Card>
+    );
 }
 
 export default ViewSubscribers;

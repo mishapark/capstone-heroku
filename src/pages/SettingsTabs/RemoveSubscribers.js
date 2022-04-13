@@ -1,46 +1,59 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
 import CustomHeader from "../../components/CustomTable/CustomHeader";
 import {
-  Table,
-  TableBody,
-  TableContainer,
-  TableCell,
-  Paper,
-  TableRow,
-  Card,
-  IconButton,
+    Table,
+    TableBody,
+    TableContainer,
+    TableCell,
+    Paper,
+    TableRow,
+    Card,
+    IconButton,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CustomTableToolbar from "../../components/CustomTable/CustomTableToolbar";
 
-function RemoveSubscribers() {
-  const DUMMY_COLUMNS = ["Subscriber Name", "Delete"];
+// api
+import { getCompanies } from "../../api/companies";
 
-  return (
-    <Card>
-      <CustomTableToolbar title="Remove Subscribers" />
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <CustomHeader columns={DUMMY_COLUMNS} />
-          <TableBody>
-            {/* {tableData.map((p) => (
-          <TableRow key={1}>
-            <TableCell>{"Mikhail"}</TableCell>
-          </TableRow>
-        ))} */}
-            <TableRow>
-              <TableCell>{"Mikhail"}</TableCell>
-              <TableCell>
-                <IconButton color="primary">
-                  <DeleteIcon />
-                </IconButton>
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Card>
-  );
+function RemoveSubscribers() {
+    const Headers = ["Subscriber Name", ""];
+
+    const [companies, setCompanies] = useState([])
+
+
+    useEffect(() => {
+
+        getCompanies().then((data) => setCompanies(data))
+    })
+
+    return (
+        <Card>
+            <CustomTableToolbar title="Remove Subscribers" />
+            <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <CustomHeader columns={Headers} />
+                    <TableBody>
+
+                        {companies.map((c) => {
+                            return (
+                                <TableRow>
+                                    <TableCell>{c.company_name}</TableCell>
+                                    <TableCell>
+                                        <IconButton color="primary">
+                                            <DeleteIcon />
+                                        </IconButton>
+                                    </TableCell>
+                                </TableRow>
+                            )
+                        })}
+
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </Card>
+    );
 }
 
 export default RemoveSubscribers;
