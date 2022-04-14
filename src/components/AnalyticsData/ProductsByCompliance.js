@@ -14,10 +14,15 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 import axios from "axios";
-import { getProducts } from "../../api/products";
+import { getProductsWithToken } from "../../api/products";
 import { getCompliances } from "../../api/compliances";
 
+// hooks
+import useAuth from "../../hooks/useAuth";
+
 function ProductsByCompliance() {
+    // auth
+    const { auth } = useAuth();
 
     const option = {
         title: {
@@ -32,9 +37,11 @@ function ProductsByCompliance() {
 
     const [reportResults, setReportResults] = useState([]) // results from pie chart click
     const [resultsIsVisible, setResultsIsVisible] = useState(false)
+    
 
     useEffect(() => {
-        getProducts().then((data) => {
+
+        getProductsWithToken(auth.accessToken).then((data) => {
             const compliant = data.filter((d) => d.is_compliant == true)
             const nonCompliant = data.filter((d) => d.is_compliant == false)
 
