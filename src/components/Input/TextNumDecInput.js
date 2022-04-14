@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { InputLabel, TextField } from "@material-ui/core";
 import styles from "./styles";
+import { FormattedMessage } from "react-intl";
 
 function TextNumDecInput({ required, label, placeholder, name, editContent }) {
   const { register } = useFormContext();
@@ -16,7 +17,7 @@ function TextNumDecInput({ required, label, placeholder, name, editContent }) {
     <div style={styles.inputContainer}>
       <InputLabel style={styles.inputLabel} htmlFor="component-error">
         {required ? <span style={styles.ipnutReq}>*</span> : null}
-        {label}
+        <FormattedMessage id={label} />
       </InputLabel>
       <div style={styles.input}>
         <TextField

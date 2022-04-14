@@ -1,5 +1,6 @@
 import React from "react";
 import { TableSortLabel, TableCell, TableHead, TableRow } from "@mui/material";
+import { FormattedMessage } from "react-intl";
 
 function CustomHeader({ columns }) {
   return (
@@ -7,7 +8,9 @@ function CustomHeader({ columns }) {
       <TableRow>
         {columns.map((headCell) => (
           <TableCell key={headCell} align="left" padding="normal">
-            <TableSortLabel>{headCell}</TableSortLabel>
+            <TableSortLabel>
+              {<FormattedMessage id={headCell} />}
+            </TableSortLabel>
           </TableCell>
         ))}
       </TableRow>

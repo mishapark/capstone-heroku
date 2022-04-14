@@ -2,15 +2,18 @@ import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { InputLabel, TextField } from "@material-ui/core";
 import styles from "./styles";
+import { FormattedMessage } from "react-intl";
 
 function TextInput({ required, label, placeholder, name, type, editContent }) {
   const [content, setContent] = useState(
     editContent
-      ? typeof editContent[name] === "string" ||
-        typeof editContent[name] === "number"
-        ? editContent[name]
-        : editContent[name].name
-        ? editContent[name].name
+      ? editContent[name]
+        ? typeof editContent[name] === "string" ||
+          typeof editContent[name] === "number"
+          ? editContent[name]
+          : editContent[name].name
+          ? editContent[name].name
+          : ""
         : ""
       : ""
   );
@@ -19,7 +22,7 @@ function TextInput({ required, label, placeholder, name, type, editContent }) {
     <div style={styles.inputContainer}>
       <InputLabel style={styles.inputLabel} htmlFor="component-error">
         {required ? <span style={styles.ipnutReq}>*</span> : null}
-        {label}
+        <FormattedMessage id={label} />
       </InputLabel>
       <div style={styles.input}>
         <TextField

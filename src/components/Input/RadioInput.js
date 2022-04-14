@@ -7,6 +7,7 @@ import {
   Radio,
 } from "@material-ui/core";
 import styles from "./styles";
+import { FormattedMessage } from "react-intl";
 
 function RadioInput({ required, label, options, name, editContent }) {
   const [radioValue, setRadioValue] = useState(
@@ -18,7 +19,7 @@ function RadioInput({ required, label, options, name, editContent }) {
     <div style={styles.inputContainer}>
       <InputLabel style={styles.inputLabel} htmlFor="component-error">
         {required ? <span style={styles.ipnutReq}>*</span> : null}
-        {label}
+        <FormattedMessage id={label} />
       </InputLabel>
       <div style={styles.input}>
         <RadioGroup

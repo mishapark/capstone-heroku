@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@material-ui/core";
 import CircularProgress from "@mui/material/CircularProgress";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-
+import { FormattedMessage } from "react-intl";
 import useProducts from "../hooks/useProducts";
 import { useNavigate, useParams } from "react-router-dom";
 import ProductDetails from "../components/ProductDetails/ProductDetails";
@@ -19,7 +19,7 @@ function ProductInfo() {
       setProduct(products.find((p) => p._id === params.id));
     }
   }, [products]);
-  
+
   return isLoading ? (
     <CircularProgress />
   ) : (
@@ -32,7 +32,7 @@ function ProductInfo() {
         aria-label="Add"
       >
         <ArrowBackIcon />
-        Back
+        <FormattedMessage id={"Back"} />
       </Button>
       <div
         style={{

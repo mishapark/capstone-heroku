@@ -4,6 +4,7 @@ import { InputLabel } from "@material-ui/core";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import styles from "./styles";
+import { FormattedMessage } from "react-intl";
 
 const records = [
   {
@@ -97,7 +98,7 @@ const records = [
   },
 ];
 
-const newarr = records.map(e => {
+const newarr = records.map((e) => {
   return e.options.reduce((acc, current) => {
     const optionRows = [];
     optionRows.push({
@@ -106,8 +107,8 @@ const newarr = records.map(e => {
     });
     acc = acc.concat(optionRows);
     return acc;
-  }, [])
-})
+  }, []);
+});
 
 function RecordType({ required, label, placeholder, name }) {
   const { register } = useFormContext();
@@ -116,14 +117,12 @@ function RecordType({ required, label, placeholder, name }) {
     <div style={styles.inputContainer}>
       <InputLabel style={styles.inputLabel} htmlFor="component-error">
         {required ? <span style={styles.ipnutReq}>*</span> : null}
-        {label}
+        <FormattedMessage id={label} />
       </InputLabel>
       <div style={styles.input}>
         <Autocomplete
           size="small"
-          options={
-            [].concat(...newarr)
-          }
+          options={[].concat(...newarr)}
           groupBy={(option) => option.title}
           getOptionLabel={(option) => option.options}
           fullWidth

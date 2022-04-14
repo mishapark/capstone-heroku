@@ -76,17 +76,17 @@ const ROLES = [
         menuOptions: [{ name: "Edit user groups", icon: <EditIcon /> }],
         optionsColor: "#c365d3",
       },
-      {
-        title: "Sidebar Access",
-        color: "#f44336",
-        icon: <ViewSidebarIcon />,
-        menuOptions: [
-          { name: "Add sidebar access", icon: <AddIcon /> },
-          { name: "Remove sidebar access", icon: <RemoveIcon /> },
-          { name: "Edit sidebar access", icon: <EditIcon /> },
-        ],
-        optionsColor: "#ff7f75",
-      },
+      // {
+      //   title: "Sidebar Access",
+      //   color: "#f44336",
+      //   icon: <ViewSidebarIcon />,
+      //   menuOptions: [
+      //     { name: "Add sidebar access", icon: <AddIcon /> },
+      //     { name: "Remove sidebar access", icon: <RemoveIcon /> },
+      //     { name: "Edit sidebar access", icon: <EditIcon /> },
+      //   ],
+      //   optionsColor: "#ff7f75",
+      // },
       {
         title: "Company Settings",
         color: "#ffd229",
@@ -150,7 +150,7 @@ function Settings() {
       <SettingsList title={ROLES[2].title} cards={ROLES[1].cards} />
       <SettingsList title={ROLES[2].title} cards={ROLES[2].cards} />
 
-      {role === "Super_Admin" ? (
+      {/* {role === "Super_Admin" ? (
         <SettingsList title={ROLES[2].title} cards={ROLES[0].cards} />
       ) : null}
       {role === "Admin" ? (
@@ -158,7 +158,7 @@ function Settings() {
       ) : null}
       {role === "Viewer" ? (
         <SettingsList title={ROLES[2].title} cards={ROLES[2].cards} />
-      ) : null}
+      ) : null} */}
     </>
   );
 }

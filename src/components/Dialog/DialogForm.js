@@ -10,6 +10,8 @@ import ProductTechnicalInfo from "./AddProductSections/ProductTechnicalInfo";
 import ProductEnvironInfo from "./AddProductSections/ProductEnvironInfo";
 import MarkingDoc from "./AddProductSections/MarkingDoc";
 import ComplianceReports from "./AddProductSections/ComplianceReports";
+import { FormattedMessage } from "react-intl";
+
 const styles = {
   inputs: {
     display: "flex",
@@ -75,7 +77,7 @@ function DialogForm({ title, standards, countries, editContent }) {
         aria-controls="panel1a-content"
         id="panel1a-header"
       >
-        {title}
+        <FormattedMessage id={title} />
       </AccordionSummary>
       <AccordionDetails>
         <div style={styles.inputs}>{renderForm(title)}</div>

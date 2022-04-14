@@ -4,6 +4,7 @@ import { InputLabel } from "@material-ui/core";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import styles from "./styles";
+import { FormattedMessage } from "react-intl";
 
 function AutocompleteInput({ required, label, placeholder, options, name }) {
   const { register } = useFormContext();
@@ -12,7 +13,7 @@ function AutocompleteInput({ required, label, placeholder, options, name }) {
     <div style={styles.inputContainer}>
       <InputLabel style={styles.inputLabel} htmlFor="component-error">
         {required ? <span style={styles.ipnutReq}>*</span> : null}
-        {label}
+        <FormattedMessage id={label} />
       </InputLabel>
       <div style={styles.input}>
         <>

@@ -9,6 +9,7 @@ import {
 } from "@material-ui/core";
 import TextField from "@mui/material/TextField";
 import styles from "./styles";
+import { FormattedMessage } from "react-intl";
 
 function SupplyConnInput({ required, label, placeholder, options, name }) {
   const [state, setState] = useState(options);
@@ -44,7 +45,7 @@ function SupplyConnInput({ required, label, placeholder, options, name }) {
     >
       <InputLabel style={styles.inputLabel} htmlFor="component-error">
         {required ? <span style={styles.ipnutReq}>*</span> : null}
-        {label}
+        <FormattedMessage id={label} />
       </InputLabel>
       <div
         style={{

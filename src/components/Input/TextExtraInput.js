@@ -3,6 +3,7 @@ import { InputLabel, TextField, Button } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import styles from "./styles";
+import { FormattedMessage } from "react-intl";
 
 function TextExtraInput({ required, label, placeholder, field, editContent }) {
   const [content, setContent] = useState(
@@ -28,7 +29,7 @@ function TextExtraInput({ required, label, placeholder, field, editContent }) {
     <div style={styles.inputContainer}>
       <InputLabel style={styles.inputLabel} htmlFor="component-error">
         {required ? <span style={styles.ipnutReq}>*</span> : null}
-        {label}
+        <FormattedMessage id={label} />
       </InputLabel>
       <div style={styles.input}>
         <>

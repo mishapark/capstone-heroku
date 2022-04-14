@@ -2,6 +2,7 @@ import React from "react";
 import { InputLabel } from "@material-ui/core";
 import Typography from "@mui/material/Typography";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
+import { FormattedMessage } from "react-intl";
 
 const styles = {
   element: { marginBottom: 10, flex: "0 0 25%" },
@@ -16,7 +17,9 @@ function ProductEntries({ title, data }) {
         return (
           <>
             <div style={styles.element}>
-              <InputLabel style={styles.mb10}>Regulatory Model Name</InputLabel>
+              <InputLabel style={styles.mb10}>
+                <FormattedMessage id={"Regulatory Model Name"} />
+              </InputLabel>
               <div>
                 {data.regulatory_model_name
                   ? data.regulatory_model_name
@@ -24,31 +27,41 @@ function ProductEntries({ title, data }) {
               </div>
             </div>
             <div style={styles.element}>
-              <InputLabel style={styles.mb10}>Product Name</InputLabel>
+              <InputLabel style={styles.mb10}>
+                <FormattedMessage id={"Product Name"} />
+              </InputLabel>
               <div>{data.product_name ? data.product_name : " - "}</div>
             </div>
             <div style={styles.element}>
-              <InputLabel style={styles.mb10}>Regulatory Family</InputLabel>
+              <InputLabel style={styles.mb10}>
+                <FormattedMessage id={"Regulatory Family"} />
+              </InputLabel>
               <div>{data.product_family ? data.product_family : " - "}</div>
             </div>
             <div style={styles.element}>
-              <InputLabel style={styles.mb10}>Product Category</InputLabel>
+              <InputLabel style={styles.mb10}>
+                <FormattedMessage id={"Product Category"} />
+              </InputLabel>
               <div>{data.product_category ? data.product_category : " - "}</div>
             </div>
             <div style={styles.element}>
               <InputLabel style={styles.mb10}>
-                Product Description / Intended Use
+                <FormattedMessage id={"Product Description / Intended Use"} />
               </InputLabel>
               <div>
                 {data.product_description ? data.product_description : " - "}
               </div>
             </div>
             <div style={styles.element}>
-              <InputLabel style={styles.mb10}>Model Difference</InputLabel>
+              <InputLabel style={styles.mb10}>
+                <FormattedMessage id={"Model Difference"} />
+              </InputLabel>
               <div>{data.model_difference ? data.model_difference : " - "}</div>
             </div>
             <div style={styles.element}>
-              <InputLabel style={styles.mb10}>Intended Environment</InputLabel>
+              <InputLabel style={styles.mb10}>
+                <FormattedMessage id={"Intended Environment"} />
+              </InputLabel>
               <div>
                 {data.intended_environment
                   ? data.intended_environment.join(", ")
@@ -56,20 +69,22 @@ function ProductEntries({ title, data }) {
               </div>
             </div>
             <div style={styles.element}>
-              <InputLabel style={styles.mb10}>Applicable Standards</InputLabel>
+              <InputLabel style={styles.mb10}>
+                <FormattedMessage id={"Applicable Standards"} />
+              </InputLabel>
               <div>
                 {data.applicable_standard ? data.applicable_standard : " - "}
               </div>
             </div>
             <div style={styles.element}>
               <InputLabel style={styles.mb10}>
-                Applicant Name and Address
+                <FormattedMessage id={"Applicant Name and Address"} />
               </InputLabel>
               <div>{data.applicant.name ? data.applicant.name : " - "}</div>
             </div>
             <div style={styles.element}>
               <InputLabel style={styles.mb10}>
-                Manufacturer Name and Address
+                <FormattedMessage id={"Manufacturer Name and Address"} />
               </InputLabel>
               <div>
                 {data.manufacturer[0].name ? data.manufacturer[0].name : " - "}{" "}
@@ -77,11 +92,15 @@ function ProductEntries({ title, data }) {
               </div>
             </div>
             <div style={styles.element}>
-              <InputLabel style={styles.mb10}>TradeMark</InputLabel>
+              <InputLabel style={styles.mb10}>
+                <FormattedMessage id={"TradeMark"} />
+              </InputLabel>
               <div>{data.trade_mark.status === true ? "Yes" : "No"}</div>
             </div>
             <div style={styles.element}>
-              <InputLabel style={styles.mb10}>Family/Series Model</InputLabel>
+              <InputLabel style={styles.mb10}>
+                <FormattedMessage id={"Family/Series Model"} />
+              </InputLabel>
               <div>
                 {data.family_series_model[0]
                   ? data.family_series_model[0].text
@@ -89,7 +108,9 @@ function ProductEntries({ title, data }) {
               </div>
             </div>
             <div style={styles.element}>
-              <InputLabel style={styles.mb10}>Market</InputLabel>
+              <InputLabel style={styles.mb10}>
+                <FormattedMessage id={"Market"} />
+              </InputLabel>
               <div>
                 {data.market && data.market[0].country_name !== ""
                   ? data.market.map((c) => c.country_name).join(", ")
@@ -103,7 +124,9 @@ function ProductEntries({ title, data }) {
           <>
             <div style={styles.element}>
               <InputLabel style={styles.mb10}>
-                Overall Size of Equipment (W x D x H)
+                <FormattedMessage
+                  id={"Overall Size of Equipment (W x D x H)"}
+                />
               </InputLabel>
               <div>{`W: ${
                 data.equipment_size.width ? data.equipment_size.width : " - "
@@ -117,33 +140,35 @@ function ProductEntries({ title, data }) {
             </div>
             <div style={styles.element}>
               <InputLabel style={styles.mb10}>
-                Power Rating/Electrical Rating
+                <FormattedMessage id={"Power Rating/Electrical Rating"} />
               </InputLabel>
               <div>
-                Voltage:{" "}
+                <FormattedMessage id={"Voltage"} />:{" "}
                 {data.power_rating?.voltage ? data.power_rating.voltage : "0"}
               </div>
               <div>
-                Phase:{" "}
+                <FormattedMessage id={"Phase"} />:{" "}
                 {data.power_rating?.phase ? data.power_rating.phase : "0"}
               </div>
               <div>
-                Frequency:{" "}
+                <FormattedMessage id={"Frequency"} />:{" "}
                 {data.power_rating?.frequency
                   ? data.power_rating.frequency
                   : "0"}
               </div>
               <div>
-                Power:{" "}
+                <FormattedMessage id={"Power"} />:{" "}
                 {data.power_rating?.power ? data.power_rating.power : "0"}
               </div>
               <div>
-                Current:{" "}
+                <FormattedMessage id={"Current"} />:{" "}
                 {data.power_rating?.current ? data.power_rating.current : "0"}
               </div>
             </div>
             <div style={styles.element}>
-              <InputLabel style={styles.mb10}>Operation Mode</InputLabel>
+              <InputLabel style={styles.mb10}>
+                <FormattedMessage id={"Operation Mode"} />
+              </InputLabel>
               <div>{`${
                 data.operation_mode.selected_mode
                   ? data.operation_mode.selected_mode
@@ -154,7 +179,7 @@ function ProductEntries({ title, data }) {
             </div>
             <div style={styles.element}>
               <InputLabel style={styles.mb10}>
-                Classification of use by
+                <FormattedMessage id={"Classification of use by"} />
               </InputLabel>
               <div>
                 {data.use_classification[0] !== "false"
@@ -163,7 +188,9 @@ function ProductEntries({ title, data }) {
               </div>
             </div>
             <div style={styles.element}>
-              <InputLabel style={styles.mb10}>Supply Connection</InputLabel>
+              <InputLabel style={styles.mb10}>
+                <FormattedMessage id={"Supply Connection"} />
+              </InputLabel>
               <div>
                 {data.supply_connection[0] !== "false"
                   ? data.supply_connection.join(", ")
@@ -172,7 +199,7 @@ function ProductEntries({ title, data }) {
             </div>
             <div style={styles.element}>
               <InputLabel style={styles.mb10}>
-                Supply Connection – Type
+                <FormattedMessage id={"Supply Connection – Type"} />
               </InputLabel>
               <div>
                 {data.supply_connection_type.length !== 0
@@ -181,7 +208,9 @@ function ProductEntries({ title, data }) {
               </div>
             </div>
             <div style={styles.element}>
-              <InputLabel style={styles.mb10}>Equipment Mobility</InputLabel>
+              <InputLabel style={styles.mb10}>
+                <FormattedMessage id={"Equipment Mobility"} />
+              </InputLabel>
               <div>
                 {data.mobility[0] !== "false"
                   ? data.mobility.join(", ")
@@ -194,12 +223,16 @@ function ProductEntries({ title, data }) {
         return (
           <>
             <div style={styles.element}>
-              <InputLabel style={styles.mb10}>Pollution Degree</InputLabel>
+              <InputLabel style={styles.mb10}>
+                <FormattedMessage id={"Pollution Degree"} />
+              </InputLabel>
               <div>{data.pollution_degree ? data.pollution_degree : " - "}</div>
             </div>
             <div style={styles.element}>
               <InputLabel style={styles.mb10}>
-                Manufacturer Specific Max Operating Ambient
+                <FormattedMessage
+                  id={"Manufacturer Specific Max Operating Ambient"}
+                />
               </InputLabel>
               <div>
                 {data.max_operating_ambient
@@ -209,7 +242,7 @@ function ProductEntries({ title, data }) {
             </div>
             <div style={styles.element}>
               <InputLabel style={styles.mb10}>
-                Ingree Protection Classification
+                <FormattedMessage id={"Ingree Protection Classification"} />
               </InputLabel>
               <div>
                 {data.ingree_protection_classification
@@ -219,7 +252,7 @@ function ProductEntries({ title, data }) {
             </div>
             <div style={styles.element}>
               <InputLabel style={styles.mb10}>
-                Altitude During Operation
+                <FormattedMessage id={"Altitude During Operation"} />
               </InputLabel>
               <div>
                 {data.operation_altitude
@@ -229,14 +262,16 @@ function ProductEntries({ title, data }) {
             </div>
             <div style={styles.element}>
               <InputLabel style={styles.mb10}>
-                Mass Of Equipment (in kg)
+                <FormattedMessage id={"Mass Of Equipment (in kg)"} />
               </InputLabel>
               <div>
                 {data.equipment_mass ? parseFloat(data.equipment_mass) : " - "}
               </div>
             </div>
             <div style={styles.element}>
-              <InputLabel style={styles.mb10}>Relative Humidity (%)</InputLabel>
+              <InputLabel style={styles.mb10}>
+                <FormattedMessage id={"Relative Humidity (%)"} />
+              </InputLabel>
               <div>
                 {data.relative_humidity
                   ? parseFloat(data.relative_humidity)
@@ -245,7 +280,7 @@ function ProductEntries({ title, data }) {
             </div>
             <div style={styles.element}>
               <InputLabel style={styles.mb10}>
-                Atmospheric Pressure [kPa]
+                <FormattedMessage id={"Atmospheric Pressure [kPa]"} />
               </InputLabel>
               <div>
                 {data.atmospheric_pressure
@@ -254,7 +289,9 @@ function ProductEntries({ title, data }) {
               </div>
             </div>
             <div style={styles.element}>
-              <InputLabel style={styles.mb10}>Indoor or Outdoor</InputLabel>
+              <InputLabel style={styles.mb10}>
+                <FormattedMessage id={"Indoor or Outdoor"} />
+              </InputLabel>
               <div>
                 {data.indoor_outdoor !== "false" ? data.indoor_outdoor : " - "}
               </div>
@@ -265,7 +302,9 @@ function ProductEntries({ title, data }) {
         return (
           <>
             <div style={styles.element}>
-              <InputLabel style={styles.mb10}>Copy of Marking Plate</InputLabel>
+              <InputLabel style={styles.mb10}>
+                <FormattedMessage id={"Copy of Marking Plate"} />
+              </InputLabel>
               <div>
                 {data.marking_plate.length !== 0
                   ? data.marking_plate.map((file) => (
@@ -284,7 +323,7 @@ function ProductEntries({ title, data }) {
             </div>
             <div style={styles.element}>
               <InputLabel style={styles.mb10}>
-                Warning/Cautionary Marking
+                <FormattedMessage id={"Warning/Cautionary Marking"} />
               </InputLabel>
               <div>
                 {data.warning_mark.length !== 0
@@ -303,11 +342,15 @@ function ProductEntries({ title, data }) {
               </div>
             </div>
             <div style={styles.element}>
-              <InputLabel style={styles.mb10}>Fuse Type</InputLabel>
+              <InputLabel style={styles.mb10}>
+                <FormattedMessage id={"Fuse Type"} />
+              </InputLabel>
               <div>{data.fuse_type ? data.fuse_type : " - "}</div>
             </div>
             <div style={styles.element}>
-              <InputLabel style={styles.mb10}>Fuse Marking</InputLabel>
+              <InputLabel style={styles.mb10}>
+                <FormattedMessage id={"Fuse Marking"} />
+              </InputLabel>
               <div>{data.fuse_marking !== "" ? data.fuse_marking : " - "}</div>
             </div>
           </>
@@ -316,8 +359,10 @@ function ProductEntries({ title, data }) {
         return (
           <>
             <div style={styles.element}>
-              <InputLabel style={styles.mb10}>Report Number</InputLabel>
-              <div>{data ? data[0] : " - "}</div>
+              <InputLabel style={styles.mb10}>
+                <FormattedMessage id={"Report Number"} />
+              </InputLabel>
+              <div>{data ? (data[0] !== "" ? data[0] : " - ") : " - "}</div>
             </div>
           </>
         );

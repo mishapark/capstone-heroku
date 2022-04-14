@@ -9,6 +9,7 @@ import {
 } from "@material-ui/core";
 import UploadIcon from "@mui/icons-material/Upload";
 import styles from "./styles";
+import { FormattedMessage } from "react-intl";
 
 function RadioUpload({ required, label, options, name, editContent }) {
   const { register } = useFormContext();
@@ -21,7 +22,7 @@ function RadioUpload({ required, label, options, name, editContent }) {
     <div style={styles.inputContainer}>
       <InputLabel style={styles.inputLabel} htmlFor="component-error">
         {required ? <span style={styles.ipnutReq}>*</span> : null}
-        {label}
+        <FormattedMessage id={label} />
       </InputLabel>
       <div style={styles.input}>
         <>

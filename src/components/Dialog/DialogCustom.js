@@ -9,6 +9,7 @@ import { getCountries } from "../../api/countries";
 import { getStandards } from "../../api/standards";
 import useProduct from "../../hooks/useProduct";
 import axios from "axios";
+import { FormattedMessage } from "react-intl";
 
 function DialogCustom({ title, onClose, editContent, setRequestData }) {
   const [standards, setStandards] = useState([]);
@@ -113,7 +114,9 @@ function DialogCustom({ title, onClose, editContent, setRequestData }) {
             : methods.handleSubmit(onEdit)
         }
       >
-        <DialogTitle id="scroll-dialog-title">{title}</DialogTitle>
+        <DialogTitle id="scroll-dialog-title">
+          <FormattedMessage id={title} />
+        </DialogTitle>
         <DialogContent dividers={true} style={{ backgroundColor: "#f6f7f8" }}>
           <DialogForm
             title="General Product Information"
@@ -136,14 +139,16 @@ function DialogCustom({ title, onClose, editContent, setRequestData }) {
           <DialogForm title="Compliance Reports" editContent={editContent} />
         </DialogContent>
         <DialogActions>
-          <Button onClick={onClose}>Cancel</Button>
+          <Button onClick={onClose}>
+            <FormattedMessage id={"Cancel"} />
+          </Button>
           <Button
             type="submit"
             onClick={onClose}
             color="primary"
             variant="contained"
           >
-            Submit
+            <FormattedMessage id={"Submit"} />
           </Button>
         </DialogActions>
       </form>

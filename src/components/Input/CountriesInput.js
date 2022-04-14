@@ -3,6 +3,7 @@ import { InputLabel } from "@material-ui/core";
 import { Autocomplete } from "@mui/material";
 import { TextField } from "@mui/material";
 import styles from "./styles";
+import { FormattedMessage } from "react-intl";
 
 function CountriesInput({
   required,
@@ -25,7 +26,7 @@ function CountriesInput({
     <div style={styles.inputContainer}>
       <InputLabel style={styles.inputLabel} htmlFor="component-error">
         {required ? <span style={styles.ipnutReq}>*</span> : null}
-        {label}
+        <FormattedMessage id={label} />
       </InputLabel>
       <div style={styles.input}>
         <Autocomplete

@@ -3,6 +3,7 @@ import { useFormContext } from "react-hook-form";
 import { InputLabel, Button } from "@material-ui/core";
 import UploadIcon from "@mui/icons-material/Upload";
 import styles from "./styles";
+import { FormattedMessage } from "react-intl";
 
 function UploadInput({ required, label, uploadLabel, name }) {
   const { register } = useFormContext();
@@ -12,7 +13,7 @@ function UploadInput({ required, label, uploadLabel, name }) {
     <div style={styles.inputContainer}>
       <InputLabel style={styles.inputLabel} htmlFor="component-error">
         {required ? <span style={styles.ipnutReq}>*</span> : null}
-        {label}
+        <FormattedMessage id={label} />
       </InputLabel>
       <div style={styles.input}>
         <label htmlFor={uploadLabel}>

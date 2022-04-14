@@ -6,6 +6,7 @@ import {
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ProductEntries from "./ProductEntries";
+import { FormattedMessage } from "react-intl";
 
 const styles = {
   inputs: {
@@ -32,7 +33,7 @@ function ProductDetails({ title, data }) {
         aria-controls="panel1a-content"
         id="panel1a-header"
       >
-        {title}
+        <FormattedMessage id={title} />
       </AccordionSummary>
       <AccordionDetails>
         <div style={styles.inputs}>

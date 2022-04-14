@@ -7,6 +7,7 @@ import {
   Checkbox,
 } from "@material-ui/core";
 import styles from "./styles";
+import { FormattedMessage } from "react-intl";
 
 function CheckboxInput({ required, label, options, name }) {
   const [state, setState] = useState(options);
@@ -27,7 +28,7 @@ function CheckboxInput({ required, label, options, name }) {
     <div style={styles.inputContainer}>
       <InputLabel style={styles.inputLabel} htmlFor="component-error">
         {required ? <span style={styles.ipnutReq}>*</span> : null}
-        {label}
+        <FormattedMessage id={label} />
       </InputLabel>
       <div style={styles.input}>
         <FormGroup

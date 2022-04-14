@@ -77,7 +77,7 @@ const useProduct = (data, files) => {
       atmospheric_pressure: data.atmospheric_pressure
         ? parseFloat(data.atmospheric_pressure)
         : 0,
-      indoor_outdoor: data.indoor_outdoor && data.indoor_outdoor.join(", "),
+      indoor_outdoor: data.indoor_outdoor ? data.indoor_outdoor.join(", ") : "",
     },
     marking_and_doc: {
       marking_plate: files[0].marking_plate,

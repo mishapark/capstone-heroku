@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { InputLabel, TextField, InputAdornment } from "@material-ui/core";
 import styles from "./styles";
+import { FormattedMessage } from "react-intl";
 
 function TextCelciusInput({ required, label, placeholder, name, editContent }) {
   const [content, setContent] = useState(
@@ -17,7 +18,7 @@ function TextCelciusInput({ required, label, placeholder, name, editContent }) {
     <div style={styles.inputContainer}>
       <InputLabel style={styles.inputLabel} htmlFor="component-error">
         {required ? <span style={styles.ipnutReq}>*</span> : null}
-        {label}
+        <FormattedMessage id={label} />
       </InputLabel>
       <div style={styles.input}>
         <TextField

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { InputLabel } from "@material-ui/core";
 import TextField from "@mui/material/TextField";
 import styles from "./styles";
+import { FormattedMessage } from "react-intl";
 
 function PowerRatingInput({
   required,
@@ -25,7 +26,7 @@ function PowerRatingInput({
     <div style={styles.inputContainer}>
       <InputLabel style={styles.inputLabel} htmlFor="component-error">
         {required ? <span style={styles.ipnutReq}>*</span> : null}
-        {label}
+        <FormattedMessage id={label} />
       </InputLabel>
       <div style={styles.powerInput}>
         {options.map((e) => (

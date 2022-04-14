@@ -35,7 +35,7 @@ function Products() {
         <Card>
           <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
             <Typography variant="h6" component="div" sx={{ flex: "1 1 100%" }}>
-              Products
+              <FormattedMessage id={"Products"}></FormattedMessage>
             </Typography>
             <Tooltip title="Add Product">
               <Button
@@ -45,7 +45,7 @@ function Products() {
                 aria-label="Add"
               >
                 <AddIcon />
-                Create
+                <FormattedMessage id={"Create"} />
               </Button>
             </Tooltip>
           </Toolbar>

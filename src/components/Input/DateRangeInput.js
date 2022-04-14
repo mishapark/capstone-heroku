@@ -4,6 +4,7 @@ import { InputLabel } from "@material-ui/core";
 import DatePicker from "@mui/lab/DatePicker";
 import styles from "./styles";
 import { useFormContext } from "react-hook-form";
+import { FormattedMessage } from "react-intl";
 
 function DateRangeInput({ required, label, name, editContent }) {
   const [value, setValue] = useState(null);
@@ -13,7 +14,7 @@ function DateRangeInput({ required, label, name, editContent }) {
     <div style={styles.inputContainer}>
       <InputLabel style={styles.inputLabel} htmlFor="component-error">
         {required ? <span style={styles.ipnutReq}>*</span> : null}
-        {label}
+        <FormattedMessage id={label} />
       </InputLabel>
       <div style={styles.input}>
         <DatePicker

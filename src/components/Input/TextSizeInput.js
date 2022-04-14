@@ -4,6 +4,7 @@ import { InputLabel } from "@material-ui/core";
 import styles from "./styles";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import { FormattedMessage } from "react-intl";
 
 function TextSizeInput({ required, label, placeholder, name, editContent }) {
   const [acContent, setAcContent] = useState(
@@ -26,7 +27,7 @@ function TextSizeInput({ required, label, placeholder, name, editContent }) {
     <div style={styles.inputContainer}>
       <InputLabel style={styles.inputLabel} htmlFor="component-error">
         {required ? <span style={styles.ipnutReq}>*</span> : null}
-        {label}
+        <FormattedMessage id={label} />
       </InputLabel>
       <div style={styles.input}>
         <TextField
