@@ -121,25 +121,25 @@ function ProductEntries({ title, data }) {
               </InputLabel>
               <div>
                 Voltage:{" "}
-                {data.power_rating.voltage ? data.power_rating.voltage : " - "}
+                {data.power_rating?.voltage ? data.power_rating.voltage : "0"}
               </div>
               <div>
                 Phase:{" "}
-                {data.power_rating.phase ? data.power_rating.phase : " - "}
+                {data.power_rating?.phase ? data.power_rating.phase : "0"}
               </div>
               <div>
                 Frequency:{" "}
-                {data.power_rating.frequency
+                {data.power_rating?.frequency
                   ? data.power_rating.frequency
-                  : " - "}
+                  : "0"}
               </div>
               <div>
                 Power:{" "}
-                {data.power_rating.power ? data.power_rating.power : " - "}
+                {data.power_rating?.power ? data.power_rating.power : "0"}
               </div>
               <div>
                 Current:{" "}
-                {data.power_rating.current ? data.power_rating.current : " - "}
+                {data.power_rating?.current ? data.power_rating.current : "0"}
               </div>
             </div>
             <div style={styles.element}>
@@ -316,22 +316,8 @@ function ProductEntries({ title, data }) {
         return (
           <>
             <div style={styles.element}>
-              <InputLabel style={styles.mb10}>Copy of Marking Plate</InputLabel>
-              <div>{}</div>
-            </div>
-            <div style={styles.element}>
-              <InputLabel style={styles.mb10}>
-                Warning/Cautionary Marking
-              </InputLabel>
-              <div>{}</div>
-            </div>
-            <div style={styles.element}>
-              <InputLabel style={styles.mb10}>Fuse Type</InputLabel>
-              <div>{}</div>
-            </div>
-            <div style={styles.element}>
-              <InputLabel style={styles.mb10}>Fuse Marking</InputLabel>
-              <div>{}</div>
+              <InputLabel style={styles.mb10}>Report Number</InputLabel>
+              <div>{data ? data[0] : " - "}</div>
             </div>
           </>
         );

@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { InputLabel, TextField } from "@material-ui/core";
 import styles from "./styles";
 
-function TextNumX({ required, label, placeholder, name }) {
+function TextNumX({ required, label, placeholder, name, editContent }) {
+  const [content, setContent] = useState(
+    editContent
+      ? editContent.ingree_protection_classification
+        ? editContent.ingree_protection_classification
+        : ""
+      : ""
+  );
   const { register } = useFormContext();
 
   const re = /^[0-9+Xx\b]+$/;
@@ -27,6 +34,8 @@ function TextNumX({ required, label, placeholder, name }) {
           }}
           placeholder={placeholder}
           {...register(name)}
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
         />
       </div>
     </div>

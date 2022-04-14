@@ -7,7 +7,17 @@ import TextNumDecInput from "../../Input/TextNumDecInput";
 import TextNumX from "../../Input/TextNumX";
 
 function ProductEnvironInfo({ editContent }) {
-  const options = ["PD1", "PD2", "PD3"];
+  const options = [
+    {
+      name: "P1",
+    },
+    {
+      name: "P2",
+    },
+    {
+      name: "P3",
+    },
+  ];
 
   return (
     <>
@@ -24,6 +34,7 @@ function ProductEnvironInfo({ editContent }) {
         label="Manufacturer Specific Max Operating Ambient"
         placeholder="Enter Ambient"
         name="max_operating_ambient"
+        editContent={editContent}
       />
       <TextNumX
         required={false}
@@ -37,7 +48,7 @@ function ProductEnvironInfo({ editContent }) {
         label="Altitude During Operation"
         placeholder="Enter Altitude"
         name="operation_altitude"
-        // editContent={editContent}
+        editContent={editContent}
       />
       <TextNumDecInput
         required={false}
@@ -51,19 +62,36 @@ function ProductEnvironInfo({ editContent }) {
         label="Relative Humidity (%)"
         placeholder="Enter Humidity"
         name="relative_humidity"
-        // editContent={editContent}
+        editContent={editContent}
       />
       <TextInput
         required={false}
         label="Atmospheric Pressure [kPa]"
         placeholder="Enter Pressure"
         name="atmospheric_pressure"
-        // editContent={editContent}
+        editContent={editContent}
       />
       <CheckboxInput
         required={false}
         label="Indoor or Outdoor"
-        options={["Indoor", "Outdoor"]}
+        options={[
+          {
+            name: "Indoor",
+            isChecked: editContent
+              ? editContent.indoor_outdoor.includes("Indoor")
+                ? true
+                : false
+              : false,
+          },
+          {
+            name: "Outdoor",
+            isChecked: editContent
+              ? editContent.indoor_outdoor.includes("Outdoor")
+                ? true
+                : false
+              : false,
+          },
+        ]}
         name="indoor_outdoor"
         editContent={editContent}
       />

@@ -1,20 +1,13 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
-import DateRangePicker from "@mui/lab/DateRangePicker";
-import Box from "@mui/material/Box";
-import { useFormContext } from "react-hook-form";
 import { InputLabel } from "@material-ui/core";
+import DatePicker from "@mui/lab/DatePicker";
 import styles from "./styles";
+import { useFormContext } from "react-hook-form";
 
-function DateRangeInput({
-  required,
-  label,
-  placeholder,
-  name,
-  type,
-  editContent,
-}) {
-  const [value, setValue] = useState([null, null]);
+function DateRangeInput({ required, label, name, editContent }) {
+  const [value, setValue] = useState(null);
+  const { register } = useFormContext();
 
   return (
     <div style={styles.inputContainer}>
@@ -23,36 +16,13 @@ function DateRangeInput({
         {label}
       </InputLabel>
       <div style={styles.input}>
-        <DateRangePicker
-          startText="Issued Date"
-          endText="Expiry Date"
+        <DatePicker
           value={value}
           onChange={(newValue) => {
-            console.log(newValue);
             setValue(newValue);
           }}
-          renderInput={(startProps, endProps) => (
-            <React.Fragment>
-              <TextField
-                size="small"
-                {...startProps}
-                id="outlined-basic"
-                variant="outlined"
-                fullWidth
-                helperText=""
-                // {...register(name)}
-              />
-              <Box sx={{ mx: 2 }}> & </Box>
-              <TextField
-                size="small"
-                {...endProps}
-                id="outlined-basic"
-                variant="outlined"
-                fullWidth
-                helperText=""
-                // {...register(name)}
-              />
-            </React.Fragment>
+          renderInput={(params) => (
+            <TextField {...params} size="small" {...register(name)} />
           )}
         />
       </div>

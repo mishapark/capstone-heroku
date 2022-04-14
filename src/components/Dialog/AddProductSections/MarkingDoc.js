@@ -3,7 +3,7 @@ import RadioInput from "../../Input/RadioInput";
 import TextInput from "../../Input/TextInput";
 import UploadInput from "../../Input/UploadInput";
 
-function MarkingDoc() {
+function MarkingDoc({ editContent }) {
   return (
     <>
       <UploadInput
@@ -22,14 +22,26 @@ function MarkingDoc() {
         required={false}
         label="Fuse Type"
         placeholder="Enter Fuse Type"
-        options={["Replaceable", "Non-Replaceable", "None"]}
+        options={[
+          {
+            name: "Replaceable",
+          },
+          {
+            name: "Non-Replaceable",
+          },
+          {
+            name: "None",
+          },
+        ]}
         name="fuse_type"
+        editContent={editContent}
       />
       <TextInput
         required={false}
         label="Fuse Marking"
         placeholder="Enter Fuse Marking"
         name="fuse_marking"
+        editContent={editContent}
       />
     </>
   );

@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { InputLabel, TextField, InputAdornment } from "@material-ui/core";
 import styles from "./styles";
 
-function TextCelciusInput({ required, label, placeholder, name }) {
+function TextCelciusInput({ required, label, placeholder, name, editContent }) {
+  const [content, setContent] = useState(
+    editContent
+      ? editContent.max_operating_ambient
+        ? editContent.max_operating_ambient
+        : ""
+      : ""
+  );
   const { register } = useFormContext();
 
   return (
@@ -27,6 +34,8 @@ function TextCelciusInput({ required, label, placeholder, name }) {
           }}
           placeholder={placeholder}
           {...register(name)}
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
         />
       </div>
     </div>

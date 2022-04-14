@@ -46,11 +46,13 @@ const useProduct = (data, files) => {
       },
       equipment_weight: data.equipment_mass,
       power_rating: {
-        voltage: data.power_rating?.voltage,
-        phase: data.power_rating?.phase,
-        frequency: data.power_rating?.frequency,
-        power: data.power_rating?.power,
-        current: data.power_rating?.current,
+        voltage: data.power_rating?.voltage ? data.power_rating.voltage : 0,
+        phase: data.power_rating?.phase ? data.power_rating.phase : 0,
+        frequency: data.power_rating?.frequency
+          ? data.power_rating.frequency
+          : 0,
+        power: data.power_rating?.power ? data.power_rating.power : 0,
+        current: data.power_rating?.current ? data.power_rating.current : 0,
       },
       operation_mode: {
         selected_mode: data.operation_mode,
@@ -65,10 +67,16 @@ const useProduct = (data, files) => {
       pollution_degree: data.pollution_degree,
       max_operating_ambient: parseFloat(data.max_operating_ambient),
       ingree_protection_classification: data.ingree_protection_classification,
-      operation_altitude: parseFloat(data.operation_altitude),
+      operation_altitude: data.operation_altitude
+        ? parseFloat(data.operation_altitude)
+        : 0,
       equipment_mass: parseFloat(data.equipment_mass),
-      relative_humidity: parseFloat(data.relative_humidity),
-      atmospheric_pressure: parseFloat(data.atmospheric_pressure),
+      relative_humidity: data.relative_humidity
+        ? parseFloat(data.relative_humidity)
+        : 0,
+      atmospheric_pressure: data.atmospheric_pressure
+        ? parseFloat(data.atmospheric_pressure)
+        : 0,
       indoor_outdoor: data.indoor_outdoor && data.indoor_outdoor.join(", "),
     },
     marking_and_doc: {
@@ -77,7 +85,9 @@ const useProduct = (data, files) => {
       fuse_type: data.fuse_type,
       fuse_marking: data.fuse_marking,
     },
-    compliance_report_number: [""],
+    compliance_report_number: [
+      data.compliance_report_number ? data.compliance_report_number : "",
+    ],
     last_updated_status: {
       last_updated_by: "",
       last_updated_date: new Date(),

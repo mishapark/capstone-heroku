@@ -51,9 +51,17 @@ function DialogForm({ title, standards, countries, editContent }) {
           />
         );
       case "Marking and Documentations":
-        return <MarkingDoc />;
+        return (
+          <MarkingDoc
+            editContent={editContent && editContent["marking_and_doc"]}
+          />
+        );
       case "Compliance Reports":
-        return <ComplianceReports />;
+        return (
+          <ComplianceReports
+            editContent={editContent && editContent["compliance_report_number"]}
+          />
+        );
       default:
         break;
     }

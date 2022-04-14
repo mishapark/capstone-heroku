@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import {
   InputLabel,
@@ -8,7 +8,10 @@ import {
 } from "@material-ui/core";
 import styles from "./styles";
 
-function RadioInput({ required, label, options, name }) {
+function RadioInput({ required, label, options, name, editContent }) {
+  const [radioValue, setRadioValue] = useState(
+    editContent ? (editContent[name] ? editContent[name] : "") : ""
+  );
   const { register } = useFormContext();
 
   return (
@@ -22,13 +25,17 @@ function RadioInput({ required, label, options, name }) {
           row
           aria-labelledby="demo-row-radio-buttons-group-label"
           name="row-radio-buttons-group"
+          value={radioValue}
+          onChange={(event) => {
+            setRadioValue(event.target.value);
+          }}
         >
           {options.map((option) => (
             <FormControlLabel
-              key={option}
-              value={option}
+              key={option.name}
+              value={option.name}
               control={<Radio color="primary" {...register(name)} />}
-              label={option}
+              label={option.name}
             />
           ))}
         </RadioGroup>

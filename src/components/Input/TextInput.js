@@ -6,20 +6,13 @@ import styles from "./styles";
 function TextInput({ required, label, placeholder, name, type, editContent }) {
   const [content, setContent] = useState(
     editContent
-      ? typeof editContent[name] === "string"
+      ? typeof editContent[name] === "string" ||
+        typeof editContent[name] === "number"
         ? editContent[name]
         : editContent[name].name
         ? editContent[name].name
         : ""
       : ""
-
-    // editContent
-    //   ? typeof editContent[name] !== "object"
-    //     ? editContent[name]
-    //     : editContent[name].name
-    //     ? editContent[name].name
-    //     : ""
-    //   : ""
   );
   const { register } = useFormContext();
   return (

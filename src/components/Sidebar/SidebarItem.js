@@ -99,7 +99,6 @@ const SidebarItem = ({ route, index, toggleMenu }) => {
         </ListItemIcon>
         <Typography variant="body1" className="flexSpacer">
           <FormattedMessage id={route.name}></FormattedMessage>
-          {console.log(route.name)}
         </Typography>
         {badge(route.badge)}
       </ListItem>

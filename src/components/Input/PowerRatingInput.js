@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useFormContext } from "react-hook-form";
 import { InputLabel } from "@material-ui/core";
 import TextField from "@mui/material/TextField";
 import styles from "./styles";
@@ -13,9 +12,15 @@ function PowerRatingInput({
   editContent,
 }) {
   const [content, setContent] = useState(
-    editContent ? editContent.power_rating : ""
+    editContent
+      ? editContent.power_rating
+      : { voltage: 0, phase: 0, frequency: 0, power: 0, current: 0 }
   );
-
+  useEffect(() => {
+    field.onChange({
+      ...content,
+    });
+  }, []);
   return (
     <div style={styles.inputContainer}>
       <InputLabel style={styles.inputLabel} htmlFor="component-error">
