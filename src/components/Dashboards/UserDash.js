@@ -21,24 +21,28 @@ export const UserDash = ({ products, data, option, d2, o2 }) => {
     <div>
       <Grid container spacing={2}>
         <Grid item xs={12} md={4}>
-          <Paper sx={{ padding: 2 }}>
+          <Paper sx={{ padding: 2, maxWidth: "580px" }}>
             <Typography variant="h6">
               <FormattedMessage id="dash.total"></FormattedMessage>
             </Typography>
             <Typography variant="h4">{products.length}</Typography>
           </Paper>
           <br></br>
-          <Paper sx={{ padding: 2 }}>
-            <div style={{ maxWidth: "700px" }}>
+          <Paper sx={{ padding: 2, maxWidth: "580px", minHeight: "338px" }}>
+            <div>
               <Typography variant="h6">
                 <FormattedMessage id="dash.rfqOverview"></FormattedMessage>
               </Typography>
-              <Pie data={d2} option={o2} style={{ maxWidth: "500px" }} />
+              <Pie
+                data={d2}
+                option={o2}
+                style={{ maxWidth: "500px", height: "300px" }}
+              />
             </div>
           </Paper>
         </Grid>
         <Grid item xs={12} md={8}>
-          <Paper sx={{ padding: 2 }}>
+          <Paper sx={{ padding: 2, maxWidth: "700px", minHeight: "413px" }}>
             <div style={{ maxWidth: "700px" }}>
               <Typography variant="h6">
                 <FormattedMessage id="dash.complaince"></FormattedMessage>
@@ -48,7 +52,7 @@ export const UserDash = ({ products, data, option, d2, o2 }) => {
           </Paper>
         </Grid>
         <Grid item xs={12}>
-          <Paper sx={{ padding: 2 }}>
+          <Paper sx={{ padding: 2, maxWidth: "1000px" }}>
             <Typography variant="h6">
               <FormattedMessage id="dash.renewals"></FormattedMessage>
             </Typography>
