@@ -27,7 +27,7 @@ const messages = {
 const ROLES = {
   User: "Viewer",
   Super_Admin: "Super_Admin",
-  Admin: 5150,
+  Approver: "Approver",
 };
 
 function App() {
@@ -53,7 +53,13 @@ function App() {
             <Route element={<PersistLogin />}>
               <Route
                 element={
-                  <RequireAuth allowedRoles={[ROLES.User, ROLES.Super_Admin]} />
+                  <RequireAuth
+                    allowedRoles={[
+                      ROLES.User,
+                      ROLES.Super_Admin,
+                      ROLES.Approver,
+                    ]}
+                  />
                 }
               >
                 <Route path="/*" element={<Dashboard />} />
