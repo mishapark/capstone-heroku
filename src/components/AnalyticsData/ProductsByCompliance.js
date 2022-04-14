@@ -19,10 +19,12 @@ import { getCompliances } from "../../api/compliances";
 
 // hooks
 import useAuth from "../../hooks/useAuth";
+import useRefreshToken from "../../hooks/useRefreshToken";
 
 function ProductsByCompliance() {
     // auth
     const { auth } = useAuth();
+    const refresh = useRefreshToken();
 
     const option = {
         title: {
@@ -40,7 +42,7 @@ function ProductsByCompliance() {
     
 
     useEffect(() => {
-
+        console.log(refresh)
         getProductsWithToken(auth.accessToken).then((data) => {
             const compliant = data.filter((d) => d.is_compliant == true)
             const nonCompliant = data.filter((d) => d.is_compliant == false)
