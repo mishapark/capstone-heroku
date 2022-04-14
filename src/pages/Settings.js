@@ -149,8 +149,8 @@ function Settings() {
       <SettingsList title={ROLES[2].title} cards={ROLES[0].cards} />
       <SettingsList title={ROLES[2].title} cards={ROLES[1].cards} />
       <SettingsList title={ROLES[2].title} cards={ROLES[2].cards} />
-      {/* 
-      {role === "Super Admin" ? (
+
+      {role === "Super_Admin" ? (
         <SettingsList title={ROLES[2].title} cards={ROLES[0].cards} />
       ) : null}
       {role === "Admin" ? (
@@ -158,7 +158,7 @@ function Settings() {
       ) : null}
       {role === "Viewer" ? (
         <SettingsList title={ROLES[2].title} cards={ROLES[2].cards} />
-      ) : null} */}
+      ) : null}
     </>
   );
 }

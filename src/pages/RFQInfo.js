@@ -125,7 +125,7 @@ export const RFQInfo = () => {
   }, []);
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="md">
       <Paper square={false}>
         <Grid container style={{ padding: "16px" }}>
           <Grid item container>
@@ -159,12 +159,24 @@ export const RFQInfo = () => {
                       handleSelect={handleSelect}
                       handleApprover={handleApprover}
                     ></RFQForm>
-                    <Grid container spacing={2}>
-                      <Grid item xs={8} md={6}>
-                        <Button type="submit">Save</Button>
+                    <Grid container spacing={0} justifyContent="flex-end">
+                      <Grid item xs={1.5}>
+                        <Button
+                          type="submit"
+                          color="primary"
+                          variant="contained"
+                        >
+                          Save
+                        </Button>
                       </Grid>
-                      <Grid item xs={8} md={6}>
-                        <Button onClick={() => navigate("/rfq")}>Cancel</Button>
+                      <Grid item xs={3}>
+                        <Button
+                          color="primary"
+                          variant="contained"
+                          onClick={() => navigate("/rfq")}
+                        >
+                          Cancel
+                        </Button>
                       </Grid>
                     </Grid>
                   </form>
