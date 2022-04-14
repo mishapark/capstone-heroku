@@ -1,5 +1,5 @@
-const lightBlue = require('@material-ui/core/colors/lightBlue');
-const yellow = require('@material-ui/core/colors/yellow');
+const lightBlue = require("@material-ui/core/colors/lightBlue");
+const yellow = require("@material-ui/core/colors/yellow");
 
 // Colors
 const infoColor = lightBlue.default[500];
@@ -15,5 +15,5 @@ export {
   warningColor,
   drawerWidth,
   notificationCenterWidth,
-  MobileBreakpoint
+  MobileBreakpoint,
 };

@@ -21,12 +21,14 @@ export const RFQForm = ({
 }) => {
   return (
     <div>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} sx={{ marginBottom: 3 }}>
         <Grid item xs={4}>
-          <Typography variant="body2">Person Information</Typography>
+          <Typography variant="body2" sx={{ textAlign: "right" }}>
+            Person Information
+          </Typography>
         </Grid>
-        <Grid item xs={6}>
-          <Stack spacing={2}>
+        <Grid item xs={8}>
+          <Stack spacing={2} sx={{ width: "80%" }}>
             <TextField
               id="to"
               variant="outlined"
@@ -35,6 +37,8 @@ export const RFQForm = ({
               size="small"
               value={rfq.to}
               onChange={handleChangeValue}
+              label="To"
+              InputLabelProps={{ shrink: true }}
             />
             <TextField
               id="from"
@@ -44,32 +48,42 @@ export const RFQForm = ({
               name="from"
               value={rfq.from}
               onChange={handleChangeValue}
+              label="From"
+              InputLabelProps={{ shrink: true }}
             />
             <Autocomplete
               disablePortal
               id="approver"
               value={rfq.approver}
               name="approver"
+              size="small"
               onInputChange={(event, value) => handleApprover(event, value)}
               options={approvers.map((element) => element.userName)}
               renderInput={(params) => (
-                <TextField {...params} label="Approver" />
+                <TextField
+                  {...params}
+                  label="Approver"
+                  InputLabelProps={{ shrink: true }}
+                />
               )}
             />
           </Stack>
         </Grid>
         <Grid item xs={4}>
-          <Typography variant="body2">RFQ Details</Typography>
+          <Typography variant="body2" sx={{ textAlign: "right" }}>
+            RFQ Details
+          </Typography>
         </Grid>
-        <Grid item xs={6}>
-          <Stack spacing={2}>
+        <Grid item xs={8}>
+          <Stack spacing={2} sx={{ width: "80%" }}>
             <TextField
               id="rfq-date"
               value={rfq.rfqDate}
               variant="outlined"
-              required
               disabled
               size="small"
+              label="Date"
+              InputLabelProps={{ shrink: true }}
             />
             <TextField
               id="vendor-details"
@@ -79,12 +93,20 @@ export const RFQForm = ({
               name="vendorDetail"
               value={rfq.vendorDetail}
               onChange={handleChangeValue}
+              label="Vendor Details"
+              InputLabelProps={{ shrink: true }}
             />
             <DesktopDatePicker
-              label="Date&Time picker"
               value={value}
               onChange={(e) => handleDate(e)}
-              renderInput={(params) => <TextField {...params} />}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  size="small"
+                  label="Date & Time"
+                  InputLabelProps={{ shrink: true }}
+                />
+              )}
             />
             <TextField
               id="description"
@@ -93,8 +115,11 @@ export const RFQForm = ({
               rows={5}
               size="small"
               name="description"
+              required
               value={rfq.description}
               onChange={handleChangeValue}
+              label="Description"
+              InputLabelProps={{ shrink: true }}
             >
               {rfq.description}
             </TextField>
@@ -107,6 +132,8 @@ export const RFQForm = ({
               name="instruction"
               value={rfq.instruction}
               onChange={handleChangeValue}
+              label="Other Functions"
+              InputLabelProps={{ shrink: true }}
             />
             <TextField
               id="statement"
@@ -116,14 +143,18 @@ export const RFQForm = ({
               value={rfq.statement}
               onChange={handleChangeValue}
               required
+              label="Statement"
+              InputLabelProps={{ shrink: true }}
             />
           </Stack>
         </Grid>
         <Grid item xs={4}>
-          <Typography variant="body2">RFQ Status</Typography>
+          <Typography variant="body2" sx={{ textAlign: "right" }}>
+            RFQ Status
+          </Typography>
         </Grid>
-        <Grid item xs={6}>
-          <Stack spacing={2}>
+        <Grid item xs={8}>
+          <Stack spacing={2} sx={{ width: "80%" }}>
             <Autocomplete
               disablePortal
               id="combo-box-demo"
@@ -132,8 +163,14 @@ export const RFQForm = ({
               value={rfq.status}
               onInputChange={(e, value) => handleSelect(e, value)}
               renderInput={(params) => (
-                <TextField {...params} name="status" label="Status" />
+                <TextField
+                  {...params}
+                  name="status"
+                  label="Status"
+                  InputLabelProps={{ shrink: true }}
+                />
               )}
+              size="small"
             />
           </Stack>
         </Grid>
