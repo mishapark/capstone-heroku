@@ -47,6 +47,9 @@ function Signup() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          width: "550px",
+          p: 5,
+          border: "1px black solid",
         }}
       >
         <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>

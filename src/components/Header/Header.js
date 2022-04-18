@@ -191,7 +191,7 @@ const Header = ({ logo, logoAltText, toggleFullscreen, toggleDrawer }) => {
               className={classes.logo}
               style={{ maxWidth: "30px" }}
             />
-            Alchimetis
+            &nbsp;&nbsp; Alchimetis
           </div>
 
           <Hidden xsDown>

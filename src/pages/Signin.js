@@ -1,6 +1,6 @@
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
+import { Button } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -50,6 +50,9 @@ export default function SignIn() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          width: "550px",
+          p: 5,
+          border: "1px black solid",
         }}
       >
         <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
@@ -141,22 +144,13 @@ export default function SignIn() {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2, backgroundColor: "#3F50B5" }}
+            sx={{ mt: 3, mb: 2 }}
           >
             Sign In
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link to="/forgot" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link to="/signup" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
+          <Link to="/forgot">Forgot password?</Link>
+          <br />
+          <Link to="/signup">Sign up</Link>
         </Box>
       </Box>
     </Container>

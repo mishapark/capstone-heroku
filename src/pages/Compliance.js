@@ -73,13 +73,13 @@ export default function Compliance() {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell key={1} sx={{ fontWeight: "bold" }}>
+              <TableCell key={1}>
                 <FormattedMessage id="compliance.productName"></FormattedMessage>
               </TableCell>
-              <TableCell key={2} sx={{ fontWeight: "bold" }}>
+              <TableCell key={2}>
                 <FormattedMessage id="compliance.status"></FormattedMessage>
               </TableCell>
-              <TableCell key={3} sx={{ fontWeight: "bold" }}>
+              <TableCell key={3}>
                 <FormattedMessage id="compliance.documents"></FormattedMessage>
               </TableCell>
             </TableRow>
