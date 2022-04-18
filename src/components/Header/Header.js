@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     boxShadow: "0 1px 8px rgba(0,0,0,.3)",
     position: "relative",
+    background: "#101637",
     zIndex: theme.zIndex.drawer + 100,
     [theme.breakpoints.down("sm")]: {
       position: "fixed",
@@ -190,7 +191,7 @@ const Header = ({ logo, logoAltText, toggleFullscreen, toggleDrawer }) => {
               className={classes.logo}
               style={{ maxWidth: "30px" }}
             />
-            The Daily Compliance
+            Alchimetis
           </div>
 
           <Hidden xsDown>

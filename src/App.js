@@ -18,6 +18,7 @@ import { IntlProvider } from "react-intl";
 import French from "./languages/fr-CA.json";
 import English from "./languages/en-US.json";
 import LanguageProvider from "./context/LanguageProvider";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const messages = {
   en: English,
@@ -36,40 +37,56 @@ function App() {
   const value = useMemo(() => ({ user, setUser }), [user, setUser]);
   const [language, setLanguage] = React.useState("en");
 
+  const theme = createTheme({
+    typography: {
+      fontFamily: ["Poppins", "sans-serif"].join(","),
+    },
+    palette: {
+      primary: {
+        main: "#0024FF",
+      },
+      secondary: {
+        main: "#edf2ff",
+      },
+    },
+  });
+
   return (
     <LanguageProvider.Provider
       value={{ language: "en", setLanguage: setLanguage }}
     >
       <IntlProvider locale={language} messages={messages[language]}>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            {/* public routes */}
-            <Route path="/" element={<Home />} />
-            <Route path="unathorized" element={<Unauthorized />} />
-            <Route path="signin" element={<SignIn />} />
-            <Route path="signup" element={<Signup />} />
-            <Route path="forgot" element={<Forgot />} />
-            {/* we want to protect these routes */}
-            <Route element={<PersistLogin />}>
-              <Route
-                element={
-                  <RequireAuth
-                    allowedRoles={[
-                      ROLES.User,
-                      ROLES.Super_Admin,
-                      ROLES.Approver,
-                    ]}
-                  />
-                }
-              >
-                <Route path="/*" element={<Dashboard />} />
+        <ThemeProvider theme={theme}>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              {/* public routes */}
+              <Route path="/" element={<Home />} />
+              <Route path="unathorized" element={<Unauthorized />} />
+              <Route path="signin" element={<SignIn />} />
+              <Route path="signup" element={<Signup />} />
+              <Route path="forgot" element={<Forgot />} />
+              {/* we want to protect these routes */}
+              <Route element={<PersistLogin />}>
+                <Route
+                  element={
+                    <RequireAuth
+                      allowedRoles={[
+                        ROLES.User,
+                        ROLES.Super_Admin,
+                        ROLES.Approver,
+                      ]}
+                    />
+                  }
+                >
+                  <Route path="/*" element={<Dashboard />} />
+                </Route>
               </Route>
-            </Route>
 
-            {/* catch all */}
-            <Route path="*" element={<Missing />} />
-          </Route>
-        </Routes>
+              {/* catch all */}
+              <Route path="*" element={<Missing />} />
+            </Route>
+          </Routes>
+        </ThemeProvider>
       </IntlProvider>
     </LanguageProvider.Provider>
   );

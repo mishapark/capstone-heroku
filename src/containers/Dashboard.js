@@ -110,7 +110,7 @@ const Dashboard = () => {
     <>
       <Header
         logoAltText="The Daily Compliance"
-        logo={`/logo.png`}
+        logo={`/logo.svg`}
         toggleDrawer={handleDrawerToggle}
         toggleFullscreen={handleFullscreenToggle}
       />

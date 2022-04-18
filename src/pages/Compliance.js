@@ -17,6 +17,8 @@ import axios from "axios";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
+import { getProductsWithToken } from "../api/products";
+import useAuth from "../hooks/useAuth";
 
 const EnhancedTableToolbar = (props) => {
   const { numSelected } = props;
@@ -55,8 +57,13 @@ export default function Compliance() {
     }
   };
 
+  const auth = useAuth();
+
   React.useEffect(() => {
-    sendGetRequest();
+    getProductsWithToken(auth.accessToken).then((data) => {
+      console.log(data);
+      setProducts(data);
+    });
   }, []);
 
   return (

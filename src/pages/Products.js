@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Toolbar, Typography, Tooltip } from "@mui/material";
-import { Button, Dialog } from "@material-ui/core";
+import { Button, Dialog } from "@mui/material";
 import Card from "@mui/material/Card";
 import CircularProgress from "@mui/material/CircularProgress";
 import AddIcon from "@material-ui/icons/Add";

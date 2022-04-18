@@ -2,7 +2,7 @@ import React from "react";
 import { Typography } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 import { Paper } from "@material-ui/core";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 import { Card, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 import { TextField } from "@mui/material";
