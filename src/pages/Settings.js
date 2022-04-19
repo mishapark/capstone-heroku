@@ -123,12 +123,12 @@ const ROLES = [
         icon: <GroupsIcon />,
         info: "Assigned user group",
       },
-      {
+      /*{
         title: "Sidebar Access",
         color: "#f44336",
         icon: <ViewSidebarIcon />,
         info: "Sidebar access",
-      },
+      },*/
       {
         title: "Reset password",
         color: "#ffd229",
