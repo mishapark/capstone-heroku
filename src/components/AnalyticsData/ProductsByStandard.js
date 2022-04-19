@@ -12,123 +12,128 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
+// hooks
+import useAuth from "../../hooks/useAuth";
+
+// api
+import { getProductsByCategoryWithToken } from "../../api/products";
+
 import axios from "axios";
 
 function ProductsByStandard({ title, data }) {
-  const [category, setCategory] = useState(""); // chosen category
-  const [standard, setStandard] = useState(""); // chosen standard
-  const [standards, setStandards] = useState([]); // list of standards based on category
-  const [reportResults, setReportResults] = useState([]); // results from run report
-  const [resultsIsVisible, setResultsIsVisible] = useState(false); // results from run report
+    // auth
+    const { auth } = useAuth();
 
-  const getStandards = data
-    .map((s) => s["standard_body"])
-    .reduce((prev, curr) => prev.concat(curr), []);
+    const [category, setCategory] = useState(""); // chosen category
+    const [standard, setStandard] = useState(""); // chosen standard
+    const [standards, setStandards] = useState([]); // list of standards based on category
+    const [reportResults, setReportResults] = useState([]); // results from run report
+    const [resultsIsVisible, setResultsIsVisible] = useState(false); // results from run report
 
-  const getStandardsByCat = data.filter(
-    (s) => s["standard_category"] === category
-  );
+    const getStandards = data
+        .map((s) => s["standard_body"])
+        .reduce((prev, curr) => prev.concat(curr), []);
 
-  const handleCategoryDropdownChange = (event, value) => {
-    setCategory(value);
-  };
-  const handleStandardDropdownChange = (event, value) => {
-    setStandard(value);
-  };
+    const getStandardsByCat = data.filter(
+        (s) => s["standard_category"] === category
+    );
 
-  useEffect(() => {
-    console.log(category);
-    if (category !== "") {
-      if (getStandardsByCat[0]) {
-        setStandards(getStandardsByCat[0]["standard_body"]);
-      }
-    }
-    if (category === null) {
-      setStandards(getStandards);
-    }
-  }, [category]);
+    const handleCategoryDropdownChange = (event, value) => {
+        setCategory(value);
+    };
+    const handleStandardDropdownChange = (event, value) => {
+        setStandard(value);
+    };
 
-  const handleRunReport = (event) => {
-    console.log(category);
-    console.log(standard);
+    useEffect(() => {
+        console.log(category);
+        if (category !== "") {
+            if (getStandardsByCat[0]) {
+                setStandards(getStandardsByCat[0]["standard_body"]);
+            }
+        }
+        if (category === null) {
+            setStandards(getStandards);
+        }
+    }, [category]);
 
-    // call api
-    axios
-      .get(`https://humber-capstone-backend.herokuapp.com/products/category`, {
-        params: { id: category, standard: standard },
-      })
-      .then((res) => {
-        setReportResults(res.data);
-        setResultsIsVisible(true);
-      });
-  };
+    const handleRunReport = (event) => {
+        console.log(category);
+        console.log(standard);
 
-  return (
-    <>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-        }}
-      >
-        <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          options={data.map((standard) => standard["standard_category"])}
-          sx={{ width: 300, m: 1 }}
-          renderInput={(params) => (
-            <TextField {...params} label="Select Category" />
-          )}
-          onChange={handleCategoryDropdownChange}
-        />
+        getProductsByCategoryWithToken(auth.accessToken, { id: category, standard: standard })
+            .then((data) => {
+                setReportResults(data);
+                setResultsIsVisible(true);
+            })
+    };
 
-        <Autocomplete
-          disablePortal
-          id="combo-box-demo1"
-          options={standards}
-          sx={{ width: 300, m: 1 }}
-          renderInput={(params) => (
-            <TextField {...params} label="Select Standards" />
-          )}
-          onChange={handleStandardDropdownChange}
-        />
+    return (
+        <>
+            <Box
+                sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "center",
+                }}
+            >
+                <Autocomplete
+                    disablePortal
+                    id="combo-box-demo"
+                    options={data.map((standard) => standard["standard_category"])}
+                    sx={{ width: 300, m: 1 }}
+                    renderInput={(params) => (
+                        <TextField {...params} label="Select Category" />
+                    )}
+                    onChange={handleCategoryDropdownChange}
+                />
 
-        <Button variant="outlined" sx={{ m: 1 }} onClick={handleRunReport}>
-          Run Report
-        </Button>
-      </Box>
-      {resultsIsVisible && (
-        <Box>
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell sx={{ fontWeight: "bold" }}>
-                    Product Name
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {reportResults.map((row) => (
-                  <TableRow
-                    key={row._id}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row">
-                      <a href={"/products/" + row._id} target="_blank">
-                        {row.product_details.product_name}
-                      </a>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Box>
-      )}
-    </>
-  );
+                <Autocomplete
+                    disablePortal
+                    id="combo-box-demo1"
+                    options={standards}
+                    sx={{ width: 300, m: 1 }}
+                    renderInput={(params) => (
+                        <TextField {...params} label="Select Standards" />
+                    )}
+                    onChange={handleStandardDropdownChange}
+                />
+
+                <Button variant="outlined" sx={{ m: 1 }} onClick={handleRunReport}>
+                    Run Report
+                </Button>
+            </Box>
+            {resultsIsVisible && (
+                <Box>
+                    <TableContainer component={Paper}>
+                        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell sx={{ fontWeight: "bold" }}>
+                                        Product Name
+                                    </TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {reportResults.map((row) => (
+                                    <TableRow
+                                        key={row._id}
+                                        sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                    >
+                                        <TableCell component="th" scope="row">
+                                            <a href={"/products/" + row._id} target="_blank">
+                                                {row.product_details.product_name}
+                                            </a>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </Box>
+            )}
+        </>
+    );
 }
 
 export default ProductsByStandard;

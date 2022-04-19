@@ -16,11 +16,17 @@ import Paper from '@mui/material/Paper';
 
 import axios from "axios";
 
-import { getRfqs } from "../../api/rfqs";
+import { getRfqsWithToken } from "../../api/rfqs";
 import { set } from "date-fns";
+
+// hooks
+import useAuth from "../../hooks/useAuth";
 
 
 function RfqOverviewByStatus() {
+
+    // auth
+    const { auth } = useAuth();
 
     const [rfqs, setRfqs] = useState([]);
     const [resultsIsVisible, setResultsIsVisible] = useState(false)
@@ -32,7 +38,7 @@ function RfqOverviewByStatus() {
     const [reportResults, setReportResults] = useState([]) // results from doughut click
 
     useEffect(() => {
-        getRfqs().then((data) => {
+        getRfqsWithToken(auth.accessToken).then((data) => {
             setRfqs(data)
 
             const initiated = data.filter((d) => d.RFQstages === "Initiated")

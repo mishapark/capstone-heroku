@@ -29,3 +29,22 @@ export const getProductsWithToken = (token) => {
         console.log(err.message);
     }
 };
+
+export const getProductsByCategoryWithToken = (token, params) => {
+    try {
+
+        let headers = {
+            "x-auth-token": token,
+            "params": params
+        }
+
+        const promise = axios.get(
+            "https://humber-capstone-backend.herokuapp.com/products/category",
+            {headers, params}
+        );
+        const data = promise.then((response) => response.data);
+        return data;
+    } catch (err) {
+        console.log(err.message);
+    }
+};

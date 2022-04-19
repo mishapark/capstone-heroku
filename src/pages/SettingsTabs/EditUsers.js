@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 // mui
 import {
     Box, Paper, Toolbar, Typography, Button,
-    Table, TableBody, TableContainer, TableCell, TableRow, Card, IconButton
+    Table, TableHead, TableBody, TableContainer, TableCell, TableRow, Card, IconButton
 } from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from '@mui/icons-material/Add';
@@ -13,6 +13,7 @@ import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import TabContext from "@material-ui/lab/TabContext";
 import TabPanel from "@material-ui/lab/TabPanel";
+
 
 //components
 import { PageHeader } from "../../components/Header/PageHeader";
@@ -38,10 +39,10 @@ function EditUsers() {
     useEffect(() => {
         getCompany(auth.companyId).then((data) => {
             setCompany(data)
-            
+
             refreshUsers(data.company_domain)
         })
-       
+
 
     }, [])
 
@@ -102,7 +103,13 @@ function EditUsers() {
                         <TabPanel value="1">
                             <TableContainer component={Paper}>
                                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                                    
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>Username</TableCell>
+                                            <TableCell>Email</TableCell>
+                                            <TableCell></TableCell>
+                                        </TableRow>
+                                    </TableHead>
                                     <TableBody>
 
                                         {companyUsers.map((c) => {
@@ -127,7 +134,13 @@ function EditUsers() {
                         <TabPanel value="2">
                             <TableContainer component={Paper}>
                                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                                    
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>Username</TableCell>
+                                            <TableCell>Email</TableCell>
+                                            <TableCell></TableCell>
+                                        </TableRow>
+                                    </TableHead>
                                     <TableBody>
 
                                         {usersByEmail.map((c) => {
