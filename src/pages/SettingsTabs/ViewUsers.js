@@ -81,8 +81,8 @@ function ViewUsers() {
                 <Paper sx={{ width: "100%" }}>
                     <PageHeader
                         icon={<ApartmentIcon />}
-                        title="Edit Users"
-                        description="Add/Remove user's subscriber access"
+                        title="User List"
+                        description="View a list of users"
                     ></PageHeader>
                     <Divider />
 
