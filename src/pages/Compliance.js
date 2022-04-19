@@ -50,18 +50,16 @@ export default function Compliance() {
       const response = await axios.get(
         "https://humber-capstone-backend.herokuapp.com/products"
       );
-      console.log(response.data);
       setProducts(response.data);
     } catch (err) {
       console.log(err.message);
     }
   };
 
-  const auth = useAuth();
+  const { auth, setAuth } = useAuth();
 
   React.useEffect(() => {
     getProductsWithToken(auth.accessToken).then((data) => {
-      console.log(data);
       setProducts(data);
     });
   }, []);

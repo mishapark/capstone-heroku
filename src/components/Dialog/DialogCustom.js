@@ -10,6 +10,7 @@ import { getStandards } from "../../api/standards";
 import useProduct from "../../hooks/useProduct";
 import axios from "axios";
 import { FormattedMessage } from "react-intl";
+import useAuth from "../../hooks/useAuth";
 
 function DialogCustom({ title, onClose, editContent, setRequestData }) {
   const [standards, setStandards] = useState([]);
@@ -21,6 +22,8 @@ function DialogCustom({ title, onClose, editContent, setRequestData }) {
   }, []);
 
   const methods = useForm();
+
+  const { auth, setAuth } = useAuth();
 
   const onSubmit = (data) => {
     console.log(data);
@@ -37,6 +40,7 @@ function DialogCustom({ title, onClose, editContent, setRequestData }) {
           {
             headers: {
               "Content-Type": "application/json",
+              "x-auth-token": auth.accessToken,
             },
           }
         )

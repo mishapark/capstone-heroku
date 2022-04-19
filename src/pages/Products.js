@@ -8,16 +8,20 @@ import AddIcon from "@material-ui/icons/Add";
 import DialogCustom from "../components/Dialog/DialogCustom";
 import CustomTable from "../components/CustomTable/CustomTable";
 import { FormattedMessage } from "react-intl";
+import useAuth from "../hooks/useAuth";
 
 function Products() {
   const [open, setOpen] = React.useState(false);
   const [requestData, setRequestData] = useState(new Date());
   const [isLoading, setIsLoading] = useState(true);
   const [tableData, setTableData] = useState([]);
+  const { auth, setAuth } = useAuth();
 
   const sendGetRequest = () => {
     axios
-      .get("https://humber-capstone-backend.herokuapp.com/products")
+      .get("https://humber-capstone-backend.herokuapp.com/products", {
+        headers: { "x-auth-token": auth.accessToken },
+      })
       .then((response) => {
         setTableData(response.data);
         setIsLoading(false);
