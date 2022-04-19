@@ -144,7 +144,7 @@ export const RFQ = () => {
         e.preventDefault();
         axios
             .post(`https://humber-capstone-backend.herokuapp.com/rfqs/add`, newRfq, {
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json", "x-auth-token" : auth.accessToken },
             })
             .then(function (response) {
                 if (response.data.message === "Sucessfully Submitted") {
