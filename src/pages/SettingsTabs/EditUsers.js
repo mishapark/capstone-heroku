@@ -27,7 +27,7 @@ import { getUsersByEmail, getCompanyUsers, deleteCompanyUser, addCompanyUser } f
 
 function EditUsers() {
 
-    const Headers = ["Username", "Email", ""];
+    //const Headers = ["Username", "Email", ""];
 
     const { auth } = useAuth();
     const [company, setCompany] = useState("");
@@ -102,7 +102,7 @@ function EditUsers() {
                         <TabPanel value="1">
                             <TableContainer component={Paper}>
                                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                                    <CustomHeader columns={Headers} />
+                                    
                                     <TableBody>
 
                                         {companyUsers.map((c) => {
@@ -127,7 +127,7 @@ function EditUsers() {
                         <TabPanel value="2">
                             <TableContainer component={Paper}>
                                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                                    <CustomHeader columns={Headers} />
+                                    
                                     <TableBody>
 
                                         {usersByEmail.map((c) => {
