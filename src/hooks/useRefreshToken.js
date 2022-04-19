@@ -19,6 +19,7 @@ const useRefreshToken = () => {
         user: localStorage.getItem("user"),
         roles: response.data.role,
         companyId: localStorage.getItem("companyId"),
+        docusignClientId: localStorage.getItem("docusignClientId"),
         userId: localStorage.getItem("userId"),
         accessToken: response.data.accessToken,
       };
