@@ -61,11 +61,11 @@ const ROLES = [
         color: "#3f51b5",
         icon: <PeopleAltIcon />,
         menuOptions: [
-          //{ name: "Add users", icon: <GroupAddIcon /> },
+          { name: "Add users", icon: <GroupAddIcon /> },
           //{ name: "Remove users", icon: <GroupRemoveIcon /> },
-          //{ name: "View users", icon: <PeopleAltIcon /> },
+          { name: "View users", icon: <PeopleAltIcon /> },
           //{ name: "Author", icon: <AccountCircleIcon /> },
-          { name: "Edit users", icon: <EditIcon /> },
+          //{ name: "Edit users", icon: <EditIcon /> },
         ],
         optionsColor: "#303f9f",
       },
@@ -123,12 +123,12 @@ const ROLES = [
         icon: <GroupsIcon />,
         info: "Assigned user group",
       },
-      {
+      /*{
         title: "Sidebar Access",
         color: "#f44336",
         icon: <ViewSidebarIcon />,
         info: "Sidebar access",
-      },
+      },*/
       {
         title: "Reset password",
         color: "#ffd229",
