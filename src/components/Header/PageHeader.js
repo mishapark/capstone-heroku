@@ -16,7 +16,7 @@ export const PageHeader = ({ icon, title, description }) => {
       >
         <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>{icon}</Avatar>
       </Grid>
-      <Grid item xs={4}>
+      <Grid item xs={4} sx={{ mt: 3 }}>
         <Typography variant="h5">{title}</Typography>
         <Typography variant="body2">{description}</Typography>
       </Grid>

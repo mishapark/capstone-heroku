@@ -20,6 +20,7 @@ import English from "./languages/en-US.json";
 import LanguageProvider from "./context/LanguageProvider";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const messages = {
   en: English,
@@ -38,6 +39,33 @@ function App() {
   const value = useMemo(() => ({ user, setUser }), [user, setUser]);
   const [language, setLanguage] = React.useState("en");
 
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+
+  const darkTheme2 = React.useMemo(
+    () =>
+      createTheme({
+        typography: {
+          fontFamily: ["Poppins", "sans-serif"].join(","),
+        },
+        palette: {
+          mode: prefersDarkMode ? "dark" : "light",
+          primary: {
+            main: "#0024FF",
+          },
+          secondary: {
+            main: "#101637",
+          },
+          background: {
+            default: "#fcfcfc",
+          },
+        },
+        ".MuiButtonBase-root": {
+          color: "#fcfcfc",
+        },
+      }),
+    [prefersDarkMode]
+  );
+
   const theme = createTheme({
     typography: {
       fontFamily: ["Poppins", "sans-serif"].join(","),
@@ -52,6 +80,9 @@ function App() {
       background: {
         default: "#fcfcfc",
       },
+    },
+    ".MuiButtonBase-root": {
+      color: "#fcfcfc",
     },
   });
 

@@ -180,7 +180,7 @@ export const RFQ = () => {
   return (
     <>
       <Stack spacing={2}>
-        <Dialog open={open} onClose={handleClose} maxWidth="md">
+        <Dialog open={open} onClose={handleClose} scroll="paper" maxWidth="md">
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <form onSubmit={handleSubmitData}>
               <DialogTitle>Create new RFQ</DialogTitle>
