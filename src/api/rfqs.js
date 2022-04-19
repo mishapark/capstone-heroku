@@ -48,3 +48,21 @@ export const getRfqsApproversWithToken = (token) => {
         console.log(err.message);
     }
 };
+
+export const getRfqsByUserWithToken = (token) => {
+    try {
+
+        let headers = {
+            "x-auth-token": token
+        }
+
+        const promise = axios.get(
+            "https://humber-capstone-backend.herokuapp.com/rfqs/findUserRfqs",
+            {headers}
+        );
+        const data = promise.then((response) => response.data);
+        return data;
+    } catch (err) {
+        console.log(err.message);
+    }
+};
