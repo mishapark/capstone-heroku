@@ -85,6 +85,7 @@ export default function SignIn() {
                   const accessToken = response["data"]["accessToken"];
                   const roles = response["data"]["role"];
                   const companyId = response["data"]["companyId"];
+                  const docusignClientId = response["data"]["docusignClientId"];
                   const userId = response["data"]["userId"];
                   localStorage.setItem("role", roles);
                   localStorage.setItem("user", user);
