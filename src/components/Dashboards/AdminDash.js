@@ -48,7 +48,7 @@ export const AdminDash = () => {
       setMonthRevenue(response3.data);
       setAverageRevenue(response4.data[0].totalPayment);
       setYearRevenue(response5.data);
-      console.log(response5);
+      console.log(response6);
       setChurn({
         active:
           response6.data[0].active_memebr_count_thisYear[0].Active_member_count,

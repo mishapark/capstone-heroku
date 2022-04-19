@@ -5,7 +5,6 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   content: {
-    backgroundColor: theme.palette.background.default,
     minWidth: 0,
     width: "100%",
     position: "relative",

@@ -12,6 +12,7 @@ import MyPreferences from "../pages/MyPreferences";
 import ProductInfo from "../pages/ProductInfo";
 import { RFQInfo } from "../pages/RFQInfo";
 import { TaskInfo } from "../pages/TaskInfo";
+import ComplianceList from "../pages/ComplianceList";
 
 const useStyles = makeStyles((theme) => ({
   panel: {
@@ -103,6 +104,7 @@ const Dashboard = () => {
       <Route path="/products/:id" element={<ProductInfo />} />
       <Route path="/rfq/:id" element={<RFQInfo />} />
       <Route path="/tasks/:id" element={<TaskInfo />} />
+      <Route path="/compliancelist" element={<ComplianceList />} />
     </Routes>
   );
 

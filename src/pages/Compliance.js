@@ -11,7 +11,7 @@ import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import FilterListIcon from "@mui/icons-material/FilterList";
-import { Button } from "@material-ui/core";
+import { Alert, Button, Stack } from "@mui/material";
 import { Chip } from "@mui/material";
 import axios from "axios";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
@@ -19,9 +19,12 @@ import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import { getProductsWithToken } from "../api/products";
 import useAuth from "../hooks/useAuth";
+import AddIcon from "@material-ui/icons/Add";
+import DoneIcon from "@mui/icons-material/Done";
+import { AddCompliance } from "../components/Compliance/AddCompliance";
+import ListIcon from "@mui/icons-material/List";
 
-const EnhancedTableToolbar = (props) => {
-  const { numSelected } = props;
+const EnhancedTableToolbar = ({ handleClickOpen }) => {
   return (
     <Toolbar>
       <Typography
@@ -32,12 +35,20 @@ const EnhancedTableToolbar = (props) => {
       >
         <FormattedMessage id="Compliance Central"></FormattedMessage>
       </Typography>
-
-      <Tooltip title="Filter list">
-        <IconButton>
-          <FilterListIcon />
-        </IconButton>
-      </Tooltip>
+      <Stack spacing={2} direction="row">
+        <Tooltip title="Get compliance">
+          <Button variant="outlined">
+            <ListIcon />
+            <Link to="/compliancelist">Compliances</Link>
+          </Button>
+        </Tooltip>
+        <Tooltip title="Add compliance">
+          <Button variant="outlined" onClick={handleClickOpen}>
+            <AddIcon />
+            <FormattedMessage id="rfq.createBtn"></FormattedMessage>
+          </Button>
+        </Tooltip>
+      </Stack>
     </Toolbar>
   );
 };
@@ -64,10 +75,26 @@ export default function Compliance() {
     });
   }, []);
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
-        <EnhancedTableToolbar />
+        <EnhancedTableToolbar handleClickOpen={handleClickOpen} />
+        <AddCompliance
+          open={open}
+          setOpen={setOpen}
+          handleClickOpen={handleClickOpen}
+          handleClose={handleClose}
+        ></AddCompliance>
         <Table>
           <TableHead>
             <TableRow>
@@ -94,13 +121,17 @@ export default function Compliance() {
                   {product.is_compliant ? (
                     <FormattedMessage id="compliance.status.isCompliant">
                       {(placeholder) => (
-                        <Chip label={placeholder} sx={{ color: "#2F7C31" }} />
+                        <Chip
+                          label={placeholder}
+                          deleteIcon={<DoneIcon />}
+                          sx={{ color: "#2F7C31" }}
+                        />
                       )}
                     </FormattedMessage>
                   ) : (
                     <FormattedMessage id="compliance.status.isNotCompliant">
                       {(placeholder) => (
-                        <Chip label={placeholder} sx={{ color: "#2F7C31" }} />
+                        <Chip label={placeholder} sx={{ color: "#ff5151" }} />
                       )}
                     </FormattedMessage>
                   )}
