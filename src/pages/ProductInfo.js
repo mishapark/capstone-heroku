@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { FormattedMessage } from "react-intl";

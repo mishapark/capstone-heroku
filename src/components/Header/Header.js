@@ -26,6 +26,8 @@ import Divider from "@mui/material/Divider";
 import useLogout from "../../hooks/useLogout";
 import { useNavigate } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
+import useAuth from "../../hooks/useAuth";
+import { getProductsWithToken } from "../../api/products";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -119,14 +121,6 @@ const Header = ({ logo, logoAltText, toggleFullscreen, toggleDrawer }) => {
     if (searchExpanded) handleSearchExpandToggle();
   };
 
-  const { products } = useProducts(
-    "https://humber-capstone-backend.herokuapp.com/products"
-  );
-
-  useEffect(() => {
-    setProduct(products);
-  }, [products]);
-
   let [isShown, setIsShown] = useState(true);
   let searchRef = useRef();
 
@@ -171,6 +165,14 @@ const Header = ({ logo, logoAltText, toggleFullscreen, toggleDrawer }) => {
   };
 
   const searchInput = useRef();
+
+  const { auth, setAuth } = useAuth();
+
+  React.useEffect(() => {
+    getProductsWithToken(auth.accessToken).then((data) => {
+      setProduct(data);
+    });
+  }, []);
 
   return (
     <>

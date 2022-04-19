@@ -11,7 +11,7 @@ import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import FilterListIcon from "@mui/icons-material/FilterList";
-import { Alert, Button, Stack } from "@mui/material";
+import { Alert, Avatar, Button, Stack } from "@mui/material";
 import { Chip } from "@mui/material";
 import axios from "axios";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
@@ -20,9 +20,11 @@ import { FormattedMessage } from "react-intl";
 import { getProductsWithToken } from "../api/products";
 import useAuth from "../hooks/useAuth";
 import AddIcon from "@material-ui/icons/Add";
-import DoneIcon from "@mui/icons-material/Done";
 import { AddCompliance } from "../components/Compliance/AddCompliance";
 import ListIcon from "@mui/icons-material/List";
+import { getStandards } from "../api/standards";
+import NotInterestedIcon from "@mui/icons-material/NotInterested";
+import DoneIcon from "@mui/icons-material/Done";
 
 const EnhancedTableToolbar = ({ handleClickOpen }) => {
   return (
@@ -56,26 +58,17 @@ const EnhancedTableToolbar = ({ handleClickOpen }) => {
 export default function Compliance() {
   const [products, setProducts] = React.useState([]);
 
-  const sendGetRequest = async () => {
-    try {
-      const response = await axios.get(
-        "https://humber-capstone-backend.herokuapp.com/products"
-      );
-      setProducts(response.data);
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
-
   const { auth, setAuth } = useAuth();
 
   React.useEffect(() => {
     getProductsWithToken(auth.accessToken).then((data) => {
       setProducts(data);
     });
+    getStandards().then((data) => setStandards(data));
   }, []);
 
   const [open, setOpen] = React.useState(false);
+  const [standards, setStandards] = React.useState([]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -94,6 +87,7 @@ export default function Compliance() {
           setOpen={setOpen}
           handleClickOpen={handleClickOpen}
           handleClose={handleClose}
+          data={standards}
         ></AddCompliance>
         <Table>
           <TableHead>
@@ -123,15 +117,20 @@ export default function Compliance() {
                       {(placeholder) => (
                         <Chip
                           label={placeholder}
-                          deleteIcon={<DoneIcon />}
-                          sx={{ color: "#2F7C31" }}
+                          variant="outlined"
+                          icon={<DoneIcon />}
+                          color="success"
                         />
                       )}
                     </FormattedMessage>
                   ) : (
                     <FormattedMessage id="compliance.status.isNotCompliant">
                       {(placeholder) => (
-                        <Chip label={placeholder} sx={{ color: "#ff5151" }} />
+                        <Chip
+                          label={placeholder}
+                          icon={<NotInterestedIcon />}
+                          color="error"
+                        />
                       )}
                     </FormattedMessage>
                   )}

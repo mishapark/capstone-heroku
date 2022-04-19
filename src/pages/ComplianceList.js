@@ -58,12 +58,7 @@ export default function ComplainceList() {
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
         <EnhancedTableToolbar2 handleClickOpen={handleClickOpen} />
-        <AddCompliance
-          open={open}
-          setOpen={setOpen}
-          handleClickOpen={handleClickOpen}
-          handleClose={handleClose}
-        ></AddCompliance>
+
         <Table>
           <TableHead>
             <TableRow>

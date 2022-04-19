@@ -180,7 +180,7 @@ export const RFQ = () => {
   return (
     <>
       <Stack spacing={2}>
-        <Dialog open={open} onClose={handleClose} scroll="paper" maxWidth="md">
+        <Dialog open={open} onClose={handleClose} maxWidth="md">
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <form onSubmit={handleSubmitData}>
               <DialogTitle>Create new RFQ</DialogTitle>
@@ -298,7 +298,7 @@ export const RFQ = () => {
             </form>
           </LocalizationProvider>
         </Dialog>
-        <Box sx={{ width: "100%", mt: 2 }}>
+        <Box sx={{ width: "100%" }}>
           <Paper sx={{ width: "100%", mt: 2 }}>
             <Toolbar
               style={{ display: "flex", justifyContent: "space-between" }}
