@@ -92,7 +92,7 @@ export default function SignIn() {
                   localStorage.setItem("userId", userId);
                   localStorage.setItem("companyId", companyId);
                   localStorage.setItem("docusignClientId", docusignClientId);
-                  setAuth({ user, roles, companyId, userId, accessToken });
+                  setAuth({ user, roles, companyId, docusignClientId, userId, accessToken });
                   navigate("../dash", { replace: true });
                 } else {
                   console.log(response.error);
