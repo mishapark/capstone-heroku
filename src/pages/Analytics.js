@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Doughnut, Line, Pie } from "react-chartjs-2";
-import { Box } from "@mui/system";
 import { Paper, Typography, Grid, Toolbar, IconButton } from "@mui/material";
-import FilterListIcon from "@mui/icons-material/FilterList";
 import axios from "axios";
-import { Button, Card, Container } from "@material-ui/core";
+import { Button, Card, Container } from "@mui/material";
 import { Stack } from "@mui/material";
 import DropdownList from "react-widgets/DropdownList";
 

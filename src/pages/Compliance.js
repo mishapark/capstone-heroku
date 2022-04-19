@@ -12,7 +12,7 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { Button } from "@material-ui/core";
-import { Chip } from "@material-ui/core";
+import { Chip } from "@mui/material";
 import axios from "axios";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import { Link } from "react-router-dom";

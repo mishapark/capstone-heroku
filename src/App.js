@@ -19,6 +19,7 @@ import French from "./languages/fr-CA.json";
 import English from "./languages/en-US.json";
 import LanguageProvider from "./context/LanguageProvider";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { CssBaseline } from "@mui/material";
 
 const messages = {
   en: English,
@@ -42,13 +43,21 @@ function App() {
       fontFamily: ["Poppins", "sans-serif"].join(","),
     },
     palette: {
-      type: "dark",
       primary: {
         main: "#0024FF",
       },
       secondary: {
         main: "#101637",
       },
+      background: {
+        default: "#fcfcfc",
+      },
+    },
+  });
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: "dark",
     },
   });
 
@@ -58,6 +67,7 @@ function App() {
     >
       <IntlProvider locale={language} messages={messages[language]}>
         <ThemeProvider theme={theme}>
+          <CssBaseline />
           <Routes>
             <Route path="/" element={<Layout />}>
               {/* public routes */}

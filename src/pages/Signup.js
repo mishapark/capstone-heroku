@@ -5,7 +5,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -14,7 +13,7 @@ import Container from "@mui/material/Container";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Signup() {
   const {
@@ -49,6 +48,7 @@ function Signup() {
           alignItems: "center",
           width: "550px",
           p: 5,
+
           border: "1px black solid",
         }}
       >
@@ -125,16 +125,11 @@ function Signup() {
             )}
           </Typography>
 
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2, backgroundColor: "#3F50B5" }}
-          >
+          <Button type="submit" fullWidth variant="contained">
             Sign Up
           </Button>
           <Link to="/signin" variant="body2">
-            {"Already have an account? Sign in"}
+            Already have an account? <br></br>Sign in
           </Link>
         </Box>
       </Box>

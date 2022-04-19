@@ -1,11 +1,12 @@
-import { Outlet } from "react-router-dom"
+import { CssBaseline } from "@mui/material";
+import { Outlet } from "react-router-dom";
 
 const Layout = () => {
-    return (
-        <main className="App">
-            <Outlet />
-        </main>
-    )
-}
+  return (
+    <main className="App">
+      <Outlet />
+    </main>
+  );
+};
 
-export default Layout
+export default Layout;
