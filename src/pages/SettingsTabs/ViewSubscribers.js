@@ -6,6 +6,7 @@ import {
     TableBody,
     TableContainer,
     TableCell,
+    TableHead,
     Paper,
     TableRow,
     Card,
@@ -19,7 +20,7 @@ import CustomTableToolbar from "../../components/CustomTable/CustomTableToolbar"
 import { PageHeader } from "../../components/Header/PageHeader";
 
 // api
-import { getCompanies, deleteCompany} from "../../api/companies";
+import { getCompanies, deleteCompany } from "../../api/companies";
 
 function ViewSubscribers() {
     const Headers = ["Subscriber Name", ""];
@@ -35,7 +36,7 @@ function ViewSubscribers() {
     const handleDelete = (e, id) => {
         e.preventDefault()
 
-        deleteCompany(id).then((data)=>{
+        deleteCompany(id).then((data) => {
             //reload the companies
             getCompanies().then((data) => setCompanies(data))
         })
@@ -44,13 +45,18 @@ function ViewSubscribers() {
     return (
         <Card>
             <PageHeader
-                        icon={<ApartmentIcon />}
-                        title="Subscriber List"
-                        description="View the list of subscribers"
-                    ></PageHeader>
+                icon={<ApartmentIcon />}
+                title="Subscriber List"
+                description="View the list of subscribers"
+            ></PageHeader>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <CustomHeader columns={Headers} />
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Subscriber Name</TableCell>
+                            <TableCell></TableCell>
+                        </TableRow>
+                    </TableHead>
                     <TableBody>
 
                         {companies.map((c) => {
