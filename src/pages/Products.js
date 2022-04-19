@@ -38,12 +38,7 @@ function Products() {
               <FormattedMessage id={"Products"}></FormattedMessage>
             </Typography>
             <Tooltip title="Add Product">
-              <Button
-                onClick={() => setOpen(true)}
-                variant="contained"
-                color="primary"
-                aria-label="Add"
-              >
+              <Button onClick={() => setOpen(true)} variant="outlined">
                 <AddIcon />
                 <FormattedMessage id={"Create"} />
               </Button>

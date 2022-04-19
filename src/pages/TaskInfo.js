@@ -167,65 +167,74 @@ export const TaskInfo = () => {
   };
 
   return (
-    <Paper>
-      <Grid container style={{ padding: "16px" }}>
-        <Grid item container>
-          <Grid item xs={12}>
-            <PageHeader
-              icon={<TaskIcon />}
-              title={rfq.rfqNumber}
-              description="Tasks to approve"
-            ></PageHeader>
-          </Grid>
-          <Grid item xs={12}>
-            <Divider />
-          </Grid>
-          <Grid
-            container
-            item
-            style={{
-              paddingLeft: "16px",
-              paddingTop: "16px",
-            }}
-          >
-            <Grid item xs={12} spacing={2}>
-              <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <form onSubmit={handleSubmit}>
-                  <RFQForm
-                    rfq={rfq}
-                    handleChangeValue={handleChangeValue}
-                    handleDate={handleDate}
-                    value={value}
-                    approvers={approvers}
-                    handleSelect={handleSelect}
-                    handleApprover={handleApprover}
-                  ></RFQForm>
-                  <Grid container spacing={2}>
-                    {!signButtonIsDisabled && (
-                      <Grid item xs={8} md={6}>
-                        <Button onClick={handleSignRfq}>Sign RFQ</Button>
+    <Container maxWidth="md">
+      <Paper>
+        <Grid container style={{ padding: "16px" }}>
+          <Grid item container>
+            <Grid item xs={12}>
+              <PageHeader
+                icon={<TaskIcon />}
+                title={rfq.rfqNumber}
+                description="Tasks to approve"
+              ></PageHeader>
+            </Grid>
+            <Grid item xs={12}>
+              <Divider />
+            </Grid>
+            <Grid
+              container
+              item
+              style={{
+                paddingLeft: "16px",
+                paddingTop: "16px",
+              }}
+            >
+              <Grid item xs={12} spacing={2}>
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <form onSubmit={handleSubmit}>
+                    <RFQForm
+                      rfq={rfq}
+                      handleChangeValue={handleChangeValue}
+                      handleDate={handleDate}
+                      value={value}
+                      approvers={approvers}
+                      handleSelect={handleSelect}
+                      handleApprover={handleApprover}
+                    ></RFQForm>
+                    <Grid container spacing={0} justifyContent="flex-end">
+                      <Grid item xs={1.5}>
+                        {!signButtonIsDisabled && (
+                          <Button onClick={handleSignRfq} variant="outlined">
+                            Sign RFQ
+                          </Button>
+                        )}
                       </Grid>
-                    )}
-
-                    {signButtonIsDisabled && (
-                      <Grid item xs={8} md={6}>
-                        <Button onClick={handlePreviewSignDocument}>
-                          <FormattedMessage id="tasks.previewDocument"></FormattedMessage>
+                      <Grid item xs={4}>
+                        {signButtonIsDisabled && (
+                          <Button
+                            onClick={handlePreviewSignDocument}
+                            variant="outlined"
+                          >
+                            <FormattedMessage id="tasks.previewDocument"></FormattedMessage>
+                          </Button>
+                        )}
+                      </Grid>
+                      <Grid item xs={3}>
+                        <Button
+                          onClick={() => navigate("/tasks")}
+                          variant="outlined"
+                        >
+                          <FormattedMessage id="cancelBtn"></FormattedMessage>
                         </Button>
                       </Grid>
-                    )}
-                    <Grid item xs={8} md={6}>
-                      <Button onClick={() => navigate("/tasks")}>
-                        <FormattedMessage id="cancelBtn"></FormattedMessage>
-                      </Button>
                     </Grid>
-                  </Grid>
-                </form>
-              </LocalizationProvider>
+                  </form>
+                </LocalizationProvider>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
-    </Paper>
+      </Paper>
+    </Container>
   );
 };

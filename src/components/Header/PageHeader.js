@@ -1,4 +1,5 @@
 import { Grid, Typography } from "@material-ui/core";
+import { Avatar } from "@mui/material";
 import React from "react";
 
 export const PageHeader = ({ icon, title, description }) => {
@@ -13,7 +14,7 @@ export const PageHeader = ({ icon, title, description }) => {
           padding: "16px",
         }}
       >
-        {icon}
+        <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>{icon}</Avatar>
       </Grid>
       <Grid item xs={4}>
         <Typography variant="h5">{title}</Typography>

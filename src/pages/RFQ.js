@@ -269,8 +269,12 @@ export const RFQ = () => {
                 </Stack>
               </DialogContent>
               <DialogActions>
-                <Button onClick={handleClose}>Cancel</Button>
-                <Button type="submit">Submit</Button>
+                <Button onClick={handleClose} variant="outlined">
+                  Cancel
+                </Button>
+                <Button type="submit" variant="outlined">
+                  Submit
+                </Button>
               </DialogActions>
             </form>
           </LocalizationProvider>
@@ -288,12 +292,7 @@ export const RFQ = () => {
                 <FormattedMessage id="RFQ Manager"></FormattedMessage>
               </Typography>
               <Tooltip title="Create RFQ">
-                <Button
-                  onClick={handleClickOpen}
-                  variant="contained"
-                  color="primary"
-                  aria-label="Add"
-                >
+                <Button onClick={handleClickOpen} variant="outlined">
                   <AddIcon />
                   <FormattedMessage id="rfq.createBtn"></FormattedMessage>
                 </Button>

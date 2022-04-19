@@ -58,13 +58,13 @@ export const Tasks = () => {
           <Table>
             <TableHead>
               <TableRow key={1}>
-                <TableCell key={11} sx={{ fontWeight: "bold" }}>
+                <TableCell key={11}>
                   <FormattedMessage id="rfq.rfqNumber"></FormattedMessage>
                 </TableCell>
-                <TableCell key={12} sx={{ fontWeight: "bold" }}>
+                <TableCell key={12}>
                   <FormattedMessage id="rfq.Status"></FormattedMessage>
                 </TableCell>
-                <TableCell key={13} sx={{ fontWeight: "bold" }}>
+                <TableCell key={13}>
                   <FormattedMessage id="rfq.Stage"></FormattedMessage>
                 </TableCell>
               </TableRow>

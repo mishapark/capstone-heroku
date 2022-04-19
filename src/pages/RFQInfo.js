@@ -164,7 +164,7 @@ export const RFQInfo = () => {
                         <Button
                           type="submit"
                           color="primary"
-                          variant="contained"
+                          variant="outlined"
                         >
                           Save
                         </Button>
@@ -172,7 +172,7 @@ export const RFQInfo = () => {
                       <Grid item xs={3}>
                         <Button
                           color="primary"
-                          variant="contained"
+                          variant="outlined"
                           onClick={() => navigate("/rfq")}
                         >
                           Cancel

@@ -42,6 +42,7 @@ function App() {
       fontFamily: ["Poppins", "sans-serif"].join(","),
     },
     palette: {
+      type: "dark",
       primary: {
         main: "#0024FF",
       },
