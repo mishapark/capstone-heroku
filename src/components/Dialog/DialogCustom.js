@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { useForm, FormProvider } from "react-hook-form";
-import { Button } from "@material-ui/core";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogForm from "./DialogForm";
-import { getCountries } from "../../api/countries";
-import { getStandards } from "../../api/standards";
-import useProduct from "../../hooks/useProduct";
 import axios from "axios";
 import { FormattedMessage } from "react-intl";
-import useAuth from "../../hooks/useAuth";
+import { useForm, FormProvider } from "react-hook-form";
 import { getComplianceWithToken } from "../../api/compliances";
+import { getCountries } from "../../api/countries";
+import { getStandards } from "../../api/standards";
+
+import { Button } from "@mui/material";
+import { DialogActions } from "@mui/material";
+import { DialogContent } from "@mui/material";
+import { DialogTitle } from "@mui/material";
+
+import useProduct from "../../hooks/useProduct";
+import useAuth from "../../hooks/useAuth";
+
+import DialogForm from "./DialogForm";
 
 function DialogCustom({ title, onClose, editContent, setRequestData }) {
   const [standards, setStandards] = useState([]);
