@@ -1,14 +1,14 @@
 import {
-    Paper,
-    Card,
-    Typography,
-    Button,
-    Table,
-    TableHead,
-    TableRow,
-    TableBody,
-    TableCell,
-    Badge,
+  Paper,
+  Card,
+  Typography,
+  Button,
+  Table,
+  TableHead,
+  TableRow,
+  TableBody,
+  TableCell,
+  Badge,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
@@ -24,14 +24,13 @@ import useAuth from "../hooks/useAuth";
 import { getRfqsByUserWithToken } from "../api/rfqs";
 
 export const Tasks = () => {
+  // auth
+  const { auth } = useAuth();
+  const [state, setState] = React.useState("");
+  const [rfqs, setRfqs] = React.useState([]);
 
-    // auth
-    const { auth } = useAuth();
-    const [state, setState] = React.useState("");
-    const [rfqs, setRfqs] = React.useState([]);
-
-    const sendGetRequest = async () => {
-        /*try {
+  const sendGetRequest = async () => {
+    /*try {
             const response = await axios.get(
                 "https://humber-capstone-backend.herokuapp.com/rfqs"
             );
@@ -40,17 +39,16 @@ export const Tasks = () => {
         } catch (err) {
             console.log(err.message);
         }*/
-        getRfqsByUserWithToken(auth.accessToken).then((data) => {
-            setRfqs(data);
-        })
+    getRfqsByUserWithToken(auth.accessToken).then((data) => {
+      setRfqs(data);
+    });
+  };
 
-    };
+  React.useEffect(() => {
+    sendGetRequest();
+  }, []);
 
-    React.useEffect(() => {
-        sendGetRequest();
-    }, []);
-
-    return (
+  return (
         <div>
             <Box sx={{ width: "100%" }}>
                 <Paper sx={{ width: "100%" }}>

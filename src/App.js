@@ -99,53 +99,6 @@ function App() {
 
   const theme = React.useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
 
-  // const darkTheme2 = React.useMemo(
-  //   () =>
-  //     createTheme(
-  //       adaptV4Theme({
-  //         typography: {
-  //           fontFamily: ["Poppins", "sans-serif"].join(","),
-  //         },
-  //         palette: {
-  //           mode: prefersDarkMode ? "dark" : "light",
-  //           primary: {
-  //             main: "#0024FF",
-  //           },
-  //           secondary: {
-  //             main: "#101637",
-  //           },
-  //           background: {
-  //             default: "#2e2e2e",
-  //           },
-  //         },
-
-  //       })
-  //     ),
-  //   [prefersDarkMode]
-  // );
-
-  // const theme = createTheme(
-  //   adaptV4Theme({
-  //     typography: {
-  //       fontFamily: ["Poppins", "sans-serif"].join(","),
-  //     },
-  //     palette: {
-  //       primary: {
-  //         main: "#0024FF",
-  //       },
-  //       secondary: {
-  //         main: "#101637",
-  //       },
-  //       background: {
-  //         default: "#fcfcfc",
-  //       },
-  //     },
-  //     ".MuiButtonBase-root": {
-  //       color: "#fcfcfc",
-  //     },
-  //   })
-  // );
-
   return (
     <LanguageProvider.Provider
       value={{ language: "en", setLanguage: setLanguage }}
