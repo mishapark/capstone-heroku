@@ -25,6 +25,7 @@ import { AdminDash } from "../components/Dashboards/AdminDash";
 
 // api
 import { getProductsWithToken } from "../api/products";
+import { getRfqsWithToken } from "../api/rfqs";
 
 export const Dash = () => {
 
