@@ -362,7 +362,7 @@ function ProductEntries({ title, data }) {
               <InputLabel style={styles.mb10}>
                 <FormattedMessage id={"Report Number"} />
               </InputLabel>
-              <div>{data ? (data[0] !== "" ? data[0] : " - ") : " - "}</div>
+              <div>{data.length > 0 ? data.join(", ") : " - "}</div>
             </div>
           </>
         );

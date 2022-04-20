@@ -30,7 +30,7 @@ function PowerRatingInput({
       </InputLabel>
       <div style={styles.powerInput}>
         {options.map((e) => (
-          <div style={styles.powerFields}>
+          <div style={styles.powerFields} key={e}>
             <p style={{ width: 250 }}>{e}</p>
             <TextField
               id="outlined-basic"

@@ -85,9 +85,9 @@ const useProduct = (data, files) => {
       fuse_type: data.fuse_type,
       fuse_marking: data.fuse_marking,
     },
-    compliance_report_number: [
-      data.compliance_report_number ? data.compliance_report_number : "",
-    ],
+    compliance_report_number: data.compliance_report_number
+      ? data.compliance_report_number
+      : [],
     last_updated_status: {
       last_updated_by: "",
       last_updated_date: new Date(),
