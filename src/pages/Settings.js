@@ -162,19 +162,19 @@ function Settings() {
 
   return (
     <>
-      <SettingsList title={ROLES[2].title} cards={ROLES[0].cards} />
+      {/*<SettingsList title={ROLES[2].title} cards={ROLES[0].cards} />
       <SettingsList title={ROLES[2].title} cards={ROLES[1].cards} />
-      <SettingsList title={ROLES[2].title} cards={ROLES[2].cards} />
+  <SettingsList title={ROLES[2].title} cards={ROLES[2].cards} />*/}
 
-      {/* {role === "Super_Admin" ? (
+       {role === "Super_Admin" ? (
         <SettingsList title={ROLES[2].title} cards={ROLES[0].cards} />
       ) : null}
       {role === "Admin" ? (
         <SettingsList title={ROLES[2].title} cards={ROLES[1].cards} />
       ) : null}
-      {role === "Viewer" ? (
+      {role === "Author" || role === "Viewer" || role === "Reviewer" || role === "Approver"  ? (
         <SettingsList title={ROLES[2].title} cards={ROLES[2].cards} />
-      ) : null} */}
+      ) : null}
     </>
   );
 }
