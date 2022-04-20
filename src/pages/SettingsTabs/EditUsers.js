@@ -46,12 +46,13 @@ function EditUsers() {
             // get list of all companies
             getCompanies().then((data) => {
                 setCompanies(data)
+                // on initial load, set companyUsers to be all the users in the system
+                getUsers().then((data1) => {
+                    setCompanyUsers(data1)
+                })
             })
 
-            // on initial load, set companyUsers to be all the users in the system
-            getUsers().then((data) => {
-                setCompanyUsers(data)
-            })
+
 
         } else {
             getCompany(auth.companyId).then((data) => {
