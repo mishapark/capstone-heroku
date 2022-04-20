@@ -115,7 +115,6 @@ function DialogCustom({ title, onClose, editContent, setRequestData }) {
 
   return (
     <FormProvider {...methods}>
-      {console.log(compliances)}
       <form
         onSubmit={
           title === "Add Product"
@@ -145,7 +144,11 @@ function DialogCustom({ title, onClose, editContent, setRequestData }) {
             title="Marking and Documentations"
             editContent={editContent}
           />
-          <DialogForm title="Compliance Reports" editContent={editContent} />
+          <DialogForm
+            title="Compliance Reports"
+            compliances={compliances}
+            editContent={editContent}
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={onClose}>

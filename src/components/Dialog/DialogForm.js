@@ -24,7 +24,7 @@ const styles = {
   },
 };
 
-function DialogForm({ title, standards, countries, editContent }) {
+function DialogForm({ title, standards, countries, compliances, editContent }) {
   const [expanded, setExpanded] = useState(true);
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
@@ -61,6 +61,7 @@ function DialogForm({ title, standards, countries, editContent }) {
       case "Compliance Reports":
         return (
           <ComplianceReports
+            compliances={compliances}
             editContent={editContent && editContent["compliance_report_number"]}
           />
         );

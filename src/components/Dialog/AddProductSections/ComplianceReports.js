@@ -5,21 +5,63 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DateRangeInput from "../../Input/DateRangeInput";
 import RecordType from "../../Input/RecordType";
+import { InputLabel } from "@material-ui/core";
+import { FormattedMessage } from "react-intl";
+import AutocompleteCompliances from "../../Input/AutocompleteCompliances";
+import { Button } from "@material-ui/core";
+import AddIcon from "@material-ui/icons/Add";
+import { Controller } from "react-hook-form";
 
-function ComplianceReports({ editContent }) {
+const styles = {
+  inputContainer: {
+    flex: "0 0 23.5%",
+    marginBottom: 10,
+    marginRight: 10,
+  },
+  inputLabel: {
+    marginBottom: 10,
+    textAlign: "left",
+  },
+};
+
+function ComplianceReports({ compliances, editContent }) {
+  const [numberOfInputs, setNumberOfInputs] = useState(1);
+
   const complReportNumber = {
     compliance_report_number: editContent ? editContent[0] : 0,
   };
 
+  const addClicked = () => {
+    setNumberOfInputs(numberOfInputs + 1);
+  };
+
   return (
     <>
-      <TextInput
+      <div style={styles.inputContainer}>
+        <InputLabel style={styles.inputLabel} htmlFor="component-error">
+          <FormattedMessage id={"Report Number"} />
+        </InputLabel>
+
+        <Controller
+          name="compliance_report_number"
+          render={({ field: { onChange } }) => (
+            <AutocompleteCompliances
+              required={false}
+              placeholder="Enter Report Number"
+              onChange={onChange}
+              editContent={complReportNumber}
+              options={compliances}
+            />
+          )}
+        />
+      </div>
+      {/* <TextInput
         required={false}
         label="Report Number"
         placeholder="Enter Report Number"
         name="compliance_report_number"
         editContent={complReportNumber}
-      />
+      /> */}
       {/* <DownloadInput
         required={false}
         label="Download"
