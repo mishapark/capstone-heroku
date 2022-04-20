@@ -110,7 +110,7 @@ export const AdminDash = () => {
           <br></br>
         </Grid>
         <Grid item xs={12} md={4}>
-          <Paper sx={{ padding: 2, height: "200px" }}>
+          <Paper sx={{ padding: 2, height: "250px" }}>
             <Typography variant="h6">Average Monthly Revenue</Typography>
             <Typography variant="h4">${averageRevenue}</Typography>
           </Paper>

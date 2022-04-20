@@ -23,6 +23,7 @@ import CheckoutForm from "../components/CheckoutForm";
 import React, { useEffect, useState } from "react";
 import PaymentsIcon from "@mui/icons-material/Payments";
 import { PageHeader } from "../components/Header/PageHeader";
+import useAuth from "../hooks/useAuth";
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -31,6 +32,7 @@ const stripePromise = loadStripe(
 );
 
 const Billing = () => {
+  const { auth } = useAuth();
   const [status, setStatus] = React.useState("ready");
   const [companyId, setCompanyId] = React.useState(
     localStorage.getItem("companyId")
@@ -52,7 +54,7 @@ const Billing = () => {
     console.log(paymenet);
   };
 
-  if (status === "success") {
+  if (status === "alive") {
     return (
       <Container maxWidth="lg">
         <Paper>
@@ -78,82 +80,98 @@ const Billing = () => {
   return (
     <Container maxWidth="xl">
       <Paper square={false}>
-        <Grid container style={{ padding: "16px" }}>
-          <Grid item container>
-            <Grid item xs={12}>
-              <PageHeader
-                icon={icon}
-                title="Billing"
-                description="Please, select the plan and the payment card"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Divider />
-            </Grid>
-            <Grid
-              container
-              item
-              style={{
-                paddingLeft: "16px",
-                paddingTop: "16px",
-              }}
-            >
-              <Grid item xs={6}>
-                <Typography variant="h6">Select plan</Typography>
-                <FormControl
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    paddingLeft: "16px",
-                    paddingTop: "16px",
-                  }}
-                >
-                  <FormLabel id="demo-radio-buttons-group-label">
-                    Subcription
-                  </FormLabel>
-                  <RadioGroup
-                    aria-labelledby="demo-radio-buttons-group-label"
-                    name="radio-buttons-group"
-                    value={paymenet.amount}
-                    onChange={handleChange}
-                  >
-                    <FormControlLabel
-                      value="1000"
-                      name="Standard"
-                      control={<Radio />}
-                      label="Standard - $10"
-                    />
-                    <FormControlLabel
-                      value="2000"
-                      name="Professional"
-                      control={<Radio />}
-                      label="Professional - $20"
-                    />
-                    <FormControlLabel
-                      value="3000"
-                      name="Enterprise"
-                      control={<Radio />}
-                      label="Enterprise - $30"
-                    />
-                  </RadioGroup>
-                </FormControl>
+        {auth.subscriptionStatus === "alive" ? (
+          <Box style={{ margin: "2em", minHeight: "200px" }}>
+            <Grid container>
+              <Grid
+                item
+                xs={12}
+                style={{ display: "flex", justifyContent: "center" }}
+              >
+                <Typography variant="h6" style={{ paddingTop: "16px" }}>
+                  Your subscription is active
+                </Typography>
               </Grid>
-              <Grid item xs={6} sx={{ m: 2 }}>
-                <Typography variant="h6">Payment Card</Typography>
-                <Typography variant="body2">Enter the card number</Typography>
-                <Elements stripe={stripePromise}>
-                  <CheckoutForm
-                    companyId={companyId}
-                    payment={paymenet}
-                    success={() => {
-                      setStatus("success");
+            </Grid>
+          </Box>
+        ) : (
+          <Grid container style={{ padding: "16px" }}>
+            <Grid item container>
+              <Grid item xs={12}>
+                <PageHeader
+                  icon={icon}
+                  title="Billing"
+                  description="Please, select the plan and the payment card"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Divider />
+              </Grid>
+              <Grid
+                container
+                item
+                style={{
+                  paddingLeft: "16px",
+                  paddingTop: "16px",
+                }}
+              >
+                <Grid item xs={6}>
+                  <Typography variant="h6">Select plan</Typography>
+                  <FormControl
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      paddingLeft: "16px",
+                      paddingTop: "16px",
                     }}
-                  />
-                </Elements>
+                  >
+                    <FormLabel id="demo-radio-buttons-group-label">
+                      Subcription
+                    </FormLabel>
+                    <RadioGroup
+                      aria-labelledby="demo-radio-buttons-group-label"
+                      name="radio-buttons-group"
+                      value={paymenet.amount}
+                      onChange={handleChange}
+                    >
+                      <FormControlLabel
+                        value="1000"
+                        name="Standard"
+                        control={<Radio />}
+                        label="Standard - $10"
+                      />
+                      <FormControlLabel
+                        value="2000"
+                        name="Professional"
+                        control={<Radio />}
+                        label="Professional - $20"
+                      />
+                      <FormControlLabel
+                        value="3000"
+                        name="Enterprise"
+                        control={<Radio />}
+                        label="Enterprise - $30"
+                      />
+                    </RadioGroup>
+                  </FormControl>
+                </Grid>
+                <Grid item xs={6} sx={{ m: 2 }}>
+                  <Typography variant="h6">Payment Card</Typography>
+                  <Typography variant="body2">Enter the card number</Typography>
+                  <Elements stripe={stripePromise}>
+                    <CheckoutForm
+                      companyId={companyId}
+                      payment={paymenet}
+                      success={() => {
+                        setStatus(auth.subscriptionStatus);
+                      }}
+                    />
+                  </Elements>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
+        )}
       </Paper>
     </Container>
   );
