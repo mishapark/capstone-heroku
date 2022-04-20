@@ -5,11 +5,11 @@ import { Button, Card, Container } from "@mui/material";
 import { Stack } from "@mui/material";
 import DropdownList from "react-widgets/DropdownList";
 
-import Tab from "@material-ui/core/Tab";
-import Tabs from "@material-ui/core/Tabs";
-import TabContext from "@material-ui/lab/TabContext";
-import TabList from "@material-ui/lab/TabList";
-import TabPanel from "@material-ui/lab/TabPanel";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
+import TabContext from "@mui/lab/TabContext";
+import TabList from "@mui/lab/TabList";
+import TabPanel from "@mui/lab/TabPanel";
 
 import { getStandards } from "../api/standards";
 

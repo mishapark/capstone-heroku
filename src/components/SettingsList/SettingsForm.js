@@ -2,7 +2,7 @@ import { Box, Paper, Toolbar, Typography } from "@mui/material";
 import { React, useState, useEffect } from "react";
 import { PageHeader } from "../../components/Header/PageHeader";
 import ApartmentIcon from "@mui/icons-material/Apartment";
-import { Button, Divider, Grid, TextField } from "@material-ui/core";
+import { Button, Divider, Grid, TextField } from "@mui/material";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom"
 

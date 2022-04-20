@@ -1,6 +1,6 @@
 import React from "react";
 import EngineeringIcon from "@mui/icons-material/Engineering";
-import { Box, Button, Divider, Grid, Paper } from "@material-ui/core";
+import { Box, Button, Divider, Grid, Paper } from "@mui/material";
 import { PageHeader } from "../../components/Header/PageHeader";
 import SettingsForm from "../../components/SettingsList/SettingsForm";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";

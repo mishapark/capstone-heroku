@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { InputLabel } from "@material-ui/core";
+import { InputLabel } from "@mui/material";
 import { Autocomplete } from "@mui/material";
 import { TextField } from "@mui/material";
 import styles from "./styles";

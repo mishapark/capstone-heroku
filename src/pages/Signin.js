@@ -15,7 +15,7 @@ import axios from "axios";
 import { useContext, useState, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { Alert } from "@material-ui/lab";
+import { Alert } from '@mui/material';
 
 export default function SignIn() {
   const {

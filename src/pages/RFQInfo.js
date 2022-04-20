@@ -17,7 +17,7 @@ import { DesktopDatePicker } from "@mui/lab";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import ReceiptIcon from "@mui/icons-material/Receipt";
-import { Divider } from "@material-ui/core";
+import { Divider } from "@mui/material";
 import { PageHeader } from "../components/Header/PageHeader";
 import { RFQForm } from "../components/RFQ/RFQForm";
 

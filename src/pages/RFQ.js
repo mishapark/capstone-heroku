@@ -1,6 +1,6 @@
 import React from "react";
 import { Typography } from "@mui/material";
-import { Grid } from "@material-ui/core";
+import { Grid } from "@mui/material";
 import { Paper } from "@mui/material";
 import { Button } from "@mui/material";
 import { Card, Stack } from "@mui/material";
@@ -9,8 +9,8 @@ import { TextField } from "@mui/material";
 import { Box } from "@mui/material";
 import { Toolbar, Tooltip } from "@mui/material";
 import { useState, useEffect } from "react";
-import AddIcon from "@material-ui/icons/Add";
-import { Select, MenuItem } from "@material-ui/core";
+import AddIcon from "@mui/icons-material/Add";
+import { Select, MenuItem } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -288,10 +288,10 @@ export const RFQ = () => {
                 </Stack>
               </DialogContent>
               <DialogActions>
-                <Button onClick={handleClose} variant="outlined">
+                <Button onClick={handleClose} variant="contained">
                   Cancel
                 </Button>
-                <Button type="submit" variant="outlined">
+                <Button type="submit" variant="contained">
                   Submit
                 </Button>
               </DialogActions>
@@ -311,7 +311,7 @@ export const RFQ = () => {
                 <FormattedMessage id="RFQ Manager"></FormattedMessage>
               </Typography>
               <Tooltip title="Create RFQ">
-                <Button onClick={handleClickOpen} variant="outlined">
+                <Button onClick={handleClickOpen} variant="contained">
                   <AddIcon />
                   <FormattedMessage id="rfq.createBtn"></FormattedMessage>
                 </Button>

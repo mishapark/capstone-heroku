@@ -18,7 +18,13 @@ import { IntlProvider } from "react-intl";
 import French from "./languages/fr-CA.json";
 import English from "./languages/en-US.json";
 import LanguageProvider from "./context/LanguageProvider";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import {
+  ThemeProvider,
+  StyledEngineProvider,
+  createTheme,
+  adaptV4Theme,
+} from "@mui/material/styles";
+import makeStyles from "@mui/styles/makeStyles";
 import { CssBaseline } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
@@ -46,95 +52,94 @@ function App() {
 
   const darkTheme2 = React.useMemo(
     () =>
-      createTheme({
-        typography: {
-          fontFamily: ["Poppins", "sans-serif"].join(","),
-        },
-        palette: {
-          mode: prefersDarkMode ? "dark" : "light",
-          primary: {
-            main: "#0024FF",
+      createTheme(
+        adaptV4Theme({
+          typography: {
+            fontFamily: ["Poppins", "sans-serif"].join(","),
           },
-          secondary: {
-            main: "#101637",
+          palette: {
+            mode: prefersDarkMode ? "dark" : "light",
+            primary: {
+              main: "#0024FF",
+            },
+            secondary: {
+              main: "#101637",
+            },
+            background: {
+              default: "#2e2e2e",
+            },
           },
-          // },
-          // background: {
-          //   default: "#fcfcfc",
-          // },
-        },
-        ".MuiButtonBase-root": {
-          color: "#fcfcfc",
-        },
-      }),
+          ".MuiButtonBase-root": {
+            color: "#fcfcfc",
+          },
+        })
+      ),
     [prefersDarkMode]
   );
 
-  const theme = createTheme({
-    typography: {
-      fontFamily: ["Poppins", "sans-serif"].join(","),
-    },
-    palette: {
-      primary: {
-        main: "#0024FF",
+  const theme = createTheme(
+    adaptV4Theme({
+      typography: {
+        fontFamily: ["Poppins", "sans-serif"].join(","),
       },
-      secondary: {
-        main: "#101637",
+      palette: {
+        primary: {
+          main: "#0024FF",
+        },
+        secondary: {
+          main: "#101637",
+        },
+        background: {
+          default: "#fcfcfc",
+        },
       },
-      background: {
-        default: "#fcfcfc",
+      ".MuiButtonBase-root": {
+        color: "#fcfcfc",
       },
-    },
-    ".MuiButtonBase-root": {
-      color: "#fcfcfc",
-    },
-  });
-
-  const darkTheme = createTheme({
-    palette: {
-      mode: "dark",
-    },
-  });
+    })
+  );
 
   return (
     <LanguageProvider.Provider
       value={{ language: "en", setLanguage: setLanguage }}
     >
       <IntlProvider locale={language} messages={messages[language]}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              {/* public routes */}
-              <Route path="/" element={<Home />} />
-              <Route path="unathorized" element={<Unauthorized />} />
-              <Route path="signin" element={<SignIn />} />
-              <Route path="signup" element={<Signup />} />
-              <Route path="forgot" element={<Forgot />} />
-              {/* we want to protect these routes */}
-              <Route element={<PersistLogin />}>
-                <Route
-                  element={
-                    <RequireAuth
-                      allowedRoles={[
-                        ROLES.User,
-                        ROLES.Super_Admin,
-                        ROLES.Approver,
-                        ROLES.Admin,
-                        ROLES.Author,
-                      ]}
-                    />
-                  }
-                >
-                  <Route path="/*" element={<Dashboard />} />
+        <StyledEngineProvider injectFirst>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                {/* public routes */}
+                <Route path="/" element={<Home />} />
+                <Route path="unathorized" element={<Unauthorized />} />
+                <Route path="signin" element={<SignIn />} />
+                <Route path="signup" element={<Signup />} />
+                <Route path="forgot" element={<Forgot />} />
+                {/* we want to protect these routes */}
+                <Route element={<PersistLogin />}>
+                  <Route
+                    element={
+                      <RequireAuth
+                        allowedRoles={[
+                          ROLES.User,
+                          ROLES.Super_Admin,
+                          ROLES.Approver,
+                          ROLES.Admin,
+                          ROLES.Author,
+                        ]}
+                      />
+                    }
+                  >
+                    <Route path="/*" element={<Dashboard />} />
+                  </Route>
                 </Route>
-              </Route>
 
-              {/* catch all */}
-              <Route path="*" element={<Missing />} />
-            </Route>
-          </Routes>
-        </ThemeProvider>
+                {/* catch all */}
+                <Route path="*" element={<Missing />} />
+              </Route>
+            </Routes>
+          </ThemeProvider>
+        </StyledEngineProvider>
       </IntlProvider>
     </LanguageProvider.Provider>
   );

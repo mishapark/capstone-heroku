@@ -7,7 +7,7 @@ import {
 } from "@mui/material"
 import Autocomplete from "@mui/material/Autocomplete";
 import ApartmentIcon from "@mui/icons-material/Apartment";
-import { Divider, Grid, TextField } from "@material-ui/core";
+import { Divider, Grid, TextField } from "@mui/material";
 
 
 //components

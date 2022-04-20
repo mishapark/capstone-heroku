@@ -31,7 +31,7 @@ function RemoveUserGroups() {
             <TableRow>
               <TableCell>{"Mikhail"}</TableCell>
               <TableCell>
-                <IconButton color="primary">
+                <IconButton color="primary" size="large">
                   <DeleteIcon />
                 </IconButton>
               </TableCell>

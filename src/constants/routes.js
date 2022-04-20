@@ -6,10 +6,10 @@ import Products from "../pages/Products";
 import { Tasks } from "../pages/Tasks";
 
 // Icons
-import DashboardIcon from "@material-ui/icons/Dashboard";
-import InboxIcon from "@material-ui/icons/Inbox";
-import CheckBoxIcon from "@material-ui/icons/CheckBox";
-import AssessmentIcon from "@material-ui/icons/Assessment";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import InboxIcon from "@mui/icons-material/Inbox";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import AssessmentIcon from "@mui/icons-material/Assessment";
 import RequestQuoteIcon from "@mui/icons-material/RequestQuote";
 import TaskIcon from "@mui/icons-material/Task";
 import { Dash } from "../pages/Dash";

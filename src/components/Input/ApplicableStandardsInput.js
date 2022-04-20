@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import Autocomplete from "@mui/material/Autocomplete";
-import { InputLabel } from "@material-ui/core";
+import { InputLabel } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import styles from "./styles";
 import { FormattedMessage } from "react-intl";

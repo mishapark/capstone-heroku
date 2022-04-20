@@ -1,5 +1,5 @@
 import React from "react";
-import { InputLabel } from "@material-ui/core";
+import { InputLabel } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import { FormattedMessage } from "react-intl";

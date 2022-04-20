@@ -19,7 +19,7 @@ import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import { getProductsWithToken } from "../api/products";
 import useAuth from "../hooks/useAuth";
-import AddIcon from "@material-ui/icons/Add";
+import AddIcon from "@mui/icons-material/Add";
 import DoneIcon from "@mui/icons-material/Done";
 import { AddCompliance } from "../components/Compliance/AddCompliance";
 import ListIcon from "@mui/icons-material/List";

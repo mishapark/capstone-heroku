@@ -8,11 +8,11 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from '@mui/icons-material/Add';
 import ApartmentIcon from "@mui/icons-material/Apartment";
-import { Divider, Grid, TextField } from "@material-ui/core";
-import Tab from "@material-ui/core/Tab";
-import Tabs from "@material-ui/core/Tabs";
-import TabContext from "@material-ui/lab/TabContext";
-import TabPanel from "@material-ui/lab/TabPanel";
+import { Divider, Grid, TextField } from "@mui/material";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
+import TabContext from "@mui/lab/TabContext";
+import TabPanel from "@mui/lab/TabPanel";
 
 
 //components
@@ -76,7 +76,6 @@ function AddUsers() {
     }
 
     return (
-
         <div>
             <Box sx={{ width: "100%" }}>
                 <Paper sx={{ width: "100%" }}>
@@ -105,12 +104,12 @@ function AddUsers() {
                                             <TableCell>{c.userName}</TableCell>
                                             <TableCell>{c.userEmail}</TableCell>
                                             <TableCell>
-                                                <IconButton color="primary" onClick={(e) => handleAdd(e, c._id)}>
+                                                <IconButton color="primary" onClick={(e) => handleAdd(e, c._id)} size="large">
                                                     <AddIcon />
                                                 </IconButton>
                                             </TableCell>
                                         </TableRow>
-                                    )
+                                    );
                                 })}
 
                             </TableBody>
@@ -119,7 +118,6 @@ function AddUsers() {
                 </Paper>
             </Box>
         </div>
-
     );
 }
 

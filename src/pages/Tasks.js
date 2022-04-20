@@ -15,7 +15,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "../api/axios";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
-import { IconButton, Toolbar, Tooltip } from "@material-ui/core";
+import { IconButton, Toolbar, Tooltip } from "@mui/material";
 import { FormattedMessage } from "react-intl";
 
 // hooks
@@ -60,7 +60,7 @@ export const Tasks = () => {
                         </Typography>
 
                         <Tooltip title="Create RFQ">
-                            <IconButton>
+                            <IconButton size="large">
                                 <Badge badgeContent={rfqs.length} color="primary">
                                     <TaskAltIcon />
                                 </Badge>

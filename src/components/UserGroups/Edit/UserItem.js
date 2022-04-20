@@ -1,10 +1,10 @@
 import React from "react";
-import Typography from "@material-ui/core/Typography";
+import Typography from "@mui/material/Typography";
 import classNames from "classnames";
-import { makeStyles } from "@material-ui/core/styles";
+import makeStyles from '@mui/styles/makeStyles';
 
-const lightBlue = require("@material-ui/core/colors/lightBlue");
-const yellow = require("@material-ui/core/colors/yellow");
+const lightBlue = require("@mui/material/colors/lightBlue");
+const yellow = require("@mui/material/colors/yellow");
 
 const infoColor = lightBlue.default[500];
 const warningColor = yellow.default[500];
@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     overflowX: "auto",
     overflowY: "hidden",
     whiteSpace: "nowrap",
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down('md')]: {
       height: "calc(100vh - 56px)",
     },
     [theme.breakpoints.up("sm")]: {
@@ -108,7 +108,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cards: {
     position: "relative",
-    padding: `0 ${theme.spacing(1)}px ${theme.spacing(1)}px`,
+    padding: `0 ${theme.spacing(1)} ${theme.spacing(1)}`,
     boxSizing: "border-box",
     height: "100%",
     overflowX: "hidden",

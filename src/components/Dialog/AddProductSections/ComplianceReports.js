@@ -5,11 +5,11 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DateRangeInput from "../../Input/DateRangeInput";
 import RecordType from "../../Input/RecordType";
-import { InputLabel } from "@material-ui/core";
+import { InputLabel } from "@mui/material";
 import { FormattedMessage } from "react-intl";
 import AutocompleteCompliances from "../../Input/AutocompleteCompliances";
-import { Button } from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
+import { Button } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 import { Controller } from "react-hook-form";
 
 const styles = {

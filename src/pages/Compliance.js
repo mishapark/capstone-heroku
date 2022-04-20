@@ -19,7 +19,7 @@ import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import { getProductsWithToken } from "../api/products";
 import useAuth from "../hooks/useAuth";
-import AddIcon from "@material-ui/icons/Add";
+import AddIcon from "@mui/icons-material/Add";
 import { AddCompliance } from "../components/Compliance/AddCompliance";
 import ListIcon from "@mui/icons-material/List";
 import { getStandards } from "../api/standards";
@@ -39,13 +39,13 @@ const EnhancedTableToolbar = ({ handleClickOpen }) => {
       </Typography>
       <Stack spacing={2} direction="row">
         <Tooltip title="Get compliance">
-          <Button variant="outlined">
+          <Button variant="contained">
             <ListIcon />
             <Link to="/compliancelist">Compliances</Link>
           </Button>
         </Tooltip>
         <Tooltip title="Add compliance">
-          <Button variant="outlined" onClick={handleClickOpen}>
+          <Button variant="contained" onClick={handleClickOpen}>
             <AddIcon />
             <FormattedMessage id="rfq.createBtn"></FormattedMessage>
           </Button>
