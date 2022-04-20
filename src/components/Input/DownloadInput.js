@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { InputLabel, Button } from "@material-ui/core";
+import { InputLabel, Button } from "@mui/material";
 import UploadIcon from "@mui/icons-material/Upload";
 import styles from "./styles";
 import { FormattedMessage } from "react-intl";

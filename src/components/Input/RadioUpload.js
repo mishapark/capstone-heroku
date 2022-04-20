@@ -6,7 +6,7 @@ import {
   RadioGroup,
   Button,
   Radio,
-} from "@material-ui/core";
+} from "@mui/material";
 import UploadIcon from "@mui/icons-material/Upload";
 import styles from "./styles";
 import { FormattedMessage } from "react-intl";

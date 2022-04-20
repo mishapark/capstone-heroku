@@ -5,7 +5,7 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio,
-} from "@material-ui/core";
+} from "@mui/material";
 import styles from "./styles";
 import { FormattedMessage } from "react-intl";
 

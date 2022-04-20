@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { InputLabel, TextField } from "@material-ui/core";
+import { InputLabel, TextField } from "@mui/material";
 import styles from "./styles";
 import { FormattedMessage } from "react-intl";
 

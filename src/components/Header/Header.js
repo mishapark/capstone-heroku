@@ -1,19 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
 
-import AccountBoxIcon from "@material-ui/icons/AccountBox";
-import AppBar from "@material-ui/core/AppBar";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import { Box, Hidden, Paper } from "@material-ui/core";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import AppBar from "@mui/material/AppBar";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import { Box, Hidden, Paper } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import IconButton from "@material-ui/core/IconButton";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import Menu from "@material-ui/core/Menu";
-import MenuIcon from "@material-ui/icons/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import Toolbar from "@material-ui/core/Toolbar";
-import { makeStyles } from "@material-ui/core/styles";
+import IconButton from "@mui/material/IconButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import Toolbar from "@mui/material/Toolbar";
+import makeStyles from "@mui/styles/makeStyles";
 import { Link } from "react-router-dom";
 import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     background: "#101637",
     zIndex: theme.zIndex.drawer + 100,
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("md")]: {
       position: "fixed",
     },
   },
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
   },
   logo: {
     margin: "auto",
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("md")]: {
       maxWidth: "80px",
     },
   },
@@ -74,9 +74,7 @@ const useStyles = makeStyles((theme) => ({
   searchInput: {
     fontSize: "1rem",
     padding: theme.spacing(1) * 1.9,
-    [theme.breakpoints.down("xs")]: {
-      padding: theme.spacing(1) * 1.2,
-    },
+    padding: "10px",
     cursor: "text",
     textIndent: "30px",
     border: "none",
@@ -182,6 +180,7 @@ const Header = ({ logo, logoAltText, toggleFullscreen, toggleDrawer }) => {
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerToggle}
+            size="large"
           >
             <MenuIcon />
           </IconButton>
@@ -196,14 +195,18 @@ const Header = ({ logo, logoAltText, toggleFullscreen, toggleDrawer }) => {
             &nbsp;&nbsp; Daily Compliance
           </div>
 
-          <Hidden xsDown>
+          <Hidden smDown>
             <div
               className={classes.searchWrapper}
               ref={searchRef}
               onClick={() => setIsShown((isShown) => !isShown)}
             >
               <form className={classes.searchForm}>
-                <IconButton aria-label="Search" className={classes.searchIcon}>
+                <IconButton
+                  aria-label="Search"
+                  className={classes.searchIcon}
+                  size="large"
+                >
                   <SearchIcon />
                 </IconButton>
                 <FormattedMessage
@@ -275,6 +278,7 @@ const Header = ({ logo, logoAltText, toggleFullscreen, toggleDrawer }) => {
               onClick={handleSearchExpandToggle}
               aria-expanded={searchExpanded}
               aria-label="Show searchbar"
+              size="large"
             >
               <SearchIcon />
             </IconButton>
@@ -288,6 +292,7 @@ const Header = ({ logo, logoAltText, toggleFullscreen, toggleDrawer }) => {
             aria-haspopup="true"
             color="inherit"
             onClick={handleSettingdToggle}
+            size="large"
           >
             <MoreVertIcon />
           </IconButton>

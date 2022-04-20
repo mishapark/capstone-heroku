@@ -4,7 +4,7 @@ import { Toolbar, Typography, Tooltip } from "@mui/material";
 import { Button, Dialog } from "@mui/material";
 import Card from "@mui/material/Card";
 import CircularProgress from "@mui/material/CircularProgress";
-import AddIcon from "@material-ui/icons/Add";
+import AddIcon from "@mui/icons-material/Add";
 import DialogCustom from "../components/Dialog/DialogCustom";
 import CustomTable from "../components/CustomTable/CustomTable";
 import { FormattedMessage } from "react-intl";
@@ -42,7 +42,7 @@ function Products() {
               <FormattedMessage id={"Products"}></FormattedMessage>
             </Typography>
             <Tooltip title="Add Product">
-              <Button onClick={() => setOpen(true)} variant="outlined">
+              <Button onClick={() => setOpen(true)} variant="contained">
                 <AddIcon />
                 <FormattedMessage id={"Create"} />
               </Button>

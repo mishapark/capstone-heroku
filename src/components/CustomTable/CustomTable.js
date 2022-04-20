@@ -41,89 +41,84 @@ function CustomTable({ tableData, setRequestData }) {
       .then(() => setRequestData(new Date()));
   };
 
-  return (
-    <>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <CustomHeader columns={DUMMY_COLUMNS} />
-          <TableBody>
-            {tableData.map((p) => (
-              <TableRow key={p["_id"]}>
-                <TableCell>
-                  {p["product_details"]["product_name"]
-                    ? p["product_details"]["product_name"]
-                    : "-"}
-                </TableCell>
-                <TableCell>
-                  {p["product_details"]["product_family"]
-                    ? p["product_details"]["product_family"]
-                    : "-"}
-                </TableCell>
-                <TableCell>
-                  {p["product_details"]["product_category"]
-                    ? p["product_details"]["product_category"]
-                    : "-"}
-                </TableCell>
-                <TableCell>
-                  {p["product_details"]["applicable_standard"]
-                    ? p["product_details"]["applicable_standard"]
-                    : "-"}
-                </TableCell>
-                <TableCell>
-                  {p.last_updated_status.last_updated_date
-                    .toString()
-                    .slice(0, 10)}
-                </TableCell>
-                <TableCell>
-                  <IconButton color="primary">
-                    <Link to={`${p._id}`}>
-                      <PageviewIcon />
-                    </Link>
-                  </IconButton>
-                </TableCell>
-                <TableCell>
-                  <IconButton
-                    color="primary"
-                    onClick={(e) => {
-                      setEditContent(p);
-                      setOpen(true);
-                    }}
-                  >
-                    <EditIcon />
-                  </IconButton>
-                </TableCell>
-                <TableCell>
-                  <IconButton
-                    color="primary"
-                    onClick={() => handleDelete(p.product_id)}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+  return <>
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <CustomHeader columns={DUMMY_COLUMNS} />
+        <TableBody>
+          {tableData.map((p) => (
+            <TableRow key={p["_id"]}>
+              <TableCell>
+                {p["product_details"]["product_name"]
+                  ? p["product_details"]["product_name"]
+                  : "-"}
+              </TableCell>
+              <TableCell>
+                {p["product_details"]["product_family"]
+                  ? p["product_details"]["product_family"]
+                  : "-"}
+              </TableCell>
+              <TableCell>
+                {p["product_details"]["product_category"]
+                  ? p["product_details"]["product_category"]
+                  : "-"}
+              </TableCell>
+              <TableCell>
+                {p["product_details"]["applicable_standard"]
+                  ? p["product_details"]["applicable_standard"]
+                  : "-"}
+              </TableCell>
+              <TableCell>
+                {p.last_updated_status.last_updated_date
+                  .toString()
+                  .slice(0, 10)}
+              </TableCell>
+              <TableCell>
+                <IconButton color="primary" size="large">
+                  <Link to={`${p._id}`}>
+                    <PageviewIcon />
+                  </Link>
+                </IconButton>
+              </TableCell>
+              <TableCell>
+                <IconButton
+                  color="primary"
+                  onClick={(e) => {
+                    setEditContent(p);
+                    setOpen(true);
+                  }}
+                  size="large">
+                  <EditIcon />
+                </IconButton>
+              </TableCell>
+              <TableCell>
+                <IconButton color="primary" onClick={() => handleDelete(p.product_id)} size="large">
+                  <DeleteIcon />
+                </IconButton>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
 
-      <Dialog
-        open={open}
+    <Dialog
+      open={open}
+      onClose={() => setOpen(false)}
+      scroll="paper"
+      aria-labelledby="scroll-dialog-title"
+      aria-describedby="scroll-dialog-description"
+      maxWidth="xl"
+      fullWidth
+    >
+      <DialogCustom
+        title="Edit Product"
         onClose={() => setOpen(false)}
-        scroll="paper"
-        aria-labelledby="scroll-dialog-title"
-        aria-describedby="scroll-dialog-description"
-        maxWidth="xl"
-        fullWidth
-      >
-        <DialogCustom
-          title="Edit Product"
-          onClose={() => setOpen(false)}
-          editContent={editContent}
-          setRequestData={setRequestData}
-        />
-      </Dialog>
-    </>
-  );
+        editContent={editContent}
+        setRequestData={setRequestData}
+      />
+    </Dialog>
+  </>;
 }
 
 export default CustomTable;

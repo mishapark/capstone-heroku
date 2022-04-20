@@ -85,54 +85,52 @@ function RfqOverviewByStatus() {
 
     }
 
-    return (
-        <>
+    return <>
+        <Box>
+            <Doughnut data={doughnutData} option={option} height="200px"
+                width="200px"
+                options={{
+                    maintainAspectRatio: false,
+                    onClick: function (event, element) {
+                        handleDoughnutChartOnclick(event, element)
+                    }
+                }} />
+        </Box>
+        {resultsIsVisible &&
             <Box>
-                <Doughnut data={doughnutData} option={option} height="200px"
-                    width="200px"
-                    options={{
-                        maintainAspectRatio: false,
-                        onClick: function (event, element) {
-                            handleDoughnutChartOnclick(event, element)
-                        }
-                    }} />
-            </Box>
-            {resultsIsVisible &&
-                <Box>
-                    <TableContainer component={Paper}>
-                        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell sx={{ fontWeight: 'bold' }} width="33%">RFQ Number</TableCell>
-                                    <TableCell sx={{ fontWeight: 'bold' }} width="33%">Description</TableCell>
-                                    <TableCell sx={{ fontWeight: 'bold' }} width="33%">RFQ Date</TableCell>
+                <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell sx={{ fontWeight: 'bold' }} width="33%">RFQ Number</TableCell>
+                                <TableCell sx={{ fontWeight: 'bold' }} width="33%">Description</TableCell>
+                                <TableCell sx={{ fontWeight: 'bold' }} width="33%">RFQ Date</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+
+                            {reportResults.map((row) => (
+
+                                <TableRow
+                                    key={row._id}
+                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                >
+
+                                    <TableCell component="th" scope="row">
+                                        <a href={"/rfq/" + row.rfqNumber} target="_blank">{row.rfqNumber}</a>
+                                    </TableCell>
+                                    <TableCell component="th" scope="row">{row.description}</TableCell>
+                                    <TableCell component="th" scope="row">{row.rfqDate.match(/^\d{4}\-\d{1,2}\-\d{1,2}/)}</TableCell>
                                 </TableRow>
-                            </TableHead>
-                            <TableBody>
+                            ))}
+                        </TableBody>
+                    </Table>
 
-                                {reportResults.map((row) => (
+                </TableContainer>
 
-                                    <TableRow
-                                        key={row._id}
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                    >
-
-                                        <TableCell component="th" scope="row">
-                                            <a href={"/rfq/" + row.rfqNumber} target="_blank">{row.rfqNumber}</a>
-                                        </TableCell>
-                                        <TableCell component="th" scope="row">{row.description}</TableCell>
-                                        <TableCell component="th" scope="row">{row.rfqDate.match(/^\d{4}\-\d{1,2}\-\d{1,2}/)}</TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-
-                    </TableContainer>
-
-                </Box>
-            }
-        </>
-    );
+            </Box>
+        }
+    </>;
 
 
 }

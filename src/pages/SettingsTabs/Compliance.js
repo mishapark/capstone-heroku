@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Paper } from "@material-ui/core";
+import { Box, Button, Divider, Paper } from "@mui/material";
 import React from "react";
 import { PageHeader } from "../../components/Header/PageHeader";
 import SettingsForm from "../../components/SettingsList/SettingsForm";

@@ -90,7 +90,7 @@ export default function ProductsDash({ products }) {
         to="/products"
         onClick={preventDefault}
         sx={{ mt: 3 }}
-      >
+        underline="hover">
         See all products
       </Link>
     </React.Fragment>

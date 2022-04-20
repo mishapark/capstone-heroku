@@ -78,92 +78,92 @@ function ProductsByCompliance() {
 
     }
 
-    return (
-        <>
+    return <>
+        <Box>
+            <Pie data={pieData} option={option} height="200px"
+                width="200px"
+                options={{
+                    maintainAspectRatio: false,
+                    onClick: function (event, element) {
+                        handlePieChartOnclick(event, element)
+                    }
+                }} />
+        </Box>
+
+        {resultsIsVisible &&
             <Box>
-                <Pie data={pieData} option={option} height="200px"
-                    width="200px"
-                    options={{
-                        maintainAspectRatio: false,
-                        onClick: function (event, element) {
-                            handlePieChartOnclick(event, element)
-                        }
-                    }} />
-            </Box>
-
-            {resultsIsVisible &&
-                <Box>
-                    <TableContainer component={Paper}>
-                        <Table sx={{ minWidth: 650 }} aria-label="simple table" stickyHeader>
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell sx={{ fontWeight: 'bold' }} width="33%">Product Name</TableCell>
-                                    <TableCell sx={{ fontWeight: 'bold' }} width="33%">Compliance Report Number(s)</TableCell>
-                                    <TableCell sx={{ fontWeight: 'bold' }} width="33%">Expiry Date</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {reportResults.map((row) => {
-                                    // if there are no mappings, return empty table cells
-                                    if (row.compliance_report_number.length == 0) {
-                                        return (
-
-                                            <TableRow
-                                                key={row._id}
-                                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                            >
-                                                <TableCell component="th" scope="row">
-                                                    <a href={"/products/" + row._id} target="_blank">{row.product_details.product_name}</a>
-                                                </TableCell>
-                                                <TableCell component="th" scope="row"></TableCell>
-                                                <TableCell component="th" scope="row"></TableCell>
-                                            </TableRow>
-                                        )
-                                    }
-
-                                    // otherwise, get the compliance numbers and expiry dates
+                <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 650 }} aria-label="simple table" stickyHeader>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell sx={{ fontWeight: 'bold' }} width="33%">Product Name</TableCell>
+                                <TableCell sx={{ fontWeight: 'bold' }} width="33%">Compliance Report Number(s)</TableCell>
+                                <TableCell sx={{ fontWeight: 'bold' }} width="33%">Expiry Date</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {reportResults.map((row) => {
+                                // if there are no mappings, return empty table cells
+                                if (row.compliance_report_number.length == 0) {
                                     return (
-                                        <Fragment>
-                                            <TableRow
-                                                key={row._id}
-                                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                            >
-                                                <TableCell component="th" scope="row" rowSpan={row.compliance_report_number.length + 1}>
-                                                    <a href={"/products/" + row._id} target="_blank">{row.product_details.product_name}</a>
 
-                                                </TableCell>
-                                            </TableRow>
+                                        <TableRow
+                                            key={row._id}
+                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                        >
+                                            <TableCell component="th" scope="row">
+                                                <a href={"/products/" + row._id} target="_blank">{row.product_details.product_name}</a>
+                                            </TableCell>
+                                            <TableCell component="th" scope="row"></TableCell>
+                                            <TableCell component="th" scope="row"></TableCell>
+                                        </TableRow>
+                                    )
+                                }
 
-                                            {row.compliance_report_number.map((r) => {
+                                // otherwise, get the compliance numbers and expiry dates
+                                return (
+                                    <Fragment>
+                                        <TableRow
+                                            key={row._id}
+                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                        >
+                                            <TableCell component="th" scope="row" rowSpan={row.compliance_report_number.length + 1}>
+                                                <a href={"/products/" + row._id} target="_blank">{row.product_details.product_name}</a>
 
-                                                const complianceReport = compliances.filter((c) => c["report_number"] === r)
+                                            </TableCell>
+                                        </TableRow>
 
-                                                if (complianceReport.length === 0) {
-                                                    return (< TableRow >
-                                                        <TableCell>{r}</TableCell>
-                                                        <TableCell>{ }</TableCell>
-                                                    </TableRow>)
-                                                } else {
-                                                    return (< TableRow >
+                                        {row.compliance_report_number.map((r) => {
+
+                                            const complianceReport = compliances.filter((c) => c["report_number"] === r)
+
+                                            if (complianceReport.length === 0) {
+                                                return (< TableRow >
+                                                    <TableCell>{r}</TableCell>
+                                                    <TableCell>{ }</TableCell>
+                                                </TableRow>)
+                                            } else {
+                                                return (
+                                                    < TableRow >
                                                         <TableCell>{r}</TableCell>
                                                         <TableCell>{complianceReport[0].end_date.match(/^\d{4}\-\d{1,2}\-\d{1,2}/)}</TableCell>
-                                                    </TableRow>)
-                                                }
+                                                    </TableRow>
+                                                );
+                                            }
 
-                                            })}
-                                        </Fragment>
-                                    )
+                                        })}
+                                    </Fragment>
+                                );
 
-                                })}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </Box>
-            }
+                            })}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </Box>
+        }
 
 
-        </>
-    );
+    </>;
 }
 
 export default ProductsByCompliance;

@@ -21,7 +21,7 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { PageHeader } from "../components/Header/PageHeader";
 import TaskIcon from "@mui/icons-material/Task";
 import { RFQForm } from "../components/RFQ/RFQForm";
-import { Divider } from "@material-ui/core";
+import { Divider } from "@mui/material";
 import { FormattedMessage } from "react-intl";
 
 // api

@@ -1,9 +1,9 @@
 import React from 'react'
-import { Table } from "@material-ui/core";
-import { TableCell } from "@material-ui/core";
-import { TableRow } from "@material-ui/core";
-import { TableHead } from "@material-ui/core";
-import { TableBody } from "@material-ui/core";
+import { Table } from "@mui/material";
+import { TableCell } from "@mui/material";
+import { TableRow } from "@mui/material";
+import { TableHead } from "@mui/material";
+import { TableBody } from "@mui/material";
 
 export const GeneralTable = ({headers, data}) => {
     

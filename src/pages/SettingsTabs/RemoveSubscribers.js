@@ -41,12 +41,12 @@ function RemoveSubscribers() {
                                 <TableRow>
                                     <TableCell>{c.company_name}</TableCell>
                                     <TableCell>
-                                        <IconButton color="primary">
+                                        <IconButton color="primary" size="large">
                                             <DeleteIcon />
                                         </IconButton>
                                     </TableCell>
                                 </TableRow>
-                            )
+                            );
                         })}
 
                     </TableBody>

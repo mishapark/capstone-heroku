@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { InputLabel, TextField, Button } from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
-import RemoveIcon from "@material-ui/icons/Remove";
+import { InputLabel, TextField, Button } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 import styles from "./styles";
 import { FormattedMessage } from "react-intl";
 

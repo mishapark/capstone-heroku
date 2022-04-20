@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 
-import Drawer from "@material-ui/core/Drawer";
-import Hidden from "@material-ui/core/Hidden";
-import List from "@material-ui/core/List";
+import Drawer from "@mui/material/Drawer";
+import Hidden from "@mui/material/Hidden";
+import List from "@mui/material/List";
 import PropTypes from "prop-types";
 import SidebarItem from "./SidebarItem";
-import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
+import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import { drawerWidth } from "../../styleVariables";
-import { makeStyles } from "@material-ui/core/styles";
-import withWidth from "@material-ui/core/withWidth";
+import makeStyles from "@mui/styles/makeStyles";
+
+// FIXME checkout https://mui.com/components/use-media-query/#migrating-from-withwidth
+const withWidth = () => (WrappedComponent) => (props) =>
+  <WrappedComponent {...props} width="xs" />;
 
 const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
@@ -21,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     zIndex: theme.zIndex.drawer + 99,
   },
   modal: {
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("md")]: {
       top: "56px!important",
     },
     [theme.breakpoints.up("sm")]: {
@@ -30,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     zIndex: "1000!important",
   },
   backdrop: {
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("md")]: {
       top: "56px",
     },
     [theme.breakpoints.up("sm")]: {
@@ -63,7 +66,7 @@ const Sidebar = ({ opened, toggleDrawer, routes, location }) => {
 
   return (
     <>
-      <Hidden smDown>
+      <Hidden mdDown>
         <Drawer
           variant="persistent"
           classes={{

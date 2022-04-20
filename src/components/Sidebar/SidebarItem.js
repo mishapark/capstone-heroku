@@ -1,10 +1,10 @@
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
 import { NavLink } from "react-router-dom";
 import React from "react";
-import Typography from "@material-ui/core/Typography";
+import Typography from "@mui/material/Typography";
 import classNames from "classnames";
-import { makeStyles } from "@material-ui/core/styles";
+import makeStyles from "@mui/styles/makeStyles";
 import { FormattedMessage } from "react-intl";
 
 const useStyles = makeStyles((theme) => ({
@@ -26,8 +26,8 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
   },
   menuItem: {
-    paddingLeft: 0,
-    paddingRight: 0,
+    paddingLeft: 10,
+    paddingRight: 10,
     paddingTop: theme.spacing(1) * 1.5,
     paddingBottom: theme.spacing(1) * 1.5,
   },

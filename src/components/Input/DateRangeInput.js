@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
-import { InputLabel } from "@material-ui/core";
+import { InputLabel } from "@mui/material";
 import DatePicker from "@mui/lab/DatePicker";
 import styles from "./styles";
 import { useFormContext } from "react-hook-form";

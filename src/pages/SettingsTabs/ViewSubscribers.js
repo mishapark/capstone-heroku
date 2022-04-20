@@ -64,12 +64,12 @@ function ViewSubscribers() {
                                 <TableRow>
                                     <TableCell>{c.company_name}</TableCell>
                                     <TableCell>
-                                        <IconButton color="primary" onClick={(e) => handleDelete(e, c._id)}>
+                                        <IconButton color="primary" onClick={(e) => handleDelete(e, c._id)} size="large">
                                             <DeleteIcon />
                                         </IconButton>
                                     </TableCell>
                                 </TableRow>
-                            )
+                            );
                         })}
 
                     </TableBody>

@@ -6,7 +6,7 @@ import {
   InputLabel,
   FormControlLabel,
   Checkbox,
-} from "@material-ui/core";
+} from "@mui/material";
 import TextField from "@mui/material/TextField";
 import styles from "./styles";
 import { FormattedMessage } from "react-intl";

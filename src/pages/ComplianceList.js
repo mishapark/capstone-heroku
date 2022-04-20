@@ -19,7 +19,7 @@ import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import { getProductsWithToken } from "../api/products";
 import useAuth from "../hooks/useAuth";
-import AddIcon from "@material-ui/icons/Add";
+import AddIcon from "@mui/icons-material/Add";
 import DoneIcon from "@mui/icons-material/Done";
 import { AddCompliance } from "../components/Compliance/AddCompliance";
 import ListIcon from "@mui/icons-material/List";
@@ -113,8 +113,12 @@ export default function ComplainceList() {
                 <TableCell>{complaince.regulatory_authority}</TableCell>
                 <TableCell>{complaince.regulatory_authority}</TableCell>
                 <TableCell>{complaince.record_type.record_type}</TableCell>
-                <TableCell>{complaince.start_date}</TableCell>
-                <TableCell>{complaince.end_date}</TableCell>
+                <TableCell>
+                  {complaince.start_date.match(/^\d{4}\-\d{1,2}\-\d{1,2}/)}
+                </TableCell>
+                <TableCell>
+                  {complaince.end_date.match(/^\d{4}\-\d{1,2}\-\d{1,2}/)}
+                </TableCell>
                 <TableCell>
                   <Button
                     aria-label="delete"
