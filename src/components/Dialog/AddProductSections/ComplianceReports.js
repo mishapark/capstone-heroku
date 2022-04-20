@@ -10,7 +10,7 @@ function ComplianceReports({ editContent }) {
   const complReportNumber = {
     compliance_report_number: editContent ? editContent[0] : 0,
   };
-  console.log(complReportNumber);
+
   return (
     <>
       <TextInput
@@ -32,14 +32,14 @@ function ComplianceReports({ editContent }) {
         placeholder="Enter Record Type"
         name="record_type"
       /> */}
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
+      {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DateRangeInput
           required={false}
           label="Expiry Date"
           placeholder="Enter Date"
           name="date_range"
         />
-      </LocalizationProvider>
+      </LocalizationProvider> */}
     </>
   );
 }
