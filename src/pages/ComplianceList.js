@@ -24,6 +24,7 @@ import DoneIcon from "@mui/icons-material/Done";
 import { AddCompliance } from "../components/Compliance/AddCompliance";
 import ListIcon from "@mui/icons-material/List";
 import { getComplianceWithToken } from "../api/compliances";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const EnhancedTableToolbar2 = ({ handleClickOpen }) => {
   return (
@@ -61,6 +62,20 @@ export default function ComplainceList() {
     );
   }, []);
 
+  const handleDelete = (compliance) => {
+    axios
+      .delete(
+        `https://humber-capstone-backend.herokuapp.com/compliances/delete?report_number=${compliance}`,
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      )
+      .then(function (response) {
+        window.location.reload();
+      });
+  };
+
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
@@ -86,6 +101,9 @@ export default function ComplainceList() {
               <TableCell key={6}>
                 <FormattedMessage id="End Date"></FormattedMessage>
               </TableCell>
+              <TableCell key={7}>
+                <FormattedMessage id="Delete"></FormattedMessage>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -97,6 +115,15 @@ export default function ComplainceList() {
                 <TableCell>{complaince.record_type.record_type}</TableCell>
                 <TableCell>{complaince.start_date}</TableCell>
                 <TableCell>{complaince.end_date}</TableCell>
+                <TableCell>
+                  <Button
+                    aria-label="delete"
+                    name="delete"
+                    onClick={() => handleDelete(complaince.report_number)}
+                  >
+                    <DeleteIcon />
+                  </Button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

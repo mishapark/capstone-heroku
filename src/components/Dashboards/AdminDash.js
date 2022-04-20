@@ -14,14 +14,17 @@ import ReactTooltip from "react-tooltip";
 import { MonthlyRevenueDash } from "./MonthlyRevenueDash";
 import { AnnualRevenueDash } from "./AnnualRevenueDash";
 import { SubscribersTable } from "./SubscribersTable";
+import { TurnOver } from "./TurnOver";
 
 export const AdminDash = () => {
   const [subscrubers, setSubscrubers] = useState([]);
   const [filteredSub, setFilteredSub] = useState([]);
   const [monthRevenue, setMonthRevenue] = useState([]);
   const [averageRevenue, setAverageRevenue] = useState([]);
-  const [churn, setChurn] = useState({});
+  const [churn, setChurn] = useState();
   const [yearRevenue, setYearRevenue] = useState([]);
+  const [turnOver, setTurnOver] = useState({ lastMonth: 0, thisMonth: 0 });
+
   const getAllSubscrubers = async () => {
     try {
       const response = await axios.get(
@@ -49,12 +52,22 @@ export const AdminDash = () => {
       setAverageRevenue(response4.data[0].totalPayment);
       setYearRevenue(response5.data);
       console.log(response6);
-      setChurn({
-        active:
-          response6.data[0].active_memebr_count_thisYear[0].Active_member_count,
-        notActive:
-          response6.data[0].unactive_member_count[0].No_Active_member_count,
+      setTurnOver({
+        thisMonth:
+          response6.data[0].thisMonth_memebr_count[0]
+            .thisMonth_Active_member_count,
+        lastMonth:
+          response6.data[0].lastMonth_member_count[0]
+            .lastMonth_Active_member_count,
       });
+      setChurn(
+        (response6.data[0].thisMonth_memebr_count[0]
+          .thisMonth_Active_member_count -
+          response6.data[0].lastMonth_member_count[0]
+            .lastMonth_Active_member_count) /
+          response6.data[0].lastMonth_member_count[0]
+            .lastMonth_Active_member_count
+      );
     } catch (err) {
       console.log(err.message);
     }
@@ -104,17 +117,23 @@ export const AdminDash = () => {
           <br></br>
         </Grid>
         <Grid item xs={12} md={8}>
-          <Paper sx={{ padding: 2, height: "200px" }}>
+          <Paper sx={{ padding: 2, height: "250px" }}>
             <Typography variant="h6">Churn rate</Typography>
-            <br />
-            <Typography variant="body1">
-              Active members: <b>{churn.active}</b>
-            </Typography>
-            <Typography variant="body1">
-              Not active members: <b>{churn.notActive}</b>
-            </Typography>
+            <Grid container direction="row">
+              <Grid item xs={12} md={3}>
+                <Typography variant="body1">
+                  <br />
+                  <Typography variant="h6">Rate: {churn}</Typography>
+                </Typography>
+              </Grid>
+              <Grid item xs={12} md={5}>
+                <TurnOver
+                  thisMonth={turnOver.thisMonth}
+                  lastMonth={turnOver.lastMonth}
+                ></TurnOver>
+              </Grid>
+            </Grid>
           </Paper>
-          <br></br>
         </Grid>
         <Grid item xs={12} md={12} justifyContent="center">
           <Paper sx={{ padding: 2 }}>
@@ -182,7 +201,6 @@ export const AdminDash = () => {
                 </ComposableMap>
               </Grid>
               <Grid item xs={12} md={5}>
-                {console.log(subscrubers)}
                 {isShown ? (
                   <SubscribersTable
                     subscrubers={filteredSub}

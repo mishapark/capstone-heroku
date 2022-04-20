@@ -117,7 +117,6 @@ export default function Compliance() {
                       {(placeholder) => (
                         <Chip
                           label={placeholder}
-                          variant="outlined"
                           icon={<DoneIcon />}
                           color="success"
                         />

@@ -81,9 +81,9 @@ function App() {
       secondary: {
         main: "#101637",
       },
-      // background: {
-      //   default: "#fcfcfc",
-      // },
+      background: {
+        default: "#fcfcfc",
+      },
     },
     ".MuiButtonBase-root": {
       color: "#fcfcfc",
