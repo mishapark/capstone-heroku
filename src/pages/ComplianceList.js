@@ -113,8 +113,12 @@ export default function ComplainceList() {
                 <TableCell>{complaince.regulatory_authority}</TableCell>
                 <TableCell>{complaince.regulatory_authority}</TableCell>
                 <TableCell>{complaince.record_type.record_type}</TableCell>
-                <TableCell>{complaince.start_date}</TableCell>
-                <TableCell>{complaince.end_date}</TableCell>
+                <TableCell>
+                  {complaince.start_date.match(/^\d{4}\-\d{1,2}\-\d{1,2}/)}
+                </TableCell>
+                <TableCell>
+                  {complaince.end_date.match(/^\d{4}\-\d{1,2}\-\d{1,2}/)}
+                </TableCell>
                 <TableCell>
                   <Button
                     aria-label="delete"
