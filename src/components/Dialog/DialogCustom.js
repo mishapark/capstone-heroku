@@ -11,19 +11,23 @@ import useProduct from "../../hooks/useProduct";
 import axios from "axios";
 import { FormattedMessage } from "react-intl";
 import useAuth from "../../hooks/useAuth";
+import { getComplianceWithToken } from "../../api/compliances";
 
 function DialogCustom({ title, onClose, editContent, setRequestData }) {
   const [standards, setStandards] = useState([]);
   const [countries, setCountries] = useState([]);
+  const [compliances, setCompliances] = useState([]);
+  const { auth } = useAuth();
 
   useEffect(() => {
     getStandards().then((data) => setStandards(data));
     getCountries().then((data) => setCountries(data));
+    getComplianceWithToken(auth.accessToken).then((data) =>
+      setCompliances(data)
+    );
   }, []);
 
   const methods = useForm();
-
-  const { auth, setAuth } = useAuth();
 
   const onSubmit = (data) => {
     console.log(data);
@@ -111,6 +115,7 @@ function DialogCustom({ title, onClose, editContent, setRequestData }) {
 
   return (
     <FormProvider {...methods}>
+      {console.log(compliances)}
       <form
         onSubmit={
           title === "Add Product"

@@ -101,7 +101,7 @@ function App() {
       value={{ language: "en", setLanguage: setLanguage }}
     >
       <IntlProvider locale={language} messages={messages[language]}>
-        <ThemeProvider theme={darkTheme2}>
+        <ThemeProvider theme={theme}>
           <CssBaseline />
           <Routes>
             <Route path="/" element={<Layout />}>

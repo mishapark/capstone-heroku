@@ -55,7 +55,7 @@
   "Regulatory Family": "Famille réglementaire",
   "Product Category": "Catégorie de Produit",
   "Product Description / Intended Use": "Description du produit / Utilisation prévue",
-  "Model Difference": "Différence de modèle",
+  "Model Difference (if applicable)": "Différence de modèle (le cas échéant)",
   "Intended Environment": "Environnement prévu",
   "Applicable Standards": "Normes applicables",
   "Applicant Name and Address": "Nom et adresse du demandeur",
@@ -91,5 +91,6 @@
   "Report Number": "Signaler le numéro",
   "Back": "Arrière",
   "Add Product": "Ajouter un produit",
-  "Edit Product": "Modifier le produit"
+  "Edit Product": "Modifier le produit",
+  "Expiry Date": "Date d'expiration"
 }
