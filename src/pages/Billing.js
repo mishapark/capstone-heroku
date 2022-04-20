@@ -40,10 +40,14 @@ const Billing = () => {
     plan: "",
   });
 
+  const d = new Date();
+  const month = d.getMonth();
+
   const handleChange = (event) => {
     setPayment({
       amount: event.target.value,
       plan: event.target.name,
+      month: month,
     });
     console.log(paymenet);
   };
