@@ -19,7 +19,7 @@ import useAuth from "../../hooks/useAuth";
 // api
 import { getCompany, getCompanies } from "../../api/companies";
 import { getUsersByEmail, getCompanyUsers, deleteCompanyUser, addCompanyUser } from "../../api/companyusers";
-import { updateUserRole } from "../../api/users";
+import { getUsers, updateUserRole } from "../../api/users";
 
 function AddUserGroups() {
     //const Headers = ["Username", "Email", ""];
@@ -38,6 +38,11 @@ function AddUserGroups() {
             // get list of all companies
             getCompanies().then((data) => {
                 setCompanies(data)
+            })
+
+            // on initial load, set companyUsers to be all the users in the system
+            getUsers().then((data) => {
+                setCompanyUsers(data)
             })
 
         } else {
@@ -73,6 +78,15 @@ function AddUserGroups() {
             getCompanyUsers(chosenCompany._id).then((data) => {
                 setCompanyUsers(data)
             })
+        } 
+        
+        // super admin removed the filter
+        if (isSuperAdmin && !val) {
+            setCompany("")
+            getUsers().then((data) => {
+                setCompanyUsers(data)
+            })
+
         }
     }
 
