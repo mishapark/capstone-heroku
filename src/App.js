@@ -45,7 +45,7 @@ const ROLES = {
 
 function App() {
   const [user, setUser] = useState(null);
-  const [mode, setMode] = React.useState("dark");
+  const [mode, setMode] = React.useState("light");
   const colorMode = React.useMemo(
     () => ({
       toggleColorMode: () => {
