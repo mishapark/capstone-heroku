@@ -28,12 +28,26 @@ function AddUserGroups() {
     const [company, setCompany] = useState("");
     const [companies, setCompanies] = useState([]);
     const [companyUsers, setCompanyUsers] = useState([]);
+    const [isSuperAdmin, setIsSuperAdmin] = useState(false)
 
     useEffect(() => {
-        // get list of all companies
-        getCompanies().then((data) => {
-            setCompanies(data)
-        })
+
+        // if user is super admin, allow filtering on subscribers
+        if (auth.roles.indexOf("Super_Admin") > -1) {
+            setIsSuperAdmin(true)
+            // get list of all companies
+            getCompanies().then((data) => {
+                setCompanies(data)
+            })
+
+        } else {
+            getCompany(auth.companyId).then((data)=> {
+                setCompany(data)
+                getCompanyUsers(data._id).then((data) => {
+                    setCompanyUsers(data)
+                })
+            })
+        }
 
 
     }, [])
@@ -88,24 +102,27 @@ function AddUserGroups() {
                         description="Add user group permissions to subscriber users"
                     ></PageHeader>
                     <Divider />
-                    <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "center",
-                        }}
-                    >
-                        <Autocomplete
-                            disablePortal
-                            id="combo-box-demo"
-                            options={companies.map((c) => c.company_name)}
-                            sx={{ width: 300, m: 1 }}
-                            renderInput={(params) => (
-                                <TextField {...params} label="Select Subscriber" />
-                            )}
-                            onChange={(e, v) => handleSubscriberChange(e, v)}
-                        />
-                    </Box>
+
+                    {isSuperAdmin &&
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "center",
+                            }}
+                        >
+                            <Autocomplete
+                                disablePortal
+                                id="combo-box-demo"
+                                options={companies.map((c) => c.company_name)}
+                                sx={{ width: 300, m: 1 }}
+                                renderInput={(params) => (
+                                    <TextField {...params} label="Select Subscriber" />
+                                )}
+                                onChange={(e, v) => handleSubscriberChange(e, v)}
+                            />
+                        </Box>
+                    }
 
                     <TableContainer component={Paper}>
                         <Table sx={{ minWidth: 650 }} aria-label="simple table">

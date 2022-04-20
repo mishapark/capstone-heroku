@@ -40,7 +40,7 @@ const ROLES = [
         icon: <GroupsIcon />,
         menuOptions: [
           { name: "Add user groups", icon: <GroupAddIcon /> },
-          { name: "Remove user groups", icon: <GroupRemoveIcon /> },
+          //{ name: "Remove user groups", icon: <GroupRemoveIcon /> },
         ],
         optionsColor: "#c365d3",
       },
@@ -73,7 +73,10 @@ const ROLES = [
         title: "User Groups",
         color: "#9c27b0",
         icon: <GroupsIcon />,
-        menuOptions: [{ name: "Edit user groups", icon: <EditIcon /> }],
+        menuOptions: [
+            { name: "Add user groups", icon: <GroupAddIcon /> }
+            //{ name: "Edit user groups", icon: <EditIcon /> }
+        ],
         optionsColor: "#c365d3",
       },
       // {
