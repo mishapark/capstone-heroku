@@ -22,6 +22,7 @@ const useRefreshToken = () => {
         docusignClientId: localStorage.getItem("docusignClientId"),
         userId: localStorage.getItem("userId"),
         accessToken: response.data.accessToken,
+        subscriptionStatus: response.data.subscriptionStatus,
       };
     });
     return response.data.accessToken;

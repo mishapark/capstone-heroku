@@ -23,24 +23,50 @@ function CheckoutForm({ success, payment, companyId }) {
       const { id } = paymentMethod;
 
       try {
-        const { data } = await axios.post(
-          "https://humber-capstone-backend.herokuapp.com/payments/charge",
-          {
-            id,
-            amount: payment.amount,
-            plan: payment.plan,
-            companyId: companyId,
-          },
-          {
-            headers: { "Content-Type": "application/json" },
-            withCredentials: true,
-          }
-        );
-        console.log(data);
-        success();
+        const { data } = await axios
+          .post(
+            "https://humber-capstone-backend.herokuapp.com/payments/charge",
+            {
+              id,
+              amount: payment.amount,
+              plan: payment.plan,
+              companyId: companyId,
+            },
+            {
+              headers: { "Content-Type": "application/json" },
+              withCredentials: true,
+            }
+          )
+          .then((response) => {
+            if (response.data.message === "Successfully charged the fees.") {
+              handleUpdate();
+            }
+          });
       } catch (error) {
         console.log(error);
       }
+    }
+  };
+
+  const handleUpdate = async () => {
+    try {
+      const { data } = await axios.put(
+        "https://humber-capstone-backend.herokuapp.com/payments/updateCompany",
+        {
+          amount: payment.amount,
+          plan: payment.plan,
+          companyId: companyId,
+          month: payment.month,
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
+      console.log(data);
+      success();
+    } catch (error) {
+      console.log(error);
     }
   };
 

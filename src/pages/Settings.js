@@ -35,14 +35,27 @@ const ROLES = [
         optionsColor: "#303f9f",
       },
       {
-        title: "User Groups",
+        title: "Users",
         color: "#9c27b0",
+        icon: <PeopleAltIcon />,
+        menuOptions: [
+          //{ name: "Add users", icon: <GroupAddIcon /> },
+          //{ name: "Remove users", icon: <GroupRemoveIcon /> },
+          //{ name: "View users", icon: <PeopleAltIcon /> },
+          //{ name: "Author", icon: <AccountCircleIcon /> },
+          { name: "Edit users", icon: <EditIcon /> },
+        ],
+        optionsColor: "#c365d3",
+      },
+      {
+        title: "User Groups",
+        color: "#ffd229",
         icon: <GroupsIcon />,
         menuOptions: [
           { name: "Add user groups", icon: <GroupAddIcon /> },
           //{ name: "Remove user groups", icon: <GroupRemoveIcon /> },
         ],
-        optionsColor: "#c365d3",
+        optionsColor: "#b18c00",
       },
       {
         title: "Reset Password",
@@ -149,19 +162,19 @@ function Settings() {
 
   return (
     <>
-      <SettingsList title={ROLES[2].title} cards={ROLES[0].cards} />
+      {/*<SettingsList title={ROLES[2].title} cards={ROLES[0].cards} />
       <SettingsList title={ROLES[2].title} cards={ROLES[1].cards} />
-      <SettingsList title={ROLES[2].title} cards={ROLES[2].cards} />
+  <SettingsList title={ROLES[2].title} cards={ROLES[2].cards} />*/}
 
-      {/* {role === "Super_Admin" ? (
+       {role === "Super_Admin" ? (
         <SettingsList title={ROLES[2].title} cards={ROLES[0].cards} />
       ) : null}
       {role === "Admin" ? (
         <SettingsList title={ROLES[2].title} cards={ROLES[1].cards} />
       ) : null}
-      {role === "Viewer" ? (
+      {role === "Author" || role === "Viewer" || role === "Reviewer" || role === "Approver"  ? (
         <SettingsList title={ROLES[2].title} cards={ROLES[2].cards} />
-      ) : null} */}
+      ) : null}
     </>
   );
 }
