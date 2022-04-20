@@ -55,9 +55,10 @@ function App() {
           secondary: {
             main: "#101637",
           },
-          background: {
-            default: "#fcfcfc",
-          },
+          // },
+          // background: {
+          //   default: "#fcfcfc",
+          // },
         },
         ".MuiButtonBase-root": {
           color: "#fcfcfc",
@@ -77,9 +78,9 @@ function App() {
       secondary: {
         main: "#101637",
       },
-      background: {
-        default: "#fcfcfc",
-      },
+      // background: {
+      //   default: "#fcfcfc",
+      // },
     },
     ".MuiButtonBase-root": {
       color: "#fcfcfc",
@@ -97,7 +98,7 @@ function App() {
       value={{ language: "en", setLanguage: setLanguage }}
     >
       <IntlProvider locale={language} messages={messages[language]}>
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={darkTheme2}>
           <CssBaseline />
           <Routes>
             <Route path="/" element={<Layout />}>

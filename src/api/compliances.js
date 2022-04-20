@@ -13,24 +13,37 @@ export const getCompliances = () => {
 };
 
 export const createCompliance = (token, compliance) => {
-    try {
+  try {
+    let config = {
+      headers: {
+        "x-auth-token": token,
+      },
+    };
 
-        let config = {
-            headers: {
-                "x-auth-token": token
-            },
-        };
+    const promise = axios.post(
+      "https://humber-capstone-backend.herokuapp.com/compliances/add/",
+      compliance,
+      config
+    );
+    const data = promise.then((response) => response.data);
+    return data;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
 
-        const promise = axios.post(
-            "https://humber-capstone-backend.herokuapp.com/compliances/add/",
-            compliance,
-            config
-
-        );
-        const data = promise.then((response) => response.data);
-        return data;
-
-    } catch (err) {
-        console.log(err.message);
-    }
-}
+export const getComplianceWithToken = (token) => {
+  try {
+    let headers = {
+      "x-auth-token": token,
+    };
+    const promise = axios.get(
+      "https://humber-capstone-backend.herokuapp.com/compliances/",
+      { headers }
+    );
+    const data = promise.then((response) => response.data);
+    return data;
+  } catch (err) {
+    console.log(err.message);
+  }
+};

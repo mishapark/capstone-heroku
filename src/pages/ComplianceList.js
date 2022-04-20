@@ -23,6 +23,7 @@ import AddIcon from "@material-ui/icons/Add";
 import DoneIcon from "@mui/icons-material/Done";
 import { AddCompliance } from "../components/Compliance/AddCompliance";
 import ListIcon from "@mui/icons-material/List";
+import { getComplianceWithToken } from "../api/compliances";
 
 const EnhancedTableToolbar2 = ({ handleClickOpen }) => {
   return (
@@ -40,7 +41,7 @@ const EnhancedTableToolbar2 = ({ handleClickOpen }) => {
 };
 
 export default function ComplainceList() {
-  const [products, setProducts] = React.useState([]);
+  const [compliance, setCompliance] = React.useState([]);
 
   const { auth, setAuth } = useAuth();
 
@@ -54,13 +55,19 @@ export default function ComplainceList() {
     setOpen(false);
   };
 
+  React.useEffect(() => {
+    getComplianceWithToken(auth.accessToken).then((data) =>
+      setCompliance(data)
+    );
+  }, []);
+
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
         <EnhancedTableToolbar2 handleClickOpen={handleClickOpen} />
-
         <Table>
           <TableHead>
+            {console.log(compliance)}
             <TableRow>
               <TableCell key={1}>
                 <FormattedMessage id="Reference ID"></FormattedMessage>
@@ -82,7 +89,7 @@ export default function ComplainceList() {
               </TableCell>
             </TableRow>
           </TableHead>
-          <TableBody></TableBody>
+          <TableBody>comppli</TableBody>
         </Table>
       </Paper>
     </Box>
