@@ -41,7 +41,7 @@ const EnhancedTableToolbar2 = ({ handleClickOpen }) => {
 };
 
 export default function ComplainceList() {
-  const [compliance, setCompliance] = React.useState([]);
+  const [compliances, setCompliances] = React.useState([]);
 
   const { auth, setAuth } = useAuth();
 
@@ -57,7 +57,7 @@ export default function ComplainceList() {
 
   React.useEffect(() => {
     getComplianceWithToken(auth.accessToken).then((data) =>
-      setCompliance(data)
+      setCompliances(data)
     );
   }, []);
 
@@ -67,7 +67,6 @@ export default function ComplainceList() {
         <EnhancedTableToolbar2 handleClickOpen={handleClickOpen} />
         <Table>
           <TableHead>
-            {console.log(compliance)}
             <TableRow>
               <TableCell key={1}>
                 <FormattedMessage id="Reference ID"></FormattedMessage>
@@ -79,7 +78,7 @@ export default function ComplainceList() {
                 <FormattedMessage id="Applied Standard"></FormattedMessage>
               </TableCell>
               <TableCell key={4}>
-                <FormattedMessage id="Sub Sections"></FormattedMessage>
+                <FormattedMessage id="Record Type"></FormattedMessage>
               </TableCell>
               <TableCell key={5}>
                 <FormattedMessage id="Start Date"></FormattedMessage>
@@ -89,7 +88,18 @@ export default function ComplainceList() {
               </TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>comppli</TableBody>
+          <TableBody>
+            {compliances.map((complaince) => (
+              <TableRow>
+                <TableCell>{complaince.report_number}</TableCell>
+                <TableCell>{complaince.regulatory_authority}</TableCell>
+                <TableCell>{complaince.regulatory_authority}</TableCell>
+                <TableCell>{complaince.record_type.record_type}</TableCell>
+                <TableCell>{complaince.start_date}</TableCell>
+                <TableCell>{complaince.end_date}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
         </Table>
       </Paper>
     </Box>

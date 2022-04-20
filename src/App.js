@@ -31,6 +31,9 @@ const ROLES = {
   User: "Viewer",
   Super_Admin: "Super_Admin",
   Approver: "Approver",
+  Admin: "Admin",
+  Author: "Author",
+  Reviever: "Reviewer",
 };
 
 function App() {
@@ -117,6 +120,8 @@ function App() {
                         ROLES.User,
                         ROLES.Super_Admin,
                         ROLES.Approver,
+                        ROLES.Admin,
+                        ROLES.Author,
                       ]}
                     />
                   }
