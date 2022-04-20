@@ -25,14 +25,8 @@ const styles = {
 };
 
 function ComplianceReports({ compliances, editContent }) {
-  const [numberOfInputs, setNumberOfInputs] = useState(1);
-
   const complReportNumber = {
-    compliance_report_number: editContent ? editContent[0] : 0,
-  };
-
-  const addClicked = () => {
-    setNumberOfInputs(numberOfInputs + 1);
+    compliance_report_number: editContent ? editContent : "",
   };
 
   return (
@@ -49,7 +43,7 @@ function ComplianceReports({ compliances, editContent }) {
               required={false}
               placeholder="Enter Report Number"
               onChange={onChange}
-              editContent={complReportNumber}
+              editContent={editContent}
               options={compliances}
             />
           )}
