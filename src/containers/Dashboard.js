@@ -13,6 +13,7 @@ import ProductInfo from "../pages/ProductInfo";
 import { RFQInfo } from "../pages/RFQInfo";
 import { TaskInfo } from "../pages/TaskInfo";
 import ComplianceList from "../pages/ComplianceList";
+import useAuth from "../hooks/useAuth";
 
 const useStyles = makeStyles((theme) => ({
   panel: {
@@ -108,6 +109,8 @@ const Dashboard = () => {
     </Routes>
   );
 
+  const { auth } = useAuth();
+
   return (
     <>
       <Header
@@ -122,7 +125,13 @@ const Dashboard = () => {
           opened={opened}
           toggleDrawer={handleDrawerToggle}
         />
-        <Workspace opened={opened}>{getRoutes}</Workspace>
+
+        {auth.subscriptionStatus === "alive" ||
+        auth.roles.includes("Super_Admin") ? (
+          <Workspace opened={opened}>{getRoutes}</Workspace>
+        ) : (
+          <Billing></Billing>
+        )}
       </div>
     </>
   );

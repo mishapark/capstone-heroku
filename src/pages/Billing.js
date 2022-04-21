@@ -155,7 +155,7 @@ const Billing = () => {
                     </RadioGroup>
                   </FormControl>
                 </Grid>
-                <Grid item xs={6} sx={{ m: 2 }}>
+                <Grid item xs={5} sx={{ m: 2 }}>
                   <Typography variant="h6">Payment Card</Typography>
                   <Typography variant="body2">Enter the card number</Typography>
                   <Elements stripe={stripePromise}>
