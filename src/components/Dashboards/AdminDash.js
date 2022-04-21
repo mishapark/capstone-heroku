@@ -137,7 +137,7 @@ export const AdminDash = () => {
         </Grid>
         <Grid item xs={12} md={12} justifyContent="center">
           <Paper sx={{ padding: 2 }}>
-            <Typography variant="h6">Subscrubers by Geography</Typography>
+            <Typography variant="h6">Subscribers by Geography</Typography>
             <Grid container direction="row">
               <Grid item xs={12} md={7}>
                 <ReactTooltip>{content}</ReactTooltip>
