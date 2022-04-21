@@ -1,6 +1,7 @@
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import { Button } from "@mui/material";
+import LoadingButton from "@mui/lab/LoadingButton";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -15,7 +16,7 @@ import axios from "axios";
 import { useContext, useState, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { Alert } from '@mui/material';
+import { Alert } from "@mui/material";
 
 export default function SignIn() {
   const {
@@ -27,6 +28,7 @@ export default function SignIn() {
   const { setAuth, persist, setPersist } = useAuth();
 
   const [pwd, setPwd] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -70,6 +72,7 @@ export default function SignIn() {
           component="form"
           onSubmit={handleSubmit((data) => {
             const user = data["userEmail"];
+            setIsLoading(true);
             axios
               .post(
                 "https://humber-capstone-backend.herokuapp.com/users/login",
@@ -82,6 +85,7 @@ export default function SignIn() {
               .then(function (response) {
                 if (response["status"] === 200) {
                   console.log(response);
+                  setIsLoading(false);
                   const accessToken = response["data"]["accessToken"];
                   const roles = response["data"]["role"];
                   const companyId = response["data"]["companyId"];
@@ -92,7 +96,14 @@ export default function SignIn() {
                   localStorage.setItem("userId", userId);
                   localStorage.setItem("companyId", companyId);
                   localStorage.setItem("docusignClientId", docusignClientId);
-                  setAuth({ user, roles, companyId, docusignClientId, userId, accessToken });
+                  setAuth({
+                    user,
+                    roles,
+                    companyId,
+                    docusignClientId,
+                    userId,
+                    accessToken,
+                  });
                   navigate("../dash", { replace: true });
                 } else {
                   console.log(response.error);
@@ -142,14 +153,26 @@ export default function SignIn() {
             />
             <label htmlFor="persist"> Trust This Device</label>
           </div>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Sign In
-          </Button>
+          {isLoading ? (
+            <LoadingButton
+              loading
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign In
+            </LoadingButton>
+          ) : (
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign In
+            </Button>
+          )}
+
           <Link to="/forgot">Forgot password?</Link>
           <br />
           <Link to="/signup">Sign up</Link>
