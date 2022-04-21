@@ -97,6 +97,10 @@ function App() {
 
   const theme = React.useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
 
+  const authorizedButNotPaid = () => {
+    let appRoutes;
+  };
+
   return (
     <LanguageProvider.Provider
       value={{ language: "en", setLanguage: setLanguage }}
@@ -114,6 +118,7 @@ function App() {
                   <Route path="signin" element={<SignIn />} />
                   <Route path="signup" element={<Signup />} />
                   <Route path="forgot" element={<Forgot />} />
+
                   {/* we want to protect these routes */}
                   <Route element={<PersistLogin />}>
                     <Route

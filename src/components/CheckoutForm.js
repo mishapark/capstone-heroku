@@ -23,7 +23,7 @@ function CheckoutForm({ success, payment, companyId }) {
       const { id } = paymentMethod;
 
       try {
-        const { data } = await axios
+        const data = await axios
           .post(
             "https://humber-capstone-backend.herokuapp.com/payments/charge",
             {
@@ -50,7 +50,7 @@ function CheckoutForm({ success, payment, companyId }) {
 
   const handleUpdate = async () => {
     try {
-      const { data } = await axios.put(
+      const promise = await axios.put(
         "https://humber-capstone-backend.herokuapp.com/payments/updateCompany",
         {
           amount: payment.amount,
@@ -63,8 +63,10 @@ function CheckoutForm({ success, payment, companyId }) {
           withCredentials: true,
         }
       );
-      console.log(data);
-      success();
+      if (promise.data.message == "Update success!") {
+        success();
+        window.location.reload();
+      }
     } catch (error) {
       console.log(error);
     }
