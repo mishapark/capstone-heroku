@@ -109,10 +109,19 @@ export default function ComplainceList() {
           <TableBody>
             {compliances.map((complaince) => (
               <TableRow>
-                <TableCell>{complaince.report_number}</TableCell>
-                <TableCell>{complaince.regulatory_authority}</TableCell>
-                <TableCell>{complaince.regulatory_authority}</TableCell>
-                <TableCell>{complaince.record_type.record_type}</TableCell>
+                <TableCell>
+                  {complaince.report_number && complaince.report_number}
+                </TableCell>
+                <TableCell>
+                  {complaince.regulatory_authority &&
+                    complaince.regulatory_authority}
+                </TableCell>
+                <TableCell>
+                  {complaince.applied_standard && complaince.applied_standard}
+                </TableCell>
+                <TableCell>
+                  {complaince.record_type && complaince.record_type.record_type}
+                </TableCell>
                 <TableCell>
                   {complaince.start_date.match(/^\d{4}\-\d{1,2}\-\d{1,2}/)}
                 </TableCell>

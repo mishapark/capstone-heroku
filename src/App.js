@@ -18,14 +18,14 @@ import { IntlProvider } from "react-intl";
 import French from "./languages/fr-CA.json";
 import English from "./languages/en-US.json";
 import LanguageProvider from "./context/LanguageProvider";
+import makeStyles from "@mui/styles/makeStyles";
+import CssBaseline from "@mui/material/CssBaseline";
 import {
   ThemeProvider,
   StyledEngineProvider,
   createTheme,
   adaptV4Theme,
 } from "@mui/material/styles";
-import makeStyles from "@mui/styles/makeStyles";
-import { CssBaseline } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import ColorModeContext from "./context/ColorModeContext";
 
@@ -44,7 +44,6 @@ const ROLES = {
 };
 
 function App() {
-  const [user, setUser] = useState(null);
   const [mode, setMode] = React.useState("light");
   const colorMode = React.useMemo(
     () => ({
@@ -55,10 +54,7 @@ function App() {
     []
   );
 
-  const value = useMemo(() => ({ user, setUser }), [user, setUser]);
   const [language, setLanguage] = React.useState("en");
-
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
   const getDesignTokens = (mode) => ({
     palette: {
@@ -74,18 +70,20 @@ function App() {
             },
             background: {
               default: "#fcfcfc",
+              paper: "#f6f7f8",
             },
           }
         : {
             // palette values for dark mode
             primary: {
-              main: "#0024FF",
+              main: "#2947ff",
             },
             secondary: {
               main: "#101637",
             },
             background: {
-              default: "#2e2e2e",
+              default: "#242424 !important",
+              paper: "#292929",
             },
           }),
     },
@@ -104,8 +102,8 @@ function App() {
       value={{ language: "en", setLanguage: setLanguage }}
     >
       <IntlProvider locale={language} messages={messages[language]}>
-        <StyledEngineProvider injectFirst>
-          <ColorModeContext.Provider value={colorMode}>
+        <ColorModeContext.Provider value={colorMode}>
+          <StyledEngineProvider injectFirst>
             <ThemeProvider theme={theme}>
               <CssBaseline />
               <Routes>
@@ -140,8 +138,8 @@ function App() {
                 </Route>
               </Routes>
             </ThemeProvider>
-          </ColorModeContext.Provider>
-        </StyledEngineProvider>
+          </StyledEngineProvider>
+        </ColorModeContext.Provider>
       </IntlProvider>
     </LanguageProvider.Provider>
   );

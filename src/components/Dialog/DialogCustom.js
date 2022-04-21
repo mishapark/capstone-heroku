@@ -128,7 +128,7 @@ function DialogCustom({ title, onClose, editContent, setRequestData }) {
         <DialogTitle id="scroll-dialog-title">
           <FormattedMessage id={title} />
         </DialogTitle>
-        <DialogContent dividers={true} style={{ backgroundColor: "#f6f7f8" }}>
+        <DialogContent dividers={true}>
           <DialogForm
             title="General Product Information"
             standards={standards}

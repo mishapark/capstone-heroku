@@ -2,7 +2,7 @@ import { Header, Sidebar, Workspace } from "../components";
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import classNames from "classnames";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 import routes from "../constants/routes";
 import settingsRoutes from "../constants/settingsRoutes";
 import Settings from "../pages/Settings";
@@ -20,12 +20,12 @@ const useStyles = makeStyles((theme) => ({
     overflow: "hidden",
     width: "100%",
     maxWidth: "100%",
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down("md")]: {
       height: "auto",
       minHeight: "calc(100vh - 64px)",
       paddingTop: "64px",
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down("sm")]: {
       height: "auto",
       minHeight: "calc(100vh - 56px)",
       paddingTop: "56px",
