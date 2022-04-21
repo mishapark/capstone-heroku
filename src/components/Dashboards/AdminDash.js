@@ -88,7 +88,7 @@ export const AdminDash = () => {
       <Grid container spacing={2}>
         <Grid item xs={12} md={4}>
           <Paper sx={{ padding: 2, height: "300px" }}>
-            <Typography variant="h6">All subscrubers</Typography>
+            <Typography variant="h6">All subscribers</Typography>
             <Typography variant="h4">{subscrubers.length}</Typography>
           </Paper>
           <br></br>
