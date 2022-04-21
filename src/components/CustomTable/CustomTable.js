@@ -17,8 +17,9 @@ import CustomTableToolbar from "./CustomTableToolbar";
 import DialogCustom from "../../components/Dialog/DialogCustom";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import useAuth from "../../hooks/useAuth";
 
-const DUMMY_COLUMNS = [
+const COLUMNS = [
   "Product Name",
   "Product Family",
   "Category",
@@ -28,10 +29,21 @@ const DUMMY_COLUMNS = [
   "Edit",
   "Delete",
 ];
+const VIEWER_COLUMNS = [
+  "Product Name",
+  "Product Family",
+  "Category",
+  "Category Standard",
+  "Start Date",
+  "View",
+];
 
 function CustomTable({ tableData, setRequestData }) {
   const [open, setOpen] = useState(false);
   const [editContent, setEditContent] = useState();
+
+  const { auth } = useAuth();
+  const role = auth.roles[0];
 
   const handleDelete = async (id) => {
     await axios
@@ -45,65 +57,107 @@ function CustomTable({ tableData, setRequestData }) {
     <>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <CustomHeader columns={DUMMY_COLUMNS} />
+          {role === "Viewer" ? (
+            <CustomHeader columns={VIEWER_COLUMNS} />
+          ) : (
+            <CustomHeader columns={COLUMNS} />
+          )}
           <TableBody>
-            {tableData.map((p) => (
-              <TableRow key={p["_id"]}>
-                <TableCell>
-                  {p["product_details"]["product_name"]
-                    ? p["product_details"]["product_name"]
-                    : "-"}
-                </TableCell>
-                <TableCell>
-                  {p["product_details"]["product_family"]
-                    ? p["product_details"]["product_family"]
-                    : "-"}
-                </TableCell>
-                <TableCell>
-                  {p["product_details"]["product_category"]
-                    ? p["product_details"]["product_category"]
-                    : "-"}
-                </TableCell>
-                <TableCell>
-                  {p["product_details"]["applicable_standard"]
-                    ? p["product_details"]["applicable_standard"]
-                    : "-"}
-                </TableCell>
-                <TableCell>
-                  {p.last_updated_status.last_updated_date
-                    .toString()
-                    .slice(0, 10)}
-                </TableCell>
-                <TableCell>
-                  <IconButton color="primary" size="small">
-                    <Link to={`${p._id}`}>
-                      <PageviewIcon />
-                    </Link>
-                  </IconButton>
-                </TableCell>
-                <TableCell>
-                  <IconButton
-                    color="primary"
-                    onClick={(e) => {
-                      setEditContent(p);
-                      setOpen(true);
-                    }}
-                    size="small"
-                  >
-                    <EditIcon />
-                  </IconButton>
-                </TableCell>
-                <TableCell>
-                  <IconButton
-                    color="primary"
-                    onClick={() => handleDelete(p.product_id)}
-                    size="small"
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </TableCell>
-              </TableRow>
-            ))}
+            {role === "Viewer"
+              ? tableData.map((p) => (
+                  <TableRow key={p["_id"]}>
+                    <TableCell>
+                      {p["product_details"]["product_name"]
+                        ? p["product_details"]["product_name"]
+                        : "-"}
+                    </TableCell>
+                    <TableCell>
+                      {p["product_details"]["product_family"]
+                        ? p["product_details"]["product_family"]
+                        : "-"}
+                    </TableCell>
+                    <TableCell>
+                      {p["product_details"]["product_category"]
+                        ? p["product_details"]["product_category"]
+                        : "-"}
+                    </TableCell>
+                    <TableCell>
+                      {p["product_details"]["applicable_standard"]
+                        ? p["product_details"]["applicable_standard"]
+                        : "-"}
+                    </TableCell>
+                    <TableCell>
+                      {p.last_updated_status.last_updated_date
+                        .toString()
+                        .slice(0, 10)}
+                    </TableCell>
+                    <TableCell>
+                      <IconButton color="primary" size="small">
+                        <Link to={`${p._id}`}>
+                          <PageviewIcon />
+                        </Link>
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                ))
+              : tableData.map((p) => (
+                  <TableRow key={p["_id"]}>
+                    <TableCell>
+                      {p["product_details"]["product_name"]
+                        ? p["product_details"]["product_name"]
+                        : "-"}
+                    </TableCell>
+                    <TableCell>
+                      {p["product_details"]["product_family"]
+                        ? p["product_details"]["product_family"]
+                        : "-"}
+                    </TableCell>
+                    <TableCell>
+                      {p["product_details"]["product_category"]
+                        ? p["product_details"]["product_category"]
+                        : "-"}
+                    </TableCell>
+                    <TableCell>
+                      {p["product_details"]["applicable_standard"]
+                        ? p["product_details"]["applicable_standard"]
+                        : "-"}
+                    </TableCell>
+                    <TableCell>
+                      {p.last_updated_status.last_updated_date
+                        .toString()
+                        .slice(0, 10)}
+                    </TableCell>
+                    <TableCell>
+                      <IconButton color="primary" size="small">
+                        <Link to={`${p._id}`}>
+                          <PageviewIcon />
+                        </Link>
+                      </IconButton>
+                    </TableCell>
+
+                    <TableCell>
+                      <IconButton
+                        color="primary"
+                        onClick={(e) => {
+                          setEditContent(p);
+                          setOpen(true);
+                        }}
+                        size="small"
+                      >
+                        <EditIcon />
+                      </IconButton>
+                    </TableCell>
+                    <TableCell>
+                      <IconButton
+                        color="primary"
+                        onClick={() => handleDelete(p.product_id)}
+                        size="small"
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                ))}
           </TableBody>
         </Table>
       </TableContainer>
