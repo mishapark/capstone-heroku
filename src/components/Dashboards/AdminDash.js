@@ -159,7 +159,7 @@ export const AdminDash = () => {
                               subGeo.map((subG) => {
                                 if (subG._id === NAME) {
                                   const count = subG.count;
-                                  setContent(`${NAME} (${count} subscrubers)`);
+                                  setContent(`${NAME} (${count} subscribers)`);
                                 }
                               });
                             }}
