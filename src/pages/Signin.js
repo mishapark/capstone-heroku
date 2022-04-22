@@ -116,7 +116,10 @@ export default function SignIn() {
                   console.log(response.error);
                 }
               })
-              .catch(() => setError(true));
+              .catch(() => {
+                setError(true);
+                setIsLoading(false);
+              });
           })}
           noValidate
           sx={{ mt: 1 }}
