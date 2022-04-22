@@ -91,17 +91,24 @@ export default function SignIn() {
                   const companyId = response["data"]["companyId"];
                   const docusignClientId = response["data"]["docusignClientId"];
                   const userId = response["data"]["userId"];
+                  const subscriptionStatus =
+                    response["data"]["subscriptionStatus"];
                   localStorage.setItem("role", roles);
                   localStorage.setItem("user", user);
                   localStorage.setItem("userId", userId);
                   localStorage.setItem("companyId", companyId);
                   localStorage.setItem("docusignClientId", docusignClientId);
+                  localStorage.setItem(
+                    "subscriptionStatus",
+                    subscriptionStatus
+                  );
                   setAuth({
                     user,
                     roles,
                     companyId,
                     docusignClientId,
                     userId,
+                    subscriptionStatus,
                     accessToken,
                   });
                   navigate("../dash", { replace: true });

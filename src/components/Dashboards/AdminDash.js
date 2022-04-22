@@ -88,7 +88,7 @@ export const AdminDash = () => {
       <Grid container spacing={2}>
         <Grid item xs={12} md={4}>
           <Paper sx={{ padding: 2, height: "300px" }}>
-            <Typography variant="h6">All subscrubers</Typography>
+            <Typography variant="h6">All subscribers</Typography>
             <Typography variant="h4">{subscrubers.length}</Typography>
           </Paper>
           <br></br>
@@ -137,7 +137,7 @@ export const AdminDash = () => {
         </Grid>
         <Grid item xs={12} md={12} justifyContent="center">
           <Paper sx={{ padding: 2 }}>
-            <Typography variant="h6">Subscrubers by Geography</Typography>
+            <Typography variant="h6">Subscribers by Geography</Typography>
             <Grid container direction="row">
               <Grid item xs={12} md={7}>
                 <ReactTooltip>{content}</ReactTooltip>
@@ -159,7 +159,7 @@ export const AdminDash = () => {
                               subGeo.map((subG) => {
                                 if (subG._id === NAME) {
                                   const count = subG.count;
-                                  setContent(`${NAME} (${count} subscrubers)`);
+                                  setContent(`${NAME} (${count} subscribers)`);
                                 }
                               });
                             }}
