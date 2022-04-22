@@ -34,7 +34,7 @@ function Products() {
   }, [requestData]);
 
   return (
-    <div>
+    <>
       {!isLoading ? (
         <Card>
           <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -51,7 +51,17 @@ function Products() {
           <CustomTable tableData={tableData} setRequestData={setRequestData} />
         </Card>
       ) : (
-        <CircularProgress />
+        <div
+          style={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <CircularProgress size={80} />
+        </div>
       )}
 
       <Dialog
@@ -70,7 +80,7 @@ function Products() {
           setRequestData={setRequestData}
         />
       </Dialog>
-    </div>
+    </>
   );
 }
 
