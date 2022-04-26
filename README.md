@@ -2,9 +2,9 @@
 
 ## Credentials
 
-### Super Admin - misha@mail.com/misha
+### Super Admin - superadmin@alchimetis.com/123456
 
-### User - capprover@gmail.com/123456
+### User - regularuser@alchimetis.com/123456
 
 ## Backend
 
