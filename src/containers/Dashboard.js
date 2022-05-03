@@ -127,9 +127,9 @@ const Dashboard = () => {
         />
 
         {/*{auth.subscriptionStatus === "alive" ||
-        auth.roles.includes("Super_Admin") ? (
+        auth.roles.includes("Super_Admin") ? (*/}
           <Workspace opened={opened}>{getRoutes}</Workspace>
-        ) : (
+        {/*}) : (
           <Billing></Billing>
         )}*/}
       </div>
