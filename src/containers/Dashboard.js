@@ -126,12 +126,12 @@ const Dashboard = () => {
           toggleDrawer={handleDrawerToggle}
         />
 
-        {auth.subscriptionStatus === "alive" ||
+        {/*{auth.subscriptionStatus === "alive" ||
         auth.roles.includes("Super_Admin") ? (
           <Workspace opened={opened}>{getRoutes}</Workspace>
         ) : (
           <Billing></Billing>
-        )}
+        )}*/}
       </div>
     </>
   );
